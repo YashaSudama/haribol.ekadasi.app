@@ -78,17 +78,5 @@
     },
     "is_top_level": true,
     "variables": {}
-  },
-  "cordova-plugin-firebasex": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-firebasex"
-    },
-    "is_top_level": true,
-    "variables": {
-      "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "false",
-      "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "false",
-      "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "false"
-    }
   }
 }
