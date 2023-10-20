@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> 
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/all.css">
+        <link rel="stylesheet" href="css/index.css">
+        <title>Haribol</title>
+    </head>
+    
+    <body>
+        <header id="header">
+            <div id="top" class="pos-rel">
+                <span class="top_span d-block text-uppercase text-white">Экадаши и Вайшнавские праздники</span>
+                <span class="d-block bold text-white" id="current_date"></span>
+                <span class="d-block l-height-1-25 text-white" id="location"></span>
+            </div>
+        </header>
+        <main id="contact" style="padding: 20px;">
+            <h3 class="text-center m-t-10 l-height-1-25">Пожалуйста, напишите нам:</h3>
+            <ul class="item-margin-bottom l-height-1-2 top-ul" style="padding-left: 15px;">
+                <li class="pos-rel">
+                  <i class="pos-abs fas fa-check"></i>
+                  Ваше впечатление об этом приложении, а также, если имеются какие-либо пожелания для улучшения его работы</li>
+                <li class="pos-rel">
+                  <i class="pos-abs fas fa-check"></i>
+                  Если Вы обнаружили какую-то ошибку в работе приложения:
+
+                    <ul class="item-margin-bottom l-height-1-2 sub-ul" style="padding-left: 20px;">
+                        <li class="m-t-20">опишите подробно ошибку</li>
+                        <li>прикрепите скриншот</li>
+                        <li>напишите модель Вашего телефона, название операционной системы (например Android, iOS) и ее версию (см. в настройках телефона)
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+            <div class="width-fit" style="margin-left: 23px;">
+                <div class="pos-rel">
+                    <a href="mailto:mantramusicland@gmail.com">
+                        <i class="pos-abs icon fas fa-envelope"></i><span>mantramusicland@gmail.com</span>
+                    </a>
+                </div>
+                <div class="pos-rel m-t-5">
+                    <a href="https://t.me/GauranandaDasi">
+                        <i class="pos-abs icon fab fa-telegram"></i><span>@GauranandaDasi</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div id="height_footer"></div>
+        </main>
+        
+        <nav></nav>
+        
+        <footer>
+            <div id="footer" class="pos-fixed">
+                <ul class="d-flex text-center">
+                    <li id="home">
+                        <a href="index.html"><i class="fas fa-home fa-lg"></i></a>
+                    </li>
+                    <li id="nav">Меню</li>
+                </ul>
+            </div>
+        </footer>
+        
+        <script src="cordova.js"></script>
+        <script type="module" src="js/general.js"></script>
+        <script type="module" src="js/contacts.js"></script>
+    </body>
+</html>
