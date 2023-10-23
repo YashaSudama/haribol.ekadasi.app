@@ -216,10 +216,6 @@ hr {
 input:focus {
   outline: none;
 }
-.ios input {
-  -webkit-appearance: none;
-  border-radius: 0;
-}
 input,
 button,
 #current_location,
@@ -780,6 +776,7 @@ padding: 8px 20px;
 }
 #update_notif {
   max-height: 35px;
+  height: 35px;
 }
 .null_info button {
   border: 0;

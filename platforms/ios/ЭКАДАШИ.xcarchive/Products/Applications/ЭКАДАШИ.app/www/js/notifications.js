@@ -458,6 +458,7 @@ function work_settings_notifications( month ) {
 
         update_storage.onclick = function() {
             clear();
+            navigator.splashscreen.show();
             hide_body();
             window.location.href = 'index.html';
         }
@@ -596,6 +597,7 @@ function work_settings_notifications( month ) {
             check_exit_page.style.cssText = 'opacity: 1; z-index: 7';
 
             ok_transition.onclick = function() {
+                navigator.splashscreen.show();
                 hide_body();
                 check_exit_page.style.cssText = '';
                 window.location.href = 'index.html';

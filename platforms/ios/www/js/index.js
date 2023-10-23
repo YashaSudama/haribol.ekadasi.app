@@ -108,8 +108,6 @@ function get_firebase_token_func() {
                 token_notif = false;
             } ); 
 
-            console.log( '1 - ' + token_notif );
-
         }
 
     } else {

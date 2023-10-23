@@ -1060,9 +1060,6 @@ document.addEventListener( "deviceready", () => {
 
     FCMPlugin.onNotification( function( data ) {
 
-        console.log( data );
-        console.log( 'Goor' );
-
         if ( !data.wasTapped ) {
             alert( data.aps.alert.title + '\n' + data.aps.alert.body );
         } else { 
