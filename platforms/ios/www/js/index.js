@@ -31,21 +31,16 @@ import { window_width,
          update_notifications,
          min_preloader,
          show_body,
-         hide_body,
-         hide_background
+         hide_body
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
 
     on_device_ready();
 
-    if ( device.platform === 'Android' ) {
-
-        if ( !localStorage.getItem( 'status_firebase_token' ) ||
-              localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
-            get_firebase_token_func();
-        }
-
+    if ( !localStorage.getItem( 'status_firebase_token' ) ||
+            localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+        get_firebase_token_func();
     }
 
 }, false );
@@ -97,16 +92,8 @@ function get_firebase_token_func() {
     if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
         localStorage.setItem( 'status_firebase_token', 'false' ); 
 
-        FirebasePlugin.getToken( ( token ) => {
-            token_notif = token;
-        }, function( error ) {
-            token_notif = false;
-        } );
+        if ( device.platform === 'Android' ) {
 
-    } else {
-
-        if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
-    
             FirebasePlugin.getToken( ( token ) => {
                 token_notif = token;
             }, function( error ) {
@@ -114,7 +101,35 @@ function get_firebase_token_func() {
             } );
 
         } else {
-            return;
+
+            FCMPlugin.getToken( function( token ) {
+                token_notif = token;
+            }, function( error ) {
+                token_notif = false;
+            } ); 
+
+            console.log( '1 - ' + token_notif );
+
+        }
+
+    } else {
+
+        if ( device.platform === 'Android' ) {
+
+            FirebasePlugin.getToken( ( token ) => {
+                token_notif = token;
+            }, function( error ) {
+                token_notif = false;
+            } );
+
+        } else {
+
+            FCMPlugin.getToken( function( token ) {
+                token_notif = token;
+            }, function( error ) {
+                token_notif = false;
+            } ); 
+
         }
 
     }
@@ -171,8 +186,8 @@ current_location.onclick = function() {
     }
 
     window.location.href = 'index.html';
+    navigator.splashscreen.show();
     hide_body();
-    localStorage.setItem( 'status_background', 'yes' );
 
 }
 
@@ -666,7 +681,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
                                         '</span>' +
                                     '</div>' + 
                                     '<div class="day_full">' + 
-                                        '<span class="bold l-height-1-2 text-center">14 июня<br>' + 
+                                        // '<span class="bold l-height-1-2 text-center">14 июня<br>' + 
                                         '</span>' + 
                                         '<i class="fas fa-angle-right">' +
                                         '</i>' + 
@@ -684,7 +699,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
                                         '</span>' +  
                                     '</div>' + 
                                     '<div class="day_full">' + 
-                                        '<span class="bold l-height-1-2 text-center">25 декабря<br>' +   
+                                        // '<span class="bold l-height-1-2 text-center">25 декабря<br>' +   
                                         '</span>' + 
                                         '<i class="fas fa-angle-right">' +
                                         '</i>' +  
@@ -908,15 +923,8 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
 
             main.style.opacity = '1';
             header_top.style.opacity = '1';
-
-            if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-                hide_background();
-                localStorage.removeItem( 'status_background' );
-            } else {
-                navigator.splashscreen.hide();
-                show_body();
-            }
-
+            navigator.splashscreen.hide();
+            show_body();
             get_description( main, '.id' );
         
         }
@@ -926,7 +934,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
 
 function get_info_func( slug, index_get_info ) {
 
-    if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) && ( device.platform === 'Android' ) ) {
+    if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) ) {
         check_notifications( slug );
     }
 
@@ -1126,13 +1134,8 @@ function part_not_city( slug ) {
         div_main_coords;
     min_preloader.classList.add( 'search_preloader' );
 
-    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-        hide_background();
-        localStorage.removeItem( 'status_background' );
-    } else {
-        navigator.splashscreen.hide();
-        show_body();
-    }
+    navigator.splashscreen.hide();
+    show_body();
 
     window.addEventListener( 'keyboardDidShow', ( event ) => {
 
@@ -1234,6 +1237,7 @@ function part_not_city( slug ) {
             }
 
             list_cityes.onclick = function( event ) {
+                navigator.splashscreen.show();
                 hide_body();
 
                 setTimeout( () => {
@@ -1465,6 +1469,7 @@ function part_not_city( slug ) {
                         
                     }
 
+                    navigator.splashscreen.show();
                     hide_body();
                     
                     setTimeout( () => {
@@ -1634,13 +1639,8 @@ function not_city( lat, lon, city, slug, index_get_info ) {
        ( localStorage.getItem( 'lon' ) !== 'undefined' ) &&
          localStorage.getItem( 'city' ) ) {
 
-        if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-            hide_background();
-            localStorage.removeItem( 'status_background' );
-        } else {
-            navigator.splashscreen.hide();
-            show_body();
-        }
+        navigator.splashscreen.hide();
+        show_body();
         
         if ( !city_selection_let )  {   
            
@@ -2003,6 +2003,9 @@ function check_notifications( slug ) {
     xml_check.onload = function() {
         
         let response_check = xml_check.response;
+
+        console.log( data_send );
+        console.log( response_check );
         
         if ( response_check.message ) {
 
@@ -2019,6 +2022,8 @@ function check_notifications( slug ) {
             }
 
         } else {
+            console.log( token_notif );
+            console.log( 'return' );
             return;
         }
         

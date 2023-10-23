@@ -37,6 +37,9 @@
     },
     "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
+    },
+    "cordova-plugin-fcm": {
+      "PACKAGE_NAME": "haribol.ekadasi.app"
     }
   },
   "dependent_plugins": {}

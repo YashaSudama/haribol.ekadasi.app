@@ -191,6 +191,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "merges": [
         "cordova.plugins.diagnostic.motion"
       ]
+    },
+    {
+      "id": "cordova-plugin-fcm.FCMPlugin",
+      "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
+      "pluginId": "cordova-plugin-fcm",
+      "clobbers": [
+        "FCMPlugin"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -203,6 +211,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-statusbar": "3.0.0",
-    "cordova.plugins.diagnostic": "7.1.2"
+    "cordova.plugins.diagnostic": "7.1.2",
+    "cordova-plugin-fcm": "2.1.2"
   };
 });

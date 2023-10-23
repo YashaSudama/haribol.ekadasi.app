@@ -34,7 +34,6 @@ body,
 .close_events,
 #close_hint_description,
 #window_select_city .main input,
-#background,
 #input_select_date {
   background-color: #fff;
 }
@@ -365,7 +364,6 @@ body,
 #day_notifications,
 #time_notifications,
 .hr-hide,
-#background,
 #wrapper_hint_description  {
   transition: opacity .4s linear;
 }
@@ -645,10 +643,6 @@ font-size: 14px;
   margin-left: 0;
   width: 35%;
 }
-/*.over {
-z-index: 2;
-background-color: transparent;
-}*/
 #not_connection {
   top: 40%;
   transform: translateY(-50%);
@@ -666,31 +660,10 @@ background-color: transparent;
   padding: 4px;
   border-radius: 50%;
 }
-#background {
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-@media ( orientation: portrait ) {
-
-  #background { 
-    background-image: url( '../img/splashscreen-portrait-app.jpg' );
-  }
-
-}
-
-@media ( orientation: landscape ) {
-
-  #background {
-    background-image: url( '../img/splashscreen-landscape-app.jpg' );
-  }
-
-}
 
 #window_select_city, 
 #window_change_city,
 #check_exit_page,
-#background,
 #wrapper_hint_description {
   top: 0;
   left: 0;

@@ -494,7 +494,7 @@ var Diagnostic = (function(){
      *
      * @param {Function} successCallback -  The callback which will be called when the operation is successful.
      * This callback function is passed a single object parameter with the following fields:
-     * - {string} version - version string of the OS e.g. "11.0"
+     * - {string} version - version string of the OS e.g. "12.0"
      * - {integer} apiLevel - API level of the OS e.g. 30
      * - {string} apiName - code name for API level e.g. "FROYO"
      * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.

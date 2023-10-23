@@ -23,8 +23,8 @@ import { now_date_number,
 		 plus,
 		 minus,
 		 div_zoom_calendar,
-		 hide_background,
-		 window_height
+		 window_height,
+		 show_body
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
@@ -509,11 +509,8 @@ function inner_get_info( select_get_info ) {
     	if ( i === 2 ) {
 
     		get_description( calendar, '.click' );
-
-			setTimeout( () => {
-                hide_background();
-				localStorage.removeItem( 'status_background' );
-            }, 1000 );
+			navigator.splashscreen.hide();
+			show_body();
 
     	}
 

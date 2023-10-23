@@ -2,13 +2,6 @@
 
 import { content_description } from "./content_description.js";
 
-let background = document.getElementById( 'background' );
-
-if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-    show_background();
-    setTimeout( show_body, 1000 );
-}
-
 let content_preloader = '<div class="sk-fading-circle">' +
                           '<div class="sk-circle sk-circle-1"></div>' +
                           '<div class="sk-circle sk-circle-2"></div>' +
@@ -187,15 +180,15 @@ if ( month_name[ now_month ] === 'Январь'  ||
 if ( home ) {
 
     home.onclick = function() {
+        navigator.splashscreen.show();
         hide_body();
-        localStorage.setItem( 'status_background', 'yes' );
     }
 
 }
 
 choice_date.onclick = function( event ) {
+    navigator.splashscreen.show();
     hide_body();
-    localStorage.setItem( 'status_background', 'yes' );
 }
 
 function show_body() {
@@ -204,14 +197,6 @@ function show_body() {
 
 function hide_body() {
     document.body.style.cssText = '';
-}
-
-function show_background() {
-    background.style.cssText = 'opacity: 1; z-index: 5';
-}
-
-function hide_background() {
-    background.style.cssText = '';
 }
 
 for ( let div of description ) {
@@ -332,15 +317,8 @@ function content_not_data( main,
                            name_func, 
                            param ) {
 
-    
-    
-    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-        hide_background();
-        localStorage.removeItem( 'status_background' );
-    } else {
-        navigator.splashscreen.hide();
-        show_body();
-    }
+    navigator.splashscreen.hide();
+    show_body();
 
     if ( ( window.location.pathname === '/' ) || 
          ( window.location.pathname === '/index.html' )  ) {
@@ -383,8 +361,8 @@ function content_not_data( main,
 
     reload.onclick = function() {
         window.location.reload();
+        navigator.splashscreen.show();
         hide_body();
-        localStorage.setItem( 'status_background', 'yes' );
     }
 
     last_version.onclick = function() {
@@ -1078,6 +1056,20 @@ function update_notifications( slug ) {
 
 }
 
+document.addEventListener( "deviceready", () => {
+
+    FCMPlugin.onNotification( function( data ) {
+
+        if ( !data.wasTapped ) {
+            alert( data.aps.alert.title + '\n' + data.aps.alert.body );
+        } else { 
+            return;
+        }
+
+    } );
+
+} );
+
 export { window_width, 
          window_height,
          month_days,
@@ -1107,8 +1099,6 @@ export { window_width,
          get_description,
          show_body,
          hide_body,
-         show_background,
-         hide_background,
          key,
          scroll_window_height,
          min_preloader,
