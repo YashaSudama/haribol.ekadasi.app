@@ -57,8 +57,7 @@ if ( !localStorage.getItem( 'setting_notifications' ) ) {
 }
 
 let key = '7dc98540afbc4208863cb94ea2932ef0',
-    url = 'https://haribol.jagadguru.ru/',
-    //url = 'https://ekadashi.admin.universl.top/',
+    url = 'https://ekadasi.info/',
     now_date = new Date(), // создаем экземпляр объекта с текущей датой
     now_year = now_date.getFullYear(), // возвращает текущий год в четырехзначном формате
     now_month = now_date.getMonth(), // возвращает текущий номер месяца (значение от 0 до 11. Январь равен 0)
@@ -1077,6 +1076,14 @@ function update_notifications( slug ) {
     xml_update.send( data_send );
 
 }
+
+document.addEventListener( "deviceready", () => {
+
+    cordova.plugins.firebase.messaging.onMessage( ( payload ) => {
+        alert( payload.gcm.body + '\n' + payload.gcm.title );
+    } );
+
+} );
 
 export { window_width, 
          window_height,

@@ -39,13 +39,9 @@ document.addEventListener( "deviceready", () => {
 
     on_device_ready();
 
-    if ( device.platform === 'Android' ) {
-
-        if ( !localStorage.getItem( 'status_firebase_token' ) ||
-              localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
-            get_firebase_token_func();
-        }
-
+    if ( !localStorage.getItem( 'status_firebase_token' ) ||
+            localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+        get_firebase_token_func();
     }
 
 }, false );
@@ -97,21 +93,27 @@ function get_firebase_token_func() {
     if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
         localStorage.setItem( 'status_firebase_token', 'false' ); 
 
-        FirebasePlugin.getToken( ( token ) => {
-            token_notif = token;
-        }, function( error ) {
-            token_notif = false;
-        } );
+        cordova.plugins.firebase.messaging.getToken().then( 
+            ( token ) => {
+                token_notif = token;
+            },
+            ( error ) => {
+                token_notif = false;
+            }   
+        );
 
     } else {
 
         if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
     
-            FirebasePlugin.getToken( ( token ) => {
-                token_notif = token;
-            }, function( error ) {
-                token_notif = false;
-            } );
+            cordova.plugins.firebase.messaging.getToken().then( 
+                ( token ) => {
+                    token_notif = token;
+                },
+                ( error ) => {
+                    token_notif = false;
+                }   
+            );
 
         } else {
             return;
@@ -926,7 +928,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
 
 function get_info_func( slug, index_get_info ) {
 
-    if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) && ( device.platform === 'Android' ) ) {
+    if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) ) {
         check_notifications( slug );
     }
 
@@ -2166,193 +2168,71 @@ function on_device_ready() {
 
         if ( navigator.connection.type !== 'none' ) {
 
-            if ( device_platform === 'Android' ) {
-
-                if ( device_version >= 10 ) {
-                    device_version = Array.from( device_version )[ 0 ] + Array.from( device_version )[ 1 ];
+            if ( device_version >= 10 ) {
+                device_version = Array.from( device_version )[ 0 ] + Array.from( device_version )[ 1 ];
+            } else {
+                device_version = Array.from( device_version )[ 0 ];
+            }
+    
+            cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
+    
+                if ( canRequest ) {
+                    localStorage.setItem( 'status_location', '1' );
                 } else {
-                    device_version = Array.from( device_version )[ 0 ];
+                    localStorage.setItem( 'status_location', '0' );
                 }
+    
+            } );
         
+            if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
+                localStorage.setItem( 'user_location_accuracy', '0' );
+            }
+
+            permissions.requestPermission( permissions.ACCESS_COARSE_LOCATION, success, error );
+
+            function error() {
+                location_error( slug );
+            }
+
+            function success( status ) {
+
                 cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-        
+
                     if ( canRequest ) {
+
                         localStorage.setItem( 'status_location', '1' );
-                    } else {
-                        localStorage.setItem( 'status_location', '0' );
-                    }
-        
-                } );
-        
-                if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
-                    localStorage.setItem( 'user_location_accuracy', '0' );
-                }
 
-                permissions.requestPermission( permissions.ACCESS_COARSE_LOCATION, success, error );
+                        if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
 
-                function error() {
-                    location_error( slug );
-                }
-
-                function success( status ) {
-
-                    cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-
-                        if ( canRequest ) {
-
-                            localStorage.setItem( 'status_location', '1' );
-
-                            if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
-
-                                cordova.plugins.locationAccuracy.request( 
-                                    
-                                    function( success ) {
-                                        localStorage.setItem( 'user_location_accuracy', '1' );
-                                        localStorage.setItem( 'status_location_accuracy', '1' );
-                                        launch_calendar();
-                                    }, function ( error ) {
-                                        localStorage.setItem( 'user_location_accuracy', '1' );
-                                        localStorage.setItem( 'status_location_accuracy', '0' );
-                                        location_error( slug );
-                                    }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY );
-
-                            } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
-
-                                if ( status_location_accuracy ) {
+                            cordova.plugins.locationAccuracy.request( 
+                                
+                                function( success ) {
+                                    localStorage.setItem( 'user_location_accuracy', '1' );
+                                    localStorage.setItem( 'status_location_accuracy', '1' );
                                     launch_calendar();
-                                } else {
+                                }, function ( error ) {
+                                    localStorage.setItem( 'user_location_accuracy', '1' );
+                                    localStorage.setItem( 'status_location_accuracy', '0' );
                                     location_error( slug );
-                                }
+                                }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY );
 
+                        } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
+
+                            if ( status_location_accuracy ) {
+                                launch_calendar();
+                            } else {
+                                location_error( slug );
                             }
 
-                        } else {
-                            localStorage.setItem( 'status_location', '0' );
-                            location_error( slug );
                         }
 
-                    } );
-
-                }
-
-            } else if ( device_platform === 'iOS' ) { 
-                document.body.classList.add( 'ios' );
-
-                cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
-
-                    StatusBar.show();
-                    StatusBar.backgroundColorByHexString( '#000000' );
-
-                    switch( status ) {
-
-                        case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-                            
-                            document.addEventListener( "resume", () => { 
-                                
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 0 );
-
-                            } );
-
-                            cordova.plugins.diagnostic.requestLocationAuthorization( function( status ) {
-
-                                switch( status ) {
-
-                                    case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-                                        
-                                        localStorage.setItem( 'status_location', '0' );
-                                        location_error( slug );
-
-                                        break;
-                                    case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-
-                                        localStorage.setItem( 'status_location', '1' );
-                                        launch_calendar();
-
-                                        break;
-                                }
-
-                            }, function( error ) {
-
-                                localStorage.setItem( 'status_location', '0' );
-                                location_error( slug );
-
-                            } );
-
-                            break;
-
-                        case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-
-                            cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-
-                                if ( canRequest ) {
-            
-                                    cordova.plugins.locationAccuracy.request( function() {
-
-                                        if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
-                                            localStorage.setItem( 'user_location_accuracy', '0' );
-                                        } else {
-                                            localStorage.setItem( 'user_location_accuracy', '1' );
-                                        }
-
-                                        if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
-
-                                            setTimeout( () => {
-                                                localStorage.setItem( 'status_location', '0' );
-                                                location_error( slug );
-                                            }, 7000 );
-
-                                        } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
-                                            localStorage.setItem( 'status_location', '0' );
-                                            location_error( slug );
-                                        }
-
-                                        document.addEventListener( "resume", () => { 
-                                            
-                                            setTimeout( () => {
-                                                window.location.reload();
-                                            }, 0 );
-
-                                        } );
-
-                                    }, function() {
-                                        localStorage.setItem( 'status_location', '0' );
-                                        location_error( slug );
-                                    });
-            
-                                } else {
-                                    localStorage.setItem( 'status_location', '0' );
-                                    location_error( slug );
-                                }
-            
-                            } );
-
-                            break;
-
-                        case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-                            
-                            localStorage.setItem( 'status_location', '1' );
-                            launch_calendar();
-
-                            document.addEventListener( "resume", () => { 
-                                
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 0 );
-
-                            } );
-
-                            break;
-
+                    } else {
+                        localStorage.setItem( 'status_location', '0' );
+                        location_error( slug );
                     }
-                 }, function( error ) {
-                    
-                     localStorage.setItem( 'status_location', '0' );
-                     location_error( slug );
 
-                 } );
-                 
+                } );
+
             }
 
         } else {
