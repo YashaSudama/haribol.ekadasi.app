@@ -668,7 +668,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
                                         '</span>' +
                                     '</div>' + 
                                     '<div class="day_full">' + 
-                                        '<span class="bold l-height-1-2 text-center">14 июня<br>' + 
+                                        // '<span class="bold l-height-1-2 text-center">14 июня<br>' + 
                                         '</span>' + 
                                         '<i class="fas fa-angle-right">' +
                                         '</i>' + 
@@ -686,7 +686,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
                                         '</span>' +  
                                     '</div>' + 
                                     '<div class="day_full">' + 
-                                        '<span class="bold l-height-1-2 text-center">25 декабря<br>' +   
+                                        // '<span class="bold l-height-1-2 text-center">25 декабря<br>' +   
                                         '</span>' + 
                                         '<i class="fas fa-angle-right">' +
                                         '</i>' +  

@@ -836,10 +836,15 @@ function update_notifications( slug ) {
         value_token = get_token(),
         city_id = slug.id || Number( slug ),
         data_send,
-        status_notifications;
+        status_notifications,
+        time_value,
+        part_time_value_first,
+        part_time_value_last;
 
     if ( location.pathname.includes( 'notifications' ) ) {
         status_notifications = form.status_notifications.dataset.status;
+        part_time_value_first = form.time.value[ 0 ] + form.time.value[ 1 ];
+        part_time_value_last = form.time.value[ 3 ] + form.time.value[ 4 ];
 
         if ( status_notifications === 'false' ) {
             status_notifications = false;
@@ -847,11 +852,37 @@ function update_notifications( slug ) {
             status_notifications = true;
         }
 
+        if ( ( part_time_value_last !== '00' ) && ( part_time_value_last !== '30' )  ) {
+            
+            if ( part_time_value_last <= '15' ) {
+                time_value = part_time_value_first + ':' + '00';
+                form.time.value = time_value;
+            } else if ( ( part_time_value_last > '15' ) && ( part_time_value_last < '45' ) ) {
+                time_value = part_time_value_first + ':' + '30';
+                form.time.value = time_value;
+            } else {
+
+                if ( part_time_value_first === '23' ) {
+                    part_time_value_first = '00';
+                } else if ( part_time_value_first < 9 ) {
+                    part_time_value_first = '0' + ( Number( part_time_value_first ) + 1 );
+                } else {
+                    part_time_value_first = Number( part_time_value_first ) + 1;
+                }
+
+                time_value = part_time_value_first + ':' + '00';
+                form.time.value = time_value;
+            }
+ 
+        } else {
+            time_value = form.time.value;
+        }
+
         data_send = JSON.stringify( { 'firebaseToken': localStorage.getItem( 'firebase_token' ),
                                       'city': city_id,
                                       'notification': status_notifications,
                                       'notifyDay': Number( form.get_notifications.value ),
-                                      'notifyTime': form.time.value,
+                                      'notifyTime': time_value,
                                       'uuid': device.uuid,
                                       'token': value_token } );
 
@@ -978,7 +1009,7 @@ function update_notifications( slug ) {
                         }
                         
                         localStorage.setItem( 'setting_notifications', JSON.stringify( { day: Number( form.get_notifications.value ),
-                                                                                        time: form.time.value } ) );
+                                                                                         time: time_value } ) );
             
                         info_notifications = {
                             status: localStorage.getItem( 'status_notifications' ),
@@ -1080,7 +1111,48 @@ function update_notifications( slug ) {
 document.addEventListener( "deviceready", () => {
 
     cordova.plugins.firebase.messaging.onMessage( ( payload ) => {
-        alert( payload.gcm.body + '\n' + payload.gcm.title );
+        let notice_foreground = document.getElementById( 'notice_foreground' );
+
+        if ( notice_foreground ) {
+            notice_foreground.remove();
+        } else {
+            
+            let notice_foreground = document.createElement( 'div' ),
+                internally_notice_foreground = document.createElement( 'span' ),
+                close_notice_foreground = document.createElement( 'i' );
+
+            notice_foreground.id = 'notice_foreground';
+            notice_foreground.className = 'pos-fixed';
+
+            internally_notice_foreground.id = 'internally_notice_foreground';
+            internally_notice_foreground.className = 'internally_notice_foreground pos-abs';
+
+            close_notice_foreground.id = 'close_notice_foreground';
+            close_notice_foreground.className = 'pos-abs far fa-times-circle';
+
+            internally_notice_foreground.append( close_notice_foreground );
+            notice_foreground.append( internally_notice_foreground );
+            document.body.append( notice_foreground );
+            internally_notice_foreground.innerHTML += '<div style="display: flex">' +
+                                                        '<div style="margin-right: 15px;">' +
+                                                            '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                                                        '</div>' +
+                                                        '<div>' +
+                                                            '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
+                                                            '<span>' + payload.gcm.body + '</span>' +
+                                                        '</div>' +
+                                                      '</div>';
+
+            notice_foreground.style.cssText = 'opacity: 1; z-index: 20';
+
+            close_notice_foreground = document.getElementById( 'close_notice_foreground' );
+
+            close_notice_foreground.onclick = () => {
+                notice_foreground.style.cssText = '';
+            }
+
+        }
+
     } );
 
 } );

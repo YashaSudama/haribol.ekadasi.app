@@ -35,7 +35,8 @@ body,
 #close_hint_description,
 #window_select_city .main input,
 #background,
-#input_select_date {
+#input_select_date,
+#close_notice_foreground {
   background-color: #fff;
 }
 
@@ -78,7 +79,8 @@ body,
 #not_connection button,
 #clear_local_storage,
 .reason_server span,
-.hint_description {
+.hint_description,
+.internally_notice_foreground {
   background-color: #d6e6ff;
 }
 .day_full i,
@@ -366,6 +368,7 @@ body,
 #time_notifications,
 .hr-hide,
 #background,
+#notice_foreground,
 #wrapper_hint_description  {
   transition: opacity .4s linear;
 }
@@ -691,7 +694,8 @@ background-color: transparent;
 #window_change_city,
 #check_exit_page,
 #background,
-#wrapper_hint_description {
+#wrapper_hint_description,
+#notice_foreground {
   top: 0;
   left: 0;
   width: 100%;
@@ -1289,7 +1293,8 @@ padding: 8px 20px;
   transition: opacity 1s linear;
 }
 .close_events,
-#close_hint_description {
+#close_hint_description,
+#close_notice_foreground {
   font-size: 22px;
   border-radius: 50%;
   box-shadow: 0 5px 10px -5px #000;
@@ -1298,10 +1303,12 @@ padding: 8px 20px;
   top: -10px;
 }
 
-#wrapper_hint_description {
+#wrapper_hint_description,
+#notice_foreground {
   background-color: #ffffffc7;
 }
-.hint_description {
+.hint_description,
+.internally_notice_foreground {
   width: 90%;
   left: 5%;
   border-radius: 10px;
@@ -1310,7 +1317,12 @@ padding: 8px 20px;
   line-height: 1.45; 
   z-index: 1;
 }
-#close_hint_description {
+.internally_notice_foreground {
+  top: 50%;
+  transform: translateY(-50%);
+}
+#close_hint_description,
+#close_notice_foreground {
   top: -6px;
   right: -6px;
   font-size: 22px;
@@ -1325,7 +1337,8 @@ padding: 8px 20px;
 
 @media ( orientation: portrait ) {
 
-  .hint_description {
+  .hint_description,
+  .internally_notice_foreground {
     transform: translateY( -35% );
   }
 
