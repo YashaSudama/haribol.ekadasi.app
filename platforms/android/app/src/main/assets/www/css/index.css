@@ -80,7 +80,7 @@ body,
 #clear_local_storage,
 .reason_server span,
 .hint_description,
-.internally_notice_foreground {
+.wrapper_internally_notice_foreground {
   background-color: #d6e6ff;
 }
 .day_full i,
@@ -134,7 +134,8 @@ input:focus {
 .ekadashi_hr,
 #choice_full_list,
 .hr-style,
-.specification {
+.specification,
+.notice_foreground_hr {
   background-color: #fea00a;
 }
 .container_radio span {
@@ -648,10 +649,11 @@ font-size: 14px;
   margin-left: 0;
   width: 35%;
 }
-/*.over {
-z-index: 2;
-background-color: transparent;
-}*/
+.notice_foreground_hr {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 75%;
+}
 #not_connection {
   top: 40%;
   transform: translateY(-50%);
@@ -1308,7 +1310,7 @@ padding: 8px 20px;
   background-color: #ffffffc7;
 }
 .hint_description,
-.internally_notice_foreground {
+.wrapper_internally_notice_foreground {
   width: 90%;
   left: 5%;
   border-radius: 10px;
@@ -1317,7 +1319,7 @@ padding: 8px 20px;
   line-height: 1.45; 
   z-index: 1;
 }
-.internally_notice_foreground {
+.wrapper_internally_notice_foreground {
   top: 50%;
   transform: translateY(-50%);
 }
@@ -1338,7 +1340,7 @@ padding: 8px 20px;
 @media ( orientation: portrait ) {
 
   .hint_description,
-  .internally_notice_foreground {
+  .wrapper_internally_notice_foreground {
     transform: translateY( -35% );
   }
 

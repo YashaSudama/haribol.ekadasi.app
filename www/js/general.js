@@ -1114,41 +1114,67 @@ document.addEventListener( "deviceready", () => {
         let notice_foreground = document.getElementById( 'notice_foreground' );
 
         if ( notice_foreground ) {
-            notice_foreground.remove();
+            let wrapper_internally_notice_foreground = document.getElementById( 'wrapper_internally_notice_foreground' );
+
+            wrapper_internally_notice_foreground.innerHTML += '<hr class="notice_foreground_hr">' +
+                                                              '<div style="display: flex">' +
+                                                                  '<div style="margin-right: 15px;">' +
+                                                                      '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                                                                  '</div>' +
+                                                                  '<div>' +
+                                                                      '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
+                                                                      '<span>' + payload.gcm.body + '</span>' +
+                                                                  '</div>' +
+                                                              '</div>';
+                                                              
+            let close_notice_foreground = document.getElementById( 'close_notice_foreground' );
+
+            close_notice_foreground.onclick = () => {
+                notice_foreground.style.cssText = '';
+    
+                setTimeout( () => {
+                    notice_foreground.remove();
+                }, 1000 );
+
+            }
+
         } else {
-            
             let notice_foreground = document.createElement( 'div' ),
-                internally_notice_foreground = document.createElement( 'span' ),
+                wrapper_internally_notice_foreground = document.createElement( 'div' ),
                 close_notice_foreground = document.createElement( 'i' );
 
             notice_foreground.id = 'notice_foreground';
-            notice_foreground.className = 'pos-fixed';
-
-            internally_notice_foreground.id = 'internally_notice_foreground';
-            internally_notice_foreground.className = 'internally_notice_foreground pos-abs';
+            notice_foreground.className = 'pos-fixed';;
+            
+            wrapper_internally_notice_foreground.id = 'wrapper_internally_notice_foreground';
+            wrapper_internally_notice_foreground.className = 'wrapper_internally_notice_foreground pos-abs';
 
             close_notice_foreground.id = 'close_notice_foreground';
             close_notice_foreground.className = 'pos-abs far fa-times-circle';
 
-            internally_notice_foreground.append( close_notice_foreground );
-            notice_foreground.append( internally_notice_foreground );
+            wrapper_internally_notice_foreground.append( close_notice_foreground );
+            notice_foreground.append( wrapper_internally_notice_foreground );
             document.body.append( notice_foreground );
-            internally_notice_foreground.innerHTML += '<div style="display: flex">' +
-                                                        '<div style="margin-right: 15px;">' +
-                                                            '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
-                                                        '</div>' +
-                                                        '<div>' +
-                                                            '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
-                                                            '<span>' + payload.gcm.body + '</span>' +
-                                                        '</div>' +
-                                                      '</div>';
+            wrapper_internally_notice_foreground.innerHTML += '<div style="display: flex">' +
+                                                                  '<div style="margin-right: 15px;">' +
+                                                                      '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                                                                  '</div>' +
+                                                                  '<div>' +
+                                                                      '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
+                                                                      '<span>' + payload.gcm.body + '</span>' +
+                                                                   '</div>' +
+                                                               '</div>';
 
             notice_foreground.style.cssText = 'opacity: 1; z-index: 20';
-
             close_notice_foreground = document.getElementById( 'close_notice_foreground' );
 
             close_notice_foreground.onclick = () => {
                 notice_foreground.style.cssText = '';
+
+                setTimeout( () => {
+                    notice_foreground.remove();
+                }, 1000 );
+
             }
 
         }
