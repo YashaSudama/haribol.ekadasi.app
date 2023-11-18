@@ -2,6 +2,13 @@
 
 import { content_description } from "./content_description.js";
 
+let background = document.getElementById( 'background' );
+
+if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
+    show_background();
+    setTimeout( show_body, 1000 );
+}
+
 let content_preloader = '<div class="sk-fading-circle">' +
                           '<div class="sk-circle sk-circle-1"></div>' +
                           '<div class="sk-circle sk-circle-2"></div>' +
@@ -50,8 +57,7 @@ if ( !localStorage.getItem( 'setting_notifications' ) ) {
 }
 
 let key = '7dc98540afbc4208863cb94ea2932ef0',
-    url = 'https://haribol.jagadguru.ru/',
-    //url = 'https://ekadashi.admin.universl.top/',
+    url = 'https://ekadasi.info/',
     now_date = new Date(), // создаем экземпляр объекта с текущей датой
     now_year = now_date.getFullYear(), // возвращает текущий год в четырехзначном формате
     now_month = now_date.getMonth(), // возвращает текущий номер месяца (значение от 0 до 11. Январь равен 0)
@@ -180,15 +186,15 @@ if ( month_name[ now_month ] === 'Январь'  ||
 if ( home ) {
 
     home.onclick = function() {
-        navigator.splashscreen.show();
         hide_body();
+        localStorage.setItem( 'status_background', 'yes' );
     }
 
 }
 
 choice_date.onclick = function( event ) {
-    navigator.splashscreen.show();
     hide_body();
+    localStorage.setItem( 'status_background', 'yes' );
 }
 
 function show_body() {
@@ -197,6 +203,14 @@ function show_body() {
 
 function hide_body() {
     document.body.style.cssText = '';
+}
+
+function show_background() {
+    background.style.cssText = 'opacity: 1; z-index: 5';
+}
+
+function hide_background() {
+    background.style.cssText = '';
 }
 
 for ( let div of description ) {
@@ -317,8 +331,15 @@ function content_not_data( main,
                            name_func, 
                            param ) {
 
-    navigator.splashscreen.hide();
-    show_body();
+    
+    
+    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
+        hide_background();
+        localStorage.removeItem( 'status_background' );
+    } else {
+        navigator.splashscreen.hide();
+        show_body();
+    }
 
     if ( ( window.location.pathname === '/' ) || 
          ( window.location.pathname === '/index.html' )  ) {
@@ -361,8 +382,8 @@ function content_not_data( main,
 
     reload.onclick = function() {
         window.location.reload();
-        navigator.splashscreen.show();
         hide_body();
+        localStorage.setItem( 'status_background', 'yes' );
     }
 
     last_version.onclick = function() {
@@ -815,10 +836,15 @@ function update_notifications( slug ) {
         value_token = get_token(),
         city_id = slug.id || Number( slug ),
         data_send,
-        status_notifications;
+        status_notifications,
+        time_value,
+        part_time_value_first,
+        part_time_value_last;
 
     if ( location.pathname.includes( 'notifications' ) ) {
         status_notifications = form.status_notifications.dataset.status;
+        part_time_value_first = form.time.value[ 0 ] + form.time.value[ 1 ];
+        part_time_value_last = form.time.value[ 3 ] + form.time.value[ 4 ];
 
         if ( status_notifications === 'false' ) {
             status_notifications = false;
@@ -826,11 +852,37 @@ function update_notifications( slug ) {
             status_notifications = true;
         }
 
+        if ( ( part_time_value_last !== '00' ) && ( part_time_value_last !== '30' )  ) {
+            
+            if ( part_time_value_last <= '15' ) {
+                time_value = part_time_value_first + ':' + '00';
+                form.time.value = time_value;
+            } else if ( ( part_time_value_last > '15' ) && ( part_time_value_last < '45' ) ) {
+                time_value = part_time_value_first + ':' + '30';
+                form.time.value = time_value;
+            } else {
+
+                if ( part_time_value_first === '23' ) {
+                    part_time_value_first = '00';
+                } else if ( part_time_value_first < 9 ) {
+                    part_time_value_first = '0' + ( Number( part_time_value_first ) + 1 );
+                } else {
+                    part_time_value_first = Number( part_time_value_first ) + 1;
+                }
+
+                time_value = part_time_value_first + ':' + '00';
+                form.time.value = time_value;
+            }
+ 
+        } else {
+            time_value = form.time.value;
+        }
+
         data_send = JSON.stringify( { 'firebaseToken': localStorage.getItem( 'firebase_token' ),
                                       'city': city_id,
                                       'notification': status_notifications,
                                       'notifyDay': Number( form.get_notifications.value ),
-                                      'notifyTime': form.time.value,
+                                      'notifyTime': time_value,
                                       'uuid': device.uuid,
                                       'token': value_token } );
 
@@ -957,7 +1009,7 @@ function update_notifications( slug ) {
                         }
                         
                         localStorage.setItem( 'setting_notifications', JSON.stringify( { day: Number( form.get_notifications.value ),
-                                                                                        time: form.time.value } ) );
+                                                                                         time: time_value } ) );
             
                         info_notifications = {
                             status: localStorage.getItem( 'status_notifications' ),
@@ -1061,9 +1113,74 @@ document.addEventListener( "deviceready", () => {
     FCMPlugin.onNotification( function( data ) {
 
         if ( !data.wasTapped ) {
-            alert( data.aps.alert.title + '\n' + data.aps.alert.body );
-        } else { 
-            return;
+            let notice_foreground = document.getElementById( 'notice_foreground' );
+
+            if ( notice_foreground ) {
+                let wrapper_internally_notice_foreground = document.getElementById( 'wrapper_internally_notice_foreground' );
+
+                wrapper_internally_notice_foreground.innerHTML += '<hr class="notice_foreground_hr">' +
+                                                                '<div style="display: flex">' +
+                                                                    '<div style="margin-right: 15px;">' +
+                                                                        '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                                                                    '</div>' +
+                                                                    '<div>' +
+                                                                        '<h3 style="margin: 0;">' + data.aps.alert.title + '</h3>' +
+                                                                        '<span>' + data.aps.alert.body + '</span>' +
+                                                                    '</div>' +
+                                                                '</div>';
+                                                                
+                let close_notice_foreground = document.getElementById( 'close_notice_foreground' );
+
+                close_notice_foreground.onclick = () => {
+                    notice_foreground.style.cssText = '';
+        
+                    setTimeout( () => {
+                        notice_foreground.remove();
+                    }, 1000 );
+
+                }
+
+            } else {
+                let notice_foreground = document.createElement( 'div' ),
+                    wrapper_internally_notice_foreground = document.createElement( 'div' ),
+                    close_notice_foreground = document.createElement( 'i' );
+
+                notice_foreground.id = 'notice_foreground';
+                notice_foreground.className = 'pos-fixed';;
+                
+                wrapper_internally_notice_foreground.id = 'wrapper_internally_notice_foreground';
+                wrapper_internally_notice_foreground.className = 'wrapper_internally_notice_foreground pos-abs';
+
+                close_notice_foreground.id = 'close_notice_foreground';
+                close_notice_foreground.className = 'pos-abs far fa-times-circle';
+
+                wrapper_internally_notice_foreground.append( close_notice_foreground );
+                notice_foreground.append( wrapper_internally_notice_foreground );
+                document.body.append( notice_foreground );
+                wrapper_internally_notice_foreground.innerHTML += '<div style="display: flex">' +
+                                                                    '<div style="margin-right: 15px;">' +
+                                                                        '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                                                                    '</div>' +
+                                                                    '<div>' +
+                                                                        '<h3 style="margin: 0;">' + data.aps.alert.title + '</h3>' +
+                                                                        '<span>' + data.aps.alert.body + '</span>' +
+                                                                    '</div>' +
+                                                                '</div>';
+
+                notice_foreground.style.cssText = 'opacity: 1; z-index: 20';
+                close_notice_foreground = document.getElementById( 'close_notice_foreground' );
+
+                close_notice_foreground.onclick = () => {
+                    notice_foreground.style.cssText = '';
+
+                    setTimeout( () => {
+                        notice_foreground.remove();
+                    }, 1000 );
+
+                }
+
+            }
+
         }
 
     } );
@@ -1099,6 +1216,8 @@ export { window_width,
          get_description,
          show_body,
          hide_body,
+         show_background,
+         hide_background,
          key,
          scroll_window_height,
          min_preloader,
