@@ -106,9 +106,9 @@
     <allow-navigation href="https://api.opencagedata.com/*" />
     <allow-navigation href="https://ekadasi/*" />
     <allow-navigation href="ionic://ekadasi/*" />
-    <allow-navigation href="https://ekadashi.admin.universl.top/*" />
+    <allow-navigation href="https://ekadasi.info/*" />
     <access origin="https://api.opencagedata.com/" />
-    <access origin="https://ekadashi.admin.universl.top/" />
+    <access origin="https://ekadasi.info/" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

@@ -36,6 +36,8 @@ import { window_width,
 
 document.addEventListener( "deviceready", () => {
 
+    console.log( 'Hari' );
+
     on_device_ready();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||
@@ -918,7 +920,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
             today.addEventListener( 'click', function() {
                 window.scrollTo( { left: 0, top: scroll_today, behavior: 'smooth' } );
             } );
-
+            
             main.style.opacity = '1';
             header_top.style.opacity = '1';
             navigator.splashscreen.hide();
