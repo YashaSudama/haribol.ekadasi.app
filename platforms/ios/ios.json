@@ -111,7 +111,7 @@
         "parents": {
           "NSLocationWhenInUseUsageDescription": [
             {
-              "xml": "<string>This app requires access to your location when the screen is on and the app is displayed.</string>",
+              "xml": "<string>We request the ability to automatically determine your location and deliver content to you accordingly. Otherwise you need to select your location manually.</string>",
               "count": 1
             }
           ],
