@@ -36,8 +36,6 @@ import { window_width,
 
 document.addEventListener( "deviceready", () => {
 
-    console.log( 'Hari' );
-
     on_device_ready();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||

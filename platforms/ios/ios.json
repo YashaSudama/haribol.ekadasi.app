@@ -111,7 +111,7 @@
         "parents": {
           "NSLocationWhenInUseUsageDescription": [
             {
-              "xml": "<string>We request the ability to automatically determine your location and deliver content to you accordingly. Otherwise you need to select your location manually.</string>",
+              "xml": "<string>This app queries your location in order to provide you with the Ekadashi and Vaishnava observance dates relevant to your location.</string>",
               "count": 1
             }
           ],
