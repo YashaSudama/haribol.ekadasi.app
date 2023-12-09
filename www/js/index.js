@@ -228,12 +228,6 @@ function window_change_city_func() {
 
 function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
 
-    if ( !slug ) slug = +localStorage.getItem( 'city_name_id' );
-
-    if ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) {
-        check_notifications( slug );
-    }
-
     let class_li,
         id_li,
         value,
