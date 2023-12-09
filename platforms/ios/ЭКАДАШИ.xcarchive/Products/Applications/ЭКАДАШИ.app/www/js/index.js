@@ -2103,8 +2103,6 @@ function register_notifications_content( slug ) {
 function register_notifications( slug ) {
 
     if ( token_notif || localStorage.getItem( 'status_firebase_token' ) === 'true' ) {
-
-        console.log( '1 - ' + token_notif );
         
         if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) {
             localStorage.setItem( 'status_firebase_token', 'true' );
@@ -2121,8 +2119,6 @@ function register_notifications( slug ) {
 
     } else {
         let get_token = setInterval( function() { 
-
-            console.log( '2 - ' + token_notif );
 
             if ( token_notif ) {
                 localStorage.setItem( 'status_firebase_token', 'true' );
