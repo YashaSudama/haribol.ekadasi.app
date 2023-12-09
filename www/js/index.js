@@ -31,8 +31,7 @@ import { window_width,
          update_notifications,
          min_preloader,
          show_body,
-         hide_body,
-         reading_locale_storage
+         hide_body
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -43,8 +42,6 @@ document.addEventListener( "deviceready", () => {
             localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
         get_firebase_token_func();
     }
-
-    reading_locale_storage();
 
 }, false );
 

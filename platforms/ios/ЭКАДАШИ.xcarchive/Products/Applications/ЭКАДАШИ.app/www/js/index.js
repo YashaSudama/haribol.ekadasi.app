@@ -31,8 +31,7 @@ import { window_width,
          update_notifications,
          min_preloader,
          show_body,
-         hide_body,
-         reading_locale_storage
+         hide_body
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -43,8 +42,6 @@ document.addEventListener( "deviceready", () => {
             localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
         get_firebase_token_func();
     }
-
-    reading_locale_storage();
 
 }, false );
 
@@ -227,12 +224,6 @@ function window_change_city_func() {
 }
 
 function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
-
-    if ( !slug ) slug = +localStorage.getItem( 'city_name_id' );
-
-    if ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) {
-        check_notifications( slug );
-    }
 
     let class_li,
         id_li,

@@ -460,7 +460,7 @@ function work_settings_notifications( month ) {
             clear();
             navigator.splashscreen.show();
             hide_body();
-            //window.location.href = 'index.html';
+            window.location.href = 'index.html';
         }
 
     } else {
