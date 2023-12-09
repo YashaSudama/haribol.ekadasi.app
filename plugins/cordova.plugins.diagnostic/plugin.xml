@@ -50,7 +50,7 @@
         <framework src="CoreLocation.framework" />
 
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription" comment="Default usage descriptions: override as necessary in .plist">
-            <string>This app queries your location in order to provide you with the Ekadashi and Vaishnava observance dates relevant to your location.</string>
+            <string>The app needs to know your location to provide you with dates for observing ekadashi and Vaishnava festivals that match your location</string>
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription" comment="iOS 11 or greater">

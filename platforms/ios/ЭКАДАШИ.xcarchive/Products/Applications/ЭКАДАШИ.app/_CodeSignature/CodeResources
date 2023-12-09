@@ -42,7 +42,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		6g3Ml0LfcuDsNE3jcP6PA5QadIM=
+		JkDfsKdvzfbaOnXywULCntmcrRM=
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		zcfvOWS+rnRhHowxqC61h7gkesc=
+		1e31qy9I0i8t017SfeLjQSVLEsA=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		iB7B0ys08cydSJouJFhzpHjmHDc=
+		fM6SaJtWTW6HjmAv6BK6oFcGvOw=
 		</data>
 		<key>www/about_ekadashi.html</key>
 		<data>
@@ -226,15 +226,15 @@
 		</data>
 		<key>www/js/general.js</key>
 		<data>
-		o15HoRzZklPjCKRbbWo1E1wf700=
+		SNoH/dsY869Re3ZS16d1s+1ub+Y=
 		</data>
 		<key>www/js/index.js</key>
 		<data>
-		nv/DQ9W9p6EHXiwmX3OebLDhT1g=
+		o+clMk96/Sr8piNENgd5nISZ4pM=
 		</data>
 		<key>www/js/notifications.js</key>
 		<data>
-		/0+IyBJUoNT9Bv2MPRhTW2evCh8=
+		4gTtfDgAOA4W/JIUcy69ZsrVXr4=
 		</data>
 		<key>www/js/privacy_policy.js</key>
 		<data>
@@ -521,14 +521,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rEJGsBak43q4cfP8ajfWsrv44u+7NBUrg95TuejzwoY=
+			ss3pgxC1aqdwPnYwUPKPfRzMzYZojLdHcOj0g+AllUg=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			c2r+sJyRpxwu9gReLlrn0b5N1H1efbAur+2qvA5CtpA=
+			pWH1EISCUNq3ek4Dge1eiBWpKD1aj8NYrFejw7S/xB4=
 			</data>
 		</dict>
 		<key>www/about_ekadashi.html</key>
@@ -822,21 +822,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			E1HuhgRHOmoIxJU6OaasYCxeuYS8OtJbPP8SQ8rCkv8=
+			y/V39TkWYJh6ctqokBkyiGJOkaM1vNP0HdFvPq3ru9Y=
 			</data>
 		</dict>
 		<key>www/js/index.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KwFGHYEFkAOGvpGLYTY4Zw8w+UxRFgiWEDK9y01Aqa0=
+			h/fpS8IGkjqmV7n+27NjouQOw8L+Dqgfschc+Ctp03s=
 			</data>
 		</dict>
 		<key>www/js/notifications.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m9W4B81F7dhp61w42aRS2v0j2t2JxkiSy3nKPM+3bdU=
+			Ccel7GtzupDVB4EtINx3ohBzHrZwBFA3gqM3gI6yUY8=
 			</data>
 		</dict>
 		<key>www/js/privacy_policy.js</key>

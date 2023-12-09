@@ -179,12 +179,14 @@ if ( month_name[ now_month ] === 'Январь'  ||
 if ( home ) {
 
     home.onclick = function() {
+        navigator.splashscreen.show();
         hide_body();
     }
 
 }
 
 choice_date.onclick = function( event ) {
+    navigator.splashscreen.show();
     hide_body();
 }
 
@@ -357,6 +359,7 @@ function content_not_data( main,
     }
 
     reload.onclick = function() {
+        navigator.splashscreen.show();
         window.location.reload();
         hide_body();
     }

@@ -31,12 +31,11 @@ import { window_width,
          update_notifications,
          min_preloader,
          show_body,
-         hide_body
+         hide_body,
+         reading_locale_storage
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
-
-    console.log( 'Hari' );
 
     on_device_ready();
 
@@ -44,6 +43,8 @@ document.addEventListener( "deviceready", () => {
             localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
         get_firebase_token_func();
     }
+
+    reading_locale_storage();
 
 }, false );
 
@@ -94,43 +95,55 @@ function get_firebase_token_func() {
     if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
         localStorage.setItem( 'status_firebase_token', 'false' ); 
 
-        if ( device.platform === 'Android' ) {
+        FCMPlugin.getToken( function( token ) {
+            
+            if ( !token_notif ) {
 
-            FirebasePlugin.getToken( ( token ) => {
+                let get_firebase_token_interval = setInterval( () => {
+
+                    if ( token_notif ) clearInterval( get_firebase_token_interval );
+
+                    FCMPlugin.getToken( function( token ) {
+                        token_notif = token;
+                    }, function( error ) {
+                        token_notif = false;
+                    } ); 
+
+                }, 1000 );
+
+            } else {
                 token_notif = token;
-            }, function( error ) {
-                token_notif = false;
-            } );
+            }
 
-        } else {
-
-            FCMPlugin.getToken( function( token ) {
-                token_notif = token;
-            }, function( error ) {
-                token_notif = false;
-            } ); 
-
-        }
+        }, function( error ) {
+            token_notif = false;
+        } ); 
 
     } else {
 
-        if ( device.platform === 'Android' ) {
+        FCMPlugin.getToken( function( token ) {
+            
+            if ( !token_notif ) {
 
-            FirebasePlugin.getToken( ( token ) => {
+                let get_firebase_token_interval = setInterval( () => {
+
+                    if ( token_notif ) clearInterval( get_firebase_token_interval );
+
+                    FCMPlugin.getToken( function( token ) {
+                        token_notif = token;
+                    }, function( error ) {
+                        token_notif = false;
+                    } ); 
+
+                }, 1000 );
+
+            } else {
                 token_notif = token;
-            }, function( error ) {
-                token_notif = false;
-            } );
+            }
 
-        } else {
-
-            FCMPlugin.getToken( function( token ) {
-                token_notif = token;
-            }, function( error ) {
-                token_notif = false;
-            } ); 
-
-        }
+        }, function( error ) {
+            token_notif = false;
+        } ); 
 
     }
 
@@ -214,6 +227,12 @@ function window_change_city_func() {
 }
 
 function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
+
+    if ( !slug ) slug = +localStorage.getItem( 'city_name_id' );
+
+    if ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) {
+        check_notifications( slug );
+    }
 
     let class_li,
         id_li,
@@ -934,7 +953,7 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
 
 function get_info_func( slug, index_get_info ) {
 
-    if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) ) {
+    if ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) {
         check_notifications( slug );
     }
 
@@ -1994,7 +2013,7 @@ function check_notifications( slug ) {
         value_token = get_token(),
         data_send = JSON.stringify( { 'uuid': device.uuid,
                                       'token': value_token } ),
-        city_id = slug.id;
+        city_id =  slug.id || slug;
                                       
     xml_check.open( 'POST', url + 'api/devices/check' );
     xml_check.responseType = 'json';
@@ -2003,9 +2022,6 @@ function check_notifications( slug ) {
     xml_check.onload = function() {
         
         let response_check = xml_check.response;
-
-        console.log( data_send );
-        console.log( response_check );
         
         if ( response_check.message ) {
 
@@ -2022,8 +2038,6 @@ function check_notifications( slug ) {
             }
 
         } else {
-            console.log( token_notif );
-            console.log( 'return' );
             return;
         }
         
@@ -2089,6 +2103,8 @@ function register_notifications_content( slug ) {
 function register_notifications( slug ) {
 
     if ( token_notif || localStorage.getItem( 'status_firebase_token' ) === 'true' ) {
+
+        console.log( '1 - ' + token_notif );
         
         if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) {
             localStorage.setItem( 'status_firebase_token', 'true' );
@@ -2105,6 +2121,8 @@ function register_notifications( slug ) {
 
     } else {
         let get_token = setInterval( function() { 
+
+            console.log( '2 - ' + token_notif );
 
             if ( token_notif ) {
                 localStorage.setItem( 'status_firebase_token', 'true' );
