@@ -1947,9 +1947,6 @@ function on_success( position, city, index_get_info ) {
         
         lat = position.coords.latitude; 
         lon = position.coords.longitude;
-
-        // lat = 49.59002081089676; // Полтава
-        // lon = 34.55092795899492;
         
         if ( localStorage.getItem( 'lat' ) && 
              localStorage.getItem( 'lon' ) &&
