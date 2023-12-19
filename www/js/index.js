@@ -1863,13 +1863,13 @@ function get_city() {
     xml_location.onload = function() {
 
         let city = xml_location.response.results[ 0 ].components.city ||
-                   xml_location.response.results[ 0 ].components.county ||
+                   xml_location.response.results[ 0 ].components.town ||
                    xml_location.response.results[ 0 ].components.village || 
                    xml_location.response.results[ 0 ].components.hamlet ||
                    xml_location.response.results[ 0 ].components.borough ||
-                   xml_location.response.results[ 0 ].components.town ||
                    xml_location.response.results[ 0 ].components.municipality ||
-                   xml_location.response.results[ 0 ].components.city_district,
+                   xml_location.response.results[ 0 ].components.city_district ||
+                   xml_location.response.results[ 0 ].components.county, 
             state = xml_location.response.results[ 0 ].components.state ||
                     xml_location.response.results[ 0 ].components.province ||
                     xml_location.response.results[ 0 ].components.region ||

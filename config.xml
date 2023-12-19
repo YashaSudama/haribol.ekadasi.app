@@ -1,9 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0.1' encoding='utf-8'?>
 <widget id="haribol.ekadasi.app" 
-        version="1.0.0" 
+        version="1.0.1" 
         xmlns="http://www.w3.org/ns/widgets"
         xmlns:android="schemas.android.com/apk/res/android">
-    <name>ЭКАДАШИ</name>
+    <name>Экадаши</name>
     <description>
         Экадаши и Вайшнавские праздники
     </description>

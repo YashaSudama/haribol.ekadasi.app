@@ -739,8 +739,6 @@ function get_description( main, tag ) {
 
                     for ( let div of description ) {
 
-                        console.log( id );
-
                         if ( ( div.getAttribute( 'id' )).includes( id ) ) {
                             div_visible = div;
                             div.style.cssText = 'opacity: 1; left: 0';
