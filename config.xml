@@ -7,7 +7,8 @@
     <description>
         Экадаши и Вайшнавские праздники
     </description>
-    <author email="mantramusicland@gmail.com" href="https://mantramusic.ru/">
+    <author email="mantramusicland@gmail.com" 
+            href="https://mantramusic.ru/">
         Gaurananda dasi
     </author>
     <content src="index.html" />

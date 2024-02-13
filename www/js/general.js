@@ -9,6 +9,11 @@ if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
     setTimeout( show_body, 1000 );
 }
 
+remove_local_storage( 'index_get_info' );
+remove_local_storage( 'main' );
+remove_local_storage( 'city' );
+remove_local_storage( 'cesh_city' );
+
 let content_preloader = '<div class="sk-fading-circle">' +
                           '<div class="sk-circle sk-circle-1"></div>' +
                           '<div class="sk-circle sk-circle-2"></div>' +
@@ -51,8 +56,7 @@ if ( ( window.location.pathname === '/' ) ||
 block_nav.append( div_ul_nav );
 
 if ( !localStorage.getItem( 'setting_notifications' ) ) { 
-
-    let setting_notifications_let = JSON.stringify( { day: 1, time: '09:00' } );
+    let setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
     localStorage.setItem( 'setting_notifications', setting_notifications_let );
 }
 
@@ -63,45 +67,45 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     now_month = now_date.getMonth(), // возвращает текущий номер месяца (значение от 0 до 11. Январь равен 0)
     month_days,  
     now_date_number = now_date.getDate(), // возвращает текущую дату
-    month_name = ['Январь', 
-                  'Февраль',
-                  'Март',
-                  'Апрель',
-                  'Май',
-                  'Июнь',
-                  'Июль',
-                  'Август',
-                  'Сентябрь',
-                  'Октябрь',
-                  'Ноябрь',
-                  'Декабрь'],
-    month_name_header = ['января', 
-                         'февраля',
-                         'марта',
-                         'апреля',
-                         'мая',
-                         'июня',
-                         'июля',
-                         'августа',
-                         'сентября',
-                         'октября',
-                         'ноября',
-                         'декабря'],
+    month_name = [ 'Январь', 
+                   'Февраль',
+                   'Март',
+                   'Апрель',
+                   'Май',
+                   'Июнь',
+                   'Июль',
+                   'Август',
+                   'Сентябрь',
+                   'Октябрь',
+                   'Ноябрь',
+                   'Декабрь' ],
+    month_name_header = [ 'января', 
+                          'февраля',
+                          'марта',
+                          'апреля',
+                          'мая',
+                          'июня',
+                          'июля',
+                          'августа',
+                          'сентября',
+                          'октября',
+                          'ноября',
+                          'декабря' ],
     day_week,
-    day_name_short = ['Вс',
-                      'Пн',
-                      'Вт',
-                      'Ср',
-                      'Чт',
-                      'Пт',
-                      'Сб'],
-    day_name_full = ['Воскресенье',
-                     'Понедельник',
-                     'Вторник',
-                     'Среда',
-                     'Четверг',
-                     'Пятница',
-                     'Суббота'],
+    day_name_short = [ 'Вс',
+                       'Пн',
+                       'Вт',
+                       'Ср',
+                       'Чт',
+                       'Пт',
+                       'Сб' ],
+    day_name_full = [ 'Воскресенье',
+                      'Понедельник',
+                      'Вторник',
+                      'Среда',
+                      'Четверг',
+                      'Пятница',
+                      'Суббота' ],
     height_header,
     current_date_span = document.getElementById( 'current_date' ),
     location_span = document.getElementById( 'location' ),
@@ -129,7 +133,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     coords_left, 
     event_year,
     delete_div, 
-    index_get_info,
 	min_preloader = document.createElement( 'section' ),
     info_notifications = {
         status: localStorage.getItem( 'status_notifications' ),
@@ -151,37 +154,238 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                                             'не подключена служба VPN' +
                                     '</li>' +
                                   '</ul>',
-    text_not_internet = '<h3>Нет подключения к интернету!</h3>';
+    text_not_internet = '<h3>Нет подключения к интернету!</h3>',
+    apparition_ekadasi_days = {
+        '1': { name: 'Явление Нитьянанды Прабху',
+               name_too_events: 'Нитьянанда',
+               id: 'nityananda'
+             },
+        '2': { name: 'Гаура-Пурнима, явление Чайтаньи Махапрабху' + 
+                     '<hr class="ekadashi_hr">' +
+                     '<span class="exit">Полный пост</span>',
+               name_too_events: 'Чайтанья',
+               id: 'chaytanya'
+             },
+        '3': { name: 'Рама Навами, явление Рамы',
+               name_too_events: 'Рамачандра',
+               id: 'sita'
+             },
+        '4': { name: 'Явление Нришимхадева' + 
+                     '<hr class="ekadashi_hr">' +
+                     '<span class="exit">пост до полудня</span>',
+               name_too_events: 'Нришимхадев',
+               id: 'nrisimha'
+             },
+        '6': { name: 'Явление Баларамы',
+               name_too_events: 'Баларама',
+               id: 'baladeva'
+             },
+        '7': { name: 'Джанмастами, явление Шри Кришны' + 
+                     '<hr class="ekadashi_hr">' +
+                     '<span class="exit">Полный пост</span>',
+               name_too_events: 'Джанмастами',
+               id: 'krishna'
+             },
+        '8': { name: 'Явление А.Ч. Бхактиведанты Свами' + 
+                     '<hr class="ekadashi_hr">' +
+                     '<span class="exit">пост до полудня</span>',
+               name_too_events: 'Бхактиведанта',
+               id: 'bhaktivedanta'
+             },
+        '9': { name: 'Радхастами, явление Шримати Радхарани',
+               name_too_events: 'Радхастами',
+               id: 'radharany'
+             },
+        'A': { name: 'Праздник Говардхан-пуджа',
+               name_too_events: 'Говардхан',
+               id: 'govardhana'
+             },
+        'B': { name: 'Ратха-ятра',
+               name_too_events: 'Ратха-ятра',
+               id: 'radha-yatra'
+             },
+        'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
+                     '<hr class="ekadashi_hr">' +
+                     '<span class="exit">пост</span>',
+               name_too_events: 'Вьясапуджа',
+               id: 'vyasapudja'
+             },
+        'R': { name: 'Рождество, явление Иисуса Христа',
+               name_too_events: 'Рождество',
+               id: 'rozhdestvo'
+             },
+        'Putrada': {
+            name: 'Путрада',
+            name_too_events: 'Путрада Экадаши',
+            id: 'putrada' 
+        },        
+        'Sat-tila': {
+            name: 'Шат-тила',
+            name_too_events: 'Шат-тила Экадаши',
+            id: 'sat-tila' 
+        },        
+        'Bhaimi': {
+            name: 'Джая (Бхаими)',
+            name_too_events: 'Джая Экадаши',
+            id: 'bhaimi' 
+        },        
+        'Vijaya': {
+            name: 'Виджая',
+            name_too_events: 'Виджая Экадаши', 
+            id: 'vijaya' 
+        },        
+        'Amalaki vrata': {
+            name: 'Амалаки',
+            name_too_events: 'Амалаки Экадаши',
+            id: 'amalaki' 
+        },
+        'Papamocani': {
+            name: 'Папа-мочани',
+            name_too_events: 'Папа-мочани Экадаши',
+            id: 'papamocani' 
+        },
+        'Kamada': {
+            name: 'Камада',
+            name_too_events: 'Камада Экадаши',
+            id: 'kamada' 
+        },
+        'Varuthini': {
+            name: 'Варутхини',
+            name_too_events: 'Варутхини Экадаши',
+            id: 'varuthini' 
+        },
+        'Mohini': {
+            name: 'Мохини',
+            name_too_events: 'Мохини Экадаши',
+            id: 'mohini' 
+        },
+        'Apara': {
+            name: 'Апара',
+            name_too_events: 'Апара Экадаши',
+            id: 'apara' 
+        },
+        'Pandava Nirjala': {
+            name: 'Нирджала (Пандава, Бхима)',
+            name_too_events: 'Нирджала Экадаши',
+            id: 'pandava' 
+        },
+        'Yogini': {
+            name: 'Йогини',
+            name_too_events: 'Йогини Экадаши',        
+            id: 'yogini'
+        },
+        'Sayana': {
+            name: 'Дева-шаяни (Падма)',
+            name_too_events: 'Дева-шаяни (Падма)',
+            id: 'sayana' 
+        },
+        'Kamika': {
+            name: 'Камика',
+            name_too_events: 'Камика Экадаши',
+            id: 'kamika' 
+        },
+        'Pavitropana': {
+            name: 'Павитра',
+            name_too_events: 'Павитра Экадаши',
+            id: 'pavitra' 
+        },
+        'Annada': {
+            name: 'Аннада (Аджа)',
+            name_too_events: 'Аннада Экадаши',
+            id: 'annada' 
+        },
+        'Parsva': {
+            name: 'Паршва',
+            name_too_events: 'Паршва Экадаши',
+            id: 'parsva' 
+        },
+        'Indira': {
+            name: 'Индира',
+            name_too_events: 'Индира Экадаши',
+            id: 'indira' 
+        },
+        'Padmini': {
+            name: 'Падмини',
+            name_too_events: 'Падмини Экадаши',
+            id: 'padmini' 
+        },
+        'Parama': {
+        name:  'Парама',
+            name_too_events: 'Парама Экадаши',
+            id: 'parama' 
+        },
+        'Pasankusa': {
+            name: 'Пашанкуша',
+            name_too_events: 'Пашанкуша Экадаши',
+            id: 'pasankusa' 
+        },
+        'Rama': { 
+            name: 'Рама',
+            name_too_events: 'Рама Экадаши',
+            id: 'rama-ekadashi' 
+        },
+        'Utthana': {
+            name: 'Уттхана',
+            name_too_events: 'Уттхана Экадаши',
+            id: 'utthana'
+        },
+        'Moksada': {
+            name: 'Мокшада',
+            name_too_events: 'Мокшада Экадаши',
+            id: 'moksada' 
+        },
+        'Saphala': {
+            name: 'Са-пхала',
+            name_too_events: 'Са-пхала Экадаши',
+            id: 'saphala'
+        },
+        'Utpanna': { 
+            name: 'Утпанна',
+            name_too_events: 'Утпанна Экадаши',
+            id: 'utpanna' 
+        }
+
+    };
+
+document.addEventListener( 'resume', () => {
+    let now_date_resume = new Date(),
+        now_date_number_resume = now_date_resume.getDate();
+
+    if ( now_date_number_resume !== now_date_number ) {
+        window.location.reload();
+    }
+
+} );
 	
 min_preloader.id = 'min_preloader';
 min_preloader.innerHTML = content_preloader;
 
-if ( month_name[ now_month ] === 'Январь'  || 
-     month_name[ now_month ] === 'Март'    || 
-     month_name[ now_month ] === 'Май'     ||
-     month_name[ now_month ] === 'Июль'    || 
-     month_name[ now_month ] === 'Август'  || 
-     month_name[ now_month ] === 'Октябрь' || 
-     month_name[ now_month ] === 'Декабрь' ) {
+if ( now_month === 0 || 
+     now_month === 2 || 
+     now_month === 4 ||
+     now_month === 6 || 
+     now_month === 7 || 
+     now_month === 9 || 
+     now_month === 11 ) {
 
-        month_days = 31;
+    month_days = 31;
 
-} else if ( month_name[ now_month ] === 'Апрель'   || 
-            month_name[ now_month ] === 'Июнь'     || 
-            month_name[ now_month ] === 'Сентябрь' || 
-            month_name[ now_month ] === 'Ноябрь' ) {
+} else if ( now_month === 3 || 
+            now_month === 5 || 
+            now_month === 8 || 
+            now_month === 10 ) {
 
-        month_days = 30;
+   month_days = 30;
 
-} else if ( month_name[ now_month ] === 'Февраль' ) {
-    
-    if ( ( now_year % 4 ) === 0 ) {
-        month_days = 29;
-    } else {
-        month_days = 28;
-    }
+} else if ( now_month === 1 ) {
+  
+   if ( ( now_year % 4 ) === 0 ) {
+       month_days = 29;
+   } else {
+       month_days = 28;
+   }
 
-} 
+}
 
 if ( home ) {
 
@@ -219,69 +423,10 @@ for ( let div of description ) {
 
 window.addEventListener( 'resize', function() {
     scroll_window_height = window.innerHeight;
+    remove_too_events();
 
     for ( let div of description ) {
-
         if ( div.style.left !== '0px' ) div.style.left = window.innerWidth + 'px';
-
-    }
-
-    let too_events = document.querySelector( '#too_events' );
-
-    if ( too_events ) {
-        let li_too_id = calendar.querySelectorAll( '.too_id' ),
-            name_class,
-            margin_close_too_events,
-            event_year_2,
-            class_too_events;
-
-            if ( plus.classList.contains( 'zoom_hide' ) ) {
-                margin_close_too_events = -15;
-            } else if ( plus.classList.contains( 'zoom_show' ) ) {
-                margin_close_too_events = -10;
-            }
-
-            if ( li_too_id.length > 0 ) {
-
-                for ( let li_id of li_too_id ) {
-
-                    event_year = li_id.closest( '.calendar_year' ).previousElementSibling.textContent;
-                    event_year_2 = 'year_' + event_year;
-
-                    if ( too_events.classList.contains( li_id.id ) ) {
-
-                        for ( let name of too_events.classList ) {
-
-                            if ( name.includes( 'year' ) ) {
-                                name_class = name;
-                            }
-
-                        }
-
-                        if ( event_year_2 !== name_class ) {
-                            continue;
-                        }
-
-                        coords_let = li_id.getBoundingClientRect();
-
-                        if ( plus.classList.contains( 'zoom_hide' ) ) {
-                            class_too_events = '.' + li_id.id + '.year_' + event_year + '.zoom_events';
-                        } else if ( plus.classList.contains( 'zoom_show' ) ) {
-                            class_too_events = '.' + li_id.id + '.year_' + event_year;
-                        }
-
-                        get_coords_left( too_events, 
-                                        coords_let,
-                                        class_too_events, 
-                                        '.' + li_id.id + '_' + event_year, 
-                                        margin_close_too_events );
-                    
-                    }
-
-                }
-			
-		} 
-
     }
 
 } );
@@ -295,10 +440,6 @@ close_nav.onclick = function() {
 }
 
 city_selection.onclick = function() {
-    
-    if ( !localStorage.getItem( 'city_selection' ) ) {
-        localStorage.setItem( 'city_selection', 'yes' );
-    }
 
     if ( localStorage.getItem( 'click_choice_city' ) === '0' ) localStorage.setItem( 'click_choice_city', '1' );
 
@@ -309,8 +450,11 @@ function reading_locale_storage() {
     
     for ( let key in localStorage ) {
         
-        if ( !localStorage.hasOwnProperty( key ) || ( key === 'index_get_info' ) 
-            || ( key === 'calendar' ) || ( key === 'main' ) ) {
+        if ( !localStorage.hasOwnProperty( key ) || 
+            ( key === 'index_get_info_new' ) || 
+            ( key === 'select_get_info' ) || 
+            ( key === 'calendar' ) || 
+            ( key === 'main_index' ) ) {
             continue;
         }
         
@@ -330,8 +474,6 @@ function content_not_data( main,
                            local_html, 
                            name_func, 
                            param ) {
-
-    
     
     if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
         hide_background();
@@ -351,16 +493,18 @@ function content_not_data( main,
     }
 
     if ( div_zoom_calendar ) {
-        div_zoom_calendar.style.cssText = 'opacity: 0; z-index: -1';
+        div_zoom_calendar.style.cssText = '';
     }
 
-    main.style.height = ( scroll_window_height - height_header - footer_id.clientHeight ) + 'px';
-    main.innerHTML = '<div id="not_connection" class="pos-rel">' +
-                        '<div class="text-center">' + text + '</div>' +
-                        '<button id="reload" class="d-block m-auto m-t-30">Перезагрузить страницу</button>' +
-                        '<button id="last_version" class="d-block m-t-30 m-auto">Отобразить последнюю<br>сохранённую версию</button>' +
-                        '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">Проверьте подключение к интернету и попробуйте еще раз</h4>' +
-                     '</div>';
+    if ( main ) {
+        main.style.height = ( scroll_window_height - height_header - footer_id.clientHeight ) + 'px';
+        main.innerHTML = '<div id="not_connection" class="pos-rel">' +
+                            '<div class="text-center">' + text + '</div>' +
+                            '<button id="reload" class="d-block m-auto m-t-30">Перезагрузить страницу</button>' +
+                            '<button id="last_version" class="d-block m-t-30 m-auto">Отобразить последнюю<br>сохранённую версию</button>' +
+                            '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">Проверьте подключение к интернету и попробуйте еще раз</h4>' +
+                        '</div>';
+    }
 
     let reload = document.getElementById( 'reload' ),
         last_version = document.getElementById( 'last_version' );
@@ -378,27 +522,40 @@ function content_not_data( main,
         }
 
         param = JSON.parse( localStorage.getItem( local_object ) );
+        
     }
 
-    reload.onclick = function() {
-        window.location.reload();
-        hide_body();
-        localStorage.setItem( 'status_background', 'yes' );
-    }
+    if ( reload ) {
 
-    last_version.onclick = function() {
-        city = localStorage.getItem( 'city_name' ) || localStorage.getItem( 'cesh_city' );
-        location_span.innerHTML = city;
-
-        if ( div_zoom_calendar ) {
-            div_zoom_calendar.style.cssText = '';
+        reload.onclick = function() {
+            window.location.reload();
+            hide_body();
+            localStorage.setItem( 'status_background', 'yes' );
         }
 
-        main.style.cssText = '';
-        main.innerHTML = localStorage.getItem( local_html );
-        name_func( param );
-        
-        if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
+    }
+
+    if ( last_version ) {
+
+        last_version.onclick = function() {
+            city = localStorage.getItem( 'city_name' );
+            location_span.innerHTML = city;
+
+            if ( div_zoom_calendar ) {
+                div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
+                                                  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
+
+                if ( localStorage.getItem( 'not_scroll' ) ) localStorage.setItem( 'not_scroll', 'true' );
+                
+            }
+
+            main.style.cssText = '';
+            main.innerHTML = localStorage.getItem( local_html );
+            name_func( param );
+            
+            if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
+
+        }
 
     }
 
@@ -414,12 +571,12 @@ function not_connection( xml_name,
 
     xml_name.onerror = function() {
         
-       content_not_data( main, 
-                         text, 
-                         local_object, 
-                         local_html, 
-                         name_func, 
-                         param );
+        content_not_data( main, 
+                          text, 
+                          local_object, 
+                          local_html, 
+                          name_func, 
+                          param );
 
     }
 
@@ -478,7 +635,8 @@ function get_coords_left( block,
     let style_too_events = document.getElementById( 'style_too_events' ),
         style_tag,
         block_height = block.offsetHeight,
-        block_top = false; 
+        block_top = false,
+        color_border_top = '#d6e6ff'; 
 
     delete_div = block.querySelector( 'i' );
 
@@ -493,15 +651,13 @@ function get_coords_left( block,
     style_tag.id = 'style_too_events';
 
     if ( ( ( coords.left + ( coords.width / 2 ) ) + ( block.clientWidth / 2 ) ) > window.innerWidth ) {
-
-        coords_left = window_width - block.clientWidth - 1;
+        coords_left = window.innerWidth - block.clientWidth - 1;
         style_tag.innerHTML +=  class_after + '::after { ' +
                                 'right: ' + ( window.innerWidth - ( coords.left + coords.width ) ) + 'px; } ' +
                                 class_close + '{ left: ' + left_right + 'px; } '; 
             
 
     } else if ( ( ( coords.left + ( coords.width / 2 ) ) - ( block.clientWidth / 2 ) ) < 20 ) {
-
         coords_left = 0; 
         style_tag.innerHTML +=  class_after + '::after { ' +
                                 'left: ' + ( coords.left + ( coords.width / 2 ) ) + 'px; } '+    
@@ -509,7 +665,6 @@ function get_coords_left( block,
                                 ( delete_div.clientWidth / 3 ) ) + 'px; }'; 
 
     } else {
-
         coords_left = ( coords.left + ( coords.width / 2 ) ) - ( block.clientWidth / 2 );
         style_tag.innerHTML +=  class_after + '::after { ' +
                                 'left: ' + ( ( block.clientWidth / 2 ) ) + 'px; } '+
@@ -518,34 +673,36 @@ function get_coords_left( block,
 
     if ( block_top ) {
 
-    if ( class_after.includes( 'zoom_events' ) ) {
-        style_tag.innerHTML +=  class_after + '::after { ' +
-                                'bottom: -20px !important;' +
-                                'border-top: 13px solid #d6e6ff !important; }';
+        if ( class_after.includes( 'zoom_events' ) ) {
+            style_tag.innerHTML +=  class_after + '::after { ' +
+                                    'bottom: -20px !important;' +
+                                    'border-top: 13px solid ' + color_border_top + ' !important; }';
+        } else {
+            style_tag.innerHTML +=  class_after + '::after { ' +
+                                    'bottom: -14px;' +
+                                    'border-top: 9px solid ' + color_border_top + ' !important; }';
+        }
+
     } else {
-        style_tag.innerHTML +=  class_after + '::after { ' +
-                                'bottom: -14px;' +
-                                'border-top: 9px solid #d6e6ff !important; }';
+
+        setTimeout( () => {
+
+            if ( class_after.includes( 'zoom_events' ) ) {
+                style_tag.innerHTML +=  class_after + '::after { ' +
+                                        'bottom: ' + block.offsetHeight +  'px !important;' +
+                                        'border-bottom: 13px solid ' + color_border_top + ' !important; }';
+            } else {
+                style_tag.innerHTML +=  class_after + '::after { ' +
+                                        'bottom: ' + ( block.offsetHeight - 1 ) + 'px;' +
+                                        'border-bottom: 9px solid ' + color_border_top + ' !important; }';
+            }
+
+        }, 0 );
+
     }
-
-    } else {
-
-    if ( class_after.includes( 'zoom_events' ) ) {
-        style_tag.innerHTML +=  class_after + '::after { ' +
-                                'bottom: ' + block.offsetHeight +  'px !important;' +
-                                'border-bottom: 13px solid #d6e6ff !important; }';
-    } else {
-        style_tag.innerHTML +=  class_after + '::after { ' +
-                                'bottom: ' + ( block.offsetHeight - 1 ) + 'px;' +
-                                'border-bottom: 9px solid #d6e6ff !important; }';
-    }
-
-}
 
     setTimeout( () => {
-
         if ( style_too_events ) style_too_events.remove();
-
         block.append( style_tag );
     }, 0 );
 
@@ -565,12 +722,10 @@ function get_description( main, tag ) {
                 let id = item.id;
 
                 if ( id.includes( '_' ) ) {
-                    let too_events = document.getElementById( 'too_events' ),
-                        new_id = id.replace( '_', ', ' ),
+                    let new_id = id.replace( '_', ', ' ),
                         arr_event = [];
-                    
-                    if ( too_events ) too_events.remove();
-
+                        
+                    remove_too_events();
                     new_id = new_id.split( ', ' );
                     event_year = item.closest( '.calendar_year' ).previousElementSibling.textContent;
                     arr_event[ 0 ] = id;
@@ -591,83 +746,13 @@ function get_description( main, tag ) {
 
                         let elem_id_orig = elem_id;
 
-                        if (elem_id === 'putrada') {
-                            elem_id = 'Путрада';
-                        } else if (elem_id === 'sat-tila') {
-                            elem_id = 'Шат-тила Экадаши';
-                        } else if (elem_id === 'bhaimi') {
-                            elem_id = 'Джая (Бхаими) Экадаши';
-                        } else if (elem_id === 'vijaya') {
-                            elem_id = 'Виджая Экадаши';
-                        } else if (elem_id === 'amalaki') {
-                            elem_id = 'Амалаки Экадаши';
-                        } else if (elem_id === 'papamocani') {
-                            elem_id = 'Папа-мочани Экадаши';
-                        } else if (elem_id === 'kamada') {
-                            elem_id = 'Камада Экадаши';
-                        } else if (elem_id === 'varuthini') {
-                            elem_id = 'Варутхини Экадаши';
-                        } else if (elem_id === 'mohini') {
-                            elem_id = 'Мохини Экадаши';
-                        } else if (elem_id === 'apara') {
-                            elem_id = 'Апара Экадаши';
-                        } else if (elem_id === 'pandava') {
-                            elem_id = 'Нирджала (Пандава, Бхима) Экадаши';
-                        } else if (elem_id === 'yogini') {
-                            elem_id = 'Йогини Экадаши';
-                        } else if (elem_id === 'sayana') {
-                            elem_id = 'Дева-шаяни (Падма) Экадаши';
-                        } else if (elem_id === 'kamika') {
-                            elem_id = 'Камика Экадаши';
-                        } else if (elem_id === 'pavitra') {
-                            elem_id = 'Павитра Экадаши';
-                        } else if (elem_id === 'annada') {
-                            elem_id = 'Аннада (Аджа) Экадаши';
-                        } else if (elem_id === 'parsva') {
-                            elem_id = 'Паршва Экадаши';
-                        } else if (elem_id === 'indira') {
-                            elem_id = 'Индира Экадаши';
-                        } else if (elem_id === 'padmini') {
-                            elem_id = 'Падмини Экадаши';
-                        } else if (elem_id === 'parama') {
-                            elem_id = 'Парама Экадаши';
-                        } else if (elem_id === 'pasankusa') {
-                            elem_id = 'Пашанкуша Экадаши';
-                        } else if (elem_id === 'rama-ekadashi') {
-                            elem_id = 'Рама Экадаши'; 
-                        } else if (elem_id === 'utthana') {
-                            elem_id = 'Уттхана Экадаши';
-                        } else if (elem_id === 'moksada') {
-                            elem_id = 'Мокшада Экадаши';
-                        } else if (elem_id === 'saphala') {
-                            elem_id = 'Са-пхала Экадаши';
-                        } else if (elem_id === 'utpanna') {
-                            elem_id = 'Утпанна Экадаши';
-                        } else if (elem_id === 'nityananda') {
-                            elem_id = 'Нитьянанда';
-                        } else if (elem_id === 'chaytanya') {
-                            elem_id = 'Чайтанья';
-                        } else if (elem_id === 'sita') {
-                            elem_id = 'Рамачандра';
-                        } else if (elem_id === 'nrisimha') {
-                            elem_id = 'Наришимха';
-                        } else if (elem_id === 'balarama') {
-                            elem_id = 'Баларама';
-                        } else if (elem_id === 'krishna') {
-                            elem_id = 'Кришна';
-                        } else if (elem_id === 'bhaktivedanta') {
-                            elem_id = 'Бхактиведанта';
-                        } else if (elem_id === 'radharany') {
-                            elem_id = 'Радхарани';
-                        } else if (elem_id === 'govardhana') {
-                            elem_id = 'Говардхана-пуджа';
-                        } else if (elem_id === 'radha-yatra') {
-                            elem_id = 'Ратха-ятра';
-                        } else if (elem_id === 'rozhdestvo') {
-                            elem_id = 'Иисус Христос';
-                        } else if (elem_id === 'vyasapudja') {
-                            elem_id = 'Сиддхасварупананда';
-                        } 
+                        for ( let key in apparition_ekadasi_days ) {
+
+                            if ( elem_id === apparition_ekadasi_days[ key ].id ) {
+                                elem_id = apparition_ekadasi_days[ key ].name_too_events;
+                            }
+
+                        }
 
                         events.innerHTML += '<span id="' + elem_id_orig + '" class="d-block">' + 
                                              elem_id + '</span>';
@@ -764,8 +849,9 @@ function get_description( main, tag ) {
                 }, 1000 );
             }
 
-        });
-    })
+        } );
+
+    } );
 
 }
 
@@ -1181,6 +1267,81 @@ document.addEventListener( "deviceready", () => {
 
 } );
 
+function add_sp_array( array ) {
+
+    if ( array[ 0 ][ 0 ] < 14 ) {
+        array.splice( 1, 0, [ '14', 'S' ] );
+    } else if ( +array[ 0 ][ 0 ] === 14 ) {
+        array.splice( 1, 0, [ '15', 'S' ] );
+    } else if ( array[ 0 ][ 0 ] > 14 ) {
+        array.splice( 0, 0, [ '14', 'S' ] );
+    }
+
+    return array;
+    
+}
+
+function add_isus_array( array ) {
+
+    if ( array[ 1 ][ 0 ] < 25 ) {
+        array.splice( 1, 0, [ '25', 'R' ] );
+    } else if ( +array[ 1 ][ 0 ] === 25 ) {
+        array.splice( 1, 0, [ '26', 'R' ] );
+    } else if ( array[ 1 ][ 0 ] > 25 ) {
+        array.splice( 0, 0, [ '25', 'R' ] );
+    }
+
+    return array;
+
+}
+
+function set_local_storage( key, value ) {
+
+    if ( !localStorage.getItem( key ) ) {
+        localStorage.setItem( key, value );
+    }
+
+}
+
+function set_update_local_storage( key, value ) {
+
+    if ( !localStorage.getItem( key ) ) {
+        localStorage.setItem( key, value );
+    } else {
+
+        if ( key === 'lat' || key === 'lon' ) {
+
+            if ( +localStorage.getItem( key ) !== ( +value ) ) {
+                localStorage.setItem( key, value );
+            }
+
+        } else {
+
+            if ( localStorage.getItem( key ) !== ( value ) ) {
+                localStorage.setItem( key, value );
+            }
+
+        }
+
+    }
+
+}
+
+function remove_local_storage( key ) {
+
+    if ( localStorage.getItem( key ) ) {
+        localStorage.removeItem( key );
+    }
+
+}
+
+function remove_too_events() {
+    let too_events = document.getElementById( 'too_events' );
+
+	if ( too_events ) too_events.remove();
+
+}
+
 export { window_width, 
          window_height,
          month_days,
@@ -1202,7 +1363,6 @@ export { window_width,
          not_connection,
          timeout,
          content_not_connection,
-         index_get_info,
          footer_id,
          location_span,
          height_header,
@@ -1227,7 +1387,14 @@ export { window_width,
          coords_let,
          text_not_connection_timeout,
          text_not_internet,
-         div_zoom_calendar };
+         div_zoom_calendar,
+         apparition_ekadasi_days,
+         add_sp_array,
+         add_isus_array,
+         set_local_storage,
+         set_update_local_storage,
+         remove_local_storage,
+         remove_too_events };
 
 // По луне
 // -------

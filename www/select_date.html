@@ -14,16 +14,17 @@
     
     <body>
         <div id="background" class="pos-fixed"></div>
-
         <header id="header">
+            <div class="before_top text-center">
+                <span class="top_span d-block">Экадаши и вайшнавские праздники</span>
+            </div>
             <div id="top" class="pos-rel">
-                <span class="top_span d-block text-uppercase text-white">Экадаши и Вайшнавские праздники</span>
-                <span class="d-block bold text-white" id="current_date"></span>
-                <span class="d-block l-height-1-25 text-white" id="location"></span>
+                <span class="d-block bold" id="current_date"></span>
+                <span class="d-block l-height-1-25" id="location"></span>
             </div>
         </header>
 
-        <div id="select_date" class="d-flex d-none">
+        <div id="select_date" class="d-flex">
             <div class="div_select_date pos-rel width-fit">
                 <input id="input_select_date" type="number" placeholder="Введите год" min="1980" max="2069">
                 <i id="open_list_years" class="fas fa-calendar-check fa-lg pos-abs"></i>
@@ -122,7 +123,12 @@
                     <li id="home">
                         <a href="index.html"><i class="fas fa-home fa-lg"></i></a>
                     </li>
-                    <li id="nav">Меню</li>
+                    <li id="show_select_date">
+                        <i class="fas fa-calendar-alt fa-lg"></i>
+                    </li>
+                    <li id="nav">
+                        <span>Меню</span>
+                    </li>
                 </ul>
             </div>
         </footer>
