@@ -11,7 +11,8 @@ import { height_footer_func,
          home,
          clear,
          content_not_connection,
-         text_not_internet
+         text_not_internet,
+         reading_locale_storage
 } from "./general.js";
 
 let main_notifications = document.getElementById( 'main_notifications' );
@@ -194,18 +195,19 @@ function work_settings_notifications() {
 
         update_storage.onclick = function() {
             clear();
-            hide_body();
-            localStorage.setItem( 'status_background', 'yes' );
-            window.location.href = 'index.html';
+            reading_locale_storage();
+            //hide_body();
+            //localStorage.setItem( 'status_background', 'yes' );
+            //window.location.href = 'index.html';
         }
 
     } else {
         main_notifications.innerHTML = '<div class="text-center">' +
-                                            '<h3>Ваше местоположение не определено</h3>' +  
+                                            '<h3 class="l-height-1-25 m-b-30">Ваше местоположение не определено</h3>' +  
                                             '<button id="select_city_notif" class="bold">' +
                                                 'Выбор города'+
                                             '</button>' +  
-                                    '</div>'
+                                       '</div>'
 
         let select_city_notif = document.getElementById( 'select_city_notif' );
 

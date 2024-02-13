@@ -626,9 +626,9 @@ function add_city_undefined_database( city, state ) {
 
             if ( response_database.name ) {
                 message_not_city.innerHTML = '<div class="width-fit m-auto">' +
-                                                '<span>Ваше местоположение определено как -</span>' +
+                                                '<span>Ваше местоположение:</span>' +
                                                 '<h4 class="m-b-5 m-t-5 width-fit">' + response_database.name + '</h4>' +
-                                                '<small>Этого населённого пункта нет в нашей базе.<br>Мы добавим его в ближайшее время' +
+                                                '<span style="font-size: 14px">Этого населённого пункта нет в нашей базе. Мы добавим его в ближайшее время</span>' +
                                              '</div>';
 
                 message_not_city.style.top = '0';
@@ -976,8 +976,14 @@ function part_not_city( slug ) {
                         city = ( event.target ).textContent;
                     } else {
                         
-                        if ( ( event.target ).tagName !== 'DIV' ) {
-                            city = ( event.target ).closest( '.full_city' ).textContent;
+                        if ( ( event.target ).tagName === 'SPAN' ) {
+
+                            if ( ( event.target ).id === 'found_cities' ) {
+                                city = ( event.target ).previousElementSibling.textContent;
+                            } else {
+                                city = ( event.target ).closest( '.full_city' ).textContent;
+                            }
+
                         } else {
                             return;
                         }
@@ -1149,15 +1155,15 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
     
     if ( localStorage.getItem( 'lat' ) && 
          localStorage.getItem( 'lon' ) &&
-         localStorage.getItem( 'city_name' ) ) {
-
+         localStorage.getItem( 'city_name' ) &&
+         localStorage.getItem( 'city_slug' ) ) {
         city_slug = localStorage.getItem( 'city_slug' );
         city_name = localStorage.getItem( 'city_name' );
         
         if ( localStorage.getItem( 'click_choice_city' ) === '0' )  {   
            
-            if ( city ) add_city_undefined_database( city, state );
-            
+            if ( city && lat && lon ) add_city_undefined_database( city, state );
+
             window_change_city_func();
             local_city.innerHTML = city_name;
             
@@ -1198,7 +1204,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
         
     } else {
         
-        if ( city ) add_city_undefined_database( city, state );
+        if ( city && lat && lon ) add_city_undefined_database( city, state );
 
         window_select_city_func();
         part_not_city( slug );
@@ -1208,10 +1214,8 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
 
 function location_error( slug ) {
 
-    main.style.opacity = '0';
-    header_top.style.opacity = '0';
-
-    if ( localStorage.getItem( 'city_name' ) ) {
+    if ( localStorage.getItem( 'city_name' ) && 
+         localStorage.getItem( 'city_slug' ) ) {
         city_slug = localStorage.getItem( 'city_slug' ); 
         city_name = localStorage.getItem( 'city_name' ); 
         
@@ -1248,6 +1252,7 @@ function location_error( slug ) {
                 get_info_func( slug, index_get_info_new );
 
             }
+
             xml_city.send();
 
         } else if ( localStorage.getItem( 'click_choice_city' ) === '1' ) {
@@ -1259,7 +1264,7 @@ function location_error( slug ) {
 
         }
 
-    } else if ( !localStorage.getItem( 'city_name' ) ) {
+    } else {
 
         if ( localStorage.getItem( 'status_location_accuracy' ) === '1' ) {
 
@@ -1481,12 +1486,13 @@ function on_success( position, city_name, index_get_info_new ) {
         }
 
     } else {
-        lat = position.coords.latitude; 
+        lat = position.coords.latitude;
         lon = position.coords.longitude;
 
         if ( localStorage.getItem( 'lat' ) && 
              localStorage.getItem( 'lon' ) &&
-             localStorage.getItem( 'city_name' ) ) {
+             localStorage.getItem( 'city_name' ) &&
+             localStorage.getItem( 'city_slug' ) ) {
                 
             city_name = localStorage.getItem( 'city_name' );
             city_slug = localStorage.getItem( 'city_slug' );

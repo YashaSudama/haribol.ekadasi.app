@@ -64,7 +64,8 @@ body,
 #current_date,
 #location,
 #review,
-#donation { 
+#donation,
+#message_not_city h4 { 
   	color: #0a213a;
 } 
 
@@ -87,7 +88,8 @@ body,
 .hint_description,
 .wrapper_internally_notice_foreground,
 #review,
-#donation {
+#donation,
+#message_not_city h4 {
   	background-color: #d6e6ff;
 }
 .day_full i,
@@ -936,6 +938,7 @@ header {
 #message_not_city {
 	top: -180px;
 	padding: 20px 20px 15px;
+	font-size: 14px;
 	transition: top .6s linear .6s;
 }
 #message_notifications,
@@ -949,7 +952,9 @@ header {
 	font-weight: normal;
 	letter-spacing: 1.2px;
 }
-#message_not_city h4,
+#message_not_city h4 {
+	padding: 8px;
+}
 #message_notifications,
 #message_location_error  {
   	padding: 10px 20px 15px;
