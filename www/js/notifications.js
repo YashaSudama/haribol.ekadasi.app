@@ -195,10 +195,9 @@ function work_settings_notifications() {
 
         update_storage.onclick = function() {
             clear();
-            reading_locale_storage();
-            //hide_body();
-            //localStorage.setItem( 'status_background', 'yes' );
-            //window.location.href = 'index.html';
+            hide_body();
+            localStorage.setItem( 'status_background', 'yes' );
+            window.location.href = 'index.html';
         }
 
     } else {
