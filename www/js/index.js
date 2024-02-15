@@ -94,6 +94,8 @@ function get_firebase_token_func() {
                         token_notif = false;
                     } ); 
 
+                }, 1000 );
+
             } else {
                 token_notif = token;
             }

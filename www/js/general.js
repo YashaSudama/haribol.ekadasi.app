@@ -902,9 +902,6 @@ function update_notifications( slug ) {
         status_notifications,
         time_value,
         part_time_value_first,
-        part_time_value_last,
-        time_value,
-        part_time_value_first,
         part_time_value_last;
 
     if ( location.pathname.includes( 'notifications' ) ) {
