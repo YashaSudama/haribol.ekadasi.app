@@ -2,11 +2,9 @@
 
 import { window_width,
          window_height,
-         month_days, 
          day_name_full,
          day_week,
          day_name_short,
-         month_name_header,
          now_date_number,
          now_month,
          month_name, 
@@ -21,7 +19,6 @@ import { window_width,
          content_not_connection,
          text_not_connection_timeout,
          text_not_internet,
-         index_get_info,
          footer_id,
          location_span,
          height_header,
@@ -31,7 +28,20 @@ import { window_width,
          update_notifications,
          min_preloader,
          show_body,
+<<<<<<< HEAD:platforms/ios/www/js/index.js
          hide_body
+=======
+         hide_body,
+         hide_background,
+         month_days,
+         apparition_ekadasi_days,
+         add_sp_array,
+         add_isus_array,
+         set_local_storage,
+         set_update_local_storage,
+         remove_local_storage,
+         reading_locale_storage
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -39,27 +49,17 @@ document.addEventListener( "deviceready", () => {
     on_device_ready();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||
+<<<<<<< HEAD:platforms/ios/www/js/index.js
             localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+=======
+          localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         get_firebase_token_func();
     }
 
 }, false );
 
-let year = document.getElementsByClassName( 'year' ),
-    month = document.getElementsByClassName( 'month' ),
-    jan = document.getElementsByClassName( 'jan' ),
-    feb = document.getElementsByClassName( 'feb' ),
-    mar = document.getElementsByClassName( 'mar' ),
-    apr = document.getElementsByClassName( 'apr' ),
-    may = document.getElementsByClassName( 'may' ),
-    jun = document.getElementsByClassName( 'jun' ),
-    jul = document.getElementsByClassName( 'jul' ),
-    aug = document.getElementsByClassName( 'aug' ),
-    sem = document.getElementsByClassName( 'sem' ),
-    oct = document.getElementsByClassName( 'oct' ),
-    nov = document.getElementsByClassName( 'nov' ),
-    dem = document.getElementsByClassName( 'dem' ),
-    window_select_city = document.getElementById( 'window_select_city' ),
+let window_select_city = document.getElementById( 'window_select_city' ),
     window_change_city = document.getElementById( 'window_change_city' ),
     local_city = document.getElementById( 'local_city' ),
     yes_change_city = document.getElementById( 'yes_change_city' ),
@@ -74,24 +74,22 @@ let year = document.getElementsByClassName( 'year' ),
     message_location_error = document.getElementById( 'message_location_error' ),
     current_location = document.getElementById( 'current_location' ),
     state,
-    not,
     lat,
     lon,
     today = document.getElementById( 'today' ),
-    scroll_today,
-    city_selection_let,
+    city_slug,
     city_name,
     city_name_id,
-    ul,
     token_notif,
     device_found = false,
-    color = '#fea00a30';
+    index_get_info_new;
 
 function get_firebase_token_func() {
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
         localStorage.setItem( 'status_firebase_token', 'false' ); 
 
+<<<<<<< HEAD:platforms/ios/www/js/index.js
         FCMPlugin.getToken( function( token ) {
             
             if ( !token_notif ) {
@@ -121,6 +119,29 @@ function get_firebase_token_func() {
         FCMPlugin.getToken( function( token ) {
             
             if ( !token_notif ) {
+=======
+        cordova.plugins.firebase.messaging.getToken().then( 
+            ( token ) => {
+                token_notif = token;
+            },
+            ( error ) => {
+                token_notif = false;
+            }   
+        );
+
+    } else {
+
+        if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+    
+            cordova.plugins.firebase.messaging.getToken().then( 
+                ( token ) => {
+                    token_notif = token;
+                },
+                ( error ) => {
+                    token_notif = false;
+                }   
+            );
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 
                 let get_firebase_token_interval = setInterval( () => {
 
@@ -152,28 +173,14 @@ if ( window_width < 480 ) {
 }
 
 height_footer_func();
-
-if ( !localStorage.getItem( 'click_choice_city' ) ) {
-    localStorage.setItem( 'click_choice_city', '0' );
-}
-
-if ( !localStorage.getItem( 'main' ) ) { 
-    localStorage.setItem( 'main', main.innerHTML );
-}
-
-if ( !localStorage.getItem( 'now_year' ) ) { 
-    localStorage.setItem( 'now_year', now_year );
-}
-
-if ( !localStorage.getItem( 'status_notifications' ) ) { 
-    localStorage.setItem( 'status_notifications', 'false' );
-}
-
-if ( !localStorage.getItem( 'user_register_notifications' ) ) {
-    localStorage.setItem( 'user_register_notifications', 'false' );
-}
+set_local_storage( 'click_choice_city', '0' );
+set_local_storage( 'now_year', now_year );
+set_local_storage( 'status_notifications', 'false' );
+set_local_storage( 'user_register_notifications', 'false' );
+set_local_storage( 'main_index', main.innerHTML );
 
 current_location.onclick = function() {
+<<<<<<< HEAD:platforms/ios/www/js/index.js
 
     if ( localStorage.getItem( 'city_select' ) ) {
         localStorage.removeItem( 'city_select' );
@@ -199,6 +206,12 @@ current_location.onclick = function() {
     navigator.splashscreen.show();
     hide_body();
 
+=======
+    remove_local_storage( 'city_select' );
+    hide_body();
+    window.location.href = 'index.html';
+    localStorage.setItem( 'status_background', 'yes' );
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 }
 
 function window_select_city_func() {
@@ -223,391 +236,308 @@ function window_change_city_func() {
 
 }
 
-function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
+function inner_get_info_func( index_get_info_new, slug, height_header, day_week ) {
 
     let class_li,
         id_li,
+        value_key,
         value,
-        country_dst;
+        country_dst,
+        array_latin_month = [ 'jan',
+                              'feb',
+                              'mar',
+                              'apr',
+                              'may',
+                              'jun',
+                              'jul',
+                              'aug',
+                              'sem',
+                              'oct',
+                              'nov',
+                              'dem' ],
+        now_date_local,
+        date_event,
+        height_year,
+        year = document.getElementsByClassName( 'year' ),
+        current_year = document.getElementById( 'current_year' ),
+        plus_year = document.getElementById( 'plus_year' ),
+        today_str = 'Сегодня',
+        tomorrow = 'Завтра',
+        day_after_tomorrow = 'Послезавтра';
 
     height_header = header_top.clientHeight;
-            
-    for ( let li of month ) {
-        li.style.top = ( height_header - 1 ) + 'px';
-    }
     
-    for ( let i = 0; i < index_get_info.length; i++ ) { 
+    for ( let i = 0; i < index_get_info_new.length; i++ ) { 
       
-        let get_year = index_get_info[ i ].value,
-            get_jan = index_get_info[ i ].jan,
-            get_feb = index_get_info[ i ].feb,
-            get_mar = index_get_info[ i ].mar,
-            get_apr = index_get_info[ i ].apr,
-            get_may = index_get_info[ i ].may,
-            get_jun = index_get_info[ i ].jun,
-            get_jul = index_get_info[ i ].jul,
-            get_aug = index_get_info[ i ].aug,
-            get_sem = index_get_info[ i ].sem,
-            get_oct = index_get_info[ i ].oct,
-            get_nov = index_get_info[ i ].nov,
-            get_dem = index_get_info[ i ].dem;
-         
-        year[i].innerHTML = '<span>' + get_year + '</span>';
-        year[i].style.top = ( height_header - 1 ) + 'px';
+        let get_year = index_get_info_new[ i ].value,
+            array_obj = [ index_get_info_new[ i ].jan,
+                          index_get_info_new[ i ].feb,
+                          index_get_info_new[ i ].mar,
+                          index_get_info_new[ i ].apr,
+                          index_get_info_new[ i ].may,
+                          index_get_info_new[ i ].jun,
+                          index_get_info_new[ i ].jul,
+                          index_get_info_new[ i ].aug,
+                          index_get_info_new[ i ].sem,
+                          index_get_info_new[ i ].oct,
+                          index_get_info_new[ i ].nov,
+                          index_get_info_new[ i ].dem ],
+            sp_array = Object.entries( array_obj[ 5 ] ),
+            isus_array = Object.entries( array_obj[ 11 ] );
 
-        function display_data( obj_month, month, item, get_year, numb_month ) {
+        array_obj[ 5 ] = Object.fromEntries( add_sp_array( sp_array ) );
+        array_obj[ 11 ] = Object.fromEntries( add_isus_array( isus_array ) );
+        year[ i ].innerHTML = '<span>' + get_year + '</span>';
+        year[ i ].style.top = ( height_header - 1 ) + 'px';
+        height_year = year[ i ].clientHeight;
+
+        function display_data( obj_month, item, month, get_year, numb_month ) { // item - свойство ( ключ ) объекта, дата события
+            let event_coming_class = '',
+                event_coming_elem = '',
+                event_coming_class_status = false;
+
+            if ( +get_year === now_year ) {
+
+                if ( numb_month === now_month ) {
+                    
+                    if ( +item === now_date_number ) {
+                        event_coming_elem = '<span>' + today_str + '</span>';
+                        event_coming_class_status = true;
+                    } else if ( +item === ( now_date_number + 1 ) ) {
+                        event_coming_elem = '<span>' + tomorrow + '</span>';
+                        event_coming_class_status = true;
+                    } else if ( +item === ( now_date_number + 2 ) ) {
+                        event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                        event_coming_class_status = true;
+                    }
+
+                } else if ( numb_month === ( now_month + 1 ) ) {
+
+                    if ( +item === 1 ) {
+
+                        if ( now_date_number === month_days ) {
+                            event_coming_elem = '<span>' + tomorrow + '</span>';
+                            event_coming_class_status = true;
+                        } else if ( ( now_date_number + 1 ) === month_days ) {
+                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_class_status = true;
+                        }
+
+                    } else if ( +item === 2 ) {
+
+                        if ( now_date_number === month_days ) {
+                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_class_status = true;
+                        }
+
+                    }
+
+                }
+
+            } else if ( +get_year === ( now_year + 1 ) ) {
+
+                if ( ( numb_month === 0 ) && ( now_month === 11 ) ) {
+
+                    if ( +item === 1 ) {
+
+                        if ( now_date_number === month_days ) {
+                            event_coming_elem = '<span>' + tomorrow + '</span>';
+                            event_coming_class_status = true;
+                        } else if ( ( now_date_number + 1 ) === month_days ) {
+                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_class_status = true;
+                        }
+
+                    } else if ( +item === 2 ) {
+
+                        if ( now_date_number === month_days ) {
+                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_class_status = true;
+                        }
+
+                    }
+
+                }
+                    
+            }
             
+            if ( event_coming_class_status ) event_coming_class = 'event_coming ';
+
+            now_date_local = new Date( now_year, now_month, now_date_number );
+            date_event = new Date( get_year, numb_month, item );
             day_week = new Date( get_year, numb_month, item ).getDay();
-            value = obj_month[ item ];
+            value_key = obj_month[ item ]; // value_key - значение свойства ( ключа ), тип события
 
-            if ( typeof( value ) === 'object' ) {
+            if ( +now_date_local <= +date_event ) {
 
-                value = Object.values( value );
-                class_li = 'value-0';
+                if ( typeof( value_key ) === 'object' ) {
 
-            } else if ( typeof( value ) === 'string' ) { 
+                    let exit_date,                      
+                        numb_month_local = numb_month + 1,
+                        item_local = +item + 1,
+                        exit_next_year = false,
+                        city_name_dst,
+                        month_days_local;
 
-                if ( value === '1' ) {
-
-                    value = '<span class="name_event d-block bold">Нитьянандa Прабху</span>' +
-                            '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                    class_li = 'value-1';
-                    id_li = 'nityananda';
-
-                }  else if (value === '2') {
-
-                   value = '<span class="name_event d-block bold">Гаура-Пурнима, Шри Чайтанья Махапрабху</span>' +
-                           '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                   class_li = 'value-2';
-                   id_li = 'chaytanya';
-
-                } else if ( value === '3' ) {
-
-                   value = '<span class="name_event d-block bold">Рама Навами, Рамачандра</span>' +
-                           '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                   class_li = 'value-3';
-                   id_li = 'sita';
-
-                } else if ( value === '4' ) {
-
-                   value = '<span class="name_event d-block bold">Наришимха</span>' +
-                           '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                   class_li = 'value-4';
-                   id_li = 'nrisimha';
-
-                } else if ( value === '6' ) {
-
-                    value = '<span class="name_event d-block bold">Баларама</span>' +
-                            '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                    class_li = 'value-6';
-                    id_li = 'baladeva';
-
-                } else if ( value === '7' ) {
-
-                   value = '<span class="name_event d-block bold">Джанмастами, Кришна</span>' +
-                           '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                   class_li = 'value-7';
-                   id_li = 'krishna';
-
-                } else if ( value === '8' ) {
-
-                   value = '<span class="name_event d-block bold">Бхактиведанта Свами Прабхупада</span>' +
-                           '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                   class_li = 'value-8';
-                   id_li = 'bhaktivedanta';
-
-                } else if ( value === '9' ) {
-
-                   value = '<span class="name_event d-block bold">Радхастами, Шримати Радхарани</span>' +
-                           '<span class="d-block bold type_event m-t-5">' + 
-                                'Явление' +
-                            '</span>';
-                   class_li = 'value-9';
-                   id_li = 'radharany';
-
-                } else if ( value === 'A' ) {
-
-                    value = '<span class="name_event d-block bold">Говардхан-пуджа</span>';
-                    class_li = 'value-A';
-                    id_li = 'govardhana';
-
-                }  else if ( value === 'B' ) {
-
-                   value = '<span class="name_event d-block bold">Ратха-ятра</span>';
-                   class_li = 'value-B';
-                   id_li = 'radha-yatra';
-
-                } 
-
-            }
-
-            if ( Array.isArray( value ) ) {
-
-                let exit_date,                      
-                    numb_month_2 = numb_month + 1,
-                    item_2 = +item + 1, 
-                    month_days_2;
+                    if ( numb_month === 0 || 
+                        numb_month === 2 || 
+                        numb_month === 4 ||
+                        numb_month === 6 || 
+                        numb_month === 7 || 
+                        numb_month === 9 || 
+                        numb_month === 11 ) {
+                
+                        month_days_local = 31;
+                
+                    } else if ( numb_month === 3 || 
+                            numb_month === 5 || 
+                            numb_month === 8 || 
+                            numb_month === 10 ) {
+                
+                        month_days_local = 30;
+                
+                    } else if ( numb_month === 1 ) {
                     
-                if ( month_name[ numb_month ] === 'Январь'  || 
-                     month_name[ numb_month ] === 'Март'    || 
-                     month_name[ numb_month ] === 'Май'     ||
-                     month_name[ numb_month ] === 'Июль'    || 
-                     month_name[ numb_month ] === 'Август'  || 
-                     month_name[ numb_month ] === 'Октябрь' || 
-                     month_name[ numb_month ] === 'Декабрь' ) {
-
-                        month_days_2 = 31;
-
-                } else if ( month_name[ numb_month ] === 'Апрель'   || 
-                            month_name[ numb_month ] === 'Июнь'     || 
-                            month_name[ numb_month ] === 'Сентябрь' || 
-                            month_name[ numb_month ] === 'Ноябрь' ) {
-
-                        month_days_2 = 30;
-
-                } else if ( month_name[ numb_month ] === 'Февраль' ) {
-                    
-                    if ( ( get_year % 4 ) === 0 ) {
-                        month_days_2 = 29;
-                    } else {
-                        month_days_2 = 28;
-                    }
-
-                } 
-
-                if ( numb_month_2 < 10 ) {
-                    numb_month_2 = '0' + numb_month_2;
-                }
-
-                if ( item_2 < 10 ) {
-                    item_2 = '0' + item_2;
-                }
-
-                if ( numb_month === 1 ) {
-
-                     if ( ( item === '28' ) || ( item === '29' ) ) {
-                        item_2 = '01';
-                        numb_month_2 = '03';
-                     }
-
-                } else if ( numb_month === 11 ) {
-
-                    if ( item === '31' ) {
-                        item_2 = '01';
-                        numb_month_2 = '01.' + ( + get_year + 1 );
-                    }
-
-                } else {
-                  
-                    if ( month_days_2 === 30 ) {
-                  
-                       if ( item === '30' ) {
-                          
-                          if ( typeof( numb_month_2 ) === 'string' ) {
-                            numb_month_2 = '0' + ( +numb_month_2 + 1 );
-                          } else {
-                             numb_month_2 = numb_month_2 + 1;
-                          } 
-                       
-                          item_2 = '01';
-                          
-                       }
-                    
-                    } else if ( month_days_2 === 31 ) { 
-                        
-                       if ( item === '31' ) {
-                          
-                          if ( typeof( numb_month_2 ) === 'string' ) {
-                            numb_month_2 = '0' + ( +numb_month_2 + 1 );
-                          } else {
-                             numb_month_2 = numb_month_2 + 1;
-                          } 
-                       
-                          item_2 = '01'; 
-                          
-                       } 
-                  
+                        if ( ( now_year % 4 ) === 0 ) {
+                            month_days_local = 29;
+                        } else {
+                            month_days_local = 28;
+                        }
+                
                     } 
-                    
-                }
-                
-                exit_date = '<span>' + item_2 + '</span>.' + numb_month_2;
-                
-                if (value[1] === 'Putrada') {
-                    value[1] = 'Путрада';
-                    id_li = 'putrada'; 
-                } else if (value[1] === 'Sat-tila') {
-                    value[1] = 'Шат-тила';
-                    id_li = 'sat-tila'; 
-                } else if (value[1] === 'Bhaimi') {
-                    value[1] = 'Джая (Бхаими)';
-                    id_li = 'bhaimi'; 
-                } else if (value[1] === 'Vijaya') {
-                    value[1] = 'Виджая';
-                    id_li = 'vijaya'; 
-                } else if (value[1] === 'Amalaki vrata') {
-                    value[1] = 'Амалаки';
-                    id_li = 'amalaki'; 
-                } else if (value[1] === 'Papamocani') {
-                    value[1] = 'Папа-мочани';
-                    id_li = 'papamocani'; 
-                } else if (value[1] === 'Kamada') {
-                    value[1] = 'Камада';
-                    id_li = 'kamada'; 
-                } else if (value[1] === 'Varuthini') {
-                    value[1] = 'Варутхини';
-                    id_li = 'varuthini'; 
-                } else if (value[1] === 'Mohini') {
-                    value[1] = 'Мохини';
-                    id_li = 'mohini'; 
-                } else if (value[1] === 'Apara') {
-                    value[1] = 'Апара';
-                    id_li = 'apara'; 
-                } else if (value[1] === 'Pandava Nirjala') {
-                    value[1] = 'Нирджала (Пандава, Бхима)';
-                    id_li = 'pandava'; 
-                } else if (value[1] === 'Yogini') {
-                    value[1] = 'Йогини';
-                    id_li = 'yogini'; 
-                } else if (value[1] === 'Sayana') {
-                    value[1] = 'Дева-шаяни (Падма)';
-                    id_li = 'sayana'; 
-                } else if (value[1] === 'Kamika') {
-                    value[1] = 'Камика';
-                    id_li = 'kamika'; 
-                } else if (value[1] === 'Pavitropana') {
-                    value[1] = 'Павитра';
-                    id_li = 'pavitra'; 
-                } else if (value[1] === 'Annada') {
-                    value[1] = 'Аннада (Аджа)';
-                    id_li = 'annada'; 
-                } else if (value[1] === 'Parsva') {
-                    value[1] = 'Паршва';
-                    id_li = 'parsva'; 
-                } else if (value[1] === 'Indira') {
-                    value[1] = 'Индира';
-                    id_li = 'indira'; 
-                } else if (value[1] === 'Padmini') {
-                    value[1] = 'Падмини';
-                    id_li = 'padmini'; 
-                } else if (value[1] === 'Parama') {
-                    value[1] = 'Парама';
-                    id_li = 'parama'; 
-                } else if (value[1] === 'Pasankusa') {
-                    value[1] = 'Пашанкуша';
-                    id_li = 'pasankusa'; 
-                } else if (value[1] === 'Rama') {
-                    value[1] = 'Рама';
-                    id_li = 'rama-ekadashi'; 
-                } else if (value[1] === 'Utthana') {
-                    value[1] = 'Уттхана';
-                    id_li = 'utthana'; 
-                } else if (value[1] === 'Moksada') {
-                    value[1] = 'Мокшада';
-                    id_li = 'moksada'; 
-                } else if (value[1] === 'Saphala') {
-                    value[1] = 'Са-пхала';
-                    id_li = 'saphala'; 
-                } else if (value[1] === 'Utpanna') {
-                    value[1] = 'Утпанна';
-                    id_li = 'utpanna'; 
-                } 
 
-                if (value[2].includes('after')) {
-                    value[2] = value[2].replace('after', 'после');
-                }
-                
-                let city_name_dst,
-                    city_dst;
-                
-                if ( localStorage.getItem( 'city_name' ) !== null ) {
-                    city_name_dst = localStorage.getItem( 'city_name' );
-                } else if ( localStorage.getItem( 'city' ) !== null ) {
-                    city_dst = localStorage.getItem( 'city' );
-                }
-                
-                if  ( city_dst !== undefined ) {
-                    country_dst = city_dst.split( ', ' );
-                } else if ( city_name_dst !== undefined ) {
-                    country_dst = city_name_dst.split(', ');
-                }  else if (slug !== undefined) {
-                    country_dst = ( slug.name ).split(', ');
-                }
-                
-                if ( country_dst !== undefined ) {
-                    
-                    if (country_dst.length === 1) {
-                        country_dst = undefined;
-                    } else if (country_dst.length === 2) {
-                        country_dst = country_dst[1];
-                    } else if (country_dst.length === 3) {
-                        country_dst = country_dst[2];
+                    if ( item_local > month_days_local ) {
+                        item_local = 1;
+                        numb_month_local = numb_month_local + 1;
+
+                        if ( numb_month_local > 12 ) {
+                            numb_month_local = 1;
+                            exit_next_year = true;
+                        }
+
                     }
                     
-                }
-                
-                if ( ( country_dst === 'Россия' ) || 
-                     ( country_dst === 'Белоруссия' ) || 
-                     ( country_dst === 'Казахстан' ) ) {
-                    
-                    if (value[3] === 'DST') {
-                        let value_1 = value[2].slice(2, 8),
-                            value_2 = value[2].slice(10),
-                            start_time = value[2].slice(0, 2),
-                            end_time = value[2].slice(8, 10);
-                            
-                        start_time = +start_time - 1;
-                        end_time = +end_time - 1;
-                        
-                        if (start_time < 10) {
-                            start_time = '0' + start_time;
-                        }
-                        
-                        if (end_time < 10) {
-                            end_time = '0' + end_time;
-                        }
-                            
-                        value[2] = start_time + value_1 + end_time + value_2;
+                    if ( numb_month_local < 10 ) {
+                        numb_month_local = '0' + numb_month_local;
                     }
                     
-                }
+                    if ( item_local < 10 ) {
+                        item_local = '0' + item_local;
+                    }
+                    
+                    if ( exit_next_year ) {
+                        exit_date = '<span>' + item_local + '</span>.' + numb_month_local + '.' + ( now_year + 1 );
+                    } else {
+                        exit_date = '<span>' + item_local + '</span>.' + numb_month_local;
+                    }
+                    
+                    if ( localStorage.getItem( 'city_name' ) ) {
+                        city_name_dst = localStorage.getItem( 'city_name' ).split( ', ');
+                    } else if ( slug ) {
+                        city_name_dst = ( slug.name ).split( ', ' );
+                    }
+                    
+                    if ( city_name_dst ) {
+                        
+                        if ( city_name_dst.length === 1 ) {
+                            country_dst = undefined;
+                        } else if ( city_name_dst.length === 2 ) {
+                            country_dst = city_name_dst[ 1 ];
+                        } else if ( city_name_dst.length === 3 ) {
+                            country_dst = city_name_dst[ 2 ];
+                        }
+                        
+                    }
 
-                value = '<span class="name_event bold l-height-1-1">' + 
-                            value[1] + ' Экадаши' +
-                        '</span><hr class="ekadashi_hr">' + 
-                        '<span class="exit bold l-height-1-1">Выход из поста<br><span class="exit_date">' + 
-                        exit_date + '</span>' + ' ' +'<span class="exit_time">' + value[2] + '</span></small></span>';
-            }
-                
-            month[ i ].innerHTML += '<li id="' + id_li + '" class="id ' + class_li + '">' + 
+                    if ( country_dst ) {
+                    
+                        if ( country_dst !== 'Россия'         || // Перевод выхода из поста на летнее время
+                            country_dst !== 'Белоруссия'     || 
+                            country_dst !== 'Казахстан'      || 
+                            country_dst !== 'Исландия'       || 
+                            country_dst !== 'Турция'         || 
+                            country_dst !== 'Северная Корея' || 
+                            country_dst !== 'Южная Корея'    || 
+                            country_dst !== 'Филиппины'      || 
+                            country_dst !== 'Колумбия'       || 
+                            country_dst !== 'Венесуэла'      || 
+                            country_dst !== 'Вьетнам'        || 
+                            country_dst !== 'Афганистан'     || 
+                            country_dst !== 'Индия'          || 
+                            country_dst !== 'Япония'         || 
+                            country_dst !== 'Китай'          || 
+                            country_dst !== 'Киргизия') {
+                            
+                            if ( value_key.light_time === 'DST' ) {
+                                let value_1 = ( value_key.exit_time ).slice( 2, 8 ),
+                                    value_2 = ( value_key.exit_time ).slice( 10 ),
+                                    start_time = ( value_key.exit_time ).slice( 0, 2 ),
+                                    end_time = ( value_key.exit_time ).slice( 8, 10 );
+                                    
+                                start_time = +start_time + 1;
+                                end_time = +end_time + 1;
+                                
+                                if ( start_time < 10 ) {
+                                    start_time = '0' + start_time;
+                                }
+                                
+                                if ( end_time < 10 ) {
+                                    end_time = '0' + end_time;
+                                }
+                                    
+                                value_key.exit_time = start_time + value_1 + end_time + value_2;
+
+                            }
+                            
+                        }
+
+                    }
+
+                    if ( ( value_key.exit_time ).includes( 'after' ) ) {
+                        value_key.exit_time = ( value_key.exit_time ).replace( 'after', 'после' );
+                    }
+
+                    class_li = 'value-0';
+                    id_li = apparition_ekadasi_days[ value_key.ekadasi_name ].id;
+                    value =  '<span class="name_event bold l-height-1-1">' + 
+                                apparition_ekadasi_days[ value_key.ekadasi_name ].name + ' Экадаши' +
+                            '</span>' +
+                            '<hr class="ekadashi_hr">' + 
+                            '<span class="exit bold l-height-1-1">Выход из поста<br>' +
+                                '<span class="exit_date">' + exit_date + '</span>' + ' ' +
+                                '<span class="exit_time">' + value_key.exit_time + '</span>' +
+                            '</span>';
+
+                } else if ( typeof( value_key ) === 'string' ) {
+                    value = '<span class="name_event d-block bold">' + apparition_ekadasi_days[ value_key ].name + '</span>';
+                    class_li = 'value-' + value_key;
+                    id_li = apparition_ekadasi_days[ value_key ].id;
+
+                    if ( value_key === 'S' && item !== '14' ) {
+                        item = '14'; 
+                        day_week = new Date( get_year, numb_month, item ).getDay();
+                    } else if ( value_key === 'R' && item !== '25' ) {
+                        item = '25';
+                        day_week = new Date( get_year, numb_month, item ).getDay();
+                    }
+
+                }
+                    
+                month.innerHTML += '<li id="' + id_li + '" class="click ' + event_coming_class + class_li + '">' + 
                                         '<div class="day_info d-flex text-center l-height-1-25">' + 
-                                            '<span>' + day_name_short[day_week] + '</span>' + 
+                                            '<span>' + day_name_short[ day_week ] + '</span>' + 
                                             '<span class="bold">' +  item + '</span>' + 
                                         '</div>' + 
                                         '<div class="event_info l-height-1-2">' + value + '</div>' + 
-                                        '<div class="day_full">' + 
-                                            '<span class="bold l-height-1-2 text-center">' +
-                                                //item + ' ' + month_name_header[numb_month] + 
-                                            '</span>' + 
-                                            '<i class="fas fa-angle-right">' +
-                                            '</i>' + 
+                                        '<div class="day_full">' + event_coming_elem +
+                                            '<i class="fas fa-angle-right"></i>' + 
                                         '</div>' + 
                                     '</li>';
+
+            }
+
         } // end display_data
+<<<<<<< HEAD:platforms/ios/www/js/index.js
         
         // jan
         for ( let item in get_jan ) {
@@ -724,206 +654,28 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
             arr_content_jun.push( content );
             
             if ( content >= 14 ) {
+=======
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 
-                while ( li = li.parentElement ) {
+        if ( now_year === +get_year ) {
 
-                    if ( ( li.classList.contains( 'value-0' ) ) || 
-                         ( li.classList.contains( 'value-4' ) ) || 
-                         ( li.classList.contains( 'value-B' ) ) ) {
-                        li.insertAdjacentHTML( 'beforeBegin', appear_sp_content );
-                    }
-                }
-                break;
-            }
-        }
-        
-        let max_number_jun = Math.max.apply( Math, arr_content_jun );
-    
-        if ( max_number_jun < 14 ) {
-            jun_ul.insertAdjacentHTML( 'beforeEnd', appear_sp_content );
-        }
-        
-        for ( let li of dem_span ) {
-            
-            content = parseInt( li.textContent );
-            day_week = new Date( get_year, 11, 25 ).getDay();
-                
-            arr_content_dem.push( content );
-            
-            if ( content >= 25 ) {
+            for ( let i = now_month; i < array_obj.length; i++ ) {
+                current_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + '>' +
+                                            '<li class="month">' +
+                                                '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
+                                            '</li>' +
+                                          '</ul>';
+                let elem_month = document.getElementById( array_latin_month[ i ] + '-' + get_year );
 
-                while ( li = li.parentElement ) {
-
-                    if ( ( li.classList.contains( 'value-0' ) ) || 
-                         ( li.classList.contains( 'value-A' ) ) || ( li.classList.contains( 'value-C' ) ) ) {
-                        li.insertAdjacentHTML( 'beforeBegin', appear_iisus_content );
-                    }
-                }
-                break;
-            }
-        }
-        
-        let max_number_dem = Math.max.apply( Math, arr_content_dem );
-
-        if ( max_number_dem < 25 ) {
-            dem_ul.insertAdjacentHTML( 'beforeEnd', appear_iisus_content );
-        }
-         
-        // Код для прокрутки контента на текущее событие       
-        let all_curr_month = document.querySelectorAll( '#current_year h4' ),
-            span_date,
-            sum_li_height = 0,
-            count = 0,
-            difference_date = month_days - now_date_number;
-            
-        if ( i === 1 ) {
-            window.scrollTo( 0, 0 );  
-
-            for ( let curr_month of all_curr_month ) { 
-                
-                if ( curr_month.textContent === month_name[ now_month ] ) {
-                    
-                    ul = curr_month.parentElement.parentElement;
-                    span_date = ul.querySelectorAll( '.day_info span.bold' );
-
-                    for ( let span of span_date ) {
-                        let day = span.parentElement.nextElementSibling.nextElementSibling.children[ 0 ],
-                            li = span.parentElement.parentElement,
-                            date = +span.textContent;
-                        
-                        if ( ( date - now_date_number ) === 2 ) {
-                            li.style.backgroundColor = color;
-                            day.innerHTML = 'Послезавтра';
-                        } else if ( ( date - now_date_number ) === 1 ) {
-                            li.style.backgroundColor = color;
-                            day.innerHTML = 'Завтра';
-                        } else if ( date === now_date_number ) {
-                            li.style.backgroundColor = color;
-                            day.innerHTML = 'Сегодня';
-                        }
-                        
-                        if ( date < now_date_number ) {
-                            count++;
-                            let li_height = li.clientHeight;
-                            sum_li_height += li_height;
-                        }
-                        
-                    }
-                    break;
-                }
-            }
-            
-            if ( count === 0 ) {
-                window.scrollTo( 0, ( ul.getBoundingClientRect().y - height_header ) );
-            } else if ( ( count > 0 ) && ( count !== span_date.length ) ) {
-                window.scrollTo( 0, (ul.getBoundingClientRect().y - height_header + sum_li_height ) );
-            } else if ( count === span_date.length ) {
-                
-                if ( month_name[ now_month ] === 'Декабрь' ) {
-                    window.scrollTo( 0, ( ( ul.parentElement.nextElementSibling.children[ 1 ] ).getBoundingClientRect().y - height_header ) );
-                } else {
-                    window.scrollTo( 0, ( ( ul.nextElementSibling ).getBoundingClientRect().y - height_header ) );
+                for ( let item in array_obj[ i ] ) {
+                    display_data( array_obj[ i ], item, elem_month, get_year, i );
                 }
                 
-            }
-            
-        }
-
-        if ( i === 2 ) {
-
-            if ( ul ) {
-            
-                let next_year_month = ul.parentElement.nextElementSibling.children[ 1 ];
+                if ( elem_month.children.length === 1 ) elem_month.remove();
                 
-                if ( difference_date === 1 ) {
-                    
-                    if ( ul.nextElementSibling ) {
-                    
-                        for ( let i = 0; i < ( ul.nextElementSibling.children ).length; i++ ) {
-                            
-                            if ( ul.nextElementSibling.children[ i ].className === 'month' ) {
-                                continue;
-                            } else {
-                                
-                                if ( +( ul.nextElementSibling.children[ i ].children[ 0 ].children[ 1 ].textContent ) === 1 ) {
-                                    ul.nextElementSibling.children[ i ].children[ 2 ].children[ 0 ].innerHTML = 'Послезавтра';
-                                    ( ( ul.nextElementSibling.children[ i ].children[ 2 ].children[ 0 ] ).parentElement.parentElement ).style.backgroundColor = color;
-                                }
-                                
-                            }
-                            
-                        }
-                        
-                    } else {
-                        
-                        for ( let i = 0; i < ( next_year_month.children ).length; i++ ) {
-                            
-                            if ( next_year_month.children[ i ].className === 'month' ) {
-                                continue;
-                                
-                            } else {
-                                
-                                if ( +( next_year_month.children[ i ].children[ 0 ].children[ 1 ].textContent ) === 1 ) {
-                                    next_year_month.children[ i ].children[ 2 ].children[ 0 ].innerHTML = 'Послезавтра';
-                                    ( ( next_year_month.children[ i ].children[ 2 ].children[ 0 ] ).parentElement.parentElement ).style.backgroundColor = color;
-                                }
-                                
-                            }
-                            
-                        }
-                        
-                    }
-
-                } else if ( difference_date === 0 ) {
-
-                    if ( ul ) {
-                    
-                        if ( ul.nextElementSibling ) {
-                        
-                            for ( let i = 0; i < ( ul.nextElementSibling.children ).length; i++ ) {
-                                
-                                if ( ul.nextElementSibling.children[i].className === 'month' ) {
-                                    continue;
-                                } else {
-                                    
-                                    if ( +( ul.nextElementSibling.children[i].children[0].children[1].textContent ) === 1 ) {
-                                        ul.nextElementSibling.children[i].children[2].children[0].innerHTML = 'Завтра';
-                                        ( ( ul.nextElementSibling.children[i].children[2].children[0]).parentElement.parentElement ).style.backgroundColor = color;
-                                    } else if ( +( ul.nextElementSibling.children[i].children[0].children[1].textContent ) === 2) {
-                                        ul.nextElementSibling.children[i].children[2].children[0].innerHTML = 'Послезавтра';
-                                        ( ( ul.nextElementSibling.children[i].children[2].children[0]).parentElement.parentElement ).style.backgroundColor = color;
-                                    }
-                                    
-                                }
-                            }
-                            
-                        } else {
-                            
-                            for ( let i = 0; i < ( next_year_month.children ).length; i++ ) {
-                                
-                                if ( next_year_month.children[i].className === 'month' ) {
-                                    continue;
-                                } else {
-                                    
-                                    if ( +( next_year_month.children[i].children[0].children[1].textContent ) === 1 ) {
-                                        next_year_month.children[i].children[2].children[0].innerHTML = 'Завтра';
-                                        ( ( next_year_month.children[i].children[2].children[0]).parentElement.parentElement ).style.backgroundColor = color;
-                                    } else if ( +( next_year_month.children[i].children[0].children[1].textContent ) === 2) {
-                                        next_year_month.children[i].children[2].children[0].innerHTML = 'Послезавтра';
-                                        ( ( next_year_month.children[i].children[2].children[0]).parentElement.parentElement ).style.backgroundColor = color;
-                                    }
-                                    
-                                }
-                            }
-                            
-                        }
-
-                    }
-                
-                }
-
             }
 
+<<<<<<< HEAD:platforms/ios/www/js/index.js
             scroll_today = window.pageYOffset;
             
             today.removeEventListener( 'click', hide_body );
@@ -937,111 +689,119 @@ function inner_get_info_func( index_get_info, slug, height_header, day_week ) {
             show_body();
             get_description( main, '.id' );
         
+=======
+            window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
+
+            if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
+                hide_background();
+                localStorage.removeItem( 'status_background' );
+            } else {
+                navigator.splashscreen.hide();
+                show_body();
+            }
+
+        } else if ( ( now_year + 1 ) === +get_year ) {
+
+            for ( let i = 0; i < array_obj.length; i++ ) {
+                plus_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + '>' +
+                                            '<li class="month">' +
+                                                '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
+                                            '</li>' +
+                                          '</ul>';
+                let elem_month = document.getElementById( array_latin_month[ i ] + '-' + get_year );
+
+                for ( let item in array_obj[ i ] ) {
+                    display_data( array_obj[ i ], item, elem_month, get_year, i );
+                }
+                
+            }
+
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         }
         
-    } // for - end
+        let month = document.getElementsByClassName( 'month' );
+
+        for ( let li of month ) {
+            li.style.top = ( height_header - 1 ) + 'px';
+        }
+
+    }
+    
+    today.removeEventListener( 'click', hide_body );
+    today.addEventListener( 'click', function() {
+        window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
+    } );
+
+    main.style.opacity = '1';
+    header_top.style.opacity = '1';
+
+    get_description( main, '.click' );
+
 }
 
-function get_info_func( slug, index_get_info ) {
+function get_info_func( slug, index_get_info_new ) {
 
+<<<<<<< HEAD:platforms/ios/www/js/index.js
     if ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) {
+=======
+    if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) ) {
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         check_notifications( slug );
     }
 
     let xml_info = new XMLHttpRequest();
             
-    xml_info.open( 'GET', url + 'api/years.json?city=' + slug.id +'&value[]=' + ( now_year - 1) + '&value[]=' + now_year + '&value[]=' + ( now_year + 1 ) );
+    xml_info.open( 'GET', url + 'api/years.json?city=' + slug.id +'&value[]=' + now_year + '&value[]=' + ( now_year + 1 ) );
     xml_info.responseType = 'json';
     xml_info.setRequestHeader( 'Content-Type', 'application/json' );
 
     not_connection( xml_info, 
                     main, 
                     text_not_connection_timeout, 
-                    'index_get_info', 
-                    'main', 
+                    'index_get_info_new', 
+                    'main_index', 
                     inner_get_info_func, 
-                    index_get_info );
+                    index_get_info_new );
 
     timeout( xml_info, 
              main, 
              text_not_connection_timeout, 
-             'index_get_info', 
-             'main', 
+             'index_get_info_new', 
+             'main_index', 
              inner_get_info_func, 
-             index_get_info );
+             index_get_info_new );
     
     xml_info.onload = function() {
-        index_get_info = xml_info.response;
-        localStorage.setItem( 'index_get_info', JSON.stringify( index_get_info ) );
-        localStorage.setItem( 'cesh_city', slug.name );
+        index_get_info_new = xml_info.response;
+        localStorage.setItem( 'index_get_info_new', JSON.stringify( index_get_info_new ) );
 
-        inner_get_info_func( index_get_info, slug, height_header, day_week );
+        inner_get_info_func( index_get_info_new, slug, height_header, day_week );
 
     };
 
     xml_info.send();
     
 } // get_info - end
-    
-function local_storage( lat, lon, city, city_name, city_name_id ) {
 
-    if ( lat !== undefined ) {
-        lat = lat.toFixed( 1 );
-    }
-    
-    if ( lon !== undefined ) {
-        lon = lon.toFixed( 1 );
-    }
+function local_storage( lat, lon, city_slug, city_name, city_name_id ) {
 
-    if ( localStorage.getItem( 'lat' ) === null ) {
-        localStorage.setItem( 'lat', lat );
-    } else {
+    if ( !localStorage.getItem( 'city_select' ) ) {
 
-        if ( +localStorage.getItem( 'lat' ) !== ( +lat ) ) {
-            localStorage.setItem( 'lat', lat );
+        if ( lat ) {
+            lat = lat.toFixed( 1 );
+        }
+        
+        if ( lon ) {
+            lon = lon.toFixed( 1 );
         }
 
+        set_update_local_storage( 'lat', lat );
+        set_update_local_storage( 'lon', lon );
     }
     
-    if ( localStorage.getItem( 'lon' ) === null ) {
-        localStorage.setItem( 'lon', lon );
-    } else {
-
-        if ( +localStorage.getItem( 'lon' ) !== ( +lon ) ) {
-            localStorage.setItem( 'lon' , lon );
-        }
-
-    } 
-    
-    if ( localStorage.getItem( 'city' ) === null ) {
-        localStorage.setItem( 'city', city );
-    } else {
-
-        if ( localStorage.getItem( 'city' ) !== city ) {
-            localStorage.setItem( 'city', city );
-        }
-
-    }
-
-    if ( localStorage.getItem( 'city_name' ) === null ) {
-        localStorage.setItem( 'city_name', city_name );
-    } else {
-
-        if ( localStorage.getItem( 'city_name' ) !== city_name ) {
-            localStorage.setItem( 'city_name', city_name );
-        }
-
-    }
-
-    if ( localStorage.getItem( 'city_name_id' ) === null ) {
-        localStorage.setItem( 'city_name_id', city_name_id );
-    } else {
-
-        if ( localStorage.getItem( 'city_name_id' ) !== city_name_id ) {
-            localStorage.setItem( 'city_name_id', city_name_id );
-        }
-
-    }
+    set_update_local_storage( 'city_slug', city_slug );
+    set_update_local_storage( 'city_name', city_name );
+    set_update_local_storage( 'city_name_id', city_name_id );
 
 } // local_storage - end
 
@@ -1068,18 +828,18 @@ function add_city_undefined_database( city, state ) {
     not_connection( xml_city_database, 
                     main, 
                     text_not_connection_timeout, 
-                    'index_get_info', 
-                    'main', 
+                    'index_get_info_new', 
+                    'main_index', 
                     inner_get_info_func, 
-                    index_get_info );
+                    index_get_info_new );
 
     timeout( xml_city_database, 
              main, 
              text_not_connection_timeout, 
-             'index_get_info', 
-             'main', 
+             'index_get_info_new', 
+             'main_index', 
              inner_get_info_func, 
-             index_get_info );
+             index_get_info_new );
 
     xml_city_database.onload = function() {
 
@@ -1089,10 +849,10 @@ function add_city_undefined_database( city, state ) {
 
             if ( response_database.name ) {
                 message_not_city.innerHTML = '<div class="width-fit m-auto">' +
-                                                '<span>Ваше местоположение определено как -</span>' +
+                                                '<span>Ваше местоположение:</span>' +
                                                 '<h4 class="m-b-5 m-t-5 width-fit">' + response_database.name + '</h4>' +
-                                                '<small>Этого населённого пункта нет в нашей базе.<br>Мы добавим его в ближайшее время' +
-                                            '</div>';
+                                                '<span style="font-size: 14px">Этого населённого пункта нет в нашей базе. Мы добавим его в ближайшее время</span>' +
+                                             '</div>';
 
                 message_not_city.style.top = '0';
 
@@ -1106,34 +866,6 @@ function add_city_undefined_database( city, state ) {
 
     xml_city_database.send( data_send );
 } // add_city_undefined_database - end
-
-function city_selection_func( city, city_name, city_name_id ) {
-
-    if ( !localStorage.getItem( 'city_select') ) {
-        localStorage.setItem( 'city_select', city );
-    } else {
-        if ( localStorage.getItem( 'city_select' ) !== city ) {
-            localStorage.setItem( 'city_select', city );
-        }
-    }
-
-    if ( !localStorage.getItem( 'city_name' ) ) {
-            localStorage.setItem( 'city_name', city_name );
-    } else {
-        if ( localStorage.getItem( 'city_name' ) !== city_name ) {
-            localStorage.setItem( 'city_name', city_name );
-        }
-    }
-
-    if ( !localStorage.getItem( 'city_name_id' ) ) {
-            localStorage.setItem( 'city_name_id', city_name_id );
-    } else {
-        if ( localStorage.getItem( 'city_name_id' ) !== city_name_id ) {
-            localStorage.setItem( 'city_name_id', city_name_id );
-        }
-    }
-
-} // city_selection_func - end
 
 function part_not_city( slug ) {
     
@@ -1256,8 +988,8 @@ function part_not_city( slug ) {
 
                 city = ( event.target ).textContent;
                 slug = get_all_cities.find( item => item.name === city );
-                city = slug.slug;
                 list_cityes.style.cssText = '';
+                city_slug = slug.slug;
                 city_name = slug.name;
                 city_name_id = slug.id;
                 location_span.innerHTML = city_name.trim();
@@ -1268,22 +1000,14 @@ function part_not_city( slug ) {
                      ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
                      ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
                      ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
-
                     update_notifications( slug );
-
                 }
                 
-                if ( !not ) {
-
-                    if ( city_selection_let ) {
-                        city_selection_func( city, city_name, city_name_id );
-                    } else {  
-                        local_storage(lat, lon, city, city_name, city_name_id);
-                    }
-                
-                }
-                
-                get_info_func( slug, index_get_info );
+                remove_local_storage( 'lat' );
+                remove_local_storage( 'lon' );
+                localStorage.setItem( 'city_select', 'yes' );
+                local_storage( lat, lon, city_slug, city_name, city_name_id );
+                get_info_func( slug, index_get_info_new );
                 today.innerHTML = '<li id="today">Сегодня</li>';
 
             }
@@ -1471,8 +1195,14 @@ function part_not_city( slug ) {
                         city = ( event.target ).textContent;
                     } else {
                         
-                        if ( ( event.target ).tagName !== 'DIV' ) {
-                            city = ( event.target ).closest( '.full_city' ).textContent;
+                        if ( ( event.target ).tagName === 'SPAN' ) {
+
+                            if ( ( event.target ).id === 'found_cities' ) {
+                                city = ( event.target ).previousElementSibling.textContent;
+                            } else {
+                                city = ( event.target ).closest( '.full_city' ).textContent;
+                            }
+
                         } else {
                             return;
                         }
@@ -1489,7 +1219,7 @@ function part_not_city( slug ) {
                     form_search.value = city;
                     slug = search_cities.find( item => item.name.toLowerCase() == city.toLowerCase() ) || 
                            search_cities.find( item => item.slug.toLowerCase() == city.toLowerCase() );
-                    city = slug.slug;
+                    city_slug = slug.slug;
                     city_name = slug.name;
                     city_name_id = slug.id;
                     location_span.innerHTML = city_name.trim();
@@ -1499,22 +1229,14 @@ function part_not_city( slug ) {
                         ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
                         ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
                         ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
-
                         update_notifications( slug );
-
-                    }
-                    
-                    if ( !not ) {
-
-                        if ( city_selection_let ) {
-                            city_selection_func( city, city_name, city_name_id );
-                        } else { 
-                            local_storage( lat, lon, city, city_name, city_name_id );
-                        }
-                        
                     }
 
-                    get_info_func( slug, index_get_info );
+                    localStorage.setItem( 'city_select', 'yes' );
+                    remove_local_storage( 'lat' );
+                    remove_local_storage( 'lon' );
+                    local_storage( lat, lon, city_slug, city_name, city_name_id );
+                    get_info_func( slug, index_get_info_new );
                     today.innerHTML = '<li id="today">Сегодня</li>';
 
                 };
@@ -1636,27 +1358,43 @@ function part_not_city( slug ) {
 
 } // part_not_city - end
     
-function not_city( lat, lon, city, slug, index_get_info ) {
+function not_city( lat, lon, city, slug, index_get_info_new ) {
 
     if ( ( localStorage.getItem( 'status_location' ) === '0' ) || 
          ( localStorage.getItem( 'status_location_accuracy' ) === '0' ) ) {
         current_location.classList.add( 'd-none' );
     }
     
+    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
+        hide_background();
+        localStorage.removeItem( 'status_background' );
+    } else {
+        navigator.splashscreen.hide();
+        show_body();
+    }
+    
     if ( localStorage.getItem( 'lat' ) && 
          localStorage.getItem( 'lon' ) &&
+<<<<<<< HEAD:platforms/ios/www/js/index.js
        ( localStorage.getItem( 'lat' ) !== 'undefined' ) &&
        ( localStorage.getItem( 'lon' ) !== 'undefined' ) &&
          localStorage.getItem( 'city' ) ) {
 
         navigator.splashscreen.hide();
         show_body();
+=======
+         localStorage.getItem( 'city_name' ) &&
+         localStorage.getItem( 'city_slug' ) ) {
+        city_slug = localStorage.getItem( 'city_slug' );
+        city_name = localStorage.getItem( 'city_name' );
+>>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         
-        if ( !city_selection_let )  {   
+        if ( localStorage.getItem( 'click_choice_city' ) === '0' )  {   
            
-            add_city_undefined_database( city, state );
+            if ( city && lat && lon ) add_city_undefined_database( city, state );
+
             window_change_city_func();
-            local_city.innerHTML = localStorage.getItem( 'city_name' );
+            local_city.innerHTML = city_name;
             
             yes_change_city.onclick = function() {
 
@@ -1673,20 +1411,17 @@ function not_city( lat, lon, city, slug, index_get_info ) {
                 setTimeout( () => {
                     window_change_city.style.cssText = '';
                 }, 500 );
-
-                city_name = localStorage.getItem( 'city_name' );
-                city = localStorage.getItem( 'city' );
                 
-                if ( localStorage.getItem( 'index_get_info' ) && 
+                if ( localStorage.getItem( 'index_get_info_new' ) && 
                      ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
-                    index_get_info = JSON.parse( localStorage.getItem( 'index_get_info' ) );
+                    index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
                     location_span.innerHTML = city_name;
                     
-                    inner_get_info_func( index_get_info, slug, height_header, day_week );
-                    city_selection_func( city, city_name, city_name_id );
+                    inner_get_info_func( index_get_info_new, slug, height_header, day_week );
                     
                 } else {
-                    get_city_and_info( lat, lon, city, state, slug );
+                    localStorage.setItem( 'now_year', now_year );
+                    get_city_and_info( lat, lon, city_slug, slug );
                 }
                 
             }
@@ -1697,133 +1432,68 @@ function not_city( lat, lon, city, slug, index_get_info ) {
         }
         
     } else {
-
-        if ( city ) add_city_undefined_database( city, state );
+        
+        if ( city && lat && lon ) add_city_undefined_database( city, state );
 
         window_select_city_func();
         part_not_city( slug );
     }
 
 } // not_city - end
-    
-function get_city_and_info( lat, lon, city, slug ) { 
-
-    let xml_city = new XMLHttpRequest(),
-        get_city_array;
-
-        xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
-        xml_city.responseType = 'json';
-        xml_city.setRequestHeader( 'Content-Type', 'application/json' );
-
-    not_connection( xml_city, 
-                    main, 
-                    text_not_connection_timeout, 
-                    'index_get_info', 
-                    'main', 
-                    inner_get_info_func, 
-                    index_get_info );
-
-    timeout( xml_city, 
-             main,
-             text_not_connection_timeout, 
-             'index_get_info', 
-             'main', 
-             inner_get_info_func, 
-             index_get_info );
-
-    xml_city.onload = function() {
-        get_city_array = xml_city.response;
-
-        slug = get_city_array.find( item => item.slug === city ) || 
-               get_city_array.find( item => item.name === city );
-        
-        if ( slug ) {
-            
-            city_name = slug.name;
-        	city_name_id = slug.id;
-            location_span.innerHTML = city_name.trim();
-
-            if ( ( localStorage.getItem( 'status_notifications' ) === 'true' ) &&
-                 ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
-                 ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
-                 ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
-
-                    update_notifications( slug );
-
-            }
-            
-            // Запись (первая) данных в localStorage и перезапись
-            if ( !localStorage.getItem( 'city_select' ) ) {
-                
-                if ( !not ) {
-                    local_storage( lat, lon, city, city_name, city_name_id );
-                }
-
-            }
-            
-            get_info_func( slug, index_get_info );
-            
-        } else {
-            not_city( lat, lon, city, slug, index_get_info );
-        }
-
-    };
-
-    xml_city.send();
-
-} // get_cityes_and_info - end
 
 function location_error( slug ) {
 
-    main.style.opacity = '0';
-    header_top.style.opacity = '0';
-
-    if ( localStorage.getItem( 'city' ) ) { 
+    if ( localStorage.getItem( 'city_name' ) && 
+         localStorage.getItem( 'city_slug' ) ) {
+        city_slug = localStorage.getItem( 'city_slug' ); 
+        city_name = localStorage.getItem( 'city_name' ); 
         
         if ( localStorage.getItem( 'click_choice_city' ) === '0' ) {
 
             let xml_city = new XMLHttpRequest(),
-                get_city_array,
-                city = localStorage.getItem( 'city' );
+                get_city_array;
 
-            xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
+            xml_city.open( 'GET', url + 'api/cities.json?slug=' + city_slug );
             xml_city.responseType = 'json';
             xml_city.setRequestHeader( 'Content-Type', 'application/json' );
 
             not_connection( xml_city, 
                             main, 
                             text_not_connection_timeout, 
-                            'index_get_info', 
-                            'main', 
+                            'index_get_info_new', 
+                            'main_index', 
                             inner_get_info_func, 
-                            index_get_info );
+                            index_get_info_new );
 
             timeout( xml_city, 
                     main, 
                     text_not_connection_timeout, 
-                    'index_get_info', 
-                    'main', 
+                    'index_get_info_new', 
+                    'main_index', 
                     inner_get_info_func, 
-                    index_get_info );
+                    index_get_info_new );
 
             xml_city.onload = function() {
                 get_city_array = xml_city.response;
-                slug = get_city_array.find( item => item.slug == city );
+                slug = get_city_array.find( item => item.slug == city_slug );
                 location_span.innerHTML = slug.name;
 
-                get_info_func( slug, index_get_info );
+                get_info_func( slug, index_get_info_new );
 
             }
+
             xml_city.send();
 
         } else if ( localStorage.getItem( 'click_choice_city' ) === '1' ) {
+            not_city( lat, lon, city_name, slug, index_get_info_new );
 
-            city_selection_let = 1;
-            not_city( lat, lon, city, slug, index_get_info );
+            setTimeout( () => {
+                localStorage.setItem( 'click_choice_city', '0' );
+            }, 1000 );
 
         }
 
-    } else if ( !localStorage.getItem( 'city' ) ) {
+    } else {
 
         if ( localStorage.getItem( 'status_location_accuracy' ) === '1' ) {
 
@@ -1837,14 +1507,13 @@ function location_error( slug ) {
             setTimeout( () => message_location_error.style.cssText = '', 5000 );
         }
 
-        not_city( lat, lon, city, slug, index_get_info );
-    }
+        not_city( lat, lon, city_name, slug, index_get_info_new );
 
-    if ( localStorage.getItem( 'click_choice_city' ) === '1' ) localStorage.setItem( 'click_choice_city', '0' );
+    }
 
 } // location_error - end
 
-function get_city() {
+function get_city( lat, lon ) {
 
     let xml_location = new XMLHttpRequest(),
         url = 'https://api.opencagedata.com/geocode/v1/json?q=' + lat + ',' + lon + 
@@ -1855,29 +1524,29 @@ function get_city() {
     not_connection( xml_location, 
                     main, 
                     text_not_connection_timeout, 
-                    'index_get_info', 
-                    'main', 
+                    'index_get_info_new', 
+                    'main_index', 
                     inner_get_info_func, 
-                    index_get_info );
+                    index_get_info_new );
 
     timeout( xml_location, 
              main, 
              text_not_connection_timeout, 
-             'index_get_info', 
-             'main', 
+             'index_get_info_new', 
+             'main_index', 
              inner_get_info_func, 
-             index_get_info );
+             index_get_info_new );
 
     xml_location.onload = function() {
 
         let city = xml_location.response.results[ 0 ].components.city ||
-                   xml_location.response.results[ 0 ].components.county ||
+                   xml_location.response.results[ 0 ].components.town ||
                    xml_location.response.results[ 0 ].components.village || 
                    xml_location.response.results[ 0 ].components.hamlet ||
                    xml_location.response.results[ 0 ].components.borough ||
-                   xml_location.response.results[ 0 ].components.town ||
                    xml_location.response.results[ 0 ].components.municipality ||
-                   xml_location.response.results[ 0 ].components.city_district,
+                   xml_location.response.results[ 0 ].components.city_district ||
+                   xml_location.response.results[ 0 ].components.county, 
             state = xml_location.response.results[ 0 ].components.state ||
                     xml_location.response.results[ 0 ].components.province ||
                     xml_location.response.results[ 0 ].components.region ||
@@ -1885,43 +1554,80 @@ function get_city() {
                     xml_location.response.results[ 0 ].components.territory,
             country = xml_location.response.results[ 0 ].components.country;
 
-        if ( ( city === 'Baranovka' ) && ( state === 'Krasnodar Krai' ) ) {
-            city = 'Sochi';
-        } else if ( city === 'City of Brussels' ) {
-            city = 'Brussels';
-        } else if ( city === 'Tirana Municipally' ) {
-            city = 'Tirana';
-        } else if ( city === 'Jakarta Special Capital Region' ) {
-            city = 'Jakarta';
-        } else if ( !city && ( state === 'Bangkok' ) ) {
-            city = 'Bangkok';
-        } else if ( city === 'Łódź' ) {
-            city = 'Lodz';
-        } else if ( city === 'Macapá' ) {
-            city = 'Macapa';
-        } else if ( ( city === 'County Dublin' ) || ( city === 'South Dublin' ) ) {
-            city = 'Dublin';
-        }
-
         if ( country ) {
 
             if ( country === 'China' ) {
 
-                if ( state === 'Shanghai' ) city = 'Shanghai';
-                if ( state === 'Beijing' ) city = 'Beijing';
-                if ( state === 'Tianjin' ) city = 'Tianjin';
-                if ( state === 'Guangdong Province' ) city = 'Guangdong';
+                if ( state === 'Shanghai' ) {
+                    city = 'Shanghai';
+                } else if ( state === 'Beijing' ) {
+                    city = 'Beijing';
+                } else if ( state === 'Tianjin' ) {
+                    city = 'Tianjin';
+                } else if ( state === 'Guangdong Province' ) {
+                    city = 'Guangdong';
+                } else if ( state === 'Hubei' ) {
+                    city = 'Hubei';
+                }
 
             } else if ( country === 'New Zealand' ) {
 
                 if ( state === 'Auckland' ) city = 'Auckland';
+
+            } else if ( country === 'Russia' ) {
+
+                if ( state === 'Moscow' ) {
+                    city = 'Moscow';
+                } if ( state === 'Saint Petersburg' ) {
+                    city = 'Saint Petersburg';
+                } else if ( ( city === 'Baranovka' ) && ( state === 'Krasnodar Krai' ) ) {
+                    city = 'Sochi';
+                } else if ( city === 'Лиски' ) {
+                    city = 'Liski';
+                }
+
+            } else if ( country === 'Thailand' ) {
+
+                if ( ( сity === 'Dauh Puri Kauh' ) || 
+                     ( сity === 'Renon' ) ) {
+                    city = 'Denpasar';
+                } else if ( state === 'Phuket Province' ) {
+                    city = 'Phuket'; 
+                } else if ( !city && ( state === 'Bangkok' ) ) {
+                    city = 'Bangkok';
+                } else if ( city === 'Tong Yang' ) {
+                    city = 'Island Samui';
+                }
+
+            } else if ( country === 'Indonesia' ) {
+
+                if ( ( city === 'Dusun Mangsit' ) ||
+                     ( city === 'Aik Berik' ) ) {
+                    city = 'Lombok';
+                } else if ( city === 'Special Capital Region of Jakarta' ) {
+                    city = 'Jakarta';
+                }
+
+            } else if ( country === 'Turkey' ) {
+
+                if ( state === 'Izmir' ) {
+                    city = 'Izmir';
+                } else if ( state === 'Istanbul' ) {
+                    city = 'Istanbul';
+                }
+
+            } else if ( country === 'Belgium' ) {
+
+                if ( state === 'Brussels-Capital' ) {
+                    city = 'Brussels';
+                }
 
             }
 
         }
 
         if ( !city && !state ) {
-            not_city(  lat, lon, city, slug, index_get_info );
+            not_city(  lat, lon, city, slug, index_get_info_new );
             return;
         }
         
@@ -1932,70 +1638,251 @@ function get_city() {
     xml_location.send();
 
 }
-    
-function on_success( position, city, index_get_info ) {
-    
+
+function get_city_and_info( lat, lon, city, slug ) { 
+    let xml_city = new XMLHttpRequest(),
+        get_city_array;
+
+        xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
+        xml_city.responseType = 'json';
+        xml_city.setRequestHeader( 'Content-Type', 'application/json' );
+
+    not_connection( xml_city, 
+                    main, 
+                    text_not_connection_timeout, 
+                    'index_get_info_new', 
+                    'main_index', 
+                    inner_get_info_func, 
+                    index_get_info_new );
+
+    timeout( xml_city, 
+             main,
+             text_not_connection_timeout, 
+             'index_get_info_new', 
+             'main_index', 
+             inner_get_info_func, 
+             index_get_info_new );
+
+    xml_city.onload = function() {
+        get_city_array = xml_city.response;
+        slug = get_city_array.find( item => item.slug === city ) || 
+               get_city_array.find( item => item.name === city );
+        
+        if ( slug ) {
+            city_slug = slug.slug;
+            city_name = slug.name;
+        	city_name_id = slug.id;
+            location_span.innerHTML = city_name.trim();
+
+            if ( ( localStorage.getItem( 'status_notifications' ) === 'true' ) &&
+                 ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
+                 ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
+                 ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
+                update_notifications( slug );
+            }
+            
+            // Запись (первая) данных в localStorage и перезапись
+            local_storage( lat, lon, city_slug, city_name, city_name_id );
+            get_info_func( slug, index_get_info_new );
+            
+        } else {
+            not_city( lat, lon, city, slug, index_get_info_new );
+        }
+
+    };
+
+    xml_city.send();
+
+} // get_cityes_and_info - end 
+
+function on_success( position, city_name, index_get_info_new ) {
+
     // если город и страна выбраны с "Выбор города" и есть запись в LocalStorage страны и города, то обращаемся к коду ниже
     if ( localStorage.getItem( 'city_select' ) ) {
-        city = localStorage.getItem( 'city_name' );
+        city_name = localStorage.getItem( 'city_name' );
+        city_slug = localStorage.getItem( 'city_slug' );
 
-        if ( localStorage.getItem( 'index_get_info' ) && 
+        if ( localStorage.getItem( 'index_get_info_new' ) && 
              ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
-            index_get_info = JSON.parse( localStorage.getItem( 'index_get_info' ) );
-            location_span.innerHTML = city;
-                
-            inner_get_info_func( index_get_info, slug, height_header, day_week );
+            index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
+            location_span.innerHTML = city_name;
+            inner_get_info_func( index_get_info_new, slug, height_header, day_week );
         } else {
             localStorage.setItem( 'now_year', now_year );
-            
-            get_city();
+            lat = position.coords.latitude; 
+            lon = position.coords.longitude;
+            get_city_and_info( lat, lon, city_slug, slug );
         }
 
     } else {
-        
-        lat = position.coords.latitude; 
+        lat = position.coords.latitude;
         lon = position.coords.longitude;
 
-        // lat = 49.59002081089676; // Полтава
-        // lon = 34.55092795899492;
-        
         if ( localStorage.getItem( 'lat' ) && 
              localStorage.getItem( 'lon' ) &&
-             localStorage.getItem( 'city' ) ) {
+             localStorage.getItem( 'city_name' ) &&
+             localStorage.getItem( 'city_slug' ) ) {
+                
+            city_name = localStorage.getItem( 'city_name' );
+            city_slug = localStorage.getItem( 'city_slug' );
                     
             if ( ( ( ( +localStorage.getItem( 'lat' ) ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) ) === ( +lon.toFixed( 1 ) ) ) ) || 
-                 ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) ) === ( +lon.toFixed( 1 ) ) ) ) ||
-                 ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) ) === ( +lon.toFixed( 1 ) ) ) ) ||
-                 ( ( ( +localStorage.getItem( 'lat' ) ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) || 
-                 ( ( ( +localStorage.getItem( 'lat' ) ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) || 
-                 ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
-                 ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
-                 ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
-                 ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ) {
-    
-                city = localStorage.getItem( 'city_name' );
-                not = 1;
-    
-                if ( localStorage.getItem( 'index_get_info' ) && 
-                     ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
-                    index_get_info = JSON.parse( localStorage.getItem( 'index_get_info' ) );
-                    location_span.innerHTML = city;
-                    inner_get_info_func( index_get_info, slug, height_header, day_week );
+                ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) ) === ( +lon.toFixed( 1 ) ) ) ) ||
+                ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) ) === ( +lon.toFixed( 1 ) ) ) ) ||
+                ( ( ( +localStorage.getItem( 'lat' ) ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) || 
+                ( ( ( +localStorage.getItem( 'lat' ) ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) || 
+                ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
+                ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
+                ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
+                ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ) {
+
+                if ( localStorage.getItem( 'index_get_info_new' ) && 
+                    ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
+                    index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
+                    location_span.innerHTML = city_name;
+                    inner_get_info_func( index_get_info_new, slug, height_header, day_week );
                 } else {
                     localStorage.setItem( 'now_year', now_year );
-                    get_city();
+                    get_city_and_info( lat, lon, city_slug, slug );
                 }
 
             } else {
-                get_city();
+                get_city( lat, lon );
             }
             
         } else {
-            get_city();
+            get_city( lat, lon );
         }
-            
+
     }
 
+}
+
+function on_error( error ) {
+    location_error( slug );
+}
+
+function on_device_ready() {
+
+    cordova.plugins.diagnostic.enableDebug();
+
+    let permissions = cordova.plugins.permissions,
+        status_location_accuracy,
+        device_version = device.version;
+
+    cordova.plugins.diagnostic.isLocationEnabled( function( enabled ) { // получение состояния определения точности местоположения
+        status_location_accuracy = enabled;
+
+        if ( enabled ) {
+            localStorage.setItem( 'status_location_accuracy', '1' );
+        } else {
+            localStorage.setItem( 'status_location_accuracy', '0' );
+        }
+        
+    }, function( error ) {
+        status_location_accuracy = false;
+    } );
+
+    function launch_calendar() {
+
+        if ( localStorage.getItem( 'click_choice_city' ) === '1' ) {
+            main.style.opacity = '0';
+            header.style.opacity = '0';
+
+            not_city( lat, lon, city, slug, index_get_info_new );
+
+            setTimeout( () => {
+                localStorage.setItem( 'click_choice_city', '0' );
+            }, 1000 );
+
+        } else {
+            navigator.geolocation.getCurrentPosition( on_success, on_error, { timeout: 5000 } );
+        }
+
+    }    
+
+    setTimeout( () => {
+
+        if ( navigator.connection.type !== 'none' ) {
+
+            if ( device_version >= 10 ) {
+                device_version = Array.from( device_version )[ 0 ] + Array.from( device_version )[ 1 ];
+            } else {
+                device_version = Array.from( device_version )[ 0 ];
+            }
+    
+            cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
+    
+                if ( canRequest ) {
+                    localStorage.setItem( 'status_location', '1' );
+                } else {
+                    localStorage.setItem( 'status_location', '0' );
+                }
+    
+            } );
+
+            set_local_storage( 'user_location_accuracy', '0' );
+
+            permissions.requestPermission( permissions.ACCESS_COARSE_LOCATION, success, error );
+
+            function error() {
+                location_error( slug );
+            }
+
+            function success( status ) {
+
+                cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
+
+                    if ( canRequest ) {
+
+                        localStorage.setItem( 'status_location', '1' );
+
+                        if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
+
+                            cordova.plugins.locationAccuracy.request( 
+                                
+                                function( success ) {
+                                    localStorage.setItem( 'user_location_accuracy', '1' );
+                                    localStorage.setItem( 'status_location_accuracy', '1' );
+                                    launch_calendar();
+                                }, function ( error ) {
+                                    localStorage.setItem( 'user_location_accuracy', '1' );
+                                    localStorage.setItem( 'status_location_accuracy', '0' );
+                                    location_error( slug );
+                                }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY );
+
+                        } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
+
+                            if ( status_location_accuracy ) {
+                                launch_calendar();
+                            } else {
+                                location_error( slug );
+                            }
+
+                        }
+
+                    } else {
+                        localStorage.setItem( 'status_location', '0' );
+                        location_error( slug );
+                    }
+
+                } );
+
+            }
+
+        } else {
+
+            content_not_connection( main, 
+                                    text_not_internet, 
+                                    'index_get_info_new', 
+                                    'main_index', 
+                                    inner_get_info_func, 
+                                    index_get_info_new );
+
+        }
+
+    }, 0 );
+    
 }
 
 function check_notifications( slug ) {
@@ -2130,255 +2017,7 @@ function register_notifications( slug ) {
 
 }
 
-function on_error( error ) {
-    location_error( slug );
-}
 
-function on_device_ready() {
-
-    cordova.plugins.diagnostic.enableDebug();
-
-    let permissions = cordova.plugins.permissions,
-        status_location_accuracy,
-        device_platform = device.platform,
-        device_version = device.version;
-
-    cordova.plugins.diagnostic.isLocationEnabled( function( enabled ) { // получение состояния определения точности местоположения
-        status_location_accuracy = enabled;
-
-        if ( enabled ) {
-            localStorage.setItem( 'status_location_accuracy', '1' );
-        } else {
-            localStorage.setItem( 'status_location_accuracy', '0' );
-        }
-        
-    }, function( error ) {
-        status_location_accuracy = false;
-    } );
-
-    function launch_calendar() {
-
-        if ( localStorage.getItem( 'city_selection' ) === 'yes' ) {
-            city_selection_let = 1;
-            main.style.opacity = '0';
-            header.style.opacity = '0';
-
-            not_city( lat, lon, city, slug, index_get_info );
-
-            localStorage.removeItem( 'city_selection' );
-        } else {
-            navigator.geolocation.getCurrentPosition( on_success, on_error, { timeout: 5000 } );
-        }
-
-    }    
-
-    setTimeout( () => {
-
-        if ( navigator.connection.type !== 'none' ) {
-
-            if ( device_platform === 'Android' ) {
-
-                if ( device_version >= 10 ) {
-                    device_version = Array.from( device_version )[ 0 ] + Array.from( device_version )[ 1 ];
-                } else {
-                    device_version = Array.from( device_version )[ 0 ];
-                }
-        
-                cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-        
-                    if ( canRequest ) {
-                        localStorage.setItem( 'status_location', '1' );
-                    } else {
-                        localStorage.setItem( 'status_location', '0' );
-                    }
-        
-                } );
-        
-                if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
-                    localStorage.setItem( 'user_location_accuracy', '0' );
-                }
-
-                permissions.requestPermission( permissions.ACCESS_COARSE_LOCATION, success, error );
-
-                function error() {
-                    location_error( slug );
-                }
-
-                function success( status ) {
-
-                    cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-
-                        if ( canRequest ) {
-
-                            localStorage.setItem( 'status_location', '1' );
-
-                            if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
-
-                                cordova.plugins.locationAccuracy.request( 
-                                    
-                                    function( success ) {
-                                        localStorage.setItem( 'user_location_accuracy', '1' );
-                                        localStorage.setItem( 'status_location_accuracy', '1' );
-                                        launch_calendar();
-                                    }, function ( error ) {
-                                        localStorage.setItem( 'user_location_accuracy', '1' );
-                                        localStorage.setItem( 'status_location_accuracy', '0' );
-                                        location_error( slug );
-                                    }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY );
-
-                            } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
-
-                                if ( status_location_accuracy ) {
-                                    launch_calendar();
-                                } else {
-                                    location_error( slug );
-                                }
-
-                            }
-
-                        } else {
-                            localStorage.setItem( 'status_location', '0' );
-                            location_error( slug );
-                        }
-
-                    } );
-
-                }
-
-            } else if ( device_platform === 'iOS' ) { 
-                document.body.classList.add( 'ios' );
-
-                cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
-
-                    StatusBar.show();
-                    StatusBar.backgroundColorByHexString( '#000000' );
-
-                    switch( status ) {
-
-                        case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-                            
-                            document.addEventListener( "resume", () => { 
-                                
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 0 );
-
-                            } );
-
-                            cordova.plugins.diagnostic.requestLocationAuthorization( function( status ) {
-
-                                switch( status ) {
-
-                                    case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-                                        
-                                        localStorage.setItem( 'status_location', '0' );
-                                        location_error( slug );
-
-                                        break;
-                                    case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-
-                                        localStorage.setItem( 'status_location', '1' );
-                                        launch_calendar();
-
-                                        break;
-                                }
-
-                            }, function( error ) {
-
-                                localStorage.setItem( 'status_location', '0' );
-                                location_error( slug );
-
-                            } );
-
-                            break;
-
-                        case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-
-                            cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-
-                                if ( canRequest ) {
-            
-                                    cordova.plugins.locationAccuracy.request( function() {
-
-                                        if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
-                                            localStorage.setItem( 'user_location_accuracy', '0' );
-                                        } else {
-                                            localStorage.setItem( 'user_location_accuracy', '1' );
-                                        }
-
-                                        if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
-
-                                            setTimeout( () => {
-                                                localStorage.setItem( 'status_location', '0' );
-                                                location_error( slug );
-                                            }, 7000 );
-
-                                        } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
-                                            localStorage.setItem( 'status_location', '0' );
-                                            location_error( slug );
-                                        }
-
-                                        document.addEventListener( "resume", () => { 
-                                            
-                                            setTimeout( () => {
-                                                window.location.reload();
-                                            }, 0 );
-
-                                        } );
-
-                                    }, function() {
-                                        localStorage.setItem( 'status_location', '0' );
-                                        location_error( slug );
-                                    });
-            
-                                } else {
-                                    localStorage.setItem( 'status_location', '0' );
-                                    location_error( slug );
-                                }
-            
-                            } );
-
-                            break;
-
-                        case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-                            
-                            localStorage.setItem( 'status_location', '1' );
-                            launch_calendar();
-
-                            document.addEventListener( "resume", () => { 
-                                
-                                setTimeout( () => {
-                                    window.location.reload();
-                                }, 0 );
-
-                            } );
-
-                            break;
-
-                    }
-                 }, function( error ) {
-                    
-                     localStorage.setItem( 'status_location', '0' );
-                     location_error( slug );
-
-                 } );
-                 
-            }
-
-        } else {
-
-            content_not_connection( main, 
-                                    text_not_internet, 
-                                    'index_get_info', 
-                                    'main', 
-                                    inner_get_info_func, 
-                                    index_get_info );
-
-        }
-
-    }, 0 );
-    
-}
 
 
 
