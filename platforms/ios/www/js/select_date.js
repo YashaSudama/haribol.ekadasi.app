@@ -23,11 +23,6 @@ import { now_date_number,
 		 plus,
 		 minus,
 		 div_zoom_calendar,
-<<<<<<< HEAD:platforms/ios/www/js/select_date.js
-		 window_height,
-		 show_body
-=======
-		 hide_background,
 		 show_body,
 		 window_height,
 		 apparition_ekadasi_days,
@@ -35,7 +30,6 @@ import { now_date_number,
 		 add_isus_array,
          set_local_storage,
          remove_too_events
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/select_date.js
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
@@ -346,25 +340,12 @@ function inner_get_info( select_get_info ) {
     	if ( i === 1 ) {
     		window.scrollTo( 0, 0 );
     		window.scrollTo( 0, calendar_ul[ now_month ].getBoundingClientRect().y 
-<<<<<<< HEAD:platforms/ios/www/js/select_date.js
     						 - height_header - height_select_date + 5 );
     	}
 
     	if ( i === 2 ) {
-
-    		get_description( calendar, '.click' );
 			navigator.splashscreen.hide();
 			show_body();
-=======
-    						 - height_header + 5 );
-							 
-			setTimeout( () => {
-				hide_background();
-				show_body();
-				localStorage.removeItem( 'status_background' );
-			}, 0 );
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/select_date.js
-
     	}
 
     }

@@ -4,12 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-ЭКАДАШИ.xcscheme</key>
+		<key>Pods-Экадаши.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

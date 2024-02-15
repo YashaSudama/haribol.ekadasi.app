@@ -28,11 +28,7 @@ import { window_width,
          update_notifications,
          min_preloader,
          show_body,
-<<<<<<< HEAD:platforms/ios/www/js/index.js
-         hide_body
-=======
          hide_body,
-         hide_background,
          month_days,
          apparition_ekadasi_days,
          add_sp_array,
@@ -41,7 +37,6 @@ import { window_width,
          set_update_local_storage,
          remove_local_storage,
          reading_locale_storage
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -49,11 +44,7 @@ document.addEventListener( "deviceready", () => {
     on_device_ready();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||
-<<<<<<< HEAD:platforms/ios/www/js/index.js
             localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
-=======
-          localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         get_firebase_token_func();
     }
 
@@ -89,7 +80,6 @@ function get_firebase_token_func() {
     if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
         localStorage.setItem( 'status_firebase_token', 'false' ); 
 
-<<<<<<< HEAD:platforms/ios/www/js/index.js
         FCMPlugin.getToken( function( token ) {
             
             if ( !token_notif ) {
@@ -119,29 +109,6 @@ function get_firebase_token_func() {
         FCMPlugin.getToken( function( token ) {
             
             if ( !token_notif ) {
-=======
-        cordova.plugins.firebase.messaging.getToken().then( 
-            ( token ) => {
-                token_notif = token;
-            },
-            ( error ) => {
-                token_notif = false;
-            }   
-        );
-
-    } else {
-
-        if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
-    
-            cordova.plugins.firebase.messaging.getToken().then( 
-                ( token ) => {
-                    token_notif = token;
-                },
-                ( error ) => {
-                    token_notif = false;
-                }   
-            );
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 
                 let get_firebase_token_interval = setInterval( () => {
 
@@ -180,38 +147,11 @@ set_local_storage( 'user_register_notifications', 'false' );
 set_local_storage( 'main_index', main.innerHTML );
 
 current_location.onclick = function() {
-<<<<<<< HEAD:platforms/ios/www/js/index.js
-
-    if ( localStorage.getItem( 'city_select' ) ) {
-        localStorage.removeItem( 'city_select' );
-    }
-
-    if ( localStorage.getItem( 'lat') ) {
-        localStorage.removeItem( 'lat' );
-    }
-
-    if ( localStorage.getItem( 'lon' ) ) {
-        localStorage.removeItem( 'lon' );
-    }
-
-    if ( localStorage.getItem( 'city' ) ) {
-        localStorage.removeItem( 'city' );
-    }
-    
-    if ( localStorage.getItem(' city_name' ) ) {
-        localStorage.removeItem( 'city_name' );
-    }
-
+    remove_local_storage( 'city_select' );
     window.location.href = 'index.html';
     navigator.splashscreen.show();
     hide_body();
 
-=======
-    remove_local_storage( 'city_select' );
-    hide_body();
-    window.location.href = 'index.html';
-    localStorage.setItem( 'status_background', 'yes' );
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 }
 
 function window_select_city_func() {
@@ -537,125 +477,6 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
             }
 
         } // end display_data
-<<<<<<< HEAD:platforms/ios/www/js/index.js
-        
-        // jan
-        for ( let item in get_jan ) {
-            display_data( get_jan, jan, item, get_year, 0 );
-        }
-       
-        // feb
-        for ( let item in get_feb ) {
-            display_data( get_feb, feb, item, get_year, 1 );
-        }
-       
-        // mar
-        for ( let item in get_mar ) {
-            display_data( get_mar, mar, item, get_year, 2 );
-        }
-           
-        // apr
-        for ( let item in get_apr ) {
-            display_data( get_apr, apr, item, get_year, 3 );
-        }
-       
-        // may
-        for ( let item in get_may ) {
-            display_data( get_may, may, item, get_year, 4 );
-        }
-           
-        // jun
-        for ( let item in get_jun ) { 
-            display_data( get_jun, jun, item, get_year, 5 );
-        }
-       
-        // jul
-        for ( let item in get_jul ) {
-            display_data( get_jul, jul, item, get_year, 6 );
-        }
-       
-        // aug
-        for ( let item in get_aug ) {
-            display_data( get_aug, aug, item, get_year, 7 );
-        }
-       
-        // sem
-        for ( let item in get_sem ) {
-            display_data( get_sem, sem, item, get_year, 8 );
-        }
-       
-        // oct
-        for ( let item in get_oct) {
-            display_data( get_oct, oct, item, get_year, 9 );
-        }
-       
-        // nov
-        for ( let item in get_nov ) {
-            display_data( get_nov, nov, item, get_year, 10 );
-        }
-       
-        // dem
-        for ( let item in get_dem ) {
-            display_data( get_dem, dem, item, get_year, 11 );
-        }
-        
-        // Добавление дня явления ШП и Рождество Иисуса
-        let jun_ul = document.getElementsByClassName( 'jun' )[ i ],
-            dem_ul = document.getElementsByClassName( 'dem' )[ i ],
-            jun_span = document.getElementsByClassName( 'jun' )[ i ].querySelectorAll( 'li .day_info .bold' ),
-            dem_span = document.getElementsByClassName( 'dem' )[ i ].querySelectorAll( 'li .day_info .bold' ),
-            arr_content_jun = [],
-            arr_content_dem = [],
-            content,
-            day_week_sp = new Date( get_year, 5, 14 ).getDay(),
-            day_week_iisus = new Date( get_year, 11, 25 ).getDay(),
-            appear_sp_content = '<li id="vyasapudja" class="id value-5">' + 
-                                    '<div class="day_info d-flex text-center l-height-1-25">' + 
-                                        '<span>' + day_name_short[ day_week_sp ] + '</span>' + 
-                                        '<span class="bold">14</span>' + 
-                                    '</div>' + 
-                                    '<div class="event_info l-height-1-2">' + 
-                                        '<span class="name_event d-block bold">Сиддхасварупананда Парамахамса Прабхупада</span>' + 
-                                        '<span class="d-block bold type_event m-t-5">' + 
-                                            'Явление' +
-                                        '</span>' +
-                                    '</div>' + 
-                                    '<div class="day_full">' + 
-                                        // '<span class="bold l-height-1-2 text-center">14 июня<br>' + 
-                                        '</span>' + 
-                                        '<i class="fas fa-angle-right">' +
-                                        '</i>' + 
-                                    '</div>' + 
-                                 '</li>', 
-            appear_iisus_content = '<li id="rozhdestvo" class="id value-D">' + 
-                                    '<div class="day_info d-flex text-center l-height-1-25">' +    
-                                        '<span>' + day_name_short[ day_week_iisus ] + '</span>' + 
-                                        '<span class="bold">25</span>' + 
-                                    '</div>' + 
-                                    '<div class="event_info l-height-1-2">' + 
-                                        '<span class="name_event d-block bold">Рождество, Иисус Христос</span>' +
-                                        '<span class="d-block bold type_event m-t-5">' + 
-                                            'Явление' +
-                                        '</span>' +  
-                                    '</div>' + 
-                                    '<div class="day_full">' + 
-                                        // '<span class="bold l-height-1-2 text-center">25 декабря<br>' +   
-                                        '</span>' + 
-                                        '<i class="fas fa-angle-right">' +
-                                        '</i>' +  
-                                    '</div>' + 
-                                 '</li>';
-    
-        for ( let li of jun_span ) {
-            
-            content = parseInt(li.textContent);
-            day_week = new Date( get_year, 5, 14 ).getDay();
-                
-            arr_content_jun.push( content );
-            
-            if ( content >= 14 ) {
-=======
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
 
         if ( now_year === +get_year ) {
 
@@ -675,30 +496,9 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                 
             }
 
-<<<<<<< HEAD:platforms/ios/www/js/index.js
-            scroll_today = window.pageYOffset;
-            
-            today.removeEventListener( 'click', hide_body );
-            today.addEventListener( 'click', function() {
-                window.scrollTo( { left: 0, top: scroll_today, behavior: 'smooth' } );
-            } );
-            
-            main.style.opacity = '1';
-            header_top.style.opacity = '1';
+            window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
             navigator.splashscreen.hide();
             show_body();
-            get_description( main, '.id' );
-        
-=======
-            window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
-
-            if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-                hide_background();
-                localStorage.removeItem( 'status_background' );
-            } else {
-                navigator.splashscreen.hide();
-                show_body();
-            }
 
         } else if ( ( now_year + 1 ) === +get_year ) {
 
@@ -716,7 +516,6 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                 
             }
 
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         }
         
         let month = document.getElementsByClassName( 'month' );
@@ -741,11 +540,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
 
 function get_info_func( slug, index_get_info_new ) {
 
-<<<<<<< HEAD:platforms/ios/www/js/index.js
-    if ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) {
-=======
     if ( ( localStorage.getItem( 'user_register_notifications' ) === 'false' ) ) {
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
         check_notifications( slug );
     }
 
@@ -1364,33 +1159,19 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
          ( localStorage.getItem( 'status_location_accuracy' ) === '0' ) ) {
         current_location.classList.add( 'd-none' );
     }
-    
-    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-        hide_background();
-        localStorage.removeItem( 'status_background' );
-    } else {
-        navigator.splashscreen.hide();
-        show_body();
-    }
+
+    navigator.splashscreen.hide();
+    show_body();
     
     if ( localStorage.getItem( 'lat' ) && 
          localStorage.getItem( 'lon' ) &&
-<<<<<<< HEAD:platforms/ios/www/js/index.js
-       ( localStorage.getItem( 'lat' ) !== 'undefined' ) &&
-       ( localStorage.getItem( 'lon' ) !== 'undefined' ) &&
-         localStorage.getItem( 'city' ) ) {
-
-        navigator.splashscreen.hide();
-        show_body();
-=======
          localStorage.getItem( 'city_name' ) &&
          localStorage.getItem( 'city_slug' ) ) {
         city_slug = localStorage.getItem( 'city_slug' );
         city_name = localStorage.getItem( 'city_name' );
->>>>>>> ekadasi-android:platforms/android/app/src/main/assets/www/js/index.js
-        
+   
         if ( localStorage.getItem( 'click_choice_city' ) === '0' )  {   
-           
+            
             if ( city && lat && lon ) add_city_undefined_database( city, state );
 
             window_change_city_func();
@@ -1413,7 +1194,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                 }, 500 );
                 
                 if ( localStorage.getItem( 'index_get_info_new' ) && 
-                     ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
+                        ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
                     index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
                     location_span.innerHTML = city_name;
                     
@@ -1430,9 +1211,9 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
             window_select_city_func();
             part_not_city( slug );
         }
-        
+   
     } else {
-        
+    
         if ( city && lat && lon ) add_city_undefined_database( city, state );
 
         window_select_city_func();
@@ -1625,13 +1406,44 @@ function get_city( lat, lon ) {
             }
 
         }
+        
+    }
 
-        if ( !city && !state ) {
-            not_city(  lat, lon, city, slug, index_get_info_new );
+}
+
+function check_notifications( slug ) {
+
+    let xml_check = new XMLHttpRequest(),
+        value_token = get_token(),
+        data_send = JSON.stringify( { 'uuid': device.uuid,
+                                      'token': value_token } ),
+        city_id = slug.id;
+                                      
+    xml_check.open( 'POST', url + 'api/devices/check' );
+    xml_check.responseType = 'json';
+    xml_check.setRequestHeader( 'Content-Type', 'application/json' );
+        
+    xml_check.onload = function() {
+        
+        let response_check = xml_check.response;
+        
+        if ( response_check.message ) {
+
+            if ( response_check.message === 'Device not found' ) {
+                register_notifications( city_id );
+            } else if ( response_check.message === 'Device found' ) {
+                device_found = true; 
+                localStorage.setItem( 'id_notifications', response_check.id );
+                localStorage.setItem( 'status_notifications', 'true' );
+                localStorage.setItem( 'user_register_notifications', 'true' );
+                register_notifications( city_id );
+            } else {
+                return;
+            }
+
+        } else {
             return;
         }
-        
-        get_city_and_info( lat, lon, city, slug );
         
     };
 
@@ -1804,71 +1616,95 @@ function on_device_ready() {
     setTimeout( () => {
 
         if ( navigator.connection.type !== 'none' ) {
+            document.body.classList.add( 'ios' );
 
-            if ( device_version >= 10 ) {
-                device_version = Array.from( device_version )[ 0 ] + Array.from( device_version )[ 1 ];
-            } else {
-                device_version = Array.from( device_version )[ 0 ];
-            }
-    
-            cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
-    
-                if ( canRequest ) {
-                    localStorage.setItem( 'status_location', '1' );
-                } else {
-                    localStorage.setItem( 'status_location', '0' );
-                }
-    
-            } );
+            cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
 
-            set_local_storage( 'user_location_accuracy', '0' );
+                StatusBar.show();
+                StatusBar.backgroundColorByHexString( '#000000' );
 
-            permissions.requestPermission( permissions.ACCESS_COARSE_LOCATION, success, error );
+                switch( status ) {
 
-            function error() {
-                location_error( slug );
-            }
+                    case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
 
-            function success( status ) {
+                        cordova.plugins.diagnostic.requestLocationAuthorization( function( status ) {
 
-                cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
+                            switch( status ) {
 
-                    if ( canRequest ) {
-
-                        localStorage.setItem( 'status_location', '1' );
-
-                        if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
-
-                            cordova.plugins.locationAccuracy.request( 
-                                
-                                function( success ) {
-                                    localStorage.setItem( 'user_location_accuracy', '1' );
-                                    localStorage.setItem( 'status_location_accuracy', '1' );
-                                    launch_calendar();
-                                }, function ( error ) {
-                                    localStorage.setItem( 'user_location_accuracy', '1' );
-                                    localStorage.setItem( 'status_location_accuracy', '0' );
+                                case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                                    
+                                    localStorage.setItem( 'status_location', '0' );
                                     location_error( slug );
-                                }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY );
 
-                        } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
+                                    break;
+                                case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
 
-                            if ( status_location_accuracy ) {
-                                launch_calendar();
-                            } else {
-                                location_error( slug );
+                                    localStorage.setItem( 'status_location', '1' );
+                                    launch_calendar();
+
+                                    break;
                             }
 
-                        }
+                        }, function( error ) {
 
-                    } else {
-                        localStorage.setItem( 'status_location', '0' );
-                        location_error( slug );
+                            localStorage.setItem( 'status_location', '0' );
+                            location_error( slug );
+
+                        } );
+
+                        break;
+
+                    case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+
+                        cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
+
+                            if ( canRequest ) {
+        
+                                cordova.plugins.locationAccuracy.request( function() {
+
+                                    if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
+                                        localStorage.setItem( 'user_location_accuracy', '0' );
+                                    } else {
+                                        localStorage.setItem( 'user_location_accuracy', '1' );
+                                    }
+
+                                    if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
+
+                                        setTimeout( () => {
+                                            localStorage.setItem( 'status_location', '0' );
+                                            location_error( slug );
+                                        }, 7000 );
+
+                                    } else if ( localStorage.getItem( 'user_location_accuracy' ) === '1' ) {
+                                        localStorage.setItem( 'status_location', '0' );
+                                        location_error( slug );
+                                    }
+
+                                }, function() {
+                                    localStorage.setItem( 'status_location', '0' );
+                                    location_error( slug );
+                                } );
+        
+                            } else {
+                                localStorage.setItem( 'status_location', '0' );
+                                location_error( slug );
+                            }
+        
+                        } );
+
+                        break;
+
+                    case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                        
+                        localStorage.setItem( 'status_location', '1' );
+                        launch_calendar();
+                        break;
                     }
 
-                } );
-
-            }
+                }, function( error ) {
+                    localStorage.setItem( 'status_location', '0' );
+                    location_error( slug );
+            } );
 
         } else {
 
@@ -1891,7 +1727,7 @@ function check_notifications( slug ) {
         value_token = get_token(),
         data_send = JSON.stringify( { 'uuid': device.uuid,
                                       'token': value_token } ),
-        city_id =  slug.id || slug;
+        city_id = slug.id;
                                       
     xml_check.open( 'POST', url + 'api/devices/check' );
     xml_check.responseType = 'json';

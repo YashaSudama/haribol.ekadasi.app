@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5DB8E70DB1A086DE90BCAE228D91DCD4 /* Pods-ЭКАДАШИ-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C8A390ACD3B0928C0999629EA1CC1E /* Pods-ЭКАДАШИ-dummy.m */; };
+		6BBCA3CA7D273CCF80DA5088636BCEAE /* Pods-Экадаши-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB215BCE5D0F5ED2E21DCFBC40B722F /* Pods-Экадаши-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		34AF3E1BB0D76A104388D01F259BE833 /* Pods-ЭКАДАШИ-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ЭКАДАШИ-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7AABE392588AAB9949AA685AF7EB6D4D /* Pods-ЭКАДАШИ */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-ЭКАДАШИ"; path = "libPods-ЭКАДАШИ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87C8A390ACD3B0928C0999629EA1CC1E /* Pods-ЭКАДАШИ-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ЭКАДАШИ-dummy.m"; sourceTree = "<group>"; };
+		24DB5412222C38DCC6960FB0E82E1A67 /* Pods-Экадаши.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Экадаши.release.xcconfig"; sourceTree = "<group>"; };
+		549934A43CB88674FD37D2C5115F9EF6 /* Pods-Экадаши-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Экадаши-acknowledgements.plist"; sourceTree = "<group>"; };
+		826399217A71CFB0AB249B47C8D4FFC3 /* Pods-Экадаши */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-Экадаши"; path = "libPods-Экадаши.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		DE2BB26339C038A71F38C02DE3563C2B /* Pods-ЭКАДАШИ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ЭКАДАШИ.debug.xcconfig"; sourceTree = "<group>"; };
-		EFD73A1A490CEBC987CD0DA6847D087B /* Pods-ЭКАДАШИ-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ЭКАДАШИ-acknowledgements.plist"; sourceTree = "<group>"; };
-		F4BACA86EC91494F429820A07B7C44E5 /* Pods-ЭКАДАШИ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ЭКАДАШИ.release.xcconfig"; sourceTree = "<group>"; };
+		D03F9A47E86A095FADDC44D028043672 /* Pods-Экадаши.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Экадаши.debug.xcconfig"; sourceTree = "<group>"; };
+		EE2725E798825A6A54D218906179D509 /* Pods-Экадаши-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Экадаши-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FCB215BCE5D0F5ED2E21DCFBC40B722F /* Pods-Экадаши-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Экадаши-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9736AFFDD677EA8E2C139A16E0F9F721 /* Frameworks */ = {
+		B245C344A28DC6F904B16ED243035F4F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -31,33 +31,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3ECE4315516A22616F30F89FB561DBB3 /* Targets Support Files */ = {
+		10C9F4698F6E715C187BF04C2358B916 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				80D085D6A96166468DA084CDAF4BBD22 /* Pods-ЭКАДАШИ */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		42E4F811E6D45CC4EEAF30BD35B4FEF3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7AABE392588AAB9949AA685AF7EB6D4D /* Pods-ЭКАДАШИ */,
+				826399217A71CFB0AB249B47C8D4FFC3 /* Pods-Экадаши */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		80D085D6A96166468DA084CDAF4BBD22 /* Pods-ЭКАДАШИ */ = {
+		1229C3500953E576ED43542EAF514F04 /* Pods-Экадаши */ = {
 			isa = PBXGroup;
 			children = (
-				34AF3E1BB0D76A104388D01F259BE833 /* Pods-ЭКАДАШИ-acknowledgements.markdown */,
-				EFD73A1A490CEBC987CD0DA6847D087B /* Pods-ЭКАДАШИ-acknowledgements.plist */,
-				87C8A390ACD3B0928C0999629EA1CC1E /* Pods-ЭКАДАШИ-dummy.m */,
-				DE2BB26339C038A71F38C02DE3563C2B /* Pods-ЭКАДАШИ.debug.xcconfig */,
-				F4BACA86EC91494F429820A07B7C44E5 /* Pods-ЭКАДАШИ.release.xcconfig */,
+				EE2725E798825A6A54D218906179D509 /* Pods-Экадаши-acknowledgements.markdown */,
+				549934A43CB88674FD37D2C5115F9EF6 /* Pods-Экадаши-acknowledgements.plist */,
+				FCB215BCE5D0F5ED2E21DCFBC40B722F /* Pods-Экадаши-dummy.m */,
+				D03F9A47E86A095FADDC44D028043672 /* Pods-Экадаши.debug.xcconfig */,
+				24DB5412222C38DCC6960FB0E82E1A67 /* Pods-Экадаши.release.xcconfig */,
 			);
-			name = "Pods-ЭКАДАШИ";
-			path = "Target Support Files/Pods-ЭКАДАШИ";
+			name = "Pods-Экадаши";
+			path = "Target Support Files/Pods-Экадаши";
+			sourceTree = "<group>";
+		};
+		B0BBBC4995BDDBAE23E3AF832929A927 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1229C3500953E576ED43542EAF514F04 /* Pods-Экадаши */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -65,8 +65,8 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
-				42E4F811E6D45CC4EEAF30BD35B4FEF3 /* Products */,
-				3ECE4315516A22616F30F89FB561DBB3 /* Targets Support Files */,
+				10C9F4698F6E715C187BF04C2358B916 /* Products */,
+				B0BBBC4995BDDBAE23E3AF832929A927 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,7 +80,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		CE4DE92A9BB20BD35D3B58B67931E254 /* Headers */ = {
+		571C45C9D1655CF5B366D95FA5EF2861 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -90,21 +90,21 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		CD57ED68EA16FF6D3445E9AD4EBD565C /* Pods-ЭКАДАШИ */ = {
+		66FF3E733A99CA846CA13F656179B04A /* Pods-Экадаши */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A345E88DAE56143560E020D555E7C53D /* Build configuration list for PBXNativeTarget "Pods-ЭКАДАШИ" */;
+			buildConfigurationList = D18477AA350E2411DF22875CBCE97E4D /* Build configuration list for PBXNativeTarget "Pods-Экадаши" */;
 			buildPhases = (
-				CE4DE92A9BB20BD35D3B58B67931E254 /* Headers */,
-				A72003ACD9FBCC0C7E6EEDE2621E252F /* Sources */,
-				9736AFFDD677EA8E2C139A16E0F9F721 /* Frameworks */,
+				571C45C9D1655CF5B366D95FA5EF2861 /* Headers */,
+				3C6F608763A99B41C406859578D436E7 /* Sources */,
+				B245C344A28DC6F904B16ED243035F4F /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-ЭКАДАШИ";
-			productName = "Pods-ЭКАДАШИ";
-			productReference = 7AABE392588AAB9949AA685AF7EB6D4D /* Pods-ЭКАДАШИ */;
+			name = "Pods-Экадаши";
+			productName = "Pods-Экадаши";
+			productReference = 826399217A71CFB0AB249B47C8D4FFC3 /* Pods-Экадаши */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -125,21 +125,21 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 42E4F811E6D45CC4EEAF30BD35B4FEF3 /* Products */;
+			productRefGroup = 10C9F4698F6E715C187BF04C2358B916 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CD57ED68EA16FF6D3445E9AD4EBD565C /* Pods-ЭКАДАШИ */,
+				66FF3E733A99CA846CA13F656179B04A /* Pods-Экадаши */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A72003ACD9FBCC0C7E6EEDE2621E252F /* Sources */ = {
+		3C6F608763A99B41C406859578D436E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DB8E70DB1A086DE90BCAE228D91DCD4 /* Pods-ЭКАДАШИ-dummy.m in Sources */,
+				6BBCA3CA7D273CCF80DA5088636BCEAE /* Pods-Экадаши-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +212,27 @@
 			};
 			name = Debug;
 		};
+		59BD66909AC44701F9BA848CCBFC9CBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D03F9A47E86A095FADDC44D028043672 /* Pods-Экадаши.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -274,9 +295,9 @@
 			};
 			name = Release;
 		};
-		67A8FD8A2274AA269541C3FE7350C2D5 /* Release */ = {
+		77676EC953FEBFE01992D8E3E95B85F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4BACA86EC91494F429820A07B7C44E5 /* Pods-ЭКАДАШИ.release.xcconfig */;
+			baseConfigurationReference = 24DB5412222C38DCC6960FB0E82E1A67 /* Pods-Экадаши.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -296,27 +317,6 @@
 			};
 			name = Release;
 		};
-		AC00C2DF41F315499E0F8E04174C1CF6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE2BB26339C038A71F38C02DE3563C2B /* Pods-ЭКАДАШИ.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -329,11 +329,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A345E88DAE56143560E020D555E7C53D /* Build configuration list for PBXNativeTarget "Pods-ЭКАДАШИ" */ = {
+		D18477AA350E2411DF22875CBCE97E4D /* Build configuration list for PBXNativeTarget "Pods-Экадаши" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AC00C2DF41F315499E0F8E04174C1CF6 /* Debug */,
-				67A8FD8A2274AA269541C3FE7350C2D5 /* Release */,
+				59BD66909AC44701F9BA848CCBFC9CBE /* Debug */,
+				77676EC953FEBFE01992D8E3E95B85F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

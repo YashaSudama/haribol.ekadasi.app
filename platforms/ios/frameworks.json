@@ -1,4 +1,9 @@
 {
+    "libc++.tbd": 1,
+    "libz.tbd": 2,
+    "AddressBook.framework": 2,
+    "libsqlite3.0.tbd": 1,
+    "Security.framework": 1,
     "CoreLocation.framework": 3,
     "WebKit.framework": 1,
     "SystemConfiguration.framework": 1,
@@ -9,11 +14,6 @@
     "AVFoundation.framework": 2,
     "UserNotifications.framework": 1,
     "Contacts.framework": 1,
-    "AddressBook.framework": 2,
     "EventKit.framework": 2,
-    "CoreMotion.framework": 1,
-    "libc++.tbd": 1,
-    "libz.tbd": 2,
-    "libsqlite3.0.tbd": 1,
-    "Security.framework": 1
+    "CoreMotion.framework": 1
 }
