@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-add-swift-support": {
-      "PACKAGE_NAME": "haribol.ekadasi.app"
-    },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
