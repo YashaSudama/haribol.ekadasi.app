@@ -1,6 +1,7 @@
 "use strict";
 
 import { content_description } from "./content_description.js";
+
 remove_local_storage( 'index_get_info' );
 remove_local_storage( 'main' );
 remove_local_storage( 'city' );
@@ -46,6 +47,7 @@ if ( ( window.location.pathname === '/' ) ||
 }
 
 block_nav.append( div_ul_nav );
+document.body.classList.add( 'ios' );
 
 if ( !localStorage.getItem( 'setting_notifications' ) ) { 
     let setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );

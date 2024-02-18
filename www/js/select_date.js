@@ -94,6 +94,62 @@ document.addEventListener( 'deviceready', () => {
 
 		}
 
+		setTimeout( () => {
+
+			height_header = header_top.offsetHeight;
+			height_hint_description = hint_description.offsetHeight;
+			year_screen.style.top = height_header + 'px';
+		
+			function init_elem( height ) {
+		
+				if ( ( ( height - height_header - footer_id.offsetHeight ) + 20 ) > height_hint_description ) {
+					hint_description_top = height_header + ( ( ( height - height_header - footer_id.offsetHeight ) / 2 ) - ( height_hint_description / 2  ) );
+				} else {
+					hint_description_top = height_header + 20;
+				}
+				
+				div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
+												  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
+			}
+			
+			init_elem( window_height );
+		
+			if ( !localStorage.getItem( 'status_hint_description' ) ) {
+				localStorage.setItem( 'status_hint_description', 'show' );
+				wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
+				hint_description.style.top = hint_description_top + 'px';
+			} else if ( localStorage.getItem( 'status_hint_description' ) === 'show' ) {
+				wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
+				hint_description.style.top = hint_description_top + 'px';
+			} 
+		
+			window.addEventListener( 'resize', () => {
+				let resize_window_height = window.innerHeight;
+				
+				height_hint_description = hint_description.offsetHeight;
+		
+				init_elem( resize_window_height );
+		
+				hint_description.style.top = hint_description_top + 'px';
+		
+				if ( top_elem ) {
+					let offset;
+		
+					if ( top_elem.tagName === 'UL' ) {
+						offset = 15;
+					} else {
+						offset = -10;
+					}
+		
+					window.scrollTo( 0, ( window.scrollY + 
+						top_elem.getBoundingClientRect().y ) -
+						height_header + offset );
+				}
+		
+			} );
+		  
+		}, 0 );
+
 	} else {
  
 		content_not_connection( calendar, 
@@ -106,70 +162,6 @@ document.addEventListener( 'deviceready', () => {
 	}
 	
 }, false );
-
-setTimeout( () => {
-
-	height_header = header_top.offsetHeight;
-	height_hint_description = hint_description.offsetHeight;
-	year_screen.style.top = height_header + 'px';
-
-	function init_elem( height ) {
-
-		if ( ( ( height - height_header - footer_id.offsetHeight ) + 20 ) > height_hint_description ) {
-			hint_description_top = height_header + ( ( ( height - height_header - footer_id.offsetHeight ) / 2 ) - ( height_hint_description / 2  ) );
-		} else {
-			hint_description_top = height_header + 20;
-		}
-		
-		div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
-										  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
-	}
-	
-	init_elem( window_height );
-	
-	if ( navigator.connection.type !== 'none' ) {
-
-		if ( !localStorage.getItem( 'status_hint_description' ) ) {
-			localStorage.setItem( 'status_hint_description', 'show' );
-			wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
-			hint_description.style.top = hint_description_top + 'px';
-		} else {
-		
-		if ( localStorage.getItem( 'status_hint_description' ) === 'show' ) {
-			wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
-			hint_description.style.top = hint_description_top + 'px';
-		} 
-		
-		}
-
-	}
-
-	window.addEventListener( 'resize', () => {
-		let resize_window_height = window.innerHeight;
-		
-		height_hint_description = hint_description.offsetHeight;
-
-		init_elem( resize_window_height );
-
-		hint_description.style.top = hint_description_top + 'px';
-
-		if ( top_elem ) {
-			let offset;
-
-			if ( top_elem.tagName === 'UL' ) {
-				offset = 15;
-			} else {
-				offset = -10;
-			}
-
-			window.scrollTo( 0, ( window.pageYOffset + 
-				top_elem.getBoundingClientRect().y ) -
-				height_header + offset );
-		}
-
-	} );
-  
-}, 0 );
 
 height_footer_func();
 
@@ -338,12 +330,10 @@ function inner_get_info( select_get_info ) {
 		}
 
     	if ( i === 1 ) {
-    		window.scrollTo( 0, 0 );
-    		window.scrollTo( 0, calendar_ul[ now_month ].getBoundingClientRect().y 
-    						 - height_header - height_select_date + 5 );
-    	}
-
-    	if ( i === 2 ) {
+    		window.scrollTo( { top: calendar_ul[ now_month ].getBoundingClientRect().y - height_header + 5,
+							   left: 0,
+							   behavior: 'smooth'
+						     } );
 			navigator.splashscreen.hide();
 			show_body();
     	}

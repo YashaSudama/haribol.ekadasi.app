@@ -1299,8 +1299,9 @@ function get_city( lat, lon ) {
     let xml_location = new XMLHttpRequest(),
         url = 'https://api.opencagedata.com/geocode/v1/json?q=' + lat + ',' + lon + 
               '&no_annotations=1&language=en&limit=1&key=' + key;
-        xml_location.open( 'GET', url );
-        xml_location.responseType = 'json';
+
+    xml_location.open( 'GET', url );
+    xml_location.responseType = 'json';
 
     not_connection( xml_location, 
                     main, 
@@ -1406,46 +1407,15 @@ function get_city( lat, lon ) {
             }
 
         }
-        
-    }
 
-}
-
-function check_notifications( slug ) {
-
-    let xml_check = new XMLHttpRequest(),
-        value_token = get_token(),
-        data_send = JSON.stringify( { 'uuid': device.uuid,
-                                      'token': value_token } ),
-        city_id = slug.id;
-                                      
-    xml_check.open( 'POST', url + 'api/devices/check' );
-    xml_check.responseType = 'json';
-    xml_check.setRequestHeader( 'Content-Type', 'application/json' );
-        
-    xml_check.onload = function() {
-        
-        let response_check = xml_check.response;
-        
-        if ( response_check.message ) {
-
-            if ( response_check.message === 'Device not found' ) {
-                register_notifications( city_id );
-            } else if ( response_check.message === 'Device found' ) {
-                device_found = true; 
-                localStorage.setItem( 'id_notifications', response_check.id );
-                localStorage.setItem( 'status_notifications', 'true' );
-                localStorage.setItem( 'user_register_notifications', 'true' );
-                register_notifications( city_id );
-            } else {
-                return;
-            }
-
-        } else {
+        if ( !city && !state ) {
+            not_city( lat, lon, city, slug, index_get_info_new );
             return;
         }
+
+        get_city_and_info( lat, lon, city, slug );
         
-    };
+    }
 
     xml_location.send();
 
@@ -1455,9 +1425,9 @@ function get_city_and_info( lat, lon, city, slug ) {
     let xml_city = new XMLHttpRequest(),
         get_city_array;
 
-        xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
-        xml_city.responseType = 'json';
-        xml_city.setRequestHeader( 'Content-Type', 'application/json' );
+    xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
+    xml_city.responseType = 'json';
+    xml_city.setRequestHeader( 'Content-Type', 'application/json' );
 
     not_connection( xml_city, 
                     main, 
@@ -1506,6 +1476,46 @@ function get_city_and_info( lat, lon, city, slug ) {
     xml_city.send();
 
 } // get_cityes_and_info - end 
+
+function check_notifications( slug ) {
+
+    let xml_check = new XMLHttpRequest(),
+        value_token = get_token(),
+        data_send = JSON.stringify( { 'uuid': device.uuid,
+                                      'token': value_token } ),
+        city_id = slug.id;
+                                      
+    xml_check.open( 'POST', url + 'api/devices/check' );
+    xml_check.responseType = 'json';
+    xml_check.setRequestHeader( 'Content-Type', 'application/json' );
+        
+    xml_check.onload = function() {
+        
+        let response_check = xml_check.response;
+        
+        if ( response_check.message ) {
+
+            if ( response_check.message === 'Device not found' ) {
+                register_notifications( city_id );
+            } else if ( response_check.message === 'Device found' ) {
+                device_found = true; 
+                localStorage.setItem( 'id_notifications', response_check.id );
+                localStorage.setItem( 'status_notifications', 'true' );
+                localStorage.setItem( 'user_register_notifications', 'true' );
+                register_notifications( city_id );
+            } else {
+                return;
+            }
+
+        } else {
+            return;
+        }
+        
+    };
+
+    xml_location.send();
+
+}
 
 function on_success( position, city_name, index_get_info_new ) {
 
@@ -1578,9 +1588,7 @@ function on_device_ready() {
 
     cordova.plugins.diagnostic.enableDebug();
 
-    let permissions = cordova.plugins.permissions,
-        status_location_accuracy,
-        device_version = device.version;
+    let status_location_accuracy;
 
     cordova.plugins.diagnostic.isLocationEnabled( function( enabled ) { // получение состояния определения точности местоположения
         status_location_accuracy = enabled;
@@ -1616,7 +1624,6 @@ function on_device_ready() {
     setTimeout( () => {
 
         if ( navigator.connection.type !== 'none' ) {
-            document.body.classList.add( 'ios' );
 
             cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
 
