@@ -330,7 +330,9 @@ function inner_get_info( select_get_info ) {
 		}
 
     	if ( i === 1 ) {
-    		window.scrollTo( { top: calendar_ul[ now_month ].getBoundingClientRect().y - height_header + 5,
+			let coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y - height_header + 5;
+			console.log( coord_scroll );
+    		window.scrollTo( { top: coord_scroll,
 							   left: 0,
 							   behavior: 'smooth'
 						     } );
