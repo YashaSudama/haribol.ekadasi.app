@@ -1398,7 +1398,7 @@ function get_city( lat, lon ) {
         }
 
         if ( !city && !state ) {
-            not_city(  lat, lon, city, slug, index_get_info_new );
+            not_city( lat, lon, city, slug, index_get_info_new );
             return;
         }
         
@@ -1414,9 +1414,9 @@ function get_city_and_info( lat, lon, city, slug ) {
     let xml_city = new XMLHttpRequest(),
         get_city_array;
 
-        xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
-        xml_city.responseType = 'json';
-        xml_city.setRequestHeader( 'Content-Type', 'application/json' );
+    xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
+    xml_city.responseType = 'json';
+    xml_city.setRequestHeader( 'Content-Type', 'application/json' );
 
     not_connection( xml_city, 
                     main, 

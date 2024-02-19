@@ -339,15 +339,16 @@ function inner_get_info( select_get_info ) {
 		}
 
     	if ( i === 1 ) {
-    		window.scrollTo( 0, 0 );
-    		window.scrollTo( 0, calendar_ul[ now_month ].getBoundingClientRect().y 
-    						 - height_header + 5 );
+			let coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y - height_header + 5;
+    		window.scrollTo( { left: 0, 
+							   top: coord_scroll,
+							   behavior: 'smooth' } );
 							 
 			setTimeout( () => {
 				hide_background();
 				show_body();
 				localStorage.removeItem( 'status_background' );
-			}, 0 );
+			}, 500 );
 
     	}
 
@@ -509,9 +510,6 @@ function get_van_year_info( slug,
 
 		if ( calendar_van_year ) {
 			calendar_van_year_ul = calendar_van_year.getElementsByTagName( 'ul' );
-			calendar.style.cssText = '';
-			min_preloader.style.cssText = '';
-			min_preloader.remove();
 			print_year( calendar_van_year_ul, get_year );
 		}
 
@@ -523,9 +521,13 @@ function get_van_year_info( slug,
 
 		}
 
-		if ( select_year || top_scroll ) {
+		setTimeout( () => {
+			calendar.style.cssText = '';
+			min_preloader.style.cssText = '';
+			min_preloader.remove();
+		}, 500 );
 
-    		window.scrollTo( { left: 0, top: 15, behavior: 'smooth' } );
+		if ( select_year || top_scroll ) {
 
 			if ( select_year ) {
 				select_year = false;
@@ -533,12 +535,20 @@ function get_van_year_info( slug,
 			} else if ( top_scroll ) {
 				top_scroll = false;
 			}
+
+			setTimeout( () => {
+				window.scrollTo( { left: 0, top: 15, behavior: 'smooth' } );
+			}, 500 );
 			
 		} else if ( bottom_scroll ) {
-			let coord = year[ year.length - 1 ].getBoundingClientRect().y - height_header - 5;
-			window.scrollBy( { left: 0, top: coord, behavior: 'smooth' } );
 			bottom_scroll = false;
 			not_scroll = true;
+
+			setTimeout( () => {
+				let coord = year[ year.length - 1 ].getBoundingClientRect().y - height_header - 5;
+				window.scrollBy( { left: 0, top: coord, behavior: 'smooth' } );
+			}, 500 );
+			
 		}
 
 		setTimeout( () => document.body.style.overflow = 'auto', 1000 );
@@ -656,7 +666,7 @@ function get_info_scroll() {
 											document.documentElement.clientHeight
 											);
 				document.body.style.overflow = 'auto';
-				window.scrollTo( 0, document_height );
+				window.scrollTo( { left: 0, top: document_height, behavior: 'smooth' } );
 				document.body.style.overflow = 'hidden';
 				
 				 get_city( get_van_year_info, slug );

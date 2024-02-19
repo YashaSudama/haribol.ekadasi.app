@@ -176,6 +176,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     }
   ];
   module.exports.metadata = {
+    "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-android-permissions": "1.1.5",
     "cordova-plugin-device": "2.1.0",
     "cordova-plugin-geolocation": "4.1.0",
