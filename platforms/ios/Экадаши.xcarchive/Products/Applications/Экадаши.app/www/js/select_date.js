@@ -95,7 +95,6 @@ document.addEventListener( 'deviceready', () => {
 		}
 
 		setTimeout( () => {
-
 			height_header = header_top.offsetHeight;
 			height_hint_description = hint_description.offsetHeight;
 			year_screen.style.top = height_header + 'px';
@@ -330,14 +329,18 @@ function inner_get_info( select_get_info ) {
 		}
 
     	if ( i === 1 ) {
+			height_header = header_top.offsetHeight;
 			let coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y - height_header + 5;
-			console.log( coord_scroll );
     		window.scrollTo( { top: coord_scroll,
 							   left: 0,
 							   behavior: 'smooth'
 						     } );
-			navigator.splashscreen.hide();
-			show_body();
+
+			setTimeout( () => {
+				navigator.splashscreen.hide();
+				show_body();
+			}, 250 );
+			
     	}
 
     }
@@ -498,9 +501,6 @@ function get_van_year_info( slug,
 
 		if ( calendar_van_year ) {
 			calendar_van_year_ul = calendar_van_year.getElementsByTagName( 'ul' );
-			calendar.style.cssText = '';
-			min_preloader.style.cssText = '';
-			min_preloader.remove();
 			print_year( calendar_van_year_ul, get_year );
 		}
 
@@ -512,23 +512,39 @@ function get_van_year_info( slug,
 
 		}
 
+		setTimeout( () => {
+			calendar.style.cssText = '';
+			min_preloader.style.cssText = '';
+			min_preloader.remove();
+		}, 500 );
+	  
 		if ( select_year || top_scroll ) {
-
-    		window.scrollTo( { left: 0, top: 15, behavior: 'smooth' } );
-
+	  
 			if ( select_year ) {
-				select_year = false;
-				not_scroll = true;
+			  	select_year = false;
+			  	not_scroll = true;
 			} else if ( top_scroll ) {
-				top_scroll = false;
+			  	top_scroll = false;
 			}
+	  
+			setTimeout( () => {
+			  	window.scrollTo( { left: 0, top: 15, behavior: 'smooth' } );
+			}, 500 );
 			
 		} else if ( bottom_scroll ) {
-			let coord = year[ year.length - 1 ].getBoundingClientRect().y - height_header - 5;
-			window.scrollBy( { left: 0, top: coord, behavior: 'smooth' } );
-			bottom_scroll = false;
-			not_scroll = true;
-		}
+	  
+			setTimeout( () => {
+			  	let coord = year[ year.length - 1 ].getBoundingClientRect().y - height_header - 5;
+			  	window.scrollBy( { left: 0, top: coord, behavior: 'smooth' } );
+
+				setTimeout ( () => {
+					bottom_scroll = false;
+					not_scroll = true;
+				}, 1000 );
+
+			}, 500 );
+			
+		  }
 
 		setTimeout( () => document.body.style.overflow = 'auto', 1000 );
 		remove_too_events();
@@ -588,9 +604,9 @@ function get_info_scroll() {
 						document.documentElement.clientHeight
 					);
 
-		if ( ( ( window.pageYOffset + scroll_window_height ) === document_height ) || 
-			 ( ( Math.ceil( window.pageYOffset + scroll_window_height ) ) === document_height ) ||
-			 ( ( Math.floor( window.pageYOffset + scroll_window_height ) ) === document_height ) ) {
+		if ( ( ( window.scrollY + scroll_window_height ) === document_height ) || 
+			 ( ( Math.ceil( window.scrollY + scroll_window_height ) ) === document_height ) ||
+			 ( ( Math.floor( window.scrollY + scroll_window_height ) ) === document_height ) ) {
 
 			if ( year.length !== 0 ) {
 
@@ -652,7 +668,7 @@ function get_info_scroll() {
 
 			}, 500 );
 
-		} else if ( window.pageYOffset === 0 ) {
+		} else if ( window.scrollY === 0 ) {
 			year_input = year[ 0 ].textContent - 1;
 
 			if ( year_input < min_year ) {
@@ -716,7 +732,7 @@ function get_top_elem() {
 }
 
 function get_info_scroll_event() {
-	window.addEventListener( 'scroll', get_info_scroll );
+	//window.addEventListener( 'scroll', get_info_scroll );
 	window.addEventListener( 'scroll', get_top_elem );
 }
 
@@ -941,7 +957,7 @@ plus.onclick = function( event_year,
 			offset = -10;
 		}
 
-		window.scrollTo( 0, ( window.pageYOffset + 
+		window.scrollTo( 0, ( window.scrollY + 
 							  zoom_plus_elem.getBoundingClientRect().y ) -
 							  height_header + offset );
 		calendar.style.cssText = '';
@@ -1042,15 +1058,15 @@ minus.onclick = function( event_year,
 		}
 
 		if ( ( document_height - scroll_window_height ) > 
-			 ( ( window.pageYOffset + zoom_minus_elem.getBoundingClientRect().y ) -
+			 ( ( window.scrollY + zoom_minus_elem.getBoundingClientRect().y ) -
 			   ( height_header ) ) ) {
 
-			window.scrollTo( 0, ( window.pageYOffset + zoom_minus_elem.getBoundingClientRect().y ) -
+			window.scrollTo( 0, ( window.scrollY + zoom_minus_elem.getBoundingClientRect().y ) -
 								( height_header + offset ) );
 			calendar.style.cssText = '';
 
 		} else if ( ( document_height - scroll_window_height ) <= 
-					( window.pageYOffset + zoom_minus_elem.getBoundingClientRect().y -
+					( window.screenY + zoom_minus_elem.getBoundingClientRect().y -
 					  height_header ) ) {
 
 			window.scrollTo( 0, document_height - scroll_window_height - 60 );

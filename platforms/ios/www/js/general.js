@@ -41,8 +41,8 @@ let content_preloader = '<div class="sk-fading-circle">' +
                         '</ul>';
 
 if ( ( window.location.pathname === '/' ) || 
-        ( window.location.pathname === '/index.html' ) || 
-        ( window.location.pathname === '/select_date.html' ) ) { 
+     ( window.location.pathname === '/index.html' ) || 
+     ( window.location.pathname === '/select_date.html' ) ) { 
     document.body.prepend( div_description );
 }
 
