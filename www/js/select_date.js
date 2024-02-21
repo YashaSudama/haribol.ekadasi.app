@@ -249,12 +249,16 @@ for ( let item of div_calendar ) {
 	count_year++;
 }
 
-function display_data( get_month, numb_ul, value, calendar ) { // value - свойство ( ключ ) объекта, дата события
+function display_data( get_month, numb_ul, value, calendar, year ) { // value - свойство ( ключ ) объекта, дата события
 
 	let calendar_ul_li = calendar[ numb_ul ].getElementsByTagName( 'li' ),
 		class_li,
 		id_li,
 		value_key = get_month[ value ]; // value_key - значение свойства ( ключа ), тип события
+
+	if ( calendar_ul_li.length === 0 ) {
+		print_year( calendar, year );
+	}
 
 	if ( typeof ( value_key ) === 'object' ) {
 		class_li = 'ekadashi';
@@ -325,7 +329,7 @@ function inner_get_info( select_get_info ) {
 		for ( let i = 0; i < array_obj.length; i++ ) {
 
 			for ( let value in array_obj[ i ] ) {
-				display_data( array_obj[ i ], i, value, calendar_ul );
+				display_data( array_obj[ i ], i, value, calendar_ul, +get_year );
 			}
 
 		}
@@ -483,6 +487,7 @@ function get_van_year_info( slug,
 			if ( !height_footer.closest( '#calendar' ) ) {
 				let calendar_local = document.getElementById( 'calendar' ),
 					height_footer_local = calendar_local.querySelector( '#height_footer' );
+
 				height_footer_local.insertAdjacentHTML( 'beforebegin', year_content );
 			} else {
 				height_footer.insertAdjacentHTML( 'beforebegin', year_content );
@@ -509,7 +514,7 @@ function get_van_year_info( slug,
 		for ( let i = 0; i < array_obj.length; i++ ) {
 
 			for ( let value in array_obj[ i ] ) {
-				display_data( array_obj[ i ], i, value, calendar_van_year_ul );
+				display_data( array_obj[ i ], i, value, calendar_van_year_ul, get_year );
 			}
 
 		}

@@ -772,16 +772,16 @@ header {
 #select_city_notif,
 #update_notif,
 #update_storage,
-#review,
-#donation {
+#review a,
+#donation a {
 	border: 0;
 	padding: 10px 0; 
 	font-size: 15px;
 } 
 #update_notif,
 #update_storage,
-#review,
-#donation {
+#review a,
+#donation a {
   	min-width: 200px;
 } 
 #update_storage,
@@ -807,7 +807,9 @@ header {
   	background-color: #3442668c;
 }
 #update_notif {
-  	max-height: 40px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 .null_info button {
 	border: 0;
@@ -1163,7 +1165,7 @@ header {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate( -50%, -51% );
+	transform: translate( -50%, -55% );
     padding: 11.5px;
 	border-radius: 50%;
 	z-index: -1;
@@ -1243,7 +1245,7 @@ header {
 .zoom_calendar .rozhdestvo::after {
 	top: 50%;
 	left: 50%;
-	transform: translate( -50%, -41% );
+	transform: translate( -50%, -43% );
     padding: 22px;
 }
 .too_events::after {
