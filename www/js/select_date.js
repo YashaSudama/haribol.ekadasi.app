@@ -29,7 +29,8 @@ import { now_date_number,
 		 add_sp_array,
 		 add_isus_array,
          set_local_storage,
-         remove_too_events
+         remove_too_events,
+         resume_event
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
@@ -79,6 +80,7 @@ set_local_storage( 'not_scroll', 'false' );
 set_local_storage( 'now_year_select_date', now_year );
 
 document.addEventListener( 'deviceready', () => { 
+	resume_event();
 
 	if ( navigator.connection.type !== 'none' ) {
 
@@ -945,7 +947,7 @@ plus.onclick = function( event_year,
 
 	setTimeout( () => { 
 		calendar.classList.add( 'zoom_calendar' );
-		window.removeEventListener( 'scroll', get_info_scroll );
+		// window.removeEventListener( 'scroll', get_info_scroll );
 	}, 400 );
 
 	setTimeout( function() { 
@@ -1012,9 +1014,9 @@ plus.onclick = function( event_year,
 			}
 		} 
 
-		setTimeout( () => {
-			window.addEventListener( 'scroll', get_info_scroll );
-		}, 500 );
+		// setTimeout( () => {
+		// 	window.addEventListener( 'scroll', get_info_scroll );
+		// }, 500 );
 
 	}, 1000 );
 
@@ -1034,7 +1036,7 @@ minus.onclick = function( event_year,
 
 	setTimeout( () => { 
 		calendar.classList.remove( 'zoom_calendar' );
-		window.removeEventListener( 'scroll', get_info_scroll );
+		// window.removeEventListener( 'scroll', get_info_scroll );
 		window.scrollTo( 0, 0 );
 	}, 400 );
 
@@ -1105,9 +1107,9 @@ minus.onclick = function( event_year,
 			}
 		} 
 
-		setTimeout( () => {
-			window.addEventListener( 'scroll', get_info_scroll );
-		}, 500 )
+		// setTimeout( () => {
+		// 	window.addEventListener( 'scroll', get_info_scroll );
+		// }, 500 )
 
 	}, 1000 );
 

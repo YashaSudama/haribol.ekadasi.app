@@ -1,7 +1,7 @@
 {
   "name": "haribol.ekadasi.app",
-  "displayName": "ЭКАДАШИ",
-  "version": "1.0.0",
+  "displayName": "Экадаши",
+  "version": "1.0.5",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
   "scripts": {

@@ -36,12 +36,13 @@ import { window_width,
          set_local_storage,
          set_update_local_storage,
          remove_local_storage,
-         reading_locale_storage
+         resume_event
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
 
     on_device_ready();
+    resume_event();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||
             localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
@@ -406,7 +407,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                             country_dst !== 'Индия'          || 
                             country_dst !== 'Япония'         || 
                             country_dst !== 'Китай'          || 
-                            country_dst !== 'Киргизия') {
+                            country_dst !== 'Киргизия' ) {
                             
                             if ( value_key.light_time === 'DST' ) {
                                 let value_1 = ( value_key.exit_time ).slice( 2, 8 ),
@@ -1276,7 +1277,7 @@ function location_error( slug ) {
 
     } else {
 
-        if ( localStorage.getItem( 'status_location_accuracy' ) === '1' ) {
+        if ( localStorage.getItem( 'status_location' ) === '1' ) {
 
             message_location_error.innerHTML =  '<div class="width-fit m-auto">' +
                                                     '<span class="d-block text-center">' +

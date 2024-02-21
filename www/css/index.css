@@ -15,7 +15,6 @@ body {
 	margin: 0;
 	font-size: 16px;
 	line-height: 1.6;
-	letter-spacing: 0.4px;
 	opacity: 0;
 }
 
@@ -601,7 +600,7 @@ header {
 .event_info {
 	width: 220px;
 	margin: auto;
-	transform: translateX( -20px );
+	transform: translateX( -25px );
 }
 .name_event {
   	font-size: 14px;
@@ -612,24 +611,11 @@ header {
 .exit {
   	font-size: 12px;
 }
-.exit_date span {
-	/* padding: 2px 3px;
-	border-radius: 50%; */
-}
 .exit_time {
   	word-spacing: -2px;
 }
 .day_info span {
   	display: block;
-}
-.ios .event_info {
-	width: 210px;
-	transform: translateX(-41px);
-}
-.ios .event_info span,
-.ios .day_full span,
-.policy h4 {
-  letter-spacing: -0.4px;
 }
 .day_info span:first-child {
   	font-size: 12px;
@@ -664,7 +650,7 @@ header {
 	width: 75%;
 }
 #not_connection {
-	top: 40%;
+	top: 45%;
 	transform: translateY(-50%);
 	line-height: 1.4;
 }

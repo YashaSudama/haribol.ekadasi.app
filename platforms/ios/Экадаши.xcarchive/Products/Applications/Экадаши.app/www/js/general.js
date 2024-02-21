@@ -47,7 +47,6 @@ if ( ( window.location.pathname === '/' ) ||
 }
 
 block_nav.append( div_ul_nav );
-document.body.classList.add( 'ios' );
 
 if ( !localStorage.getItem( 'setting_notifications' ) ) { 
     let setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
@@ -341,15 +340,19 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
 
     };
 
-document.addEventListener( 'resume', () => {
-    let now_date_resume = new Date(),
-        now_date_number_resume = now_date_resume.getDate();
+function resume_event() {
 
-    if ( now_date_number_resume !== now_date_number ) {
-        window.location.reload();
-    }
+    document.addEventListener( 'resume', () => {
+        let now_date_resume = new Date(),
+            now_date_number_resume = now_date_resume.getDate();
 
-} );
+        if ( now_date_number_resume !== now_date_number ) {
+            window.location.reload();
+        }
+
+    } );
+
+}
 	
 min_preloader.id = 'min_preloader';
 min_preloader.innerHTML = content_preloader;
@@ -463,7 +466,7 @@ function content_not_data( main,
 
     navigator.splashscreen.hide();
     show_body();
-
+    
     if ( ( window.location.pathname === '/' ) || 
          ( window.location.pathname === '/index.html' )  ) {
         window_select_city.style.cssText = '';
@@ -1405,7 +1408,8 @@ export { window_width,
          set_local_storage,
          set_update_local_storage,
          remove_local_storage,
-         remove_too_events };
+         remove_too_events,
+         resume_event };
 
 // По луне
 // -------

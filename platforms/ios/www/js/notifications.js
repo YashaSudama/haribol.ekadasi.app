@@ -12,7 +12,7 @@ import { height_footer_func,
          clear,
          content_not_connection,
          text_not_internet,
-         reading_locale_storage
+         resume_event
 } from "./general.js";
 
 let main_notifications = document.getElementById( 'main_notifications' );
@@ -177,8 +177,8 @@ function work_settings_notifications() {
                 check_exit_page.style.cssText = 'opacity: 1; z-index: 7';
     
                 ok_transition.onclick = function() {
+                    navigator.splashscreen.show();
                     hide_body();
-                    localStorage.setItem( 'status_background', 'yes' );
                     check_exit_page.style.cssText = '';
                     window.location.href = 'index.html';
                 }
@@ -188,10 +188,12 @@ function work_settings_notifications() {
                 }
     
             } else {
+                navigator.splashscreen.show();
                 hide_body();
             }
     
         }
+
         update_storage.onclick = function() {
             clear();
             hide_body();
@@ -216,7 +218,8 @@ function work_settings_notifications() {
 }
 
 document.addEventListener( "deviceready", () => {
-
+    resume_event();
+    
     if ( navigator.connection.type !== 'none' ) {
         work_settings_notifications();
     } else {
