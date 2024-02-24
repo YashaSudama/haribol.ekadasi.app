@@ -1074,8 +1074,9 @@ header {
 	font-size: 26px;
 }
 #list_all_years i {
-	top: 15px;
-	right: 15px; 
+	top: 20px;
+	right: 20px; 
+	font-size: 38px;
 }
 #list_all_years span {
   	width: 100px;
