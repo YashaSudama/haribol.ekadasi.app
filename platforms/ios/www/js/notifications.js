@@ -12,10 +12,14 @@ import { height_footer_func,
          clear,
          content_not_connection,
          text_not_internet,
-         resume_event
+         resume_event,
+         header_top
 } from "./general.js";
 
-let main_notifications = document.getElementById( 'main_notifications' );
+let main_notifications = document.getElementById( 'main_notifications' ),
+    height_header = header_top.clientHeight;
+
+main_notifications.style.marginTop = height_header + 'px';
 
 function work_settings_notifications() {
     
@@ -30,8 +34,8 @@ function work_settings_notifications() {
         remain = document.getElementById( 'remain' ),
         update_storage = document.getElementById( 'update_storage' ),
         hr_hide = main_notifications.getElementsByClassName( 'hr-hide' ),
-        status_notifications_let; 
-
+        status_notifications_let;
+        
 	min_preloader.style = 'margin: 20px 0 0';
     form.time.value = info_notifications.time;
 
@@ -59,14 +63,14 @@ function work_settings_notifications() {
     if ( localStorage.getItem( 'city_name' ) ) {
 
         form.onsubmit = function( event ) {
-            let error_update = document.getElementById( 'error_update' );
-    
-            if ( error_update ) error_update.remove();
-            
+            let not_data_server = document.getElementById( 'not_data_server' );
             event.preventDefault();
             button_update_notif.setAttribute( 'disabled', 'true' );
-            button_update_notif.after( min_preloader );
-            min_preloader.children[0].style = 'width: 25px; height: 25px;';
+
+            if ( !not_data_server ) {
+                button_update_notif.after( min_preloader );
+                min_preloader.children[ 0 ].style = 'width: 25px; height: 25px;';
+            }
     
             if ( info_notifications.status === form.status_notifications.dataset.status &&
                 info_notifications.day === Number( form.get_notifications.value ) &&
@@ -196,6 +200,7 @@ function work_settings_notifications() {
 
         update_storage.onclick = function() {
             clear();
+            navigator.splashscreen.show();
             hide_body();
             window.location.href = 'index.html';
         }
@@ -203,7 +208,7 @@ function work_settings_notifications() {
     } else {
         main_notifications.innerHTML = '<div class="text-center">' +
                                             '<h3 class="l-height-1-25 m-b-30">Ваше местоположение не определено</h3>' +  
-                                            '<button id="select_city_notif" class="bold">' +
+                                            '<button id="select_city_notif">' +
                                                 'Выбор города'+
                                             '</button>' +  
                                        '</div>'
@@ -211,7 +216,12 @@ function work_settings_notifications() {
         let select_city_notif = document.getElementById( 'select_city_notif' );
 
         select_city_notif.onclick = function() {
-            location.href = 'index.html'
+
+            if ( localStorage.getItem( 'click_choice_city' ) === '0' ) localStorage.setItem( 'click_choice_city', '1' );
+
+            navigator.splashscreen.show();
+            hide_body();
+            window.location.href = 'index.html'
         }
     }
 

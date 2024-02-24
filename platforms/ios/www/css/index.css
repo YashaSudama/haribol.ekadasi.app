@@ -50,6 +50,7 @@ body,
 .link_policy,
 #choice_full_list,
 #footer .fa-home,
+#ul_nav .fa-home,
 .close_events,
 .too_events,
 #update_notif,
@@ -234,7 +235,8 @@ input:focus {
 input,
 button,
 #current_location,
-#div_search_city {
+#div_search_city,
+#not_data_server {
   	border-radius: 10px;
 }
 .pos-rel {
@@ -325,7 +327,7 @@ button,
   	padding-bottom: 5px;
 }
 .normal {
-  	font-weight: normal;
+  	font-weight: normal !important;
 }
 .bold {
   	font-weight: bold;
@@ -365,7 +367,6 @@ button,
 }
 
 body,
-main,
 #window_select_city, 
 #window_change_city,
 #list_cityes,
@@ -377,7 +378,11 @@ main,
 #time_notifications,
 .hr-hide,
 #background,
-#wrapper_hint_description  {
+#wrapper_hint_description,
+#today,
+#not_data_server,
+#not_connection,
+.new-calendar {
   transition: opacity .4s linear;
 }
 #current_date {
@@ -413,7 +418,7 @@ main,
   	margin: 20px;
 }
 #min_preloader.search_preloader { 
-  	margin: 15px 15px -15px;
+  	margin: 15px 15px -5px;
 }
 #min_preloader .sk-fading-circle {
 	width: 40px;
@@ -539,8 +544,9 @@ main,
 /* min-reloader end */
 
 header {
-	position: sticky;
 	top: 0;
+	left: 0;
+	right: 0;
 	z-index: 3;
 }
 .before_top {
@@ -549,7 +555,7 @@ header {
 }
 #top {
 	background: url( '../img/Gopala-banner.jpg' ) 90% 100% / cover no-repeat;
-	padding: 10px 15px;
+	padding: 23px 15px;
 	box-sizing: border-box;
 	}
 #location {
@@ -561,6 +567,10 @@ header {
 }
 #main_notifications form {
   	padding-bottom: 15px;
+}
+#main_notifications #not_data_server {
+	width: 250px;
+	padding-top: 15px;
 }
 .info_year li[class*='value'] {
 	border-bottom: 1px solid #ededed;
@@ -653,6 +663,7 @@ header {
 	top: 45%;
 	transform: translateY(-50%);
 	line-height: 1.4;
+	opacity: 0;
 }
 #not_connection button,
 #clear_local_storage {
@@ -774,9 +785,17 @@ header {
 #update_storage,
 #review a,
 #donation a {
-	border: 0;
 	padding: 10px 0; 
 	font-size: 15px;
+} 
+#current_location,
+.null_info button,
+#select_city_notif,
+#update_notif,
+#update_storage,
+#review,
+#donation {
+	border: 0;
 } 
 #update_notif,
 #update_storage,
@@ -846,6 +865,8 @@ header {
 }
 #choice_full_list {
 	width: 100%;
+	height: 100%;
+	font-size: inherit;
 	border: none;
 	font-weight: bold;
 	padding: 7px;
@@ -889,10 +910,13 @@ header {
 	opacity: 0;
 	z-index: -1;
 }
-#ul_nav i {
+#ul_nav .fa-angle-left {
 	top: 20px;
 	left: 20px;
 	font-size: 38px;
+}
+#ul_nav .fa-home {
+	font-size: 32px;
 }
 #ul_nav ul {
 	top: 50%;
@@ -913,7 +937,7 @@ header {
 #message_notifications,
 #message_location_error  {
 	width: 100%;
-	z-index: 6;
+	z-index: 10;
 	box-sizing: border-box;
 	font-size: 14px;
 }
@@ -949,7 +973,7 @@ header {
 	bottom: 0;
 	left: 0;
 	font-size: 17px;
-	z-index: 3;
+	z-index: 8;
 }
 #footer ul {
 	justify-content: space-around; 
@@ -980,8 +1004,7 @@ header {
 }
 
 #select_date {
-	position: fixed;
-	top: 0;
+	top: -60px;
 	left: 0;
 	padding: 5px 10px;
 	background-color: #eee;
@@ -992,11 +1015,12 @@ header {
 	transition: top .4s linear;
 }
 .div_select_date {
-	width: 50%;
+	width: 52%;
 	max-width: 200px;
 }
 #input_select_date {
-	padding: 10px;
+	padding: 12px;
+	font-size: inherit;
 	box-sizing: border-box;
 	width: 100%;
 	color: inherit;
@@ -1012,8 +1036,11 @@ header {
 }
 
 .div_select_date i {
-	top: 14px;
-	right: 8px;
+	top: 13px;
+	right: 10px;
+}
+#select_date .fa-calendar-check {
+	font-size: 27px;
 }
 .hint {
 	top: 53px;
@@ -1054,7 +1081,7 @@ header {
   	width: 100px;
 }
 .info_all_years {
-  	font-size: 13px;
+  	font-size: 14px;
 }
 .info_all_years span {
   	width: 150px;
@@ -1510,6 +1537,9 @@ header {
 #error_update i {
 	font-size: 14px;
 	margin-right: 35px;
+}
+#not_data_server {
+	opacity: 0;
 }
 
 

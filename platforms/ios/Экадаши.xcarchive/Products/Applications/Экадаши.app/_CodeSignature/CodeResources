@@ -54,7 +54,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		ufLEWVa8+rNpykQphOl0xbMl8wg=
+		pbvS/NLONuJOuqWjuamxQOXFCr4=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>www/about_ekadashi.html</key>
 		<data>
-		sXhztCaAVDB195WHQcKG7V/EXs8=
+		BNpgMS9jR/BFx+IlFfprB/0qXjk=
 		</data>
 		<key>www/contacts.html</key>
 		<data>
-		7m8HxXhFpqIY05HAKRevlhCRmmw=
+		e322m2Nq53RWhuEmW8h1aermAsc=
 		</data>
 		<key>www/cordova.js</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>www/css/index.css</key>
 		<data>
-		J97gKCHy6FXsfD2bvfS56QbM8o0=
+		J0tj+mLeZr7/QllUh7ek5gJX1DU=
 		</data>
 		<key>www/img/Gopala-banner.jpg</key>
 		<data>
@@ -254,15 +254,15 @@
 		</data>
 		<key>www/index.html</key>
 		<data>
-		ohlA+kyADZxGfzowSOM8bOlKgNQ=
+		YGAHb9SPH4EGHL1TAjkb3i9MGTY=
 		</data>
 		<key>www/js/about_ekadashi.js</key>
 		<data>
-		pnU/0cBGlumkhNSY1H96lkFHtiU=
+		CHR5CR39dJ4IT9swNyAI9N1ijGE=
 		</data>
 		<key>www/js/contacts.js</key>
 		<data>
-		jqkaS72SVLTygm4HMPEDl1wO6Es=
+		kSMgSnwvf9vYTv5wQSOCDZjkFio=
 		</data>
 		<key>www/js/content_description.js</key>
 		<data>
@@ -270,27 +270,27 @@
 		</data>
 		<key>www/js/general.js</key>
 		<data>
-		UWNgSktGqT6k4v/G26ht/iVfv9E=
+		i17Cgh7+0gByKNggWd5B6k1v5bI=
 		</data>
 		<key>www/js/index.js</key>
 		<data>
-		HNZ/YJSruW3wc6BOYV7OA8x72mI=
+		yfw/yjLM4Xr/9FPYMpzdWnGT5g8=
 		</data>
 		<key>www/js/notifications.js</key>
 		<data>
-		/CRk25O1IFqEOudkAzXnmEy8Txs=
+		ooNxcMMAmVszp40kTIVYjP4u1BE=
 		</data>
 		<key>www/js/privacy_policy.js</key>
 		<data>
-		jqkaS72SVLTygm4HMPEDl1wO6Es=
+		vPT2OQor+Lv5SNj0JADW/tFrhLQ=
 		</data>
 		<key>www/js/select_date.js</key>
 		<data>
-		LqxY4zJEosDFvhXf3+/6pojEYTQ=
+		ELykbUzIKDtw7XV6DQVQy4k5emA=
 		</data>
 		<key>www/notifications.html</key>
 		<data>
-		YwYcGY5SdrRe/1F4z3rN+KQqHWc=
+		YBJniff8SiBpcTb+PiNpGgX+k1Y=
 		</data>
 		<key>www/plugins/cordova-plugin-android-permissions/www/permissions-dummy.js</key>
 		<data>
@@ -394,11 +394,11 @@
 		</data>
 		<key>www/privacy_policy.html</key>
 		<data>
-		/Q7C3MjnQdLx9JOgfUo18r46j44=
+		265vdxZ7SPzr4J3HkHQ1P5l2hIU=
 		</data>
 		<key>www/select_date.html</key>
 		<data>
-		BvrsHeKUk4JU7jHg24vlyZFDtHQ=
+		TXj0RjD5XVV+yS4MF2PrromZmOc=
 		</data>
 		<key>www/webfonts/Open-Sans/open-sans.eot</key>
 		<data>
@@ -565,7 +565,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SCS5Fosb8FTg/42mw3UNqlHLGAoPWnAsxaflYCCT9Rg=
+			E8CNWykI4EJ5couMV9wTyoA4WSseFX8JA6nefb4Pvys=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
@@ -579,14 +579,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FbL4P/V8pPwc6t1wpXAhZqzzCezm7ztVLNnA7nMHAXQ=
+			jHo00dJeXb3LuHxmxkmvX66l7hJLK3HYnBAfE8/gNN4=
 			</data>
 		</dict>
 		<key>www/contacts.html</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6IMKoBFYHDMVH5IR3toF2vO6RuqLParMW5w8YsOoXz8=
+			JnZAbdiu+IQF79WKyup25FS57OEEwgtCGNZO6xQsgmM=
 			</data>
 		</dict>
 		<key>www/cordova.js</key>
@@ -614,7 +614,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KIbmaEVq9lHh7kAUAsG8YZvm5ZTJoClaiYnR4oL+Dx8=
+			3xnFEj5c4BG6zzIAPGDuOA+sYtbEw7kgSKm08MTEdx0=
 			</data>
 		</dict>
 		<key>www/img/Gopala-banner.jpg</key>
@@ -915,21 +915,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xrtdk+IM0TQAuCbXz/y7Wy7w6NgY8AN3sKsn1UCJvf8=
+			Rs/n1jeIhK27Fa3jcTbSIV1m4jPNByyrKKj745LODG4=
 			</data>
 		</dict>
 		<key>www/js/about_ekadashi.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2V+JiMIjO97TcnVuJbufxyXEu+5YgdMnHsArSRF/qaA=
+			YD8T/dUshAr8ewBYsDX3BvTRzBBmcXlPkU2f1FghwRI=
 			</data>
 		</dict>
 		<key>www/js/contacts.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wII53gx1OnWrnq/k696ca+jvsR1KOhdsE472AGFYzyc=
+			oi0vPnYxK4cakiIdbjVQMKrj760LhbV60eQRhc47ijo=
 			</data>
 		</dict>
 		<key>www/js/content_description.js</key>
@@ -943,42 +943,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AzhowFGZc6bhDYDLSKzb1ndklN6lvFG8PrMD25FLpiA=
+			J5OKOUCpfv1NfBWyQvTxTutT+jNjgBWgbYf9OdBlhYc=
 			</data>
 		</dict>
 		<key>www/js/index.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9ZqFe2IAHDM79YZr8d7KLehxyGcJe1lO1aqELDNICcw=
+			YmkGLHRADaO2YfxARAScje98/xa/z3w2mwVhU+En4Gk=
 			</data>
 		</dict>
 		<key>www/js/notifications.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			x9YMwuaE7QMwj/KtIrj/NrW0LPocg5CUz3vmRgpnfpE=
+			N36vlXWmjSXMF+239rkLztHcZdnobhvXQBrq4CGV/bE=
 			</data>
 		</dict>
 		<key>www/js/privacy_policy.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wII53gx1OnWrnq/k696ca+jvsR1KOhdsE472AGFYzyc=
+			aJij9D4isz7OJSUNQryMYeY1f96O+KXVbD9qLgWLhB0=
 			</data>
 		</dict>
 		<key>www/js/select_date.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VKHIJHz2gLR3t9O/pLI4kHEMACDQ0VFFmuLAGxIWNNE=
+			ZBro9ejPvbepoKaozv+5rPN73Ex/vTwh91ZzjMW8Mls=
 			</data>
 		</dict>
 		<key>www/notifications.html</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1j4A+UDfw5/Gkyf/QYANcue+YxOU/2Kdtd0/s0Q0g/k=
+			hWzPB+jMXpE91pbEBSJk1xvJTWJzKhznkQHpXGthZ0Q=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-android-permissions/www/permissions-dummy.js</key>
@@ -1160,14 +1160,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			W2gKQk3mkuUDY+Ig1sNCjM6rp8gAAlM+YhGaGbPNlZ8=
+			XELFNlRWQG7hq7IimrQiBXCFHI5Q5sjae6wk/6fWYok=
 			</data>
 		</dict>
 		<key>www/select_date.html</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			n8sGGkgaqKs0kmlh82YsnaTMv5sSr01B4fQD6hUhOt0=
+			UBQKno+HeEhx2FclGSafsY0ZrafEk9DRMiMcSZougPo=
 			</data>
 		</dict>
 		<key>www/webfonts/Open-Sans/open-sans.eot</key>

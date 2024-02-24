@@ -152,4 +152,5 @@
     <preference name="ScrollEnabled" value="true" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
+    <preference name="KeyboardResize" value="false" />
 </widget>

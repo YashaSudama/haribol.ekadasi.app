@@ -36,7 +36,9 @@ import { window_width,
          set_local_storage,
          set_update_local_storage,
          remove_local_storage,
-         resume_event
+         resume_event,
+         today,
+         text_not_data_server
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -68,7 +70,6 @@ let window_select_city = document.getElementById( 'window_select_city' ),
     state,
     lat,
     lon,
-    today = document.getElementById( 'today' ),
     city_slug,
     city_name,
     city_name_id,
@@ -155,26 +156,14 @@ current_location.onclick = function() {
 
 }
 
-function window_select_city_func() {
-    window_select_city.style.cssText = 'opacity: 1; z-index: 5';
-    footer_id.style.zIndex = '5';
+function window_city_func( elem ) {
+    elem.style.cssText = 'opacity: 1; z-index: 5';
     today.innerHTML = '<a href="index.html" class="text-white">' +
                           '<i class="fas fa-home fa-lg"></i>' +
                       '</a>';
+    today.removeAttribute( 'id' );
 
     today.addEventListener( 'click', hide_body );
-
-}
-
-function window_change_city_func() {
-    window_change_city.style.cssText = 'opacity: 1; z-index: 5';
-    footer_id.style.zIndex = '5';
-    today.innerHTML = '<a href="index.html" class="text-white">' +
-                          '<i class="fas fa-home fa-lg"></i>' +
-                      '</a>';
-
-    today.addEventListener( 'click', hide_body );
-
 }
 
 function inner_get_info_func( index_get_info_new, slug, height_header, day_week ) {
@@ -207,6 +196,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         day_after_tomorrow = 'Послезавтра';
 
     height_header = header_top.clientHeight;
+    main.style.marginTop = height_header + 'px';
     
     for ( let i = 0; i < index_get_info_new.length; i++ ) { 
       
@@ -482,7 +472,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         if ( now_year === +get_year ) {
 
             for ( let i = now_month; i < array_obj.length; i++ ) {
-                current_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + '>' +
+                current_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
                                             '<li class="month">' +
                                                 '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
                                             '</li>' +
@@ -497,14 +487,14 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                 
             }
 
-            window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
+            window.scrollTo( { left: 0, top: 0, behavior: 'smooth' } );
             navigator.splashscreen.hide();
             show_body();
 
         } else if ( ( now_year + 1 ) === +get_year ) {
 
             for ( let i = 0; i < array_obj.length; i++ ) {
-                plus_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + '>' +
+                plus_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
                                             '<li class="month">' +
                                                 '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
                                             '</li>' +
@@ -529,11 +519,13 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
     
     today.removeEventListener( 'click', hide_body );
     today.addEventListener( 'click', function() {
-        window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
+        window.scrollTo( { left: 0, top: 0, behavior: 'smooth' } );
     } );
 
     main.style.opacity = '1';
     header_top.style.opacity = '1';
+
+    if ( today && today.hasAttribute( 'id' ) ) today.style.cssText = '';
 
     get_description( main, '.click' );
 
@@ -681,6 +673,8 @@ function part_not_city( slug ) {
             div_main_height = div_main.offsetHeight,
             div_main_top = ( window_height - keyboard_height );
 
+
+        footer_id.style.bottom = keyboard_height + 'px';
         div_main.style.top = ( ( div_main_top - div_main_height) / 2 ) + 'px';
 
         if ( div_main.style.transform === '' ) {
@@ -691,6 +685,7 @@ function part_not_city( slug ) {
 
     window.addEventListener( 'keyboardDidHide', () => {
         div_main.style.cssText = '';
+        footer_id.style.bottom = '0';
     } );
 
     div_main.addEventListener( 'touchstart', ( event ) => {
@@ -719,14 +714,16 @@ function part_not_city( slug ) {
     } );
 
     function not_data_server() {
-        div_search_city.innerHTML = '<div class="width-fit m-auto">' +
-                                        '<span class="d-block text-center search_string l-height-1-2">' +
-                                            'Не удалось получить данные с сервера! Попробуйте позже<br>или еще раз.' +
-                                        '</span>' +
-                                    '</div>';
+        div_search_city.innerHTML = text_not_data_server;
+
+        setTimeout(() => {
+            let not_data_server = document.getElementById( 'not_data_server' );
+            not_data_server.style.opacity = '1';
+        }, 500 );
+        
     }
 
-    function list_all_cities( city, slug ) { 
+    function list_all_cities( city, slug ) { // получает и публикует список всех городов
 
         let xml_all_cityes = new XMLHttpRequest(),
             get_all_cities;
@@ -760,7 +757,7 @@ function part_not_city( slug ) {
                 list_cityes.style.cssText = 'opacity: 0;' +
                                             'z-index: -1';
                 div_search_city.classList.add( 'p-all-0' );
-                div_search_city.innerHTML = '<button id="choice_full_list">' +
+                div_search_city.innerHTML = '<button id="choice_full_list" class="l-height-1-2">' +
                                                 'Выберите из полного<br>списка городов!' +
                                             '</button>';
 
@@ -789,7 +786,6 @@ function part_not_city( slug ) {
                 city_name = slug.name;
                 city_name_id = slug.id;
                 location_span.innerHTML = city_name.trim();
-
                 footer_id.style.cssText = '';
 
                 if ( ( localStorage.getItem( 'status_notifications' ) === 'true' ) &&
@@ -1175,7 +1171,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
             
             if ( city && lat && lon ) add_city_undefined_database( city, state );
 
-            window_change_city_func();
+            window_city_func( window_change_city );
             local_city.innerHTML = city_name;
             
             yes_change_city.onclick = function() {
@@ -1184,7 +1180,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                     window_change_city.style.cssText = '';
                 }, 500 );
 
-                window_select_city_func();
+                window_city_func( window_select_city );
                 part_not_city( slug );
             }
             
@@ -1209,7 +1205,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
             }
             
         } else {
-            window_select_city_func();
+            window_city_func( window_select_city );
             part_not_city( slug );
         }
    
@@ -1217,7 +1213,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
     
         if ( city && lat && lon ) add_city_undefined_database( city, state );
 
-        window_select_city_func();
+        window_city_func( window_select_city );
         part_not_city( slug );
     }
 
@@ -1627,47 +1623,35 @@ function on_device_ready() {
         if ( navigator.connection.type !== 'none' ) {
 
             cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
-
                 StatusBar.show();
                 StatusBar.backgroundColorByHexString( '#000000' );
 
                 switch( status ) {
 
                     case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-
                         cordova.plugins.diagnostic.requestLocationAuthorization( function( status ) {
 
                             switch( status ) {
-
                                 case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-                                    
                                     localStorage.setItem( 'status_location', '0' );
                                     location_error( slug );
-
                                     break;
                                 case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-
                                     localStorage.setItem( 'status_location', '1' );
                                     launch_calendar();
-
                                     break;
                             }
 
                         }, function( error ) {
-
                             localStorage.setItem( 'status_location', '0' );
                             location_error( slug );
-
                         } );
-
                         break;
 
                     case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-
                         cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
 
                             if ( canRequest ) {
-        
                                 cordova.plugins.locationAccuracy.request( function() {
 
                                     if ( !localStorage.getItem( 'user_location_accuracy' ) ) {
@@ -1703,7 +1687,6 @@ function on_device_ready() {
                         break;
 
                     case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-                        
                         localStorage.setItem( 'status_location', '1' );
                         launch_calendar();
                         break;
