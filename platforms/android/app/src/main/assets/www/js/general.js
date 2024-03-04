@@ -144,17 +144,30 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     choice_date = document.getElementById( 'choice_date' ),
     text_not_connection_timeout = '<h3 class="m-b-0 text-uppercase">Не удалось получить<br>данные с сервера</h3>' +
                                   '<h4 class="m-t-15">Возможные причины:</h4>' +
-                                  '<ul class="reason_server l-height-1-1 text-left m-auto" style="max-width: 65%">' +
+                                  '<ul class="reason_server l-height-1-1 text-left m-auto" style="max-width: 70%">' +
                                     '<li class="m-b-10 m-l-15 pos-rel">' +
                                         '<span class="pos-abs"></span>' +
-                                            'слабый интернет или нет подключения к интернету' +
+                                            'маленькая скорость интернета' +
                                     '</li>' +
                                     '<li class="pos-rel m-l-15">' +
                                         '<span class="pos-abs"></span>' +
-                                            'не подключена служба VPN' +
+                                            'сервер временно недоступен' +
                                     '</li>' +
                                   '</ul>',
     text_not_internet = '<h3>Нет подключения к интернету!</h3>',
+    text_not_data_server =  '<div id="not_data_server" class="width-fit m-auto">' +
+                                '<span class="d-block text-center search_string l-height-1-2">' +
+                                    'Не удалось получить данные с сервера! Попробуйте позже<br>или еще раз.' +
+                                '</span>' +
+                            '</div>',
+    text_error_update_notifications =  '<div id="error_update_notifications" class="width-fit m-auto">' +
+                                            '<span class="d-block text-center">' +
+                                                'Произошла ошибка! Не удалось обновить настройки уведомлений! Попробуйте позже или еще раз.' +
+                                            '</span>' +
+                                        '</div>',
+	show_select_date = document.getElementById( 'show_select_date' ),
+	year_screen = document.getElementById( 'year_screen' ),
+	today = document.getElementById( 'today' ),
     apparition_ekadasi_days = {
         '1': { name: 'Явление Нитьянанды Прабху',
                name_too_events: 'Нитьянанда',
@@ -172,7 +185,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         '4': { name: 'Явление Нришимхадева' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">пост до полудня</span>',
+                     '<span class="exit">Пост до полудня</span>',
                name_too_events: 'Нришимхадев',
                id: 'nrisimha'
              },
@@ -188,7 +201,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         '8': { name: 'Явление А.Ч. Бхактиведанты Свами' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">пост до полудня</span>',
+                     '<span class="exit">Пост до полудня</span>',
                name_too_events: 'Бхактиведанта',
                id: 'bhaktivedanta'
              },
@@ -204,9 +217,21 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                name_too_events: 'Ратха-ятра',
                id: 'radha-yatra'
              },
+        'C': { name: 'Уход А.Ч. Бхактиведанты Свами',
+                name_too_events: 'Бхактиведанта',
+                id: 'bhaktivedanta'
+            },
+        'D': { name: 'Явление Шрилы Бхактисиддханты Сарасвати Тхакура ',
+               name_too_events: 'Бхактисиддханта',
+               id: 'bhaktivedanta'
+            },
+        'E': { name: 'Явление Шрилы Бхактивиноды Тхакура Прабхупады',
+                name_too_events: 'Бхактивинода',
+                id: 'bhaktivedanta'
+            },
         'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">пост</span>',
+                     '<span class="exit">Пост</span>',
                name_too_events: 'Вьясапуджа',
                id: 'vyasapudja'
              },
@@ -432,7 +457,19 @@ window.addEventListener( 'resize', function() {
 } );
 
 nav.onclick = function() {
-    ul_nav.style.cssText = 'opacity: 1; z-index: 7';
+    
+    if ( ul_nav.style.cssText === '' ) {
+        ul_nav.style.cssText = 'opacity: 1; z-index: 7';
+
+        if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
+
+    } else {
+        ul_nav.style.cssText = '';
+
+        if ( today && today.hasAttribute( 'id' ) && !today.closest( 'body' ).querySelector( '#not_connection' ) ) today.style.cssText = '';
+
+    }
+
 }
 
 close_nav.onclick = function() {
@@ -474,63 +511,48 @@ function content_not_data( main,
                            local_html, 
                            name_func, 
                            param ) {
-    
-    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-        hide_background();
-        localStorage.removeItem( 'status_background' );
-    } else {
-        navigator.splashscreen.hide();
-        show_body();
-    }
 
-    if ( ( window.location.pathname === '/' ) || 
-         ( window.location.pathname === '/index.html' )  ) {
-        window_select_city.style.cssText = '';
-    }
+    let after_text;
 
-    if ( !height_header ) {
-        height_header = header_top.clientHeight;
-    }
-
-    if ( div_zoom_calendar ) {
-        div_zoom_calendar.style.cssText = '';
-    }
+    if ( !height_header ) height_header = header_top.clientHeight;
+    if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
+    if ( show_select_date ) show_select_date.classList.add( 'd-none' );
+    if ( year_screen ) year_screen.style.opacity = '0';
+    if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
 
     if ( main ) {
-        main.style.height = ( scroll_window_height - height_header - footer_id.clientHeight ) + 'px';
+
+        if ( text === text_not_internet ) {
+            after_text = 'Проверьте подключение к интернету и попробуйте еще раз';
+        } else {
+            after_text = 'Проверьте подключение к интернету и попробуйте еще раз или попробуйте позже';
+        }
+
+        main.style.cssText = 'margin-top: ' + height_header + 'px;' + 
+                             'height: ' + ( scroll_window_height - height_header - footer_id.clientHeight ) + 'px;';
         main.innerHTML = '<div id="not_connection" class="pos-rel">' +
                             '<div class="text-center">' + text + '</div>' +
                             '<button id="reload" class="d-block m-auto m-t-30">Перезагрузить страницу</button>' +
                             '<button id="last_version" class="d-block m-t-30 m-auto">Отобразить последнюю<br>сохранённую версию</button>' +
-                            '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">Проверьте подключение к интернету и попробуйте еще раз</h4>' +
-                        '</div>';
+                            '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">' + after_text + '</h4>' +
+                         '</div>';
     }
 
     let reload = document.getElementById( 'reload' ),
         last_version = document.getElementById( 'last_version' );
 
     if ( !localStorage.getItem( local_object ) ) {
-
-        if ( !last_version.classList.contains( 'd-none' ) ) {
-            last_version.classList.add( 'd-none' );
-        }
-
+        last_version.classList.add( 'd-none' );
     } else {
-
-        if ( last_version.classList.contains( 'd-none' ) ) {
-            last_version.classList.remove( 'd-none' );
-        }
-
         param = JSON.parse( localStorage.getItem( local_object ) );
-        
     }
 
     if ( reload ) {
 
         reload.onclick = function() {
-            window.location.reload();
             hide_body();
             localStorage.setItem( 'status_background', 'yes' );
+            window.location.reload();
         }
 
     }
@@ -538,26 +560,37 @@ function content_not_data( main,
     if ( last_version ) {
 
         last_version.onclick = function() {
+            hide_body();
+            localStorage.setItem( 'status_background', 'yes' );
             city = localStorage.getItem( 'city_name' );
             location_span.innerHTML = city;
-
-            if ( div_zoom_calendar ) {
-                div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
-                                                  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
-
-                if ( localStorage.getItem( 'not_scroll' ) ) localStorage.setItem( 'not_scroll', 'true' );
-                
-            }
-
             main.style.cssText = '';
             main.innerHTML = localStorage.getItem( local_html );
-            name_func( param );
+            
+            setTimeout( () => {
+                name_func( param );
+            }, 500 );
             
             if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
+            if ( localStorage.getItem( 'not_scroll' ) ) localStorage.setItem( 'not_scroll', 'true' );
 
         }
 
     }
+
+    setTimeout( () => {
+        main.querySelector( '#not_connection' ).style.opacity = '1';
+    
+        if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
+            hide_background();
+            show_body();
+            localStorage.removeItem( 'status_background' );
+        } else {
+            navigator.splashscreen.hide();
+            show_body();
+        }
+
+    }, 500 );
 
 }
 
@@ -915,7 +948,6 @@ function get_token() {
 }
 
 function update_notifications( slug ) {
-
     let xml_update = new XMLHttpRequest(),
         value_token = get_token(),
         city_id = slug.id || Number( slug ),
@@ -929,11 +961,39 @@ function update_notifications( slug ) {
         status_notifications = form.status_notifications.dataset.status;
         part_time_value_first = form.time.value[ 0 ] + form.time.value[ 1 ];
         part_time_value_last = form.time.value[ 3 ] + form.time.value[ 4 ];
+        part_time_value_first = form.time.value[ 0 ] + form.time.value[ 1 ];
+        part_time_value_last = form.time.value[ 3 ] + form.time.value[ 4 ];
 
         if ( status_notifications === 'false' ) {
             status_notifications = false;
         } else {
             status_notifications = true;
+        }
+
+        if ( ( part_time_value_last !== '00' ) && ( part_time_value_last !== '30' )  ) {
+            
+            if ( part_time_value_last <= '15' ) {
+                time_value = part_time_value_first + ':' + '00';
+                form.time.value = time_value;
+            } else if ( ( part_time_value_last > '15' ) && ( part_time_value_last < '45' ) ) {
+                time_value = part_time_value_first + ':' + '30';
+                form.time.value = time_value;
+            } else {
+
+                if ( part_time_value_first === '23' ) {
+                    part_time_value_first = '00';
+                } else if ( part_time_value_first < 9 ) {
+                    part_time_value_first = '0' + ( Number( part_time_value_first ) + 1 );
+                } else {
+                    part_time_value_first = Number( part_time_value_first ) + 1;
+                }
+
+                time_value = part_time_value_first + ':' + '00';
+                form.time.value = time_value;
+            }
+ 
+        } else {
+            time_value = form.time.value;
         }
 
         if ( ( part_time_value_last !== '00' ) && ( part_time_value_last !== '30' )  ) {
@@ -1001,29 +1061,43 @@ function update_notifications( slug ) {
     xml_update.responseType = 'json';
     xml_update.setRequestHeader( 'Content-Type', 'application/json' );
 
-    xml_update.onerror = function() {
+    function error() {
 
         if ( location.pathname.includes( 'notifications' ) ) {
-            min_preloader.remove();
-            button_update_notif.removeAttribute( 'disabled' );
-            button_update_notif.insertAdjacentHTML( 'afterend', '<span id="error_update" class="d-block l-height-1-2 text-center" style="margin-top: 20px">' +
-                                                                    'Нет соединения с сервером<br><br>' +
-                                                                    '<i style="font-size: 14px">Возможные причины:</i><br><br>' +
-                                                                    '<div class="width-fit m-auto text-left">' +
-                                                                        '<small>' +
-                                                                            '- слабый интернет<br>' +
-                                                                            '- не подключена служба VPN' +
-                                                                        '</small>' +
-                                                                    '</div>' +
-                                                                '</span>' );
+            let not_data_server = document.getElementById( 'not_data_server' ),
+                time = 0;
+
+            if ( not_data_server ) {
+                time = 1000;
+                not_data_server.style.opacity = '0';
+
+                setTimeout(() => {
+                    not_data_server.remove();
+                }, 500 );
+
+            }
+
+            setTimeout( () => {
+                min_preloader.remove();
+                button_update_notif.removeAttribute( 'disabled' );
+                button_update_notif.insertAdjacentHTML( 'afterend', text_not_data_server );
+
+                let not_data_server = document.getElementById( 'not_data_server' );
+                not_data_server.style.opacity = '1';
+        
+                setTimeout(() => {
+                    not_data_server.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        not_data_server.remove();
+                    }, 500 );
+
+                }, 3000 );
+
+            }, time );
                                                                 
         } else {
-            message_notifications.innerHTML =  '<div class="width-fit m-auto">' +
-                                                    '<span class="d-block text-center">' +
-                                                        'Произошла ошибка! Не удалось обновить настройки уведомлений! Попробуйте позже или еще раз.' +
-                                                    '</span>' +
-                                                '</div>';
-
+            message_notifications.innerHTML = text_error_update_notifications;
             message_notifications.style.bottom = '0';
 
             setTimeout( () => {
@@ -1034,44 +1108,31 @@ function update_notifications( slug ) {
 
     }
 
-    xml_update.timeout = 5000;
-
-    xml_update.ontimeout = function() {
-
-        if ( location.pathname.includes( 'notifications' ) ) {
-            min_preloader.remove();
-            button_update_notif.removeAttribute( 'disabled' );
-            button_update_notif.insertAdjacentHTML( 'afterend', '<span id="error_update" class="d-block l-height-1-2 text-center" style="margin-top: 20px">' +
-                                                                    'Нет соединения с сервером<br><br>' +
-                                                                    '<i style="font-size: 14px">Возможные причины:</i><br><br>' +
-                                                                    '<div class="width-fit m-auto text-left">' +
-                                                                        '<small>' +
-                                                                            '- слабый интернет<br>' +
-                                                                            '- не подключена служба VPN' +
-                                                                        '</small>' +
-                                                                    '</div>' +
-                                                                '</span>' );
-        } else {
-            message_notifications.innerHTML =  '<div class="width-fit m-auto">' +
-                                                    '<span class="d-block text-center">' +
-                                                        'Произошла ошибка! Не удалось обновить настройки уведомлений! Попробуйте позже или еще раз.' +
-                                                    '</span>' +
-                                                '</div>';
-
-            message_notifications.style.bottom = '0';
-
-            setTimeout( () => {
-                message_notifications.style.cssText = '';
-            }, 3000 );
-
-        }
-
+    function onload_error() {
+        message_notifications.innerHTML = text_error_update_notifications;
         message_notifications.style.bottom = '0';
 
         setTimeout( () => {
             message_notifications.style.cssText = '';
-        }, 3000 );
+        }, 7000 );
 
+        if ( location.pathname.includes( 'notifications') ) {
+
+            setTimeout( () => {
+                button_update_notif.removeAttribute( 'disabled' );
+                min_preloader.remove();
+            }, 8000 );
+
+        }
+    }
+
+    xml_update.onerror = function() {
+        error();
+    }
+
+    xml_update.timeout = 5000;
+    xml_update.ontimeout = function() {
+        error();
     }
         
     xml_update.onload = function() {
@@ -1119,14 +1180,12 @@ function update_notifications( slug ) {
                         }, 3500 );
 
                     } else {
-
                         message_notifications.innerHTML = '<div class="width-fit m-auto">' +
                                                             '<span class="d-block text-center m-b-10">' +
                                                                 'Ваши настройки уведомлений обновлены!' +
                                                             '</span>' +
                                                             '<a class="link_policy d-block width-fit m-auto" href="notifications.html">Настройка уведомлений</a>' +
                                                           '</div>';
-
                         message_notifications.style.bottom = '0';
 
                         setTimeout( () => {
@@ -1138,52 +1197,11 @@ function update_notifications( slug ) {
                 }
 
             } else if ( response_update.errors ) {
-
-                message_notifications.innerHTML = '<div class="width-fit m-auto">' +
-                                                    '<span class="d-block text-center">' +
-                                                        'Произошла ошибка! Попробуйте еще раз или позже!' +
-                                                    '</span>' +
-                                                  '</div>';
-
-                message_notifications.style.bottom = '0';
-
-                setTimeout( () => {
-                    message_notifications.style.cssText = '';
-                }, 3000 );
-
-                if ( location.pathname.includes( 'notifications') ) {
-
-                    setTimeout( () => {
-                        button_update_notif.removeAttribute( 'disabled' );
-                        min_preloader.remove();
-                    }, 4500 );
-
-                }
+                onload_error();
             }
 
         } else {
-
-            message_notifications.innerHTML = '<div class="width-fit m-auto">' +
-                                                '<span class="d-block text-center">' +
-                                                    'Произошла ошибка! Попробуйте еще раз или позже!' +
-                                                '</span>' +
-                                              '</div>';
-
-            message_notifications.style.bottom = '0';
-
-            setTimeout( () => {
-                message_notifications.style.cssText = '';
-            }, 3000 );
-
-            if ( location.pathname.includes( 'notifications') ) {
-
-                setTimeout( () => {
-                    button_update_notif.removeAttribute( 'disabled' );
-                    min_preloader.remove();
-                }, 4500 );
-
-            }
-            
+            onload_error();
         }
     
     };
@@ -1394,7 +1412,11 @@ export { window_width,
          set_local_storage,
          set_update_local_storage,
          remove_local_storage,
-         remove_too_events };
+         remove_too_events,
+         show_select_date,
+         year_screen,
+         today,
+         text_not_data_server  };
 
 // По луне
 // -------
@@ -1408,6 +1430,9 @@ export { window_width,
 // 9 - Радхарани 
 // А - Говардхана-пуджа  
 // В - Ратха-ятра 
+// C - Уход Бхактиведанты Свами 
+// D - Бхактисиддханта 
+// E - Бхактивинода 
 
 // Не по луне
 // ----------

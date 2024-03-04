@@ -17,6 +17,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
+      "id": "cordova-plugin-firebase-messaging.FirebaseMessaging",
+      "file": "plugins/cordova-plugin-firebase-messaging/www/FirebaseMessaging.js",
+      "pluginId": "cordova-plugin-firebase-messaging",
+      "merges": [
+        "cordova.plugins.firebase.messaging"
+      ]
+    },
+    {
       "id": "cordova-plugin-geolocation.geolocation",
       "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
       "pluginId": "cordova-plugin-geolocation",
@@ -165,28 +173,19 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "merges": [
         "cordova.plugins.diagnostic.external_storage"
       ]
-    },
-    {
-      "id": "cordova-plugin-firebase-messaging.FirebaseMessaging",
-      "file": "plugins/cordova-plugin-firebase-messaging/www/FirebaseMessaging.js",
-      "pluginId": "cordova-plugin-firebase-messaging",
-      "merges": [
-        "cordova.plugins.firebase.messaging"
-      ]
     }
   ];
   module.exports.metadata = {
-    "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-android-permissions": "1.1.5",
     "cordova-plugin-device": "2.1.0",
+    "cordova-support-android-plugin": "2.0.4",
+    "cordova-plugin-firebase-messaging": "7.0.4",
     "cordova-plugin-geolocation": "4.1.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview-signosoft-fork": "5.0.2",
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-statusbar": "3.0.0",
-    "cordova.plugins.diagnostic": "7.1.2",
-    "cordova-support-android-plugin": "2.0.4",
-    "cordova-plugin-firebase-messaging": "7.0.4"
+    "cordova.plugins.diagnostic": "7.1.2"
   };
 });

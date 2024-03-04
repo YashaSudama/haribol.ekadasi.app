@@ -30,18 +30,19 @@ import { now_date_number,
 		 add_sp_array,
 		 add_isus_array,
          set_local_storage,
-         remove_too_events
+         remove_too_events,
+		 show_select_date,
+		 year_screen,
+		 hide_body
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
 	select_date = document.getElementById( 'select_date' ),
-	show_select_date = document.getElementById( 'show_select_date' ),
 	input_select_date = document.getElementById( 'input_select_date' ),
 	list_all_years = document.getElementById( 'list_all_years' ),
 	div_list_all_years = document.getElementById( 'div_list_all_years' ),
 	open_list_years = document.getElementById( 'open_list_years' ),
 	close_list_years = document.getElementById( 'close_list_years' ),
-	year_screen = document.getElementById( 'year_screen' ),
 	year_screen_span = document.getElementById( 'year_screen_span' ),
 	year = calendar.getElementsByTagName( 'h1'),
 	div_calendar = calendar.querySelectorAll( '.calendar_year' ),
@@ -107,70 +108,6 @@ document.addEventListener( 'deviceready', () => {
 	}
 	
 }, false );
-
-setTimeout( () => {
-
-	height_header = header_top.offsetHeight;
-	height_hint_description = hint_description.offsetHeight;
-	year_screen.style.top = height_header + 'px';
-
-	function init_elem( height ) {
-
-		if ( ( ( height - height_header - footer_id.offsetHeight ) + 20 ) > height_hint_description ) {
-			hint_description_top = height_header + ( ( ( height - height_header - footer_id.offsetHeight ) / 2 ) - ( height_hint_description / 2  ) );
-		} else {
-			hint_description_top = height_header + 20;
-		}
-		
-		div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
-										  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
-	}
-	
-	init_elem( window_height );
-	
-	if ( navigator.connection.type !== 'none' ) {
-
-		if ( !localStorage.getItem( 'status_hint_description' ) ) {
-			localStorage.setItem( 'status_hint_description', 'show' );
-			wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
-			hint_description.style.top = hint_description_top + 'px';
-		} else {
-		
-		if ( localStorage.getItem( 'status_hint_description' ) === 'show' ) {
-			wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
-			hint_description.style.top = hint_description_top + 'px';
-		} 
-		
-		}
-
-	}
-
-	window.addEventListener( 'resize', () => {
-		let resize_window_height = window.innerHeight;
-		
-		height_hint_description = hint_description.offsetHeight;
-
-		init_elem( resize_window_height );
-
-		hint_description.style.top = hint_description_top + 'px';
-
-		if ( top_elem ) {
-			let offset;
-
-			if ( top_elem.tagName === 'UL' ) {
-				offset = 15;
-			} else {
-				offset = -10;
-			}
-
-			window.scrollTo( 0, ( window.pageYOffset + 
-				top_elem.getBoundingClientRect().y ) -
-				height_header + offset );
-		}
-
-	} );
-  
-}, 0 );
 
 height_footer_func();
 
@@ -257,12 +194,16 @@ for ( let item of div_calendar ) {
 	count_year++;
 }
 
-function display_data( get_month, numb_ul, value, calendar ) { // value - свойство ( ключ ) объекта, дата события
+function display_data( get_month, numb_ul, value, calendar, year ) { // value - свойство ( ключ ) объекта, дата события
 
 	let calendar_ul_li = calendar[ numb_ul ].getElementsByTagName( 'li' ),
 		class_li,
 		id_li,
 		value_key = get_month[ value ]; // value_key - значение свойства ( ключа ), тип события
+
+	if ( calendar_ul_li.length === 0 ) {
+		print_year( calendar, year );
+	}
 
 	if ( typeof ( value_key ) === 'object' ) {
 		class_li = 'ekadashi';
@@ -301,6 +242,69 @@ function display_data( get_month, numb_ul, value, calendar ) { // value - сво
 }
 
 function inner_get_info( select_get_info ) {
+
+	setTimeout( () => {
+		height_header = header_top.offsetHeight;
+		height_hint_description = hint_description.offsetHeight;
+		year_screen.style.top = height_header + 'px';
+	
+		function init_elem( height ) {
+	
+			if ( ( ( height - height_header - footer_id.offsetHeight ) + 20 ) > height_hint_description ) {
+				hint_description_top = height_header + ( ( ( height - height_header - footer_id.offsetHeight ) / 2 ) - ( height_hint_description / 2  ) );
+			} else {
+				hint_description_top = height_header + 20;
+			}
+			
+			div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
+											  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
+		}
+		
+		init_elem( window_height );
+		
+		if ( navigator.connection.type !== 'none' ) {
+	
+			if ( !localStorage.getItem( 'status_hint_description' ) ) {
+				localStorage.setItem( 'status_hint_description', 'show' );
+				wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
+				hint_description.style.top = hint_description_top + 'px';
+			} else {
+			
+			if ( localStorage.getItem( 'status_hint_description' ) === 'show' ) {
+				wrapper_hint_description.style.cssText = 'opacity: 1; z-index: 0';
+				hint_description.style.top = hint_description_top + 'px';
+			} 
+			
+			}
+	
+		}
+	
+		window.addEventListener( 'resize', () => {
+			let resize_window_height = window.innerHeight;
+			
+			height_hint_description = hint_description.offsetHeight;
+	
+			init_elem( resize_window_height );
+	
+			hint_description.style.top = hint_description_top + 'px';
+	
+			if ( top_elem ) {
+				let offset;
+	
+				if ( top_elem.tagName === 'UL' ) {
+					offset = 15;
+				} else {
+					offset = -10;
+				}
+	
+				window.scrollTo( 0, ( window.pageYOffset + 
+									  top_elem.getBoundingClientRect().y ) -
+									  height_header + offset );
+			}
+	
+		} );
+	  
+	}, 0 );
     
     for ( let i = 0; i < select_get_info.length; i++ ) {
 
@@ -333,13 +337,20 @@ function inner_get_info( select_get_info ) {
 		for ( let i = 0; i < array_obj.length; i++ ) {
 
 			for ( let value in array_obj[ i ] ) {
-				display_data( array_obj[ i ], i, value, calendar_ul );
+				display_data( array_obj[ i ], i, value, calendar_ul, +get_year );
 			}
 
 		}
 
     	if ( i === 1 ) {
-			let coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y - height_header + 5;
+			let coord_scroll;
+
+			if ( now_month === 0 || now_month === 1 ) {
+				coord_scroll = calendar_ul[ now_month ].parentElement.previousElementSibling.getBoundingClientRect().y - 20;
+			} else {
+				coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y;
+			}
+
     		window.scrollTo( { left: 0, 
 							   top: coord_scroll,
 							   behavior: 'smooth' } );
@@ -353,6 +364,9 @@ function inner_get_info( select_get_info ) {
     	}
 
     }
+
+	if ( show_select_date.classList.contains( 'd-none' ) ) show_select_date.classList.remove( 'd-none' );
+	if ( year_screen.style.opacity === '0' ) year_screen.style.opacity = '1';
 	
 	get_description( calendar, '.click' );
 
@@ -439,7 +453,7 @@ function get_van_year_info( slug,
             calendar_van_year,
 			all_years_screen,
 			calendar_van_year_ul,
-			year_content,
+			year_content = document.createElement( 'div' ),
 			sp_array = Object.entries( array_obj[ 5 ] ),
 			isus_array = Object.entries( array_obj[ 11 ] );
 	
@@ -447,12 +461,14 @@ function get_van_year_info( slug,
 		array_obj[ 11 ] = Object.fromEntries( add_isus_array( isus_array ) );
 		
 		if ( +get_year === now_year ) {
-			year_content = '<h1 class="year_select_date now_year year_h_1 m-b-0">' + get_year + '</h1>';
+			year_content.innerHTML += '<h1 class="year_select_date now_year year_h_1 m-b-0">' + get_year + '</h1>';
 		} else {
-			year_content = '<h1 class="year_select_date year_h_1 m-b-0">' + get_year + '</h1>';
+			year_content.innerHTML = '<h1 class="year_select_date year_h_1 m-b-0">' + get_year + '</h1>';
 		}
 
-		year_content += '<div class="calendar_year d-flex">' +
+		year_content.className = 'new-calendar';
+		year_content.style.opacity = '0';
+		year_content.innerHTML += '<div class="calendar_year d-flex">' +
 							'<ul class="jan"></ul>' +
 							'<ul class="feb"></ul>' +
 							'<ul class="mar"></ul>' +
@@ -468,14 +484,12 @@ function get_van_year_info( slug,
 						'</div>';
 
         if ( select_year || top_scroll ) {
+			calendar.prepend( year_content );
 
 			if ( select_year ) {
-				calendar.innerHTML = year_content;
 				calendar.append( height_footer );
-			} else if ( top_scroll ) {
-				calendar.insertAdjacentHTML( 'afterbegin', year_content );
 			}
-			
+
 			div_calendar = calendar.querySelectorAll( '.calendar_year' );
 			calendar_van_year = document.querySelector( '.calendar_year' );
 			all_years_screen = calendar.querySelectorAll( 'h1' );
@@ -490,9 +504,10 @@ function get_van_year_info( slug,
 			if ( !height_footer.closest( '#calendar' ) ) {
 				let calendar_local = document.getElementById( 'calendar' ),
 					height_footer_local = calendar_local.querySelector( '#height_footer' );
-				height_footer_local.insertAdjacentHTML( 'beforebegin', year_content );
+
+				height_footer_local.before( year_content );
 			} else {
-				height_footer.insertAdjacentHTML( 'beforebegin', year_content );
+				height_footer.before( year_content );
 			}
 			
 			div_calendar = calendar.querySelectorAll( '.calendar_year' );
@@ -516,15 +531,16 @@ function get_van_year_info( slug,
 		for ( let i = 0; i < array_obj.length; i++ ) {
 
 			for ( let value in array_obj[ i ] ) {
-				display_data( array_obj[ i ], i, value, calendar_van_year_ul );
+				display_data( array_obj[ i ], i, value, calendar_van_year_ul, get_year );
 			}
 
 		}
 
 		setTimeout( () => {
-			calendar.style.cssText = '';
+			calendar.style.height = 'auto';
 			min_preloader.style.cssText = '';
 			min_preloader.remove();
+			year_content.style.opacity = '1';
 		}, 500 );
 
 		if ( select_year || top_scroll ) {
@@ -535,10 +551,6 @@ function get_van_year_info( slug,
 			} else if ( top_scroll ) {
 				top_scroll = false;
 			}
-
-			setTimeout( () => {
-				window.scrollTo( { left: 0, top: 15, behavior: 'smooth' } );
-			}, 500 );
 			
 		} else if ( bottom_scroll ) {
 			bottom_scroll = false;
@@ -556,6 +568,9 @@ function get_van_year_info( slug,
 		get_description( calendar, '.click' );
 		inner_select_date( false );
 		localStorage.setItem( 'not_scroll', 'false' );
+
+		if ( year_screen.style.opacity === '0' ) year_screen.style.opacity = '1';
+
     }
 
 	xml_van_year.send();
@@ -771,29 +786,27 @@ input_select_date.oninput = function() {
 			not_scroll = false;
 			select_year = true;
 			calendar.innerHTML = '';
-			calendar.style.cssText = 'height: ' + ( scroll_window_height - 
-													height_header -
-													footer_id.clientHeight ) + 'px;';
+			calendar.style.height = ( scroll_window_height - 
+									  height_header -
+									  footer_id.clientHeight ) + 'px';
 			min_preloader.style.cssText = 'position: absolute;' +
-					'top: 50%;' + 
-					'left: 50%;' + 
-					'transform: translate(-50%, -50%);' +
-					'margin: 0';
+										  'top: 50%;' + 
+										  'left: 50%;' + 
+										  'transform: translate(-50%, -50%);' +
+										  'margin: 0';
 			calendar.append( min_preloader );
 			span_year_input = document.getElementById( 'year_input' );
 		
 			if ( span_year_input ) span_year_input.remove();
 
-			min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input"'  +
-																	 'class="text-center d-block' +  ' m-t-10">' +
-																  '<small>' +
-																	'Загружаем - ' + year_input + 
-																	' год' +
-																'</small>' +
-																'</span>' );
+			min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input" class="text-center d-block' +  ' m-t-10">' +
+																'<small>Загружаем - ' + year_input + ' год</small>' +
+															'</span>' );
 			
 			get_city( get_van_year_info, slug );
 			inner_select_date( false );
+			input_select_date.value = '';
+			input_select_date.blur();
 
 		} else {
 
@@ -965,7 +978,7 @@ plus.onclick = function( event_year,
 		window.scrollTo( 0, ( window.pageYOffset + 
 							  zoom_plus_elem.getBoundingClientRect().y ) -
 							  height_header + offset );
-		calendar.style.cssText = '';
+		calendar.style.opacity = '1';
 
 		if ( li_too_id.length > 0 ) {
 
@@ -1068,14 +1081,14 @@ minus.onclick = function( event_year,
 
 			window.scrollTo( 0, ( window.pageYOffset + zoom_minus_elem.getBoundingClientRect().y ) -
 								( height_header + offset ) );
-			calendar.style.cssText = '';
+			calendar.style.opacity = '1';
 
 		} else if ( ( document_height - scroll_window_height ) <= 
 					( window.pageYOffset + zoom_minus_elem.getBoundingClientRect().y -
 					  height_header ) ) {
 
 			window.scrollTo( 0, document_height - scroll_window_height - 60 );
-			calendar.style.cssText = '';
+			calendar.style.opacity = '1';
 
 		}
 

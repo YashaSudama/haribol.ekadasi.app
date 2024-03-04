@@ -29,7 +29,6 @@ import { window_width,
          min_preloader,
          show_body,
          hide_body,
-         hide_background,
          month_days,
          apparition_ekadasi_days,
          add_sp_array,
@@ -37,7 +36,9 @@ import { window_width,
          set_local_storage,
          set_update_local_storage,
          remove_local_storage,
-         reading_locale_storage
+         today,
+         text_not_data_server,
+         hide_background
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -45,7 +46,7 @@ document.addEventListener( "deviceready", () => {
     on_device_ready();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||
-          localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+            localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
         get_firebase_token_func();
     }
 
@@ -61,38 +62,24 @@ let window_select_city = document.getElementById( 'window_select_city' ),
     form_search = document.getElementById( 'form_search' ),
     div_search_city = document.getElementById( 'div_search_city' ),
     main = document.getElementById( 'main' ),
-    close_list = document.getElementById( 'close_list' ),
     message_not_city = document.getElementById( 'message_not_city' ), 
     message_location_error = document.getElementById( 'message_location_error' ),
     current_location = document.getElementById( 'current_location' ),
     state,
     lat,
     lon,
-    today = document.getElementById( 'today' ),
     city_slug,
     city_name,
     city_name_id,
     token_notif,
     device_found = false,
-    index_get_info_new;
+    index_get_info_new,
+    close_list;
 
-function get_firebase_token_func() {
+    function get_firebase_token_func() {
 
-    if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
-        localStorage.setItem( 'status_firebase_token', 'false' ); 
-
-        cordova.plugins.firebase.messaging.getToken().then( 
-            ( token ) => {
-                token_notif = token;
-            },
-            ( error ) => {
-                token_notif = false;
-            }   
-        );
-
-    } else {
-
-        if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+        if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
+            localStorage.setItem( 'status_firebase_token', 'false' ); 
     
             cordova.plugins.firebase.messaging.getToken().then( 
                 ( token ) => {
@@ -102,14 +89,27 @@ function get_firebase_token_func() {
                     token_notif = false;
                 }   
             );
-
+    
         } else {
-            return;
+    
+            if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+        
+                cordova.plugins.firebase.messaging.getToken().then( 
+                    ( token ) => {
+                        token_notif = token;
+                    },
+                    ( error ) => {
+                        token_notif = false;
+                    }   
+                );
+    
+            } else {
+                return;
+            }
+    
         }
-
+    
     }
-
-}
 
 if ( window_width < 480 ) {
     day_name_full[ 0 ] = 'Вос-нье';
@@ -125,35 +125,23 @@ set_local_storage( 'main_index', main.innerHTML );
 
 current_location.onclick = function() {
     remove_local_storage( 'city_select' );
-    hide_body();
     window.location.href = 'index.html';
-    localStorage.setItem( 'status_background', 'yes' );
-}
-
-function window_select_city_func() {
-    window_select_city.style.cssText = 'opacity: 1; z-index: 5';
-    footer_id.style.zIndex = '5';
-    today.innerHTML = '<a href="index.html" class="text-white">' +
-                          '<i class="fas fa-home fa-lg"></i>' +
-                      '</a>';
-
-    today.addEventListener( 'click', hide_body );
+    hide_body();
 
 }
 
-function window_change_city_func() {
-    window_change_city.style.cssText = 'opacity: 1; z-index: 5';
-    footer_id.style.zIndex = '5';
+function window_city_func( elem ) {
+    elem.style.cssText = 'opacity: 1; z-index: 5';
     today.innerHTML = '<a href="index.html" class="text-white">' +
                           '<i class="fas fa-home fa-lg"></i>' +
                       '</a>';
+    today.removeAttribute( 'id' );
 
     today.addEventListener( 'click', hide_body );
 
 }
 
 function inner_get_info_func( index_get_info_new, slug, height_header, day_week ) {
-
     let class_li,
         id_li,
         value_key,
@@ -182,6 +170,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         day_after_tomorrow = 'Послезавтра';
 
     height_header = header_top.clientHeight;
+    main.style.marginTop = height_header + 'px';
     
     for ( let i = 0; i < index_get_info_new.length; i++ ) { 
       
@@ -457,7 +446,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         if ( now_year === +get_year ) {
 
             for ( let i = now_month; i < array_obj.length; i++ ) {
-                current_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + '>' +
+                current_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
                                             '<li class="month">' +
                                                 '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
                                             '</li>' +
@@ -472,10 +461,11 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                 
             }
 
-            window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
+            window.scrollTo( { left: 0, top: 0, behavior: 'smooth' } );
 
             if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
                 hide_background();
+                show_body();
                 localStorage.removeItem( 'status_background' );
             } else {
                 navigator.splashscreen.hide();
@@ -485,7 +475,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         } else if ( ( now_year + 1 ) === +get_year ) {
 
             for ( let i = 0; i < array_obj.length; i++ ) {
-                plus_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + '>' +
+                plus_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
                                             '<li class="month">' +
                                                 '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
                                             '</li>' +
@@ -510,11 +500,13 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
     
     today.removeEventListener( 'click', hide_body );
     today.addEventListener( 'click', function() {
-        window.scrollTo( { left: 0, top: height_year, behavior: 'smooth' } );
+        window.scrollTo( { left: 0, top: 0, behavior: 'smooth' } );
     } );
 
     main.style.opacity = '1';
     header_top.style.opacity = '1';
+
+    if ( today && today.hasAttribute( 'id' ) ) today.style.cssText = '';
 
     get_description( main, '.click' );
 
@@ -653,14 +645,6 @@ function part_not_city( slug ) {
         div_main_coords;
     min_preloader.classList.add( 'search_preloader' );
 
-    if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-        hide_background();
-        localStorage.removeItem( 'status_background' );
-    } else {
-        navigator.splashscreen.hide();
-        show_body();
-    }
-
     window.addEventListener( 'keyboardDidShow', ( event ) => {
 
         let keyboard_height = event.keyboardHeight,
@@ -705,14 +689,16 @@ function part_not_city( slug ) {
     } );
 
     function not_data_server() {
-        div_search_city.innerHTML = '<div class="width-fit m-auto">' +
-                                        '<span class="d-block text-center search_string l-height-1-2">' +
-                                            'Не удалось получить данные с сервера! Попробуйте позже<br>или еще раз.' +
-                                        '</span>' +
-                                    '</div>';
+        div_search_city.innerHTML = text_not_data_server;
+
+        setTimeout(() => {
+            let not_data_server = document.getElementById( 'not_data_server' );
+            not_data_server.style.opacity = '1';
+        }, 500 );
+
     }
 
-    function list_all_cities( city, slug ) { 
+    function list_all_cities( city, slug ) { // получает и публикует список всех городов
 
         let xml_all_cityes = new XMLHttpRequest(),
             get_all_cities;
@@ -733,6 +719,8 @@ function part_not_city( slug ) {
     
         xml_all_cityes.onload = function() {
             get_all_cities = xml_all_cityes.response;
+            list_cityes.innerHTML = '';
+            list_cityes.innerHTML = '<i id="close_list" class="pos-fixed fas fa-angle-right fa-lg"></i>';
      
             for ( let city of get_all_cities ) {
                 list_cityes.insertAdjacentHTML( 'beforeEnd', '<span class="d-block">' + city.name + '</span>' );
@@ -740,13 +728,15 @@ function part_not_city( slug ) {
 
             list_cityes.style.cssText = 'opacity: 1;' +
                                         'z-index: 5';
+                                        
+            close_list = document.getElementById( 'close_list' ),
 
             close_list.onclick = function( event ) {
                 event.stopPropagation();
                 list_cityes.style.cssText = 'opacity: 0;' +
                                             'z-index: -1';
                 div_search_city.classList.add( 'p-all-0' );
-                div_search_city.innerHTML = '<button id="choice_full_list">' +
+                div_search_city.innerHTML = '<button id="choice_full_list" class="l-height-1-2">' +
                                                 'Выберите из полного<br>списка городов!' +
                                             '</button>';
 
@@ -1144,7 +1134,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
          ( localStorage.getItem( 'status_location_accuracy' ) === '0' ) ) {
         current_location.classList.add( 'd-none' );
     }
-    
+
     if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
         hide_background();
         localStorage.removeItem( 'status_background' );
@@ -1159,12 +1149,12 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
          localStorage.getItem( 'city_slug' ) ) {
         city_slug = localStorage.getItem( 'city_slug' );
         city_name = localStorage.getItem( 'city_name' );
-        
+   
         if ( localStorage.getItem( 'click_choice_city' ) === '0' )  {   
-           
+            
             if ( city && lat && lon ) add_city_undefined_database( city, state );
 
-            window_change_city_func();
+            window_city_func( window_change_city );
             local_city.innerHTML = city_name;
             
             yes_change_city.onclick = function() {
@@ -1184,7 +1174,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                 }, 500 );
                 
                 if ( localStorage.getItem( 'index_get_info_new' ) && 
-                     ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
+                        ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
                     index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
                     location_span.innerHTML = city_name;
                     
@@ -1198,15 +1188,15 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
             }
             
         } else {
-            window_select_city_func();
+            window_city_func( window_select_city );
             part_not_city( slug );
         }
-        
+   
     } else {
-        
+    
         if ( city && lat && lon ) add_city_undefined_database( city, state );
 
-        window_select_city_func();
+        window_city_func( window_select_city );
         part_not_city( slug );
     }
 
@@ -1266,7 +1256,7 @@ function location_error( slug ) {
 
     } else {
 
-        if ( localStorage.getItem( 'status_location_accuracy' ) === '1' ) {
+        if ( localStorage.getItem( 'status_location' ) === '1' ) {
 
             message_location_error.innerHTML =  '<div class="width-fit m-auto">' +
                                                     '<span class="d-block text-center">' +
@@ -1285,7 +1275,6 @@ function location_error( slug ) {
 } // location_error - end
 
 function get_city( lat, lon ) {
-
     let xml_location = new XMLHttpRequest(),
         url = 'https://api.opencagedata.com/geocode/v1/json?q=' + lat + ',' + lon + 
               '&no_annotations=1&language=en&limit=1&key=' + key;
@@ -1401,10 +1390,10 @@ function get_city( lat, lon ) {
             not_city( lat, lon, city, slug, index_get_info_new );
             return;
         }
-        
+
         get_city_and_info( lat, lon, city, slug );
         
-    };
+    }
 
     xml_location.send();
 
@@ -1414,9 +1403,9 @@ function get_city_and_info( lat, lon, city, slug ) {
     let xml_city = new XMLHttpRequest(),
         get_city_array;
 
-    xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
-    xml_city.responseType = 'json';
-    xml_city.setRequestHeader( 'Content-Type', 'application/json' );
+        xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
+        xml_city.responseType = 'json';
+        xml_city.setRequestHeader( 'Content-Type', 'application/json' );
 
     not_connection( xml_city, 
                     main, 
@@ -1605,7 +1594,6 @@ function on_device_ready() {
                 cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
 
                     if ( canRequest ) {
-
                         localStorage.setItem( 'status_location', '1' );
 
                         if ( localStorage.getItem( 'user_location_accuracy' ) === '0' ) {
