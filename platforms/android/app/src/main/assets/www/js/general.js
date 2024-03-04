@@ -1136,7 +1136,6 @@ function update_notifications( slug ) {
     }
         
     xml_update.onload = function() {
-        
         let response_update = xml_update.response;
 
         if ( response_update ) {

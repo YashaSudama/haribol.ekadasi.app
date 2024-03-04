@@ -1382,6 +1382,13 @@ function get_city( lat, lon ) {
                     city = 'Brussels';
                 }
 
+            } else if ( country === 'Japan' ) {
+
+                if ( city === 'Chiyoda' || 
+                     city === 'Koto' ) {
+                    city === 'Tokio';
+                }
+
             }
 
         }

@@ -62,7 +62,6 @@ let window_select_city = document.getElementById( 'window_select_city' ),
     form_search = document.getElementById( 'form_search' ),
     div_search_city = document.getElementById( 'div_search_city' ),
     main = document.getElementById( 'main' ),
-    close_list = document.getElementById( 'close_list' ),
     message_not_city = document.getElementById( 'message_not_city' ), 
     message_location_error = document.getElementById( 'message_location_error' ),
     current_location = document.getElementById( 'current_location' ),
@@ -74,7 +73,8 @@ let window_select_city = document.getElementById( 'window_select_city' ),
     city_name_id,
     token_notif,
     device_found = false,
-    index_get_info_new;
+    index_get_info_new,
+    close_list;
 
     function get_firebase_token_func() {
 
@@ -719,6 +719,8 @@ function part_not_city( slug ) {
     
         xml_all_cityes.onload = function() {
             get_all_cities = xml_all_cityes.response;
+            list_cityes.innerHTML = '';
+            list_cityes.innerHTML = '<i id="close_list" class="pos-fixed fas fa-angle-right fa-lg"></i>';
      
             for ( let city of get_all_cities ) {
                 list_cityes.insertAdjacentHTML( 'beforeEnd', '<span class="d-block">' + city.name + '</span>' );
@@ -726,6 +728,8 @@ function part_not_city( slug ) {
 
             list_cityes.style.cssText = 'opacity: 1;' +
                                         'z-index: 5';
+                                        
+            close_list = document.getElementById( 'close_list' ),
 
             close_list.onclick = function( event ) {
                 event.stopPropagation();
@@ -1376,6 +1380,13 @@ function get_city( lat, lon ) {
 
                 if ( state === 'Brussels-Capital' ) {
                     city = 'Brussels';
+                }
+
+            } else if ( country === 'Japan' ) {
+
+                if ( city === 'Chiyoda' || 
+                     city === 'Koto' ) {
+                    city === 'Tokio';
                 }
 
             }
