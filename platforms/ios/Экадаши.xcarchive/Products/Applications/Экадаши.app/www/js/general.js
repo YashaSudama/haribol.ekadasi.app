@@ -54,7 +54,7 @@ if ( !localStorage.getItem( 'setting_notifications' ) ) {
 }
 
 let key = '7dc98540afbc4208863cb94ea2932ef0',
-    url = 'https://haribol.jagadguru.ru/',
+    url = 'https://ekadasi.info/',
     now_date = new Date(), // создаем экземпляр объекта с текущей датой
     now_year = now_date.getFullYear(), // возвращает текущий год в четырехзначном формате
     now_month = now_date.getMonth(), // возвращает текущий номер месяца (значение от 0 до 11. Январь равен 0)
@@ -210,6 +210,18 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                name_too_events: 'Ратха-ятра',
                id: 'radha-yatra'
              },
+        'C': { name: 'Уход А.Ч. Бхактиведанты Свами',
+               name_too_events: 'Бхактиведанта',
+               id: 'disappearance-prabhupada'
+            },
+        'D': { name: 'Явление Шрилы Бхактисиддханты Сарасвати Тхакура ',
+               name_too_events: 'Бхактисиддханта',
+               id: 'bhaktisiddhanta'
+            },
+        'E': { name: 'Явление Шрилы Бхактивиноды Тхакура Прабхупады',
+               name_too_events: 'Бхактивинода',
+               id: 'bhaktivinoda'
+            },
         'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
                      '<hr class="ekadashi_hr">' +
                      '<span class="exit">Пост</span>',

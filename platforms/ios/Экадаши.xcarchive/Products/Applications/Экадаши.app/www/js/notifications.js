@@ -200,9 +200,9 @@ function work_settings_notifications() {
 
         update_storage.onclick = function() {
             clear();
-            navigator.splashscreen.show();
-            hide_body();
-            window.location.href = 'index.html';
+            // navigator.splashscreen.show();
+            // hide_body();
+            // window.location.href = 'index.html';
         }
 
     } else {

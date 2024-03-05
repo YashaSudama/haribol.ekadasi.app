@@ -166,6 +166,9 @@ main li.event_coming {
 .radha-yatra::after,
 .vyasapudja::after,
 .rozhdestvo::after,
+.disappearance-prabhupada::after,
+.bhaktisiddhanta::after,
+.bhaktivinoda::after,
 #local_city,
 .not_window span {
   	background-color: #fea00a40;
@@ -1185,6 +1188,9 @@ header {
 .radha-yatra::after,
 .vyasapudja::after,
 .rozhdestvo::after,
+.disappearance-prabhupada::after,
+.bhaktisiddhanta::after,
+.bhaktivinoda::after,
 .now_date::after {
 	content: '';
 	position: absolute;
@@ -1204,6 +1210,9 @@ header {
 .krishna,
 .bhaktivedanta,
 .radharany,
+.disappearance-prabhupada,
+.bhaktisiddhanta,
+.bhaktivinoda,
 .govardhana,
 .radha-yatra,
 .vyasapudja,
@@ -1265,6 +1274,9 @@ header {
 .zoom_calendar .krishna::after,
 .zoom_calendar .bhaktivedanta::after,
 .zoom_calendar .radharany::after,
+.zoom_calendar .disappearance-prabhupada::after,
+.zoom_calendar .bhaktisiddhanta::after,
+.zoom_calendar .bhaktivinoda::after,
 .zoom_calendar .govardhana::after,
 .zoom_calendar .vyasapudja::after,
 .zoom_calendar .rozhdestvo::after {
@@ -1294,7 +1306,7 @@ header {
   top: 0;
   width: 100vW;
   height: 100vh;
-  padding: 0 20px 30px;
+  padding: 0 20px 60px;
   box-sizing: border-box;
   opacity: 0; 
   -webkit-touch-callout: none; /* iOS Safari */
