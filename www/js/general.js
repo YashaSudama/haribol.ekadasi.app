@@ -219,15 +219,15 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         'C': { name: 'Уход А.Ч. Бхактиведанты Свами',
                 name_too_events: 'Бхактиведанта',
-                id: 'bhaktivedanta'
+                id: 'bhaktivedanta_disappearance'
             },
         'D': { name: 'Явление Шрилы Бхактисиддханты Сарасвати Тхакура ',
                name_too_events: 'Бхактисиддханта',
-               id: 'bhaktivedanta'
+               id: 'bhaktisiddhanta'
             },
         'E': { name: 'Явление Шрилы Бхактивиноды Тхакура Прабхупады',
                 name_too_events: 'Бхактивинода',
-                id: 'bhaktivedanta'
+                id: 'bhaktivinoda'
             },
         'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
                      '<hr class="ekadashi_hr">' +
