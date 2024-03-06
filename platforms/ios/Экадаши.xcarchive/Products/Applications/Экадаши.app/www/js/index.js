@@ -141,7 +141,6 @@ if ( window_width < 480 ) {
     day_name_full[ 1 ] = 'Пон-ник';
 }
 
-height_footer_func();
 set_local_storage( 'click_choice_city', '0' );
 set_local_storage( 'now_year', now_year );
 set_local_storage( 'status_notifications', 'false' );
@@ -528,6 +527,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
     if ( today && today.hasAttribute( 'id' ) ) today.style.cssText = '';
 
     get_description( main, '.click' );
+    height_footer_func();
 
 }
 

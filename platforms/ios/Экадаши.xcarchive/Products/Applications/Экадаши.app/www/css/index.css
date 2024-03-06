@@ -56,7 +56,6 @@ body,
 #update_notif,
 #update_storage,
 #not_connection button,
-#clear_local_storage,
 #window_select_city .main input,
 #select_city_notif,
 #yes_change_city,
@@ -74,7 +73,6 @@ body,
 .change_buttons button,
 #check_exit_page button,
 #current_location,
-.null_info button,
 #select_city_notif,
 #update_notif,
 #update_storage,
@@ -83,7 +81,6 @@ body,
 .ekadashi::after,
 .too_events,
 #not_connection button,
-#clear_local_storage,
 .reason_server span,
 .hint_description,
 .wrapper_internally_notice_foreground,
@@ -385,7 +382,8 @@ body,
 #today,
 #not_data_server,
 #not_connection,
-.new-calendar {
+.new-calendar,
+.div_zoom_calendar {
   transition: opacity .4s linear;
 }
 #current_date {
@@ -565,7 +563,7 @@ header {
   	width: 60%;
 }
 .info_year li,
-#main_notifications {
+#main_notifications .wrapper_notifications {
   	padding: 10px;
 }
 #main_notifications form {
@@ -663,14 +661,14 @@ header {
 	width: 75%;
 }
 #not_connection {
-	top: 45%;
+	top: 50%;
 	transform: translateY(-50%);
 	line-height: 1.4;
 	opacity: 0;
 }
-#not_connection button,
-#clear_local_storage {
+#not_connection button {
 	min-width: 250px;
+	font-size: 15px;
 	border: 0;
 	padding: 10px 0;
 }
@@ -782,7 +780,6 @@ header {
 	z-index: 1;
 }
 #current_location,
-.null_info button,
 #select_city_notif,
 #update_notif,
 #update_storage,
@@ -792,7 +789,6 @@ header {
 	font-size: 15px;
 } 
 #current_location,
-.null_info button,
 #select_city_notif,
 #update_notif,
 #update_storage,
@@ -832,10 +828,6 @@ header {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-}
-.null_info button {
-	border: 0;
-	font-size: 18px;
 }
 .link_policy {
   	font-size: 14px;
@@ -1010,7 +1002,7 @@ header {
 	background-color: #eee;
 	width: 100%;
 	box-sizing: border-box;
-	z-index: 1;
+	z-index: 2;
 	box-shadow: 0 10px 25px -20px #000;
 	transition: top .4s linear;
 }
@@ -1043,18 +1035,19 @@ header {
 	font-size: 27px;
 }
 .hint {
-	top: 53px;
+	top: 60px;
 	left: 10px;
 	opacity: 0;
 	z-index: -1;
 	padding: 8px 10px;
-	font-size: 14px;
+	font-size: 15px;
 	border-radius: 10px;
+	box-shadow: 0 10px 30px -20px #000;
 }
 .hint::before {
 	content: '';
 	position: absolute;
-	bottom: 47px;
+	bottom: 52px;
 	left: 20px;
 	border: 6px solid transparent;
 }
@@ -1223,6 +1216,7 @@ header {
   	left: 45%;
 }
 .div_zoom_calendar {
+	opacity: 0;
   	z-index: 1;
 }
 .div_zoom_calendar i {
@@ -1401,13 +1395,6 @@ header {
 
 }
 
-.null_info {
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 80%;
-	font-size: 22px;
-}
 #select_city_notif {
   	padding: 10px 40px;
 }
