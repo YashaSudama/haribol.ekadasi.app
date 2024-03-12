@@ -16,9 +16,6 @@
     "cordova-plugin-device": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
-    "cordova-plugin-fcm": {
-      "PACKAGE_NAME": "haribol.ekadasi.app"
-    },
     "cordova-plugin-geolocation": {
       "GPS_REQUIRED": "true",
       "PACKAGE_NAME": "haribol.ekadasi.app"
@@ -39,6 +36,9 @@
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
     "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "haribol.ekadasi.app"
+    },
+    "cordova-plugin-fcm": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     }
   },

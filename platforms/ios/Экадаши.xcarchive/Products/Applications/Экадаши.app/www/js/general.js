@@ -215,11 +215,11 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                name_too_events: 'Бхактиведанта',
                id: 'disappearance-prabhupada'
             },
-        'D': { name: 'Явление Шрилы Бхактисиддханты Сарасвати Тхакура ',
+        'D': { name: 'Явление Бхактисиддханты Сарасвати',
                name_too_events: 'Бхактисиддханта',
                id: 'bhaktisiddhanta'
             },
-        'E': { name: 'Явление Шрилы Бхактивиноды Тхакура Прабхупады',
+        'E': { name: 'Явление Бхактивиноды Тхакура',
                name_too_events: 'Бхактивинода',
                id: 'bhaktivinoda'
             },
@@ -649,7 +649,7 @@ function timeout( xml_name,
                   name_func, 
                   param ) {
 
-    xml_name.timeout = 5000;
+    xml_name.timeout = 10000;
 
     xml_name.ontimeout = function() {
         

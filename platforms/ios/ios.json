@@ -13,10 +13,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"FCMPlugin\"><param name=\"ios-package\" value=\"FCMPlugin\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
               "count": 1
             },
@@ -103,6 +99,10 @@
             {
               "xml": "<feature name=\"Diagnostic_Motion\"><param name=\"ios-package\" value=\"Diagnostic_Motion\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"FCMPlugin\"><param name=\"ios-package\" value=\"FCMPlugin\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -131,7 +131,7 @@
         "parents": {
           "NSLocationWhenInUseUsageDescription": [
             {
-              "xml": "<string>The app needs to know your location to provide you with dates for observing ekadashi and Vaishnava festivals that match your location</string>",
+              "xml": "<string>This app requires access to your location when the screen is on and the app is displayed.</string>",
               "count": 1
             }
           ],
@@ -215,9 +215,6 @@
     "cordova-plugin-device": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
-    "cordova-plugin-fcm": {
-      "PACKAGE_NAME": "haribol.ekadasi.app"
-    },
     "cordova-plugin-geolocation": {
       "GPS_REQUIRED": "true",
       "PACKAGE_NAME": "haribol.ekadasi.app"
@@ -239,6 +236,9 @@
     },
     "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
+    },
+    "cordova-plugin-fcm": {
+      "PACKAGE_NAME": "haribol.ekadasi.app"
     }
   },
   "dependent_plugins": {},
@@ -257,14 +257,6 @@
       "pluginId": "cordova-plugin-device",
       "clobbers": [
         "device"
-      ]
-    },
-    {
-      "id": "cordova-plugin-fcm.FCMPlugin",
-      "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
-      "pluginId": "cordova-plugin-fcm",
-      "clobbers": [
-        "FCMPlugin"
       ]
     },
     {
@@ -442,19 +434,27 @@
       "merges": [
         "cordova.plugins.diagnostic.motion"
       ]
+    },
+    {
+      "id": "cordova-plugin-fcm.FCMPlugin",
+      "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
+      "pluginId": "cordova-plugin-fcm",
+      "clobbers": [
+        "FCMPlugin"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-android-permissions": "1.1.5",
     "cordova-plugin-device": "2.1.0",
-    "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-geolocation": "4.1.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview-signosoft-fork": "5.0.2",
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-statusbar": "3.0.0",
-    "cordova.plugins.diagnostic": "7.1.2"
+    "cordova.plugins.diagnostic": "7.1.4",
+    "cordova-plugin-fcm": "2.1.2"
   }
 }

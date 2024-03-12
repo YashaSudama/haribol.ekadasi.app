@@ -155,14 +155,19 @@ current_location.onclick = function() {
 
 }
 
+function set_splashscreen() {
+    navigator.splashscreen.show();
+    hide_body();
+}
+
 function window_city_func( elem ) {
     elem.style.cssText = 'opacity: 1; z-index: 5';
     today.innerHTML = '<a href="index.html" class="text-white">' +
                           '<i class="fas fa-home fa-lg"></i>' +
                       '</a>';
     today.removeAttribute( 'id' );
+    today.addEventListener( 'click', set_splashscreen );
 
-    today.addEventListener( 'click', hide_body );
 }
 
 function inner_get_info_func( index_get_info_new, slug, height_header, day_week ) {
@@ -516,7 +521,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
 
     }
     
-    today.removeEventListener( 'click', hide_body );
+    today.removeEventListener( 'click', set_splashscreen );
     today.addEventListener( 'click', function() {
         window.scrollTo( { left: 0, top: 0, behavior: 'smooth' } );
     } );
@@ -1204,6 +1209,8 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                     localStorage.setItem( 'now_year', now_year );
                     get_city_and_info( lat, lon, city_slug, slug );
                 }
+
+                today.innerHTML = '<li id="today">Сегодня</li>';
                 
             }
             
@@ -1354,28 +1361,30 @@ function get_city( lat, lon ) {
 
             } else if ( country === 'New Zealand' ) {
 
-                if ( state === 'Auckland' ) city = 'Auckland';
+                if ( state === 'Auckland' ) {
+                    city = 'Auckland';
+                }
 
             } else if ( country === 'Russia' ) {
 
                 if ( state === 'Moscow' ) {
-                    city = 'Moscow';
+                 city = 'Moscow';
                 } if ( state === 'Saint Petersburg' ) {
-                    city = 'Saint Petersburg';
+                 city = 'Saint Petersburg';
                 } else if ( ( city === 'Baranovka' ) && ( state === 'Krasnodar Krai' ) ) {
-                    city = 'Sochi';
+                 city = 'Sochi';
                 } else if ( city === 'Лиски' ) {
-                    city = 'Liski';
+                 city = 'Liski';
                 }
 
             } else if ( country === 'Thailand' ) {
 
-                if ( ( сity === 'Dauh Puri Kauh' ) || 
-                     ( сity === 'Renon' ) ) {
+                if ( city === 'Dauh Puri Kauh' || 
+                     city === 'Renon' ) {
                     city = 'Denpasar';
                 } else if ( state === 'Phuket Province' ) {
                     city = 'Phuket'; 
-                } else if ( !city && ( state === 'Bangkok' ) ) {
+                } else if ( !city && state === 'Bangkok' ) {
                     city = 'Bangkok';
                 } else if ( city === 'Tong Yang' ) {
                     city = 'Island Samui';
@@ -1429,6 +1438,7 @@ function get_city( lat, lon ) {
 }
 
 function get_city_and_info( lat, lon, city, slug ) { 
+    
     let xml_city = new XMLHttpRequest(),
         get_city_array;
 
@@ -1530,7 +1540,7 @@ function on_success( position, city_name, index_get_info_new ) {
     if ( localStorage.getItem( 'city_select' ) ) {
         city_name = localStorage.getItem( 'city_name' );
         city_slug = localStorage.getItem( 'city_slug' );
-
+        
         if ( localStorage.getItem( 'index_get_info_new' ) && 
              ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
             index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
@@ -1564,7 +1574,7 @@ function on_success( position, city_name, index_get_info_new ) {
                 ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
                 ( ( ( +localStorage.getItem( 'lat' ) - 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) - 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ||
                 ( ( ( +localStorage.getItem( 'lat' ) + 0.1 ) === ( +lat.toFixed( 1 ) ) ) && ( ( +localStorage.getItem( 'lon' ) + 0.1 ) === ( +lon.toFixed( 1 ) ) ) ) ) {
-
+                
                 if ( localStorage.getItem( 'index_get_info_new' ) && 
                     ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
                     index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
@@ -1592,9 +1602,6 @@ function on_error( error ) {
 }
 
 function on_device_ready() {
-
-    cordova.plugins.diagnostic.enableDebug();
-
     let status_location_accuracy;
 
     cordova.plugins.diagnostic.isLocationEnabled( function( enabled ) { // статус службы геолокации true or false
@@ -1631,7 +1638,7 @@ function on_device_ready() {
     setTimeout( () => {
 
         if ( navigator.connection.type !== 'none' ) {
-
+            
             cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
                 StatusBar.show();
                 StatusBar.backgroundColorByHexString( '#000000' );
@@ -1650,6 +1657,13 @@ function on_device_ready() {
                                     localStorage.setItem( 'status_location', '1' );
                                     launch_calendar();
                                     break;
+                                case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                                    localStorage.setItem( 'status_location', '1' );
+                                    launch_calendar();
+                                    break;
+                                default:
+                                    localStorage.setItem( 'status_location', '0' );
+                                    location_error( slug );
                             }
 
                         }, function( error ) {
@@ -1704,6 +1718,9 @@ function on_device_ready() {
                         localStorage.setItem( 'status_location', '1' );
                         launch_calendar();
                         break;
+                    default:
+                        localStorage.setItem( 'status_location', '0' );
+                        location_error( slug );
 
                 }
 

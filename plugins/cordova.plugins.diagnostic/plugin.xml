@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova.plugins.diagnostic"
-    version="7.1.2">
+    version="7.1.4">
 
     <name>Diagnostic</name>
     <description>Cordova/Phonegap plugin to check the state of Location/WiFi/Camera/Bluetooth device settings.</description>
@@ -10,7 +10,7 @@
     <license>MIT</license>
     <keywords>ecosystem:cordova,cordova,phonegap,android,ios,diagnostic,wifi,location,gps,camera,bluetooth,settings</keywords>
     <engines>
-        <engine name="cordova" version=">=12.0.0"/>
+        <engine name="cordova" version=">=9.0.0"/>
         <engine name="cordova-android" version=">=8.0.0"/>
         <engine name="cordova-ios" version=">=5.0.0"/>
     </engines>
@@ -50,7 +50,7 @@
         <framework src="CoreLocation.framework" />
 
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription" comment="Default usage descriptions: override as necessary in .plist">
-            <string>The app needs to know your location to provide you with dates for observing ekadashi and Vaishnava festivals that match your location</string>
+            <string>This app requires access to your location when the screen is on and the app is displayed.</string>
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription" comment="iOS 11 or greater">

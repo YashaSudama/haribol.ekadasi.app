@@ -28,9 +28,6 @@
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
-    <feature name="FCMPlugin">
-        <param name="ios-package" value="FCMPlugin" />
-    </feature>
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
     </feature>
@@ -94,6 +91,9 @@
     <feature name="Diagnostic_Motion">
         <param name="ios-package" value="Diagnostic_Motion" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="FCMPlugin">
+        <param name="ios-package" value="FCMPlugin" />
     </feature>
     <name>Экадаши</name>
     <description>
