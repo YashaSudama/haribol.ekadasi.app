@@ -144,7 +144,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     choice_date = document.getElementById( 'choice_date' ),
     text_not_connection_timeout = '<h3 class="m-b-0 text-uppercase">Не удалось получить<br>данные с сервера</h3>' +
                                   '<h4 class="m-t-15">Возможные причины:</h4>' +
-                                  '<ul class="reason_server l-height-1-1 text-left m-auto" style="max-width: 70%">' +
+                                  '<ul class="reason_server width-fit l-height-1-1 text-left m-auto">' +
                                     '<li class="m-b-10 m-l-15 pos-rel">' +
                                         '<span class="pos-abs"></span>' +
                                             'маленькая скорость интернета' +
@@ -167,6 +167,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                                         '</div>',
 	show_select_date = document.getElementById( 'show_select_date' ),
 	year_screen = document.getElementById( 'year_screen' ),
+    year_screen_span = document.getElementById( 'year_screen_span' ),
 	today = document.getElementById( 'today' ),
     apparition_ekadasi_days = {
         '1': { name: 'Явление Нитьянанды Прабху',
@@ -219,13 +220,13 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         'C': { name: 'Уход А.Ч. Бхактиведанты Свами',
                 name_too_events: 'Бхактиведанта',
-                id: 'bhaktivedanta_disappearance'
+                id: 'disappearance-prabhupada'
             },
-        'D': { name: 'Явление Шрилы Бхактисиддханты Сарасвати Тхакура ',
+        'D': { name: 'Явление Бхактисиддханты Сарасвати Тхакура ',
                name_too_events: 'Бхактисиддханта',
                id: 'bhaktisiddhanta'
             },
-        'E': { name: 'Явление Шрилы Бхактивиноды Тхакура Прабхупады',
+        'E': { name: 'Явление Бхактивиноды Тхакура Прабхупады',
                 name_too_events: 'Бхактивинода',
                 id: 'bhaktivinoda'
             },
@@ -442,6 +443,16 @@ function hide_background() {
     background.style.cssText = '';
 }
 
+function show_today() {
+
+    if ( today && 
+         today.hasAttribute( 'id' ) && 
+         !today.closest( 'body' ).querySelector( '#not_connection' ) ) { 
+            today.style.cssText = ''; 
+    }
+
+}
+
 for ( let div of description ) {
   div.style.left = window_width + 'px';
 }
@@ -456,7 +467,7 @@ window.addEventListener( 'resize', function() {
 
 } );
 
-nav.onclick = function() {
+nav.addEventListener( 'click', function() {
     
     if ( ul_nav.style.cssText === '' ) {
         ul_nav.style.cssText = 'opacity: 1; z-index: 7';
@@ -468,12 +479,14 @@ nav.onclick = function() {
 
         if ( today && today.hasAttribute( 'id' ) && !today.closest( 'body' ).querySelector( '#not_connection' ) ) today.style.cssText = '';
 
+        show_today();
     }
 
-}
+} );
 
 close_nav.onclick = function() {
     ul_nav.style.cssText = '';
+    show_today();
 }
 
 city_selection.onclick = function() {
@@ -517,10 +530,25 @@ function content_not_data( main,
     if ( !height_header ) height_header = header_top.clientHeight;
     if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
     if ( show_select_date ) show_select_date.classList.add( 'd-none' );
-    if ( year_screen ) year_screen.style.opacity = '0';
+    if ( year_screen_span ) year_screen_span.innerHTML = '';
     if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
 
     if ( main ) {
+        main.innerHTML = '';
+
+        let style_not_connection = 'top: 0;' +
+                                   'transform: none;' +
+                                   'padding-top: 5px;' +
+                                   'padding-bottom: 50px;',
+            document_height = Math.max(
+                document.body.scrollHeight, 
+                document.documentElement.scrollHeight,
+                document.body.offsetHeight, 
+                document.documentElement.offsetHeight,
+                document.body.clientHeight, 
+                document.documentElement.clientHeight
+            ),
+            height_main = document_height - height_header - footer_id.clientHeight;
 
         if ( text === text_not_internet ) {
             after_text = 'Проверьте подключение к интернету и попробуйте еще раз';
@@ -529,53 +557,85 @@ function content_not_data( main,
         }
 
         main.style.cssText = 'margin-top: ' + height_header + 'px;' + 
-                             'height: ' + ( scroll_window_height - height_header - footer_id.clientHeight ) + 'px;';
+                             'height: ' + height_main + 'px;';
         main.innerHTML = '<div id="not_connection" class="pos-rel">' +
                             '<div class="text-center">' + text + '</div>' +
-                            '<button id="reload" class="d-block m-auto m-t-30">Перезагрузить страницу</button>' +
-                            '<button id="last_version" class="d-block m-t-30 m-auto">Отобразить последнюю<br>сохранённую версию</button>' +
+                            '<button id="reload" class="d-block m-auto m-t-30 l-height-1-25">Перезагрузить страницу</button>' +
+                            '<button id="last_version" class="d-block m-t-30 m-auto l-height-1-25">Отобразить последнюю<br>сохранённую версию</button>' +
                             '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">' + after_text + '</h4>' +
                          '</div>';
-    }
 
-    let reload = document.getElementById( 'reload' ),
-        last_version = document.getElementById( 'last_version' );
+        let height_main_div = main.querySelector( '#not_connection' ).clientHeight,
+            reload = document.getElementById( 'reload' ),
+            last_version = document.getElementById( 'last_version' );
 
-    if ( !localStorage.getItem( local_object ) ) {
-        last_version.classList.add( 'd-none' );
-    } else {
-        param = JSON.parse( localStorage.getItem( local_object ) );
-    }
+        change_not_connection( height_main, height_main_div );
 
-    if ( reload ) {
-
-        reload.onclick = function() {
-            hide_body();
-            localStorage.setItem( 'status_background', 'yes' );
-            window.location.reload();
+        if ( !localStorage.getItem( local_object ) ) {
+            last_version.classList.add( 'd-none' );
+        } else {
+            param = JSON.parse( localStorage.getItem( local_object ) );
         }
 
-    }
+        if ( reload ) {
 
-    if ( last_version ) {
-
-        last_version.onclick = function() {
-            hide_body();
-            localStorage.setItem( 'status_background', 'yes' );
-            city = localStorage.getItem( 'city_name' );
-            location_span.innerHTML = city;
-            main.style.cssText = '';
-            main.innerHTML = localStorage.getItem( local_html );
-            
-            setTimeout( () => {
-                name_func( param );
-            }, 500 );
-            
-            if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
-            if ( localStorage.getItem( 'not_scroll' ) ) localStorage.setItem( 'not_scroll', 'true' );
+            reload.onclick = function() {
+                hide_body();
+                localStorage.setItem( 'status_background', 'yes' );
+                window.location.reload();
+            }
 
         }
 
+        if ( last_version ) {
+
+            last_version.onclick = function() {
+                window.removeEventListener( 'resize', change_main );
+                hide_body();
+                localStorage.setItem( 'status_background', 'yes' );
+                city = localStorage.getItem( 'city_name' );
+                location_span.innerHTML = city;
+                main.style.cssText = '';
+                main.innerHTML = localStorage.getItem( local_html );
+                
+                setTimeout( () => {
+                    name_func( param );
+                }, 500 );
+                
+                if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
+                if ( localStorage.getItem( 'not_scroll' ) ) localStorage.setItem( 'not_scroll', 'true' );
+
+            }
+
+        }
+
+        function change_not_connection( height_1, height_2 ) {
+
+            if ( ( height_1 - height_2 ) <= 20 ) {
+                main.querySelector( '#not_connection' ).style.cssText = style_not_connection;
+            }
+
+        }
+
+        function change_main() {
+            main.querySelector( '#not_connection' ).style.cssText = '';
+
+            if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
+
+            setTimeout(() => {
+                let height_main_resize = window.innerHeight - height_header - footer_id.clientHeight,
+                    height_main_div_resize = main.querySelector( '#not_connection' ).clientHeight;
+
+                main.style.height = height_main_resize + 'px'; 
+                change_not_connection( height_main_resize, height_main_div_resize );
+                window.scrollTo( 0, 0 );
+                main.querySelector( '#not_connection' ).style.opacity = '1';
+            }, 1000 );
+
+        }
+
+        window.addEventListener( 'resize', change_main );
+    
     }
 
     setTimeout( () => {
@@ -623,7 +683,7 @@ function timeout( xml_name,
                   name_func, 
                   param ) {
 
-    xml_name.timeout = 5000;
+    xml_name.timeout = 10000;
 
     xml_name.ontimeout = function() {
         
@@ -656,6 +716,14 @@ function content_not_connection( main,
 
 function height_footer_func() {
     height_footer.style.height = footer_id.clientHeight + 30 + 'px';
+
+    if ( !( +height_footer.clientHeight ) ) {
+        height_footer = document.getElementById( 'height_footer' );
+        height_footer_func();
+    } else {
+        return;
+    }
+
 }
 
 function get_coords_left( block, 
@@ -1415,7 +1483,8 @@ export { window_width,
          show_select_date,
          year_screen,
          today,
-         text_not_data_server  };
+         text_not_data_server,
+         year_screen_span };
 
 // По луне
 // -------

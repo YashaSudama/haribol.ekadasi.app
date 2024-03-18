@@ -33,7 +33,7 @@ import { now_date_number,
          remove_too_events,
 		 show_select_date,
 		 year_screen,
-		 hide_body
+		 year_screen_span
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
@@ -43,7 +43,6 @@ let calendar = document.getElementById( 'calendar' ),
 	div_list_all_years = document.getElementById( 'div_list_all_years' ),
 	open_list_years = document.getElementById( 'open_list_years' ),
 	close_list_years = document.getElementById( 'close_list_years' ),
-	year_screen_span = document.getElementById( 'year_screen_span' ),
 	year = calendar.getElementsByTagName( 'h1'),
 	div_calendar = calendar.querySelectorAll( '.calendar_year' ),
 	first_day_month,
@@ -109,18 +108,25 @@ document.addEventListener( 'deviceready', () => {
 	
 }, false );
 
-height_footer_func();
-
 for ( let i = min_year; i < ( max_year + 1 ); i++ ) {
 	let year = '<span class="d-block m-b-20">' + i + '</span>';
 
 	div_list_all_years.insertAdjacentHTML( 'beforeend', year );
 }
 
-div_list_all_years.insertAdjacentHTML( 'afterbegin', 
-									   '<div style="height: 30px; width: 100%;"></div>' );
-div_list_all_years.insertAdjacentHTML( 'beforeend', 
-									   '<div style="height: 30px; width: 100%;"></div>' );
+function add_elem_div_list_all_years( where_element, height ) {
+	let content = '<div style="height: ' + height + 'px; width: 100%;"></div>'
+	div_list_all_years.insertAdjacentHTML( where_element, content );
+}
+
+add_elem_div_list_all_years( 'afterbegin', 30 );
+add_elem_div_list_all_years( 'beforeend', 60 );
+
+function show_zoom_callendar() {									   
+	div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
+									  'right: ' + ( plus.offsetWidth + 10 ) + 'px;' +
+									  'opacity: 1;';
+}
 
 function print_year( div_year, year ) {
 	let count_month = 0,
@@ -256,8 +262,8 @@ function inner_get_info( select_get_info ) {
 				hint_description_top = height_header + 20;
 			}
 			
-			div_zoom_calendar.style.cssText = 'bottom: ' + ( footer_id.offsetHeight + plus.offsetHeight + 7 ) + 'px;' +
-											  'right: ' + ( plus.offsetWidth + 10 ) + 'px';
+			show_zoom_callendar();
+
 		}
 		
 		init_elem( window_height );
@@ -369,6 +375,7 @@ function inner_get_info( select_get_info ) {
 	if ( year_screen.style.opacity === '0' ) year_screen.style.opacity = '1';
 	
 	get_description( calendar, '.click' );
+	height_footer_func();
 
 }
 
@@ -567,9 +574,8 @@ function get_van_year_info( slug,
 		remove_too_events();
 		get_description( calendar, '.click' );
 		inner_select_date( false );
+		show_zoom_callendar();
 		localStorage.setItem( 'not_scroll', 'false' );
-
-		if ( year_screen.style.opacity === '0' ) year_screen.style.opacity = '1';
 
     }
 
@@ -782,6 +788,8 @@ input_select_date.oninput = function() {
 	} else if ( input_value.length === 4 ) {
 
 		if ( ( input_value >= min_year ) && ( input_value <= max_year ) ) {
+			div_zoom_calendar.style.cssText = '';
+			year_screen_span.innerHTML = '';
 			year_input = input_value;
 			not_scroll = false;
 			select_year = true;
@@ -840,6 +848,8 @@ open_list_years.onclick = function() {
 		if ( event.target.tagName === 'DIV' ) {
 			return false;
 		} else if ( event.target.tagName === 'SPAN' ) {
+			div_zoom_calendar.style.cssText = '';
+			year_screen_span.innerHTML = '';
 			year_input = ( event.target ).textContent;
 			not_scroll = false;
 			select_year = true;
@@ -1167,10 +1177,8 @@ function inner_select_date( click ) {
 
 	if ( select_date.style.top === '' && click === true ) {
 		select_date.style.top = height_header + 'px';
-		year_screen.style.opacity = '0';
 	} else {
 		select_date.style.cssText = '';
-		year_screen.style.opacity = '1';
 	}
 
 }

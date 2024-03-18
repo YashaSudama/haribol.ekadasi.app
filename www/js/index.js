@@ -76,10 +76,23 @@ let window_select_city = document.getElementById( 'window_select_city' ),
     index_get_info_new,
     close_list;
 
-    function get_firebase_token_func() {
+function get_firebase_token_func() {
 
-        if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
-            localStorage.setItem( 'status_firebase_token', 'false' ); 
+    if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
+        localStorage.setItem( 'status_firebase_token', 'false' ); 
+
+        cordova.plugins.firebase.messaging.getToken().then( 
+            ( token ) => {
+                token_notif = token;
+            },
+            ( error ) => {
+                token_notif = false;
+            }   
+        );
+
+    } else {
+
+        if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
     
             cordova.plugins.firebase.messaging.getToken().then( 
                 ( token ) => {
@@ -89,34 +102,20 @@ let window_select_city = document.getElementById( 'window_select_city' ),
                     token_notif = false;
                 }   
             );
-    
+
         } else {
-    
-            if ( localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
-        
-                cordova.plugins.firebase.messaging.getToken().then( 
-                    ( token ) => {
-                        token_notif = token;
-                    },
-                    ( error ) => {
-                        token_notif = false;
-                    }   
-                );
-    
-            } else {
-                return;
-            }
-    
+            return;
         }
-    
+
     }
+
+}
 
 if ( window_width < 480 ) {
     day_name_full[ 0 ] = 'Вос-нье';
     day_name_full[ 1 ] = 'Пон-ник';
 }
 
-height_footer_func();
 set_local_storage( 'click_choice_city', '0' );
 set_local_storage( 'now_year', now_year );
 set_local_storage( 'status_notifications', 'false' );
@@ -136,9 +135,7 @@ function window_city_func( elem ) {
                           '<i class="fas fa-home fa-lg"></i>' +
                       '</a>';
     today.removeAttribute( 'id' );
-
     today.addEventListener( 'click', hide_body );
-
 }
 
 function inner_get_info_func( index_get_info_new, slug, height_header, day_week ) {
@@ -509,6 +506,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
     if ( today && today.hasAttribute( 'id' ) ) today.style.cssText = '';
 
     get_description( main, '.click' );
+    height_footer_func();
 
 }
 
@@ -729,7 +727,7 @@ function part_not_city( slug ) {
             list_cityes.style.cssText = 'opacity: 1;' +
                                         'z-index: 5';
                                         
-            close_list = document.getElementById( 'close_list' ),
+            close_list = document.getElementById( 'close_list' );
 
             close_list.onclick = function( event ) {
                 event.stopPropagation();
@@ -779,7 +777,8 @@ function part_not_city( slug ) {
                 localStorage.setItem( 'city_select', 'yes' );
                 local_storage( lat, lon, city_slug, city_name, city_name_id );
                 get_info_func( slug, index_get_info_new );
-                today.innerHTML = '<li id="today">Сегодня</li>';
+                today.id = 'today';
+                today.innerHTML = 'Сегодня';
 
             }
     
@@ -1007,7 +1006,8 @@ function part_not_city( slug ) {
                     remove_local_storage( 'lon' );
                     local_storage( lat, lon, city_slug, city_name, city_name_id );
                     get_info_func( slug, index_get_info_new );
-                    today.innerHTML = '<li id="today">Сегодня</li>';
+                    today.id = 'today';
+                    today.innerHTML = 'Сегодня';
 
                 };
 
@@ -1184,6 +1184,9 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                     localStorage.setItem( 'now_year', now_year );
                     get_city_and_info( lat, lon, city_slug, slug );
                 }
+
+                today.id = 'today';
+                today.innerHTML = 'Сегодня';
                 
             }
             
@@ -1332,7 +1335,9 @@ function get_city( lat, lon ) {
 
             } else if ( country === 'New Zealand' ) {
 
-                if ( state === 'Auckland' ) city = 'Auckland';
+                if ( state === 'Auckland' ) {
+                    city = 'Auckland';
+                }
 
             } else if ( country === 'Russia' ) {
 

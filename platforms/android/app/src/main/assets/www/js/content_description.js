@@ -2150,7 +2150,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                 '</span>' +
                             '</div>' +
                         '</div>' + 
-                        '<div id="content_bhaktivedanta_disappearance" class="description">' +
+                        '<div id="content_disappearance-prabhupada" class="description">' +
                             '<div class="wrapp_content">' +
                                 '<h3>Уход Шрилы Бхактиведанты Свами Прабхупады</h3>' +
                                 '<span>' + bhaktivedanta + '</span>' +

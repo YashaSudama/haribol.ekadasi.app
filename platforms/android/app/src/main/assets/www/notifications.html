@@ -23,63 +23,65 @@
             </div>
         </header>
         <main id="main_notifications">
-            <form name="settings_notifications">
-                <div id="day_notifications" class="d-flex">
-                    <div>
-                        <h4 class="d-block l-height-1-3">Присылать мне<br>уведомления<br>о событиях:</h4>
-                    </div>
-                    <div>
-                        <div class="m-b-10">
-                            <label class="d-flex">за 2 дня
-                                <input id="get_notifications_2" class="d-block pos-abs" type="radio" name="get_notifications" value="2">
-                                <span class="container_radio">
-                                    <span class="d-block pos-rel"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <div class="d-flex m-b-10">
-                            <label class="d-flex">за 1 день
-                                <input class="d-block pos-abs" type="radio" name="get_notifications" value="1">
-                                <span class="container_radio">
-                                    <span class="d-block pos-rel"></span>
-                                </span>
-                            </label>
+            <div class="wrapper_notifications">
+                <form name="settings_notifications">
+                    <div id="day_notifications" class="d-flex">
+                        <div>
+                            <h4 class="d-block l-height-1-3">Присылать мне<br>уведомления<br>о событиях:</h4>
                         </div>
                         <div>
-                            <label class="d-flex">в день события
-                                <input class="d-block pos-abs" type="radio" name="get_notifications" value="0">
-                                <span class="container_radio">
-                                    <span class="d-block pos-rel"></span>
-                                </span>
-                            </label>
+                            <div class="m-b-10">
+                                <label class="d-flex">за 2 дня
+                                    <input id="get_notifications_2" class="d-block pos-abs" type="radio" name="get_notifications" value="2">
+                                    <span class="container_radio">
+                                        <span class="d-block pos-rel"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="d-flex m-b-10">
+                                <label class="d-flex">за 1 день
+                                    <input class="d-block pos-abs" type="radio" name="get_notifications" value="1">
+                                    <span class="container_radio">
+                                        <span class="d-block pos-rel"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="d-flex">в день события
+                                    <input class="d-block pos-abs" type="radio" name="get_notifications" value="0">
+                                    <span class="container_radio">
+                                        <span class="d-block pos-rel"></span>
+                                    </span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <hr class="hr-style hr-hide">
+                    <div id="time_notifications" class="d-flex">
+                        <h4 class="d-block l-height-1-3">Время получения<br>уведомления</h4>
+                        <input type="time" name="time">
+                    </div>
+                    <hr class="hr-style hr-hide">
+                    <div id="status_notifications" class="d-flex m-b-20">
+                        <h4 class="d-block l-height-1-3">Отключить уведомления</h4>
+                        <label class="d-flex">
+                            <input class="pos-abs" type="checkbox" name="status_notifications" data-status="true">
+                            <span class="container_radio">
+                                <span class="d-block pos-rel"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="text-center">
+                        <input id="update_notif" type="submit" class="normal" value="Сохранить">
+                    </div>
+                </form>
                 <hr class="hr-style hr-hide">
-                <div id="time_notifications" class="d-flex">
-                    <h4 class="d-block l-height-1-3">Время получения<br>уведомления</h4>
-                    <input type="time" name="time">
+                <div>
+                    <h4 class="l-height-1-3">Если уведомления не приходят</h4>
+                    <button id="update_storage" class="m-t-10 pos-rel">Обновить историю</button>
                 </div>
-                <hr class="hr-style hr-hide">
-                <div id="status_notifications" class="d-flex m-b-20">
-                    <h4 class="d-block l-height-1-3">Отключить уведомления</h4>
-                    <label class="d-flex">
-                        <input class="pos-abs" type="checkbox" name="status_notifications" data-status="true">
-                        <span class="container_radio">
-                            <span class="d-block pos-rel"></span>
-                        </span>
-                    </label>
-                </div>
-                <div class="text-center">
-                    <input id="update_notif" type="submit" class="normal" value="Сохранить">
-                </div>
-            </form>
-            <hr class="hr-style hr-hide">
-            <div>
-                <h4 class="l-height-1-3">Если уведомления не приходят</h4>
-                <button id="update_storage" class="m-t-10 pos-rel">Обновить историю</button>
+                <div id="height_footer"></div>
             </div>
-            <div id="height_footer"></div>
         </main>
 
         <div id="message_notifications" class="pos-fixed l-height-1-25"></div>  
