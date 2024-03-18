@@ -436,8 +436,9 @@ function show_today() {
 
     if ( today && 
          today.hasAttribute( 'id' ) && 
-         !today.closest( 'body' ).querySelector( '#not_connection' ) ) 
-    { today.style.cssText = ''; }
+         !today.closest( 'body' ).querySelector( '#not_connection' ) ) { 
+            today.style.cssText = ''; 
+    }
 
 }
 
@@ -519,18 +520,28 @@ function content_not_data( main,
     if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
 
     if ( main ) {
-        let height_main = window.innerHeight - height_header - footer_id.clientHeight,
-            style_not_connection = 'top: 0;' +
+        main.innerHTML = '';
+        
+        let style_not_connection = 'top: 0;' +
                                    'transform: none;' +
                                    'padding-top: 5px;' +
-                                   'padding-bottom: 50px;';
+                                   'padding-bottom: 50px;',
+            document_height = Math.max(
+                document.body.scrollHeight, 
+                document.documentElement.scrollHeight,
+                document.body.offsetHeight, 
+                document.documentElement.offsetHeight,
+                document.body.clientHeight, 
+                document.documentElement.clientHeight
+            ),
+            height_main = document_height - height_header - footer_id.clientHeight;
 
         if ( text === text_not_internet ) {
             after_text = 'Проверьте подключение к интернету и попробуйте еще раз';
         } else {
             after_text = 'Проверьте подключение к интернету и попробуйте еще раз или попробуйте позже';
         }
-
+        
         main.style.cssText = 'margin-top: ' + height_header + 'px; ' +
                              'height: ' + height_main + 'px;'; 
         main.innerHTML = '<div id="not_connection" class="pos-rel">' +

@@ -1,7 +1,7 @@
 {
   "name": "haribol.ekadasi.app",
   "displayName": "Экадаши",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
   "scripts": {
@@ -14,38 +14,27 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-ios": "^7.0.1",
-    "cordova-plugin-add-swift-support": "^2.0.2",
-    "cordova-plugin-android-permissions": "^1.1.5",
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-fcm": "^2.1.2",
-    "cordova-plugin-geolocation": "^4.1.0",
+    "cordova-plugin-geolocation": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-ionic-webview-signosoft-fork": "^5.0.2",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-request-location-accuracy": "^2.3.0",
-    "cordova-plugin-statusbar": "^3.0.0",
+    "cordova-plugin-statusbar": "^4.0.0",
     "cordova.plugins.diagnostic": "^7.1.4"
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-add-swift-support": {},
-      "cordova-plugin-android-permissions": {},
-      "cordova-plugin-device": {},
+      "cordova.plugins.diagnostic": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-request-location-accuracy": {
-        "PLAY_SERVICES_LOCATION_VERSION": "16.+"
-      },
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-ionic-webview-signosoft-fork": {},
+      "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
       },
-      "cordova-plugin-ionic-keyboard": {},
-      "cordova.plugins.diagnostic": {},
+      "cordova-plugin-request-location-accuracy": {},
+      "cordova-plugin-device": {},
       "cordova-plugin-fcm": {}
-    },
-    "platforms": [
-      "ios"
-    ]
+    }
   }
 }

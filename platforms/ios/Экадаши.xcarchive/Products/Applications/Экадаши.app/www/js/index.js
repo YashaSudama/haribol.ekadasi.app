@@ -808,7 +808,8 @@ function part_not_city( slug ) {
                 localStorage.setItem( 'city_select', 'yes' );
                 local_storage( lat, lon, city_slug, city_name, city_name_id );
                 get_info_func( slug, index_get_info_new );
-                today.innerHTML = '<li id="today">Сегодня</li>';
+                today.id = 'today';
+                today.innerHTML = 'Сегодня';
 
             }
     
@@ -1037,7 +1038,8 @@ function part_not_city( slug ) {
                     remove_local_storage( 'lon' );
                     local_storage( lat, lon, city_slug, city_name, city_name_id );
                     get_info_func( slug, index_get_info_new );
-                    today.innerHTML = '<li id="today">Сегодня</li>';
+                    today.id = 'today';
+                    today.innerHTML = 'Сегодня';
 
                 };
 
@@ -1160,8 +1162,7 @@ function part_not_city( slug ) {
     
 function not_city( lat, lon, city, slug, index_get_info_new ) {
 
-    if ( ( localStorage.getItem( 'status_location' ) === '0' ) || 
-         ( localStorage.getItem( 'status_location_accuracy' ) === '0' ) ) {
+    if ( localStorage.getItem( 'status_location' ) === '0' ) {
         current_location.classList.add( 'd-none' );
     }
 
@@ -1210,7 +1211,8 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                     get_city_and_info( lat, lon, city_slug, slug );
                 }
 
-                today.innerHTML = '<li id="today">Сегодня</li>';
+                today.id = 'today';
+                today.innerHTML = 'Сегодня';
                 
             }
             
@@ -1494,46 +1496,6 @@ function get_city_and_info( lat, lon, city, slug ) {
 
 } // get_cityes_and_info - end 
 
-function check_notifications( slug ) {
-
-    let xml_check = new XMLHttpRequest(),
-        value_token = get_token(),
-        data_send = JSON.stringify( { 'uuid': device.uuid,
-                                      'token': value_token } ),
-        city_id = slug.id;
-                                      
-    xml_check.open( 'POST', url + 'api/devices/check' );
-    xml_check.responseType = 'json';
-    xml_check.setRequestHeader( 'Content-Type', 'application/json' );
-        
-    xml_check.onload = function() {
-        
-        let response_check = xml_check.response;
-        
-        if ( response_check.message ) {
-
-            if ( response_check.message === 'Device not found' ) {
-                register_notifications( city_id );
-            } else if ( response_check.message === 'Device found' ) {
-                device_found = true; 
-                localStorage.setItem( 'id_notifications', response_check.id );
-                localStorage.setItem( 'status_notifications', 'true' );
-                localStorage.setItem( 'user_register_notifications', 'true' );
-                register_notifications( city_id );
-            } else {
-                return;
-            }
-
-        } else {
-            return;
-        }
-        
-    };
-
-    xml_location.send();
-
-}
-
 function on_success( position, city_name, index_get_info_new ) {
 
     // если город и страна выбраны с "Выбор города" и есть запись в LocalStorage страны и города, то обращаемся к коду ниже
@@ -1602,20 +1564,7 @@ function on_error( error ) {
 }
 
 function on_device_ready() {
-    let status_location_accuracy;
-
-    cordova.plugins.diagnostic.isLocationEnabled( function( enabled ) { // статус службы геолокации true or false
-        status_location_accuracy = enabled;
-
-        if ( enabled ) {
-            localStorage.setItem( 'status_location_accuracy', '1' );
-        } else {
-            localStorage.setItem( 'status_location_accuracy', '0' );
-        }
-        
-    }, function( error ) {
-        status_location_accuracy = false;
-    } );
+    let let_diagnostic = cordova.plugins.diagnostic;
 
     function launch_calendar() {
 
@@ -1639,25 +1588,25 @@ function on_device_ready() {
 
         if ( navigator.connection.type !== 'none' ) {
             
-            cordova.plugins.diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
+            let_diagnostic.getLocationAuthorizationStatus( function( status ) { // получение статуса авторизации разрешения на определение местоположения
                 StatusBar.show();
                 StatusBar.backgroundColorByHexString( '#000000' );
 
                 switch( status ) {
 
-                    case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-                        cordova.plugins.diagnostic.requestLocationAuthorization( function( status ) {
+                    case let_diagnostic.permissionStatus.NOT_REQUESTED:
+                        let_diagnostic.requestLocationAuthorization( function( status ) {
 
                             switch( status ) {
-                                case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                                case let_diagnostic.permissionStatus.DENIED_ALWAYS:
                                     localStorage.setItem( 'status_location', '0' );
                                     location_error( slug );
                                     break;
-                                case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                                case let_diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
                                     localStorage.setItem( 'status_location', '1' );
                                     launch_calendar();
                                     break;
-                                case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                                case let_diagnostic.permissionStatus.GRANTED:
                                     localStorage.setItem( 'status_location', '1' );
                                     launch_calendar();
                                     break;
@@ -1672,7 +1621,8 @@ function on_device_ready() {
                         } );
                         break;
 
-                    case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                    case let_diagnostic.permissionStatus.DENIED_ALWAYS:
+
                         cordova.plugins.locationAccuracy.canRequest( function( canRequest ) {
 
                             if ( canRequest ) {
@@ -1710,11 +1660,11 @@ function on_device_ready() {
 
                         break;
 
-                    case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                    case let_diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
                         localStorage.setItem( 'status_location', '1' );
                         launch_calendar();
                         break;
-                    case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                    case let_diagnostic.permissionStatus.GRANTED:
                         localStorage.setItem( 'status_location', '1' );
                         launch_calendar();
                         break;

@@ -42,7 +42,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		B+0agvAhEbHz4Or4iKZj5KXjwrU=
+		AEh08iUvkPpuglFlHMkv889l62A=
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		wCVe1azfub1v3sls5uTBdUHXZ7U=
+		WWph/ZQO84P972KqB/YYm9f0nP8=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>www/cordova_plugins.js</key>
 		<data>
-		kX9/ovi5hwzuepxmhbACxR1Qn/Y=
+		c1+PlMaVGa6UsloQAXd30qUQWfY=
 		</data>
 		<key>www/css/all.css</key>
 		<data>
@@ -270,11 +270,11 @@
 		</data>
 		<key>www/js/general.js</key>
 		<data>
-		shvPWRWSkJhn0NKDTwJjK2DQ78Q=
+		3lur3dAC8P5USfcA7ycW0qYokyI=
 		</data>
 		<key>www/js/index.js</key>
 		<data>
-		g24RD8IKqLnwyt5UEaswamX78iA=
+		AtViBFpoERA4FFWJtL2Pg3x585k=
 		</data>
 		<key>www/js/notifications.js</key>
 		<data>
@@ -292,10 +292,6 @@
 		<data>
 		D5PUPAhShspIr6fv0z+SDZnDdaw=
 		</data>
-		<key>www/plugins/cordova-plugin-android-permissions/www/permissions-dummy.js</key>
-		<data>
-		7Xy0Np90B8G33BnFtSc//hxLSQA=
-		</data>
 		<key>www/plugins/cordova-plugin-device/www/device.js</key>
 		<data>
 		cNhFOKAP2X2rVmuujDxkQbGnVXg=
@@ -306,31 +302,23 @@
 		</data>
 		<key>www/plugins/cordova-plugin-geolocation/www/Coordinates.js</key>
 		<data>
-		OcnMkoe/mBcCvr2CsnwjFAqCce8=
+		klCIAnbvclQUV5EXaopBZ0BkXRM=
 		</data>
 		<key>www/plugins/cordova-plugin-geolocation/www/Position.js</key>
 		<data>
-		sfcX+9sdPcWmTcNlJ2g7HY6Dz6A=
+		EZw+x2jjeaixizJdny8fEVeHvek=
 		</data>
 		<key>www/plugins/cordova-plugin-geolocation/www/PositionError.js</key>
 		<data>
-		/Fp9j0iI3VCL8sP9RsXs8lnGjXY=
+		QdYnHazbJjDrQGNjH9FkYWmPXiE=
 		</data>
 		<key>www/plugins/cordova-plugin-geolocation/www/geolocation.js</key>
 		<data>
-		TZtg0qvWZqO7YfqAuxbHE1t3W3Y=
+		Uj6T2LRs3oBfDR85BVwzRMYACxw=
 		</data>
 		<key>www/plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js</key>
 		<data>
 		6JdC+Uj8WGgTUUgnYZTTulQGBlo=
-		</data>
-		<key>www/plugins/cordova-plugin-ionic-webview-signosoft-fork/src/www/ios/ios-wkwebview-exec.js</key>
-		<data>
-		73jgpOESmGyX0MXRQ13DiLQAdcg=
-		</data>
-		<key>www/plugins/cordova-plugin-ionic-webview-signosoft-fork/src/www/util.js</key>
-		<data>
-		z7puHdRMXYyzMwOQZCO7yBagUhI=
 		</data>
 		<key>www/plugins/cordova-plugin-network-information/www/Connection.js</key>
 		<data>
@@ -346,7 +334,7 @@
 		</data>
 		<key>www/plugins/cordova-plugin-statusbar/www/statusbar.js</key>
 		<data>
-		czhT4nsvsxe93bUuOaXPETpl7rY=
+		Cml6oGexdoIo0ejUaDe64leJzck=
 		</data>
 		<key>www/plugins/cordova.plugins.diagnostic/www/ios/diagnostic.bluetooth.js</key>
 		<data>
@@ -484,10 +472,6 @@
 		<data>
 		cjROqy50Me7DE8qiHyZsv9p8r2A=
 		</data>
-		<key>www/wk-plugin.js</key>
-		<data>
-		YDwquVw/+YRC/jM+r6ic4rHbJww=
-		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -565,7 +549,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OgI0zgruprcmIc+VCKgMktxITG+MBLX8+ogWw5fFUD0=
+			sf3I3JBVM+haUp+Cc4lKfS8LTgn+Kz0tc5QAxDwpojw=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
@@ -600,7 +584,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2yr+QuHdwT/EjMxW+MBmisgusQeERyllzj8usudB8Nw=
+			hGs3fMWTbsVMtTYLJxLUCC8DVrkpXvPUOa6PWbZHobg=
 			</data>
 		</dict>
 		<key>www/css/all.css</key>
@@ -943,14 +927,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			q3KElK5AussDrQySgTrtGQUy/2lwrFTXpZx6jMFucgA=
+			A6TWMhruyHFco3hWiVmOlZb1HYEJINs7At4ssWjQl0k=
 			</data>
 		</dict>
 		<key>www/js/index.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9O+FFOFMCVEXJbpTygXNoU1flHlGKhvypZYLcDznjR4=
+			LxbA6/+SmkqSLxg1aXaksQGkbS5uYMduyUIZh/MBfg4=
 			</data>
 		</dict>
 		<key>www/js/notifications.js</key>
@@ -981,13 +965,6 @@
 			L8+/ekjL0O6e73BzlRQt+Udnas7dRpkm7h5iu9C9jh4=
 			</data>
 		</dict>
-		<key>www/plugins/cordova-plugin-android-permissions/www/permissions-dummy.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4/NApQF17/rLqrsCn2MqArU/nDsQOT7J08lh9oc3TmQ=
-			</data>
-		</dict>
 		<key>www/plugins/cordova-plugin-device/www/device.js</key>
 		<dict>
 			<key>hash2</key>
@@ -1006,28 +983,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VvV1bdMsX5LvRbR2vJxeDXrJO6OiGAQ6qOXS07G8AZU=
+			D6OR1mb5rWUPubnotvnh5n6lU0uIAKgBkWAlHiSE43w=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-geolocation/www/Position.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0wFp3trhvrzWZWPHqK/sUnRg9JYA6n5zgeVb4wRXCq4=
+			2hpYhdNo1/fxJhfRhxjH2aLtWacCZaWA3lWA+bPqovY=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-geolocation/www/PositionError.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			42L0paWrRahxO8ddzXz6wDZ9Kh+Bu2ZKQb2VAIiGaLU=
+			KGIvql8+opk8t1Wuv5E201deEP5M/aczhdXkkmiBi10=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-geolocation/www/geolocation.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GP6jx4V95eed2T6wwYtfJf5Lxjl5O20+dGDCbqg/4pc=
+			UwDxe+xSU2iQtiTFTQA7CO5VK6b/GvIQkPJsVzafNOI=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js</key>
@@ -1035,20 +1012,6 @@
 			<key>hash2</key>
 			<data>
 			GmNgP2oopN8IFp0rra15qCyr4WER6Yy11VnFlOvZK8c=
-			</data>
-		</dict>
-		<key>www/plugins/cordova-plugin-ionic-webview-signosoft-fork/src/www/ios/ios-wkwebview-exec.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			GQoQ87XwFUYtcwnmRlbStW2MZUKmMQVWXpUv7ecEqZs=
-			</data>
-		</dict>
-		<key>www/plugins/cordova-plugin-ionic-webview-signosoft-fork/src/www/util.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			0yOkppYxnEDVrU7zQEQ9pj8+pgNqs3ITshLbv+EH0SM=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-network-information/www/Connection.js</key>
@@ -1076,7 +1039,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2D5oK6j44u8THQzpipYf8LDjpkwuXRVaB72EGKhI15o=
+			wayWQvy7mR5x9lQAYkhUNLrKycXLhGPKFfyQEd0IZaU=
 			</data>
 		</dict>
 		<key>www/plugins/cordova.plugins.diagnostic/www/ios/diagnostic.bluetooth.js</key>
@@ -1315,13 +1278,6 @@
 			<key>hash2</key>
 			<data>
 			bJFmac+SO08bLbXFEHyDtsogXnrQ3NhAslHmPwyNKKI=
-			</data>
-		</dict>
-		<key>www/wk-plugin.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+cTqFdpn6nfkeiFaIIT2WXlXOQp8oXtOGmwN7z8IQuY=
 			</data>
 		</dict>
 	</dict>

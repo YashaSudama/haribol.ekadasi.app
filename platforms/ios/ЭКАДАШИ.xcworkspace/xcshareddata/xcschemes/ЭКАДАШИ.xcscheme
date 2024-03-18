@@ -36,12 +36,6 @@
             ReferencedContainer = "container:&#x42d;&#x43a;&#x430;&#x434;&#x430;&#x448;&#x438;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "IDEPreferLogStreaming=YES"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <Testables>
       </Testables>
    </TestAction>
@@ -65,12 +59,6 @@
             ReferencedContainer = "container:&#x42d;&#x43a;&#x430;&#x434;&#x430;&#x448;&#x438;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "IDEPreferLogStreaming=YES"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
