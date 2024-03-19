@@ -251,6 +251,7 @@ function inner_get_info( select_get_info ) {
 
 	setTimeout( () => {
 		height_header = header_top.offsetHeight;
+		calendar.style.marginTop = height_header + 'px';
 		height_hint_description = hint_description.offsetHeight;
 		year_screen.style.top = height_header + 'px';
 	
@@ -372,7 +373,6 @@ function inner_get_info( select_get_info ) {
     }
 
 	if ( show_select_date.classList.contains( 'd-none' ) ) show_select_date.classList.remove( 'd-none' );
-	if ( year_screen.style.opacity === '0' ) year_screen.style.opacity = '1';
 	
 	get_description( calendar, '.click' );
 	height_footer_func();
@@ -476,19 +476,19 @@ function get_van_year_info( slug,
 		year_content.className = 'new-calendar';
 		year_content.style.opacity = '0';
 		year_content.innerHTML += '<div class="calendar_year d-flex">' +
-							'<ul class="jan"></ul>' +
-							'<ul class="feb"></ul>' +
-							'<ul class="mar"></ul>' +
-							'<ul class="apr"></ul>' +
-							'<ul class="may"></ul>' +
-							'<ul class="jun"></ul>' +
-							'<ul class="jul"></ul>' +
-							'<ul class="aug"></ul>' +
-							'<ul class="sem"></ul>' +
-							'<ul class="oct"></ul>' +
-							'<ul class="nov"></ul>' +
-							'<ul class="dem"></ul>' +
-						'</div>';
+									'<ul class="jan"></ul>' +
+									'<ul class="feb"></ul>' +
+									'<ul class="mar"></ul>' +
+									'<ul class="apr"></ul>' +
+									'<ul class="may"></ul>' +
+									'<ul class="jun"></ul>' +
+									'<ul class="jul"></ul>' +
+									'<ul class="aug"></ul>' +
+									'<ul class="sem"></ul>' +
+									'<ul class="oct"></ul>' +
+									'<ul class="nov"></ul>' +
+									'<ul class="dem"></ul>' +
+								  '</div>';
 
         if ( select_year || top_scroll ) {
 			calendar.prepend( year_content );
@@ -794,7 +794,8 @@ input_select_date.oninput = function() {
 			not_scroll = false;
 			select_year = true;
 			calendar.innerHTML = '';
-			calendar.style.height = ( scroll_window_height - 
+
+			calendar.style.height = ( window_height - 
 									  height_header -
 									  footer_id.clientHeight ) + 'px';
 			min_preloader.style.cssText = 'position: absolute;' +
@@ -854,9 +855,9 @@ open_list_years.onclick = function() {
 			not_scroll = false;
 			select_year = true;
 			calendar.innerHTML = '';
-			calendar.style.cssText = 'height: ' + ( scroll_window_height - 
+			calendar.style.height = ( window_height - 
 									  height_header -
-									  footer_id.clientHeight ) + 'px;';
+									  footer_id.clientHeight ) + 'px';
 			min_preloader.style.cssText = 'position: absolute;' +
 										  'top: 50%;' + 
 										  'left: 50%;' + 

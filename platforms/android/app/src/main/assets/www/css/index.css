@@ -1029,7 +1029,7 @@ header {
 	color:#e3e3e3;
 }
 .div_select_date i {
-	top: 13px;
+	top: 10px;
 	right: 10px;
 }
 #select_date .fa-calendar-check {
@@ -1380,7 +1380,7 @@ header {
 
 }
 
-@media (min-width: 480px) {
+@media ( min-width: 480px ) {
 
 	.calendar_year ul {
 		margin: 0 20px;

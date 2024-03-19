@@ -830,16 +830,38 @@ function part_not_city( slug ) {
         let search_city,
             search_index,
             before_str;
+
+        function change_letters( elem ) {
+            let change_elem = '';
+
+            if ( elem.includes( 'ё' ) || elem.includes( 'Ё' ) ) {
+                    
+                for ( let letter of elem ) {
+
+                    if ( letter === 'Ё' ) letter = 'Е';
+                    if ( letter === 'ё' ) letter = 'е';
+
+                    change_elem += letter;
+                }
+
+            } else {
+                change_elem = elem;
+            }
+
+            return change_elem; 
+
+        }
                             
         if ( search_cities.length > 0 ) {
 
             if ( div_search_city.classList.contains( 'p-all-0' ) ) div_search_city.classList.remove( 'p-all-0' );
 
             for ( let city of search_cities ) {
-
-                let local_str = str;
+                let local_str = change_letters( str ),
+                    local_city_name = change_letters( city.name );
+                
                 div_search_city.style.cssText = 'opacity: 1; margin-bottom: 15px !important;';
-                search_index = ( city.name.toLowerCase() ).indexOf( local_str.toLowerCase() );
+                search_index = ( local_city_name.toLowerCase() ).indexOf( local_str.toLowerCase() );
                 
                 if ( search_index !== -1 ) {
                     
@@ -856,14 +878,14 @@ function part_not_city( slug ) {
                         before_str = ( city.name ).slice( 0, search_index );
                     
                         if ( ( before_str[ before_str.length - 1 ] ) === ' ' || before_str[ before_str.length - 1 ] === '-' ) { 
-                            local_str = str[ 0 ].toUpperCase() + str.slice( 1 );
+                            local_str = local_str[ 0 ].toUpperCase() + local_str.slice( 1 );
                             
                             if ( ( local_str.toLowerCase() === 'сш' ) || ( local_str.toLowerCase() === 'сша' ) ) {
                                 local_str = 'США';
                             }
 
                         } else {
-                            local_str = str.toLowerCase();
+                            local_str = local_str.toLowerCase();
                         }
 
                         search_city = ( city.name ).slice( 0, search_index ) + '<span class="search_string search_string_wrap pos-rel d-inline-block">' + 
@@ -1535,8 +1557,6 @@ function on_error( error ) {
 }
 
 function on_device_ready() {
-
-    cordova.plugins.diagnostic.enableDebug();
 
     let permissions = cordova.plugins.permissions,
         status_location_accuracy,
