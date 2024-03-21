@@ -603,7 +603,6 @@ function content_not_data( main,
                 }, 500 );
                 
                 if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
-                if ( localStorage.getItem( 'not_scroll' ) ) localStorage.setItem( 'not_scroll', 'true' );
 
             }
 
