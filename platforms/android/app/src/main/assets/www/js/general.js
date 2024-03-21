@@ -436,7 +436,7 @@ function hide_body() {
 }
 
 function show_background() {
-    background.style.cssText = 'opacity: 1; z-index: 5';
+    background.style.cssText = 'opacity: 1; z-index: 9';
 }
 
 function hide_background() {
