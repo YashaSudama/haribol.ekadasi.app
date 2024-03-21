@@ -636,7 +636,6 @@ function add_city_undefined_database( city, state ) {
 
 function part_not_city( slug ) {
     
-    const russian_alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ, ';
     let list_timeout,
         sub_list_timeout,
         touch_start,
@@ -1005,72 +1004,36 @@ function part_not_city( slug ) {
             
             div_search_city.innerHTML = '<span></span>';
             div_search_city.prepend( min_preloader );
-
-            if ( russian_alphabet.includes( str[ str.length - 1 ] ) ) {
                 
-                let xml_search_name = new XMLHttpRequest();
-                
-                xml_search_name.open( 'GET', url + 'api/cities.json?name=' + str );
-                xml_search_name.responseType = 'json';
-                xml_search_name.setRequestHeader( 'Content-Type', 'application/json' );
+            let xml_search_name = new XMLHttpRequest();
+            
+            xml_search_name.open( 'GET', url + 'api/cities.json?name=' + str );
+            xml_search_name.responseType = 'json';
+            xml_search_name.setRequestHeader( 'Content-Type', 'application/json' );
 
-                xml_search_name.onerror = function() {
-                    not_data_server();
+            xml_search_name.onerror = function() {
+                not_data_server();
+            }
+    
+            xml_search_name.timeout = 5000;
+    
+            xml_search_name.ontimeout = function() {
+                not_data_server();
+            }
+
+            xml_search_name.onload = function() {
+                search_cities = xml_search_name.response;
+
+                if ( form_search.value.length > 2 ) {
+                    div_search_city.innerHTML = '<span></span>';
+                    output_cities( search_cities, str );
+                } else {
+                    enter_more();
                 }
-        
-                xml_search_name.timeout = 5000;
-        
-                xml_search_name.ontimeout = function() {
-                    not_data_server();
-                }
-
-                xml_search_name.onload = function() {
-                    search_cities = xml_search_name.response;
-
-                    if ( form_search.value.length > 2 ) {
-                        div_search_city.innerHTML = '<span></span>';
-                        output_cities( search_cities, str );
-                    } else {
-                        enter_more();
-                    }
-
-                }
-
-                xml_search_name.send();
-
-            } else {
-
-                let xml_search_slug = new XMLHttpRequest();
-
-                xml_search_slug.open( 'GET', url + 'api/cities.json?slug=' + str );
-                xml_search_slug.responseType = 'json';
-                xml_search_slug.setRequestHeader( 'Content-Type', 'application/json' );
-
-                xml_search_slug.onerror = function() {
-                    not_data_server();
-                }
-                
-                xml_search_slug.timeout = 5000;
-        
-                xml_search_slug.ontimeout = function() {
-                    not_data_server();
-                }
-
-                xml_search_slug.onload = function() {
-                    search_cities = xml_search_slug.response;
-
-                    if ( form_search.value.length > 2 ) {
-                        div_search_city.innerHTML = '<span></span>';
-                        output_cities( search_cities, str );
-                    } else {
-                        enter_more();
-                    }
-
-                }
-
-                xml_search_slug.send();
 
             }
+
+            xml_search_name.send();
             
         } else {
             enter_more();

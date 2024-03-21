@@ -264,17 +264,17 @@ function work_settings_notifications() {
 }
 
 document.addEventListener( "deviceready", () => {
-    work_settings_notifications();
-    // if ( navigator.connection.type !== 'none' ) {
-    //     work_settings_notifications();
-    // } else {
-    //     content_not_connection( main_notifications, 
-    //                             text_not_internet, 
-    //                             null, 
-    //                             null, 
-    //                             null, 
-    //                             null );
-    // }
+    
+    if ( navigator.connection.type !== 'none' ) {
+        work_settings_notifications();
+    } else {
+        content_not_connection( main_notifications, 
+                                text_not_internet, 
+                                null, 
+                                null, 
+                                null, 
+                                null );
+    }
 
 }, false );
 
