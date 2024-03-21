@@ -126,7 +126,7 @@ current_location.onclick = function() {
     remove_local_storage( 'city_select' );
     window.location.href = 'index.html';
     hide_body();
-
+    localStorage.setItem( 'status_background', 'yes' );
 }
 
 function window_city_func( elem ) {
@@ -749,6 +749,7 @@ function part_not_city( slug ) {
             }
 
             list_cityes.onclick = function( event ) {
+                localStorage.setItem( 'status_background', 'yes' );
                 hide_body();
 
                 setTimeout( () => {
@@ -1001,6 +1002,7 @@ function part_not_city( slug ) {
                         
                     }
 
+                    localStorage.setItem( 'status_background', 'yes' );
                     hide_body();
                     
                     setTimeout( () => {

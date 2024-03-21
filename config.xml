@@ -34,17 +34,17 @@
             <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" />
         </config-file>
         
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www\img\screen\android\splashscreen-app.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www\img\screen\android\splashscreen-app-new.png" />
         <preference name="AutoHideSplashScreen" value="false" />
         <preference name="SplashScreenDelay" value="3000" />
         <preference name="AndroidWindowSplashScreenBackground" value="#d6e6ff" />
 
-        <icon src="www/img/logo/android/logo_ldpi.png" density="ldpi" />
-        <icon src="www/img/logo/android/logo_mdpi.png" density="mdpi" />
-        <icon src="www/img/logo/android/logo_hdpi.png" density="hdpi" />
-        <icon src="www/img/logo/android/logo_xhdpi.png" density="xhdpi" />
-        <icon src="www/img/logo/android/logo_xxhdpi.png" density="xxhdpi" />
-        <icon src="www/img/logo/android/logo_xxxhdpi.png" density="xxxhdpi" />
+        <icon src="www/img/logo/round/logo_ldpi.png" density="ldpi" />
+        <icon src="www/img/logo/round/logo_mdpi.png" density="mdpi" />
+        <icon src="www/img/logo/round/logo_hdpi.png" density="hdpi" />
+        <icon src="www/img/logo/round/logo_xhdpi.png" density="xhdpi" />
+        <icon src="www/img/logo/round/logo_xxhdpi.png" density="xxhdpi" />
+        <icon src="www/img/logo/round/logo_xxxhdpi.png" density="xxxhdpi" />
 
         <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
         <preference name="Hostname" value="ekadasi" />

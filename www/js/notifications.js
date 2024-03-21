@@ -206,7 +206,7 @@ function work_settings_notifications() {
 
     } else {
         main_notifications.innerHTML = '<div class="text-center">' +
-                                            '<h3 class="l-height-1-25 m-b-30">Ваше местоположение не определено</h3>' +  
+                                            '<h3 class="l-height-1-25 p-t-30 m-b-30">Ваше местоположение не определено</h3>' +  
                                             '<button id="select_city_notif">' +
                                                 'Выбор города'+
                                             '</button>' +  
@@ -218,8 +218,9 @@ function work_settings_notifications() {
 
             if ( localStorage.getItem( 'click_choice_city' ) === '0' ) localStorage.setItem( 'click_choice_city', '1' );
 
+            localStorage.setItem( 'status_background', 'yes' );
             hide_body();
-            window.location.href = 'index.html'
+            window.location.href = 'index.html';
         }
 
     }

@@ -327,6 +327,9 @@ button,
 .p-b-5 {
   	padding-bottom: 5px;
 }
+.p-t-30 {
+	padding-top: 30px;
+}
 .normal {
   	font-weight: normal !important;
 }

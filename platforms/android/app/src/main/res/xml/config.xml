@@ -89,19 +89,19 @@
     <config-file parent="/manifest/application" target="AndroidManifest.xml">
         <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" />
     </config-file>
-    <icon density="ldpi" src="www/img/logo/android/logo_ldpi.png" />
-    <icon density="mdpi" src="www/img/logo/android/logo_mdpi.png" />
-    <icon density="hdpi" src="www/img/logo/android/logo_hdpi.png" />
-    <icon density="xhdpi" src="www/img/logo/android/logo_xhdpi.png" />
-    <icon density="xxhdpi" src="www/img/logo/android/logo_xxhdpi.png" />
-    <icon density="xxxhdpi" src="www/img/logo/android/logo_xxxhdpi.png" />
+    <icon density="ldpi" src="www/img/logo/round/logo_ldpi.png" />
+    <icon density="mdpi" src="www/img/logo/round/logo_mdpi.png" />
+    <icon density="hdpi" src="www/img/logo/round/logo_hdpi.png" />
+    <icon density="xhdpi" src="www/img/logo/round/logo_xhdpi.png" />
+    <icon density="xxhdpi" src="www/img/logo/round/logo_xxhdpi.png" />
+    <icon density="xxxhdpi" src="www/img/logo/round/logo_xxxhdpi.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="GradlePluginGoogleServicesEnabled" value="true" />
     <preference name="GradlePluginGoogleServicesVersion" value="4.3.13" />
     <preference name="webView" value="com.ionicframework.cordova.webview.IonicWebViewEngine" />
     <preference name="AndroidXEnabled" value="true" />
-    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www\img\screen\android\splashscreen-app.png" />
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www\img\screen\android\splashscreen-app-new.png" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidWindowSplashScreenBackground" value="#d6e6ff" />
