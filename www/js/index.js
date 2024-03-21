@@ -826,32 +826,32 @@ function part_not_city( slug ) {
 
     }
 
+    function change_letters( elem ) {
+        let change_elem = '';
+
+        if ( elem.includes( 'ё' ) || elem.includes( 'Ё' ) ) {
+                
+            for ( let letter of elem ) {
+
+                if ( letter === 'Ё' ) letter = 'Е';
+                if ( letter === 'ё' ) letter = 'е';
+
+                change_elem += letter;
+            }
+
+        } else {
+            change_elem = elem;
+        }
+
+        return change_elem; 
+
+    }
+
     function output_cities( search_cities, str ) {
 
         let search_city,
             search_index,
             before_str;
-
-        function change_letters( elem ) {
-            let change_elem = '';
-
-            if ( elem.includes( 'ё' ) || elem.includes( 'Ё' ) ) {
-                    
-                for ( let letter of elem ) {
-
-                    if ( letter === 'Ё' ) letter = 'Е';
-                    if ( letter === 'ё' ) letter = 'е';
-
-                    change_elem += letter;
-                }
-
-            } else {
-                change_elem = elem;
-            }
-
-            return change_elem; 
-
-        }
                             
         if ( search_cities.length > 0 ) {
 
@@ -897,80 +897,8 @@ function part_not_city( slug ) {
                     }
                     
                 } else {
-
-                    for ( let item_slug of city.slug ) {
-
-                        if ( ( item_slug === 'š' ) || ( item_slug === 'ș' ) ) {
-                            local_str = '';
-
-                            for ( let item_str of str ) {
-
-                                if ( item_str.toLowerCase() === 's' ) {
-
-                                    if ( item_slug === 'š' ) {
-                                        item_str = 'š';
-                                    } else if ( item_slug === 'ș' ) {
-                                        item_str = 'ș';
-                                    }
-
-                                } 
-
-                                local_str += item_str;
-
-                            }
-
-                        } else if ( ( item_slug === 'ã' ) || ( item_slug === 'á' ) ) {
-                            local_str = '';
-
-                            for ( let item_str of str ) {
-
-                                if ( item_str.toLowerCase() === 'a' ) {
-
-                                    if ( item_slug === 'ã' ) {
-                                        item_str = 'ã';
-                                    } else if ( item_slug === 'á' ) {
-                                        item_str = 'á';
-                                    } 
-
-                                }
-
-                                local_str += item_str;
-
-                            }
-
-                        }
-                        
-                    }
-
-                    search_index = ( city.slug.toLowerCase() ).indexOf( local_str.toLowerCase() );
-                    
-                    if ( search_index === 0 ) {
-                    
-                        search_city = '<span class="search_string search_string_wrap pos-rel d-inline-block">' + 
-                                            local_str[ 0 ].toUpperCase() + local_str.slice( 1 ) + 
-                                        '<span class="search_string search_string_span pos-abs"></span>' +
-                                      '</span>' + 
-                                        ( city.slug ).slice( local_str.length );
-                        
-                    } else if ( search_index > 0 ) {
-
-                        before_str = ( city.slug ).slice( 0, search_index );
-                        
-                        if ( ( before_str[ before_str.length - 1 ] ) === ' ' || before_str[ before_str.length - 1 ] === '-' ) { 
-                            local_str = str[ 0 ].toUpperCase() + str.slice( 1 );
-                        } else {
-                            local_str = str.toLowerCase();
-                        }
-
-                        search_city = ( city.slug ).slice( 0, search_index ) + '<span class="search_string search_string_wrap pos-rel d-inline-block">' + 
-                                                                                        local_str + 
-                                                                                    '<span class="search_string search_string_span pos-abs"></span>' +
-                                                                               '</span>' + 
-                                                                                    ( city.slug ).slice( search_index + local_str.length );
-                    } else {
-                        search_null();
-                    }
-
+                    search_null();
+                    return;
                 }
                 
                 div_search_city.innerHTML += '<span class="full_city d-block text-left l-height-1-25">' + search_city + '</span>';
