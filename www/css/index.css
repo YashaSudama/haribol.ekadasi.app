@@ -35,7 +35,6 @@ body,
 #close_hint_description,
 #window_select_city .main input,
 #background,
-#input_select_date,
 #close_notice_foreground,
 .before_top {
   	background-color: #fff;
@@ -78,7 +77,6 @@ body,
 #update_notif,
 #update_storage,
 #footer,
-.hint,
 .ekadashi::after,
 .too_events,
 #not_connection button,
@@ -104,15 +102,11 @@ body,
   	color: #d6e6ff;
 }
 #window_select_city .main input,
-#input_select_date,
 #time_notifications input {
   	border: 2px solid #d6e6ff;
 } 
 #list_cityes span {
   	border-bottom: 1px solid #d6e6ff;
-}
-.hint::before {
-  	border-bottom: 9px solid #d6e6ff !important;
 }
 #message_not_city,
 #message_notifications,
@@ -121,7 +115,6 @@ body,
   	background-color: #91b6ef;
 }
 #year_screen,
-.div_select_date i,
 .div_zoom_calendar i,
 #privacy_policy .icon, 
 #privacy_policy b,
@@ -172,6 +165,7 @@ main li.event_coming {
   	background-color: #fea00a40;
 } 
 .now_year,
+.list_years_now_year,
 .description a,
 .now_month,
 #about_ekadashi a,
@@ -375,7 +369,6 @@ body,
 #window_change_city,
 #list_cityes,
 #ul_nav,
-.hint,
 #calendar,
 #list_all_years,
 #day_notifications,
@@ -1000,64 +993,6 @@ header {
 
 }
 
-#select_date {
-	top: -60px;
-	left: 0;
-	padding: 5px 10px;
-	background-color: #eee;
-	width: 100%;
-	box-sizing: border-box;
-	z-index: 2;
-	box-shadow: 0 10px 25px -20px #000;
-	transition: top .4s linear;
-}
-.div_select_date {
-	width: 52%;
-	max-width: 200px;
-}
-#input_select_date {
-	padding: 12px;
-	font-size: inherit;
-	box-sizing: border-box;
-	width: 100%;
-	color: inherit;
-	caret-color: #0a213a;
-}
-#input_select_date::-webkit-input-placeholder,
-#input_select_date::-moz-placeholder,
-#input_select_date::-ms-input-placeholder,
-#window_select_city .main input::-webkit-input-placeholder,
-#window_select_city .main input::-moz-placeholder,
-#window_select_city .main input::-ms-input-placeholder {
-	color:#e3e3e3;
-}
-.div_select_date i {
-	top: 10px;
-	right: 10px;
-}
-#select_date .fa-calendar-check {
-	font-size: 27px;
-}
-.hint {
-	top: 60px;
-	left: 10px;
-	opacity: 0;
-	z-index: -1;
-	padding: 8px 10px;
-	font-size: 15px;
-	border-radius: 10px;
-}
-.hint::before {
-	content: '';
-	position: absolute;
-	bottom: 52px;
-	left: 20px;
-	border: 6px solid transparent;
-}
-.visible_hint {
-	opacity: 1;
-	z-index: 4;
-}
 #list_all_years {
 	width: 100%;
 	height: auto;
@@ -1075,12 +1010,6 @@ header {
 }
 #list_all_years span {
   	width: 100px;
-}
-.info_all_years {
-  	font-size: 14px;
-}
-.info_all_years span {
-  	width: 150px;
 }
 #div_list_all_years {
 	height: 100vh;
@@ -1254,11 +1183,9 @@ header {
 .zoom_calendar .calendar_year ul li:nth-child(7n + 7) { 
   	background-color: #ededed50;
 }
-
 .zoom_calendar .calendar_year ul li:nth-child(7n + 8) { 
   	background-color: #ededed50;
 }
-
 .zoom_calendar .radha-yatra::after, 
 .zoom_calendar .now_date::after, 
 .zoom_calendar .ekadashi::after,

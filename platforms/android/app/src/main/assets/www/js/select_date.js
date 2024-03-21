@@ -37,11 +37,8 @@ import { now_date_number,
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
-	select_date = document.getElementById( 'select_date' ),
-	input_select_date = document.getElementById( 'input_select_date' ),
 	list_all_years = document.getElementById( 'list_all_years' ),
 	div_list_all_years = document.getElementById( 'div_list_all_years' ),
-	open_list_years = document.getElementById( 'open_list_years' ),
 	close_list_years = document.getElementById( 'close_list_years' ),
 	year = calendar.getElementsByTagName( 'h1'),
 	div_calendar = calendar.querySelectorAll( '.calendar_year' ),
@@ -105,6 +102,8 @@ document.addEventListener( 'deviceready', () => {
 
 for ( let i = min_year; i < ( max_year + 1 ); i++ ) {
 	let year = '<span class="d-block m-b-20">' + i + '</span>';
+
+	if ( i === now_year ) year = '<span class="d-block m-b-20 list_years_now_year">' + i + '</span>';
 
 	div_list_all_years.insertAdjacentHTML( 'beforeend', year );
 }
@@ -511,7 +510,6 @@ function get_van_year_info( slug,
 
 		remove_too_events();
 		get_description( calendar, '.click' );
-		inner_select_date( false );
 		show_zoom_callendar();
 
     }
@@ -555,108 +553,13 @@ function get_city( func, slug ) {
 	xml_cities.send();
 }
 
-function get_top_elem() {
-	let all_lists_months = calendar.getElementsByTagName( 'ul' );
+show_select_date.onclick = function() {
 
-	for ( let month of all_lists_months ) {
-
-		if ( ( month.getBoundingClientRect().top + 35 ) > height_header ) {
-
-			if ( month.classList.contains( 'jan' ) ) {
-				top_elem = month.parentElement.previousElementSibling;
-				break;
-			} else {
-				top_elem = month; 
-				break;
-			}
-
-		}
-
+	if ( list_all_years.style.cssText === '' ) {
+		list_all_years.style.cssText = 'opacity: 1; z-index: 5;';
+	} else {
+		list_all_years.style.cssText = '';
 	}
-
-}
-
-function get_info_scroll_event() {
-	window.addEventListener( 'scroll', get_top_elem );
-}
-
-input_select_date.oninput = function() {
-	let input_value = input_select_date.value,
-		hint_1 = document.getElementById( 'hint_1' ),
-		hint_2 = document.getElementById( 'hint_2' );
-
-	if ( input_value.length === 2 ) {
-
-		if ( ( input_value < 19 ) || ( input_value > 20 ) ) {
-
-			if ( hint_2.classList.contains( 'visible_hint' ) ) {
-				hint_2.classList.remove( 'visible_hint' );
-			}
-
-			hint_1.classList.add( 'visible_hint');
-			setTimeout( () => hint_1.classList.remove( 'visible_hint' ), 6000 );
-		}
-
-		if ( input_value < 19 ) {
-			input_select_date.value = '19';
-		} else if ( input_value > 20 ) {
-			input_select_date.value = '20';
-		}
-
-	} else if ( input_value.length === 4 ) {
-
-		if ( ( input_value >= min_year ) && ( input_value <= max_year ) ) {
-			div_zoom_calendar.style.cssText = '';
-			year_screen_span.innerHTML = '';
-			year_input = input_value;
-			calendar.innerHTML = '';
-
-			calendar.style.height = ( window_height - 
-									  height_header -
-									  footer_id.clientHeight ) + 'px';
-			min_preloader.style.cssText = 'position: absolute;' +
-										  'top: 50%;' + 
-										  'left: 50%;' + 
-										  'transform: translate(-50%, -50%);' +
-										  'margin: 0';
-			calendar.append( min_preloader );
-			span_year_input = document.getElementById( 'year_input' );
-		
-			if ( span_year_input ) span_year_input.remove();
-
-			min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input" class="text-center d-block' +  ' m-t-10">' +
-																'<small>Загружаем - ' + year_input + ' год</small>' +
-															'</span>' );
-			
-			get_city( get_van_year_info, slug );
-			inner_select_date( false );
-			input_select_date.value = '';
-			input_select_date.blur();
-
-		} else {
-
-			if ( hint_1.classList.contains( 'visible_hint' ) ) {
-				hint_1.classList.remove( 'visible_hint' );
-			}
-
-			hint_2.classList.add( 'visible_hint' );
-			setTimeout( () => hint_2.classList.remove( 'visible_hint' ), 6000 );
-			input_select_date.value = input_value.slice( 0, 2 );
-
-		}
-
-	} else if ( input_value.length > 4 ) {
-		input_select_date.value = input_value.slice( 0, 4 );
-	}
-}
-
-open_list_years.onclick = function() {
-
-	if ( input_select_date.value !== '' ) {
-		input_select_date.value = '';
-	}
-
-	list_all_years.style.cssText = 'opacity: 1; z-index: 5;';
 
 	list_all_years.onclick = function( event ) {
 		remove_too_events();
@@ -690,8 +593,6 @@ open_list_years.onclick = function() {
 																'</span>' );
 
 			get_city( get_van_year_info, slug );
-			inner_select_date( false );
-
 			list_all_years.style.cssText = '';
 		}
 
@@ -702,40 +603,7 @@ open_list_years.onclick = function() {
 close_list_years.onclick = function( event ) {
 	event.stopPropagation();
 	list_all_years.style.cssText = '';
-	document.body.style.overflow = 'auto';
 }
-
-window.addEventListener( 'scroll', function() {
-
-	let year_select_date = document.getElementsByClassName( 'year_select_date' ),
-		height_calendar_year,
-		year;
-
-	if ( calendar ) {
-	
-		if ( calendar.querySelector( '.calendar_year' ) ) {
-			height_calendar_year = calendar.querySelector( '.calendar_year' ).offsetHeight + 70;
-		}
-	
-	}
-	
-	for ( let year_elem of year_select_date ) {
-		let coords_year_bottom = year_elem.getBoundingClientRect().bottom;
-
-		if ( ( coords_year_bottom < height_header ) && 
-			 ( coords_year_bottom > ( - ( height_calendar_year - scroll_window_height ) ) ) ) {
-			year = year_elem.textContent;
-		}
-
-		if ( year ) {
-			year_screen_span.innerHTML = year;
-		} else {
-			year_screen_span.innerHTML = '';
-		}
-
-	}
-
-});
 
 function plus_minus_show_hide( plus, minus ) {
 
@@ -777,7 +645,6 @@ plus.onclick = function( event_year,
 						 delete_div, 
 						 coords_let ) {
 	
-	inner_select_date( false );
 	plus_minus_show_hide( this, minus );
 
 	let too_events = document.querySelector( '#too_events' ),
@@ -861,7 +728,6 @@ minus.onclick = function( event_year,
 						  delete_div, 
 						  coords_let ) {
 
-	inner_select_date( false );
 	plus_minus_show_hide( this, plus );
 
 	let too_events = document.querySelector( '#too_events' ),
@@ -977,18 +843,62 @@ close_forever.onclick = () => {
 	wrapper_hint_description.style.cssText = '';
 }
 
-function inner_select_date( click ) {
+function get_top_elem() {
+	let all_lists_months = calendar.getElementsByTagName( 'ul' );
 
-	if ( select_date.style.top === '' && click === true ) {
-		select_date.style.top = height_header + 'px';
-	} else {
-		select_date.style.cssText = '';
+	for ( let month of all_lists_months ) {
+
+		if ( ( month.getBoundingClientRect().top + 35 ) > height_header ) {
+
+			if ( month.classList.contains( 'jan' ) ) {
+				top_elem = month.parentElement.previousElementSibling;
+				break;
+			} else {
+				top_elem = month; 
+				break;
+			}
+
+		}
+
 	}
 
 }
 
-show_select_date.onclick = () => {
-	inner_select_date( true );
+function show_year_scroll() {
+
+	let year_select_date = document.getElementsByClassName( 'year_select_date' ),
+		height_calendar_year,
+		year;
+
+	if ( calendar ) {
+	
+		if ( calendar.querySelector( '.calendar_year' ) ) {
+			height_calendar_year = calendar.querySelector( '.calendar_year' ).offsetHeight + 70;
+		}
+	
+	}
+	
+	for ( let year_elem of year_select_date ) {
+		let coords_year_bottom = year_elem.getBoundingClientRect().bottom;
+
+		if ( ( coords_year_bottom < height_header ) && 
+			 ( coords_year_bottom > ( - ( height_calendar_year - scroll_window_height ) ) ) ) {
+			year = year_elem.textContent;
+		}
+
+		if ( year ) {
+			year_screen_span.innerHTML = year;
+		} else {
+			year_screen_span.innerHTML = '';
+		}
+
+	}
+
+}
+
+function get_info_scroll_event() {
+	window.addEventListener( 'scroll', get_top_elem );
+	window.addEventListener( 'scroll', show_year_scroll );
 }
 
 setTimeout( get_info_scroll_event, 1000 );

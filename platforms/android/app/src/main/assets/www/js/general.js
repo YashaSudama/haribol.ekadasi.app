@@ -453,6 +453,12 @@ function show_today() {
 
 }
 
+function hide_today() {
+
+    if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
+
+}
+
 for ( let div of description ) {
   div.style.left = window_width + 'px';
 }
@@ -471,14 +477,9 @@ nav.addEventListener( 'click', function() {
     
     if ( ul_nav.style.cssText === '' ) {
         ul_nav.style.cssText = 'opacity: 1; z-index: 7';
-
-        if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
-
+        hide_today();
     } else {
         ul_nav.style.cssText = '';
-
-        if ( today && today.hasAttribute( 'id' ) && !today.closest( 'body' ).querySelector( '#not_connection' ) ) today.style.cssText = '';
-
         show_today();
     }
 
