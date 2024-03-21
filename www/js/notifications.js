@@ -12,7 +12,8 @@ import { height_footer_func,
          clear,
          content_not_connection,
          text_not_internet,
-         header_top
+         header_top,
+         footer_id
 } from "./general.js";
 
 let main_notifications = document.getElementById( 'main_notifications' ),
@@ -34,7 +35,16 @@ function work_settings_notifications() {
         update_storage = document.getElementById( 'update_storage' ),
         hr_hide = main_notifications.getElementsByClassName( 'hr-hide' ),
         status_notifications_let,
-        nav_ok_transition = false; 
+        nav_ok_transition = false,
+        document_height = Math.max(
+            document.body.scrollHeight, 
+            document.documentElement.scrollHeight,
+            document.body.offsetHeight, 
+            document.documentElement.offsetHeight,
+            document.body.clientHeight, 
+            document.documentElement.clientHeight
+        ),
+        height_main = document_height - height_header - footer_id.clientHeight; 
 
 	min_preloader.style = 'margin: 20px 0 0';
     form.time.value = info_notifications.time;
@@ -230,8 +240,9 @@ function work_settings_notifications() {
         }
 
     } else {
-        main_notifications.innerHTML = '<div class="text-center">' +
-                                            '<h3 class="l-height-1-25 p-t-30 m-b-30">Ваше местоположение не определено</h3>' +  
+        main_notifications.style.height = height_main + 'px';
+        main_notifications.innerHTML = '<div class="not_location text-center pos-rel">' +
+                                            '<h3 class="l-height-1-25 m-b-30 m-t-0">Ваше местоположение не определено</h3>' +  
                                             '<button id="select_city_notif">' +
                                                 'Выбор города'+
                                             '</button>' +  
@@ -253,20 +264,17 @@ function work_settings_notifications() {
 }
 
 document.addEventListener( "deviceready", () => {
-
-    if ( navigator.connection.type !== 'none' ) {
-
-        work_settings_notifications();
-
-    } else {
-
-        content_not_connection( main_notifications, 
-                                text_not_internet, 
-                                null, 
-                                null, 
-                                null, 
-                                null );
-    }
+    work_settings_notifications();
+    // if ( navigator.connection.type !== 'none' ) {
+    //     work_settings_notifications();
+    // } else {
+    //     content_not_connection( main_notifications, 
+    //                             text_not_internet, 
+    //                             null, 
+    //                             null, 
+    //                             null, 
+    //                             null );
+    // }
 
 }, false );
 

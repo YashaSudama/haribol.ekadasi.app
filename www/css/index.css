@@ -728,11 +728,6 @@ header {
 	height: 40%;
 	border-radius: 10px;
 }
-.wrap_check_exit_page {
-	top: 50%;
-	left: 50%;
-	transform: translate( -50%, -50% );
-}
 #window_select_city .main label {
   	font-size: 15px;
 }
@@ -908,7 +903,9 @@ header {
 	left: 20px;
 	font-size: 38px;
 }
-#ul_nav ul {
+#ul_nav ul,
+.wrap_check_exit_page,
+.not_location {
 	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50% );
