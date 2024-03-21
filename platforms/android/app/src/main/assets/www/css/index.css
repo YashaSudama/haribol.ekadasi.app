@@ -381,6 +381,7 @@ body,
 #today,
 #not_data_server,
 #not_connection,
+#show_select_date,
 .new-calendar,
 .div_zoom_calendar {
   	transition: opacity .4s linear;
@@ -1183,11 +1184,9 @@ header {
 .zoom_calendar .calendar_year ul li:nth-child(7n + 7) { 
   	background-color: #ededed50;
 }
-
 .zoom_calendar .calendar_year ul li:nth-child(7n + 8) { 
   	background-color: #ededed50;
 }
-
 .zoom_calendar .radha-yatra::after, 
 .zoom_calendar .now_date::after, 
 .zoom_calendar .ekadashi::after,

@@ -459,6 +459,18 @@ function hide_today() {
 
 }
 
+function show_select_date_func() {
+
+    if ( show_select_date ) show_select_date.style.cssText = '';
+
+}
+
+function hide_select_date() {
+
+    if ( show_select_date ) show_select_date.style.opacity = '0';
+
+}
+
 for ( let div of description ) {
   div.style.left = window_width + 'px';
 }
@@ -530,9 +542,10 @@ function content_not_data( main,
 
     if ( !height_header ) height_header = header_top.clientHeight;
     if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
-    if ( show_select_date ) show_select_date.classList.add( 'd-none' );
     if ( year_screen_span ) year_screen_span.innerHTML = '';
-    if ( today && today.hasAttribute( 'id' ) ) today.style.opacity = '0';
+    
+    hide_today();
+    hide_select_date();
 
     if ( main ) {
         main.innerHTML = '';
@@ -904,6 +917,7 @@ function get_description( main, tag ) {
                                     div.style.cssText = 'opacity: 1; left: 0';
                                     section_description.style.zIndex = '4';
                                     close_description.style.cssText = 'opacity: 1; z-index: 1;';
+                                    hide_select_date();
                                 } 
 
                             }
@@ -930,6 +944,8 @@ function get_description( main, tag ) {
                             div.style.cssText = 'opacity: 1; left: 0';
                             section_description.style.zIndex = '4';
                             close_description.style.cssText = 'opacity: 1; z-index: 1;';
+                            hide_today();
+                            hide_select_date();
                         } 
 
                     }
@@ -947,6 +963,8 @@ function get_description( main, tag ) {
                 setTimeout( function() {
                     section_description.style.cssText = '';
                     close_description.style.cssText = '';
+                    show_today();
+                    show_select_date_func();
                 }, 1000 );
             }
 
@@ -1481,6 +1499,7 @@ export { window_width,
          remove_local_storage,
          remove_too_events,
          show_select_date,
+         show_select_date_func,
          year_screen,
          today,
          text_not_data_server,

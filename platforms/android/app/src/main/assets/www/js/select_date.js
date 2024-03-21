@@ -32,6 +32,7 @@ import { now_date_number,
          set_local_storage,
          remove_too_events,
 		 show_select_date,
+		 show_select_date_func,
 		 year_screen,
 		 year_screen_span
 } from "./general.js";
@@ -366,8 +367,7 @@ function inner_get_info( select_get_info ) {
 
     }
 
-	if ( show_select_date.classList.contains( 'd-none' ) ) show_select_date.classList.remove( 'd-none' );
-	
+	show_select_date_func();
 	get_description( calendar, '.click' );
 	height_footer_func();
 

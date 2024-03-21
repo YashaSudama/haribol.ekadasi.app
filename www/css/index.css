@@ -381,6 +381,7 @@ body,
 #today,
 #not_data_server,
 #not_connection,
+#show_select_date,
 .new-calendar,
 .div_zoom_calendar {
   	transition: opacity .4s linear;
