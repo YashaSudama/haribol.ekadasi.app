@@ -485,7 +485,7 @@ window.addEventListener( 'resize', function() {
 
 } );
 
-nav.addEventListener( 'click', function() {
+nav.onclick = function() {
     
     if ( ul_nav.style.cssText === '' ) {
         ul_nav.style.cssText = 'opacity: 1; z-index: 7';
@@ -495,7 +495,7 @@ nav.addEventListener( 'click', function() {
         show_today();
     }
 
-} );
+}
 
 close_nav.onclick = function() {
     ul_nav.style.cssText = '';

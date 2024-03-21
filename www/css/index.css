@@ -726,7 +726,6 @@ header {
 }
 #check_exit_page .main {
 	height: 40%;
-	box-shadow: 0 3px 15px -5px #000;
 	border-radius: 10px;
 }
 .wrap_check_exit_page {

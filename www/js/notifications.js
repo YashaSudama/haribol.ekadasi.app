@@ -33,7 +33,8 @@ function work_settings_notifications() {
         remain = document.getElementById( 'remain' ),
         update_storage = document.getElementById( 'update_storage' ),
         hr_hide = main_notifications.getElementsByClassName( 'hr-hide' ),
-        status_notifications_let; 
+        status_notifications_let,
+        nav_ok_transition = false; 
 
 	min_preloader.style = 'margin: 20px 0 0';
     form.time.value = info_notifications.time;
@@ -149,19 +150,35 @@ function work_settings_notifications() {
             }
     
         }
+
+        function open_close_nav( elem ) {
+
+            if ( elem.style.cssText === '' ) {
+                elem.style.cssText = 'opacity: 1; z-index: 7';
+            } else {
+                elem.style.cssText = '';
+            }
+
+        } 
     
         nav.onclick = function() {
     
             if ( info_notifications.status === form.status_notifications.dataset.status &&
                 info_notifications.day === Number( form.get_notifications.value ) &&
                 info_notifications.time === form.time.value ) {
-                ul_nav.style.cssText = 'opacity: 1; z-index: 7';
+                open_close_nav( ul_nav );
             } else {
-                check_exit_page.style.cssText = 'opacity: 1; z-index: 7';
+
+                if ( nav_ok_transition ) {
+                    open_close_nav( ul_nav );
+                } else {
+                    open_close_nav( check_exit_page );
+                }
     
                 ok_transition.onclick = function() {
                     check_exit_page.style.cssText = '';
                     ul_nav.style.cssText = 'opacity: 1; z-index: 7';
+                    nav_ok_transition = true;
                 }
     
                 remain.onclick = function() {
@@ -178,7 +195,14 @@ function work_settings_notifications() {
                 info_notifications.day !== Number( form.get_notifications.value ) ||
                 info_notifications.time !== form.time.value ) {
                 event.preventDefault();
-                check_exit_page.style.cssText = 'opacity: 1; z-index: 7';
+
+                if ( nav_ok_transition ) {
+                    hide_body();
+                    localStorage.setItem( 'status_background', 'yes' );
+                    window.location.href = 'index.html';
+                } else {
+                    open_close_nav( check_exit_page );
+                }
     
                 ok_transition.onclick = function() {
                     hide_body();
@@ -193,6 +217,7 @@ function work_settings_notifications() {
     
             } else {
                 hide_body();
+                localStorage.setItem( 'status_background', 'yes' );
             }
     
         }
