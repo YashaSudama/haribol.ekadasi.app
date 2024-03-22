@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:"> 
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/all.css">
+        <link rel="stylesheet" href="css/index.css">
+        <title>Haribol</title>
+    </head>
+    
+    <body> 
+        <div id="background" class="pos-fixed"></div>
+        <header id="header" class="pos-fixed">
+            <div class="before_top text-center">
+                <span class="top_span d-block">Экадаши и вайшнавские праздники</span>
+            </div>
+            <div id="top" class="pos-rel">
+                <span class="d-block bold" id="current_date"></span>
+                <span class="d-block l-height-1-25" id="location"></span>
+            </div>
+        </header>
+        <main id='main'>
+            <ul id="current_year" class="info_year">
+                <li class="year text-right"></li>
+            </ul>
+            <ul id="plus_year" class="info_year">
+                <li class="year text-right"></li>
+            </ul>
+            <div id="height_footer"></div>
+        </main>
+        <div id="window_select_city" class="pos-fixed">
+            <div class="main pos-abs text-center pos-rel l-height-1-2">
+                <div class="m-b-10">
+                    <label for="form_search" id="span_search_city" class="d-block m-b-40 m-auto">Введите название населённого пункта или страны:</label>
+                    <input id="form_search" type="search" placeholder="Начните ввод"><br>
+                </div> 
+                <div id="div_search_city" class="pos-rel m-auto"></div>
+                <div class="policy">
+                    <span>
+                        <a id="current_location" class="d-block m-auto width-fit">Текущее<br>местоположение</a>
+                        <a class="link_policy d-block m-auto m-t-50 p-b-5 width-fit" href="privacy_policy.html">Политика<br>конфиденциальности</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="window_change_city" class="pos-fixed">
+           <div class="main pos-rel l-height-1-2">
+               <span class="d-block">Ранее Ваше местоположение было определено как - <h4 id="local_city" class="m-b-10 m-t-5 d-block"></h4></span>
+               <span class="d-block">Хотите сменить местоположение?</span>
+               <div class="change_buttons m-b-20 m-t-5">
+                   <button id="yes_change_city" class="bold">Да</button>
+                   <button id="no_change_city" class="bold">Нет</button>   
+               </div>
+               <span class="not_window d-block">Если Вы не хотите, чтобы появлялось это окно, то выберите Ваше местоположение через
+                    <span class="width-fit m-t-5 d-block">Меню <i class="fas fa-long-arrow-alt-right pos-rel"></i> Выбор города</span>
+               </span>
+           </div> 
+        </div>
+
+        <div id="message_not_city" class="pos-fixed l-height-1-25"></div>
+        <div id="message_notifications" class="pos-fixed l-height-1-25"></div> 
+        <div id="message_location_error" class="pos-fixed l-height-1-25"></div>
+
+        <div id="list_cityes" class="pos-abs"></div>
+
+        <nav></nav>
+
+        <footer>
+            <div id="footer" class="pos-fixed">
+                <ul class="d-flex text-center">
+                    <li id="today">Сегодня</li>
+                    <li id="nav">Меню</li>
+                </ul>
+            </div>
+        </footer>
+
+        <script async src="cordova.js"></script>
+        <script defer type="module" src="js/content_description.js"></script>
+        <script defer type="module" src="js/general.js"></script>
+        <script defer type="module" src="js/index.js"></script>
+    </body>
+</html>
