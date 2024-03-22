@@ -164,7 +164,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         plus_year = document.getElementById( 'plus_year' ),
         today_str = 'Сегодня',
         tomorrow = 'Завтра',
-        day_after_tomorrow = 'Послезавтра';
+        day_after_tomorrow = 'Скоро';
 
     height_header = header_top.clientHeight;
     main.style.marginTop = height_header + 'px';

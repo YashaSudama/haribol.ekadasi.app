@@ -643,15 +643,15 @@ header {
 .day_full span {
 	position: relative;
 	bottom: 2px;
-	margin-right: 5px;
-	font-size: 14px;
+	margin-right: 3px;
+	font-size: 13px;
 }
 .day_full i {
   	font-size: 28px;
 }
 .ekadashi_hr {
-	margin-top: 3px;
-	margin-bottom: 0px; 
+	margin-top: 5px;
+	margin-bottom: 2px; 
 	margin-left: 0;
 	width: 48%;
 }

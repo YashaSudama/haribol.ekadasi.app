@@ -39,12 +39,10 @@
         <preference name="SplashScreenDelay" value="3000" />
         <preference name="AndroidWindowSplashScreenBackground" value="#d6e6ff" />
 
-        <icon src="www/img/logo/round/logo_ldpi.png" density="ldpi" />
-        <icon src="www/img/logo/round/logo_mdpi.png" density="mdpi" />
-        <icon src="www/img/logo/round/logo_hdpi.png" density="hdpi" />
-        <icon src="www/img/logo/round/logo_xhdpi.png" density="xhdpi" />
-        <icon src="www/img/logo/round/logo_xxhdpi.png" density="xxhdpi" />
-        <icon src="www/img/logo/round/logo_xxxhdpi.png" density="xxxhdpi" />
+        <icon background="www/img/logo/background/xxxhdpi-background.png" 
+              density="xxxhdpi" 
+              foreground="www/img/logo/square/logo_xxxhdpi_new.png" 
+              src="www/img/logo/round/logo_xxxhdpi.png"/>
 
         <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
         <preference name="Hostname" value="ekadasi" />

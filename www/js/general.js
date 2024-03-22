@@ -176,7 +176,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         '2': { name: 'Гаура-Пурнима, явление Чайтаньи Махапрабху' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">Полный пост</span>',
+                     '<span class="exit bold l-height-1-1">Полный пост</span>',
                name_too_events: 'Чайтанья',
                id: 'chaytanya'
              },
@@ -186,7 +186,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         '4': { name: 'Явление Нришимхадева' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">Пост до полудня</span>',
+                     '<span class="exit bold l-height-1-1">Пост до полудня</span>',
                name_too_events: 'Нришимхадев',
                id: 'nrisimha'
              },
@@ -196,13 +196,13 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
              },
         '7': { name: 'Джанмастами, явление Шри Кришны' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">Полный пост</span>',
+                     '<span class="exit bold l-height-1-1">Полный пост</span>',
                name_too_events: 'Джанмастами',
                id: 'krishna'
              },
         '8': { name: 'Явление А.Ч. Бхактиведанты Свами' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">Пост до полудня</span>',
+                     '<span class="exit bold l-height-1-1">Пост до полудня</span>',
                name_too_events: 'Бхактиведанта',
                id: 'bhaktivedanta'
              },
@@ -210,7 +210,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                name_too_events: 'Радхастами',
                id: 'radharany'
              },
-        'A': { name: 'Праздник Говардхан-пуджа',
+        'A': { name: 'Праздник<br>Говардхан-пуджа',
                name_too_events: 'Говардхан',
                id: 'govardhana'
              },
@@ -232,11 +232,11 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
             },
         'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
                      '<hr class="ekadashi_hr">' +
-                     '<span class="exit">Пост</span>',
+                     '<span class="exit bold l-height-1-1">Пост</span>',
                name_too_events: 'Вьясапуджа',
                id: 'vyasapudja'
              },
-        'R': { name: 'Рождество, явление Иисуса Христа',
+        'R': { name: 'Рождество, явление<br>Иисуса Христа',
                name_too_events: 'Рождество',
                id: 'rozhdestvo'
              },
