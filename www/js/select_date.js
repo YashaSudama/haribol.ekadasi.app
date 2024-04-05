@@ -34,7 +34,8 @@ import { now_date_number,
 		 show_select_date,
 		 show_select_date_func,
 		 year_screen,
-		 year_screen_span
+		 year_screen_span,
+		 get_month_days
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
@@ -125,11 +126,12 @@ function show_zoom_callendar() {
 
 function print_year( div_year, year ) {
 	let count_month = 0,
-		month_days_local,
-		local_year = year;
+		local_year = year,
+		month_days_local;
 
 	for ( let ul of div_year ) {
 		first_day_month = new Date( local_year, count_month, 1 ).getDay();
+		month_days_local = get_month_days( count_month, local_year );
 
 		if ( local_year === now_year && count_month === now_month ) {
 			ul.innerHTML = '<h3 class="m-b-10 m-t-30 now_month">' + month_name[ count_month ] + '</h3>';
@@ -144,33 +146,6 @@ function print_year( div_year, year ) {
 		for ( let i = 1; i < first_day_month; i++ ) {
 			ul.innerHTML += '<li></li>';
 		}
-
-		if ( count_month === 0  || 
-			count_month === 2  || 
-			count_month === 4  ||
-			count_month === 6  || 
-			count_month === 7  || 
-			count_month === 9  || 
-			count_month === 11 ) {
-
-			   month_days_local = 31;
-
-	   } else if ( count_month === 3 || 
-				   count_month === 5 || 
-				   count_month === 8 || 
-				   count_month === 10 ) {
-
-			   month_days_local = 30;
-
-	   } else if ( count_month === 1 ) {
-		   
-		   if ( ( local_year % 4 ) === 0 ) {
-			   month_days_local = 29;
-		   } else {
-			   month_days_local = 28;
-		   }
-
-	   } 
 
 		for ( let i = 1; i < ( month_days_local + 1 ); i++ ) {
 

@@ -1,8 +1,6 @@
 "use strict";
 
-import { window_width,
-         window_height,
-         day_name_full,
+import { window_height,
          day_week,
          day_name_short,
          now_date_number,
@@ -29,7 +27,6 @@ import { window_width,
          min_preloader,
          show_body,
          hide_body,
-         month_days,
          apparition_ekadasi_days,
          add_sp_array,
          add_isus_array,
@@ -38,7 +35,8 @@ import { window_width,
          remove_local_storage,
          today,
          text_not_data_server,
-         hide_background
+         hide_background,
+         get_month_days
 } from "./general.js";
 
 document.addEventListener( "deviceready", () => {
@@ -111,11 +109,6 @@ function get_firebase_token_func() {
 
 }
 
-if ( window_width < 480 ) {
-    day_name_full[ 0 ] = 'Вос-нье';
-    day_name_full[ 1 ] = 'Пон-ник';
-}
-
 set_local_storage( 'click_choice_city', '0' );
 set_local_storage( 'now_year', now_year );
 set_local_storage( 'status_notifications', 'false' );
@@ -124,6 +117,11 @@ set_local_storage( 'main_index', main.innerHTML );
 
 current_location.onclick = function() {
     remove_local_storage( 'city_select' );
+    remove_local_storage( 'lat' );
+    remove_local_storage( 'lon' );
+    remove_local_storage( 'city_name' );
+    remove_local_storage( 'city_name_id' );
+    remove_local_storage( 'city_slug' );
     window.location.href = 'index.html';
     hide_body();
     localStorage.setItem( 'status_background', 'yes' );
@@ -196,7 +194,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         function display_data( obj_month, item, month, get_year, numb_month ) { // item - свойство ( ключ ) объекта, дата события
             let event_coming_class = '',
                 event_coming_elem = '',
-                event_coming_class_status = false;
+                event_coming_class_status = false,
+                month_days = get_month_days( now_month, now_year );
 
             if ( +get_year === now_year ) {
 
@@ -278,35 +277,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                         numb_month_local = numb_month + 1,
                         item_local = +item + 1,
                         exit_next_year = false,
-                        city_name_dst,
-                        month_days_local;
-
-                    if ( numb_month === 0 || 
-                        numb_month === 2 || 
-                        numb_month === 4 ||
-                        numb_month === 6 || 
-                        numb_month === 7 || 
-                        numb_month === 9 || 
-                        numb_month === 11 ) {
-                
-                        month_days_local = 31;
-                
-                    } else if ( numb_month === 3 || 
-                            numb_month === 5 || 
-                            numb_month === 8 || 
-                            numb_month === 10 ) {
-                
-                        month_days_local = 30;
-                
-                    } else if ( numb_month === 1 ) {
-                    
-                        if ( ( now_year % 4 ) === 0 ) {
-                            month_days_local = 29;
-                        } else {
-                            month_days_local = 28;
-                        }
-                
-                    } 
+                        month_days_local = get_month_days( numb_month, now_year );
 
                     if ( item_local > month_days_local ) {
                         item_local = 1;
@@ -331,68 +302,6 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                         exit_date = '<span>' + item_local + '</span>.' + numb_month_local + '.' + ( now_year + 1 );
                     } else {
                         exit_date = '<span>' + item_local + '</span>.' + numb_month_local;
-                    }
-                    
-                    if ( localStorage.getItem( 'city_name' ) ) {
-                        city_name_dst = localStorage.getItem( 'city_name' ).split( ', ');
-                    } else if ( slug ) {
-                        city_name_dst = ( slug.name ).split( ', ' );
-                    }
-                    
-                    if ( city_name_dst ) {
-                        
-                        if ( city_name_dst.length === 1 ) {
-                            country_dst = undefined;
-                        } else if ( city_name_dst.length === 2 ) {
-                            country_dst = city_name_dst[ 1 ];
-                        } else if ( city_name_dst.length === 3 ) {
-                            country_dst = city_name_dst[ 2 ];
-                        }
-                        
-                    }
-
-                    if ( country_dst ) {
-                    
-                        if ( country_dst !== 'Россия'         || // Перевод выхода из поста на летнее время
-                            country_dst !== 'Белоруссия'     || 
-                            country_dst !== 'Казахстан'      || 
-                            country_dst !== 'Исландия'       || 
-                            country_dst !== 'Турция'         || 
-                            country_dst !== 'Северная Корея' || 
-                            country_dst !== 'Южная Корея'    || 
-                            country_dst !== 'Филиппины'      || 
-                            country_dst !== 'Колумбия'       || 
-                            country_dst !== 'Венесуэла'      || 
-                            country_dst !== 'Вьетнам'        || 
-                            country_dst !== 'Афганистан'     || 
-                            country_dst !== 'Индия'          || 
-                            country_dst !== 'Япония'         || 
-                            country_dst !== 'Китай'          || 
-                            country_dst !== 'Киргизия') {
-                            
-                            if ( value_key.light_time === 'DST' ) {
-                                let value_1 = ( value_key.exit_time ).slice( 2, 8 ),
-                                    value_2 = ( value_key.exit_time ).slice( 10 ),
-                                    start_time = ( value_key.exit_time ).slice( 0, 2 ),
-                                    end_time = ( value_key.exit_time ).slice( 8, 10 );
-                                    
-                                start_time = +start_time + 1;
-                                end_time = +end_time + 1;
-                                
-                                if ( start_time < 10 ) {
-                                    start_time = '0' + start_time;
-                                }
-                                
-                                if ( end_time < 10 ) {
-                                    end_time = '0' + end_time;
-                                }
-                                    
-                                value_key.exit_time = start_time + value_1 + end_time + value_2;
-
-                            }
-                            
-                        }
-
                     }
 
                     if ( ( value_key.exit_time ).includes( 'after' ) ) {
@@ -1129,39 +1038,15 @@ function location_error( slug ) {
         
         if ( localStorage.getItem( 'click_choice_city' ) === '0' ) {
 
-            let xml_city = new XMLHttpRequest(),
-                get_city_array;
-
-            xml_city.open( 'GET', url + 'api/cities.json?slug=' + city_slug );
-            xml_city.responseType = 'json';
-            xml_city.setRequestHeader( 'Content-Type', 'application/json' );
-
-            not_connection( xml_city, 
-                            main, 
-                            text_not_connection_timeout, 
-                            'index_get_info_new', 
-                            'main_index', 
-                            inner_get_info_func, 
-                            index_get_info_new );
-
-            timeout( xml_city, 
-                    main, 
-                    text_not_connection_timeout, 
-                    'index_get_info_new', 
-                    'main_index', 
-                    inner_get_info_func, 
-                    index_get_info_new );
-
-            xml_city.onload = function() {
-                get_city_array = xml_city.response;
-                slug = get_city_array.find( item => item.slug == city_slug );
-                location_span.innerHTML = slug.name;
-
-                get_info_func( slug, index_get_info_new );
-
-            }
-
-            xml_city.send();
+            if ( localStorage.getItem( 'index_get_info_new' ) && 
+               ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
+                    index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
+                    location_span.innerHTML = city_name;
+                    inner_get_info_func( index_get_info_new, slug, height_header, day_week );
+                } else {
+                    localStorage.setItem( 'now_year', now_year );
+                    get_city_and_info( lat, lon, city_slug, slug );
+                }
 
         } else if ( localStorage.getItem( 'click_choice_city' ) === '1' ) {
             not_city( lat, lon, city_name, slug, index_get_info_new );
@@ -1195,9 +1080,203 @@ function location_error( slug ) {
 function get_city( lat, lon ) {
     let xml_location = new XMLHttpRequest(),
         url = 'https://api.opencagedata.com/geocode/v1/json?q=' + lat + ',' + lon + 
-              '&no_annotations=1&language=en&limit=1&key=' + key;
-        xml_location.open( 'GET', url );
-        xml_location.responseType = 'json';
+              '&no_annotations=1&language=en&limit=1&key=' + key,
+        redefinition_city = { // переопределение города
+
+            'China': [
+                {
+                    state: 'Shanghai',
+                    result: 'Shanghai',
+                },
+                {
+                    state: 'Beijing',
+                    result: 'Beijing',
+                },
+                {
+                    state: 'Tianjin',
+                    result: 'Tianjin',
+                },
+                {
+                    state: 'Guangdong Province',
+                    result: 'Guangdong',
+                },
+                {
+                    state: 'Hubei',
+                    result: 'Hubei',
+                },
+            ],
+            'New Zealand': [
+                { 
+                    state: 'Auckland',
+                    result: 'Auckland',
+                },
+            ],
+            'Russia': [
+                { 
+                    state: 'Moscow',
+                    result: 'Moscow',
+                },
+                { 
+                    city: 'Беседы',
+                    result: 'Moscow',
+                }, 
+                {
+                    state: 'Saint Petersburg',
+                    result: 'Saint Petersburg',
+                },
+                {
+                    city: 'Baranovka',
+                    state: 'Krasnodar Krai',
+                    result: 'Sochi',
+                },
+                {
+                    city: 'Лиски',
+                    result: 'Liski',
+                },
+                {
+                    city: 'Pokrovskoe',
+                    result: 'Zvenigorod',
+                },
+                {
+                    city: 'Kuyuki',
+                    result: 'Kazan',
+                },
+                {
+                    city: 'Сокуры',
+                    result: 'Kazan',
+                },
+                {
+                    city: 'Балгазын',
+                    result: 'Balgazyn',
+                },
+                {
+                    city: 'Еремеево',
+                    result: 'Istra',
+                },
+                {
+                    city: 'Bessonovka',
+                    state: 'Penza Oblast',
+                    result: 'Penza',
+                },
+                {
+                    city: 'сельское поселение Александровка',
+                    state: 'Samara Oblast',
+                    result: 'Togliatti',
+                },
+            ],
+            'Thailand': [
+                { 
+                    city: 'Dauh Puri Kauh',
+                    result: 'Denpasar',
+                }, 
+                {
+                    city: 'Renon',
+                    result: 'Denpasar',
+                },
+                {
+                    state: 'Phuket Province',
+                    result: 'Phuket',
+                },
+                {
+                    city: 'not',
+                    state: 'Bangkok',
+                    result: 'Bangkok',
+                },
+                {
+                    city: 'Tong Yang',
+                    result: 'Island Samui',
+                },
+                {
+                    city: 'Ko Samui',
+                    result: 'Island Samui',
+                },
+            ],
+            'Indonesia': [
+                { 
+                    city: 'Dusun Mangsit',
+                    result: 'Lombok',
+                }, 
+                {
+                    city: 'Aik Berik',
+                    result: 'Lombok',
+                },
+                {
+                    city: 'Special Capital Region of Jakarta',
+                    result: 'Jakarta',
+                },
+            ],
+            'Turkey': [
+                { 
+                    state: 'Izmir',
+                    result: 'Izmir',
+                }, 
+                {
+                    state: 'Istanbul',
+                    result: 'Istanbul',
+                },
+            ],
+            'Belgium': [
+                { 
+                    state: 'Brussels-Capital',
+                    result: 'Brussels',
+                }, 
+            ],
+            'Japan': [
+                { 
+                    city: 'Chiyoda',
+                    result: 'Tokio',
+                },
+                { 
+                    city: 'Koto',
+                    result: 'Tokio',
+                },
+            ],
+            'Ukraine': [
+                { 
+                    city: 'Marianivka',
+                    result: 'Zviahel',
+                }, 
+                {
+                    city: 'Obukhivka',
+                    result: 'Dnipro',
+                },
+            ],
+            'Italy': [
+                { 
+                    city: 'Uboldo',
+                    result: 'Milan',
+                }, 
+            ],
+            'United States': [
+                {
+                    city: 'Madison County',
+                    state: 'Indiana',
+                    result: 'Indianapolis',
+                },
+            ], 
+            'Czechia': [
+                { 
+                    city: 'Chýně',
+                    result: 'Prague',
+                }, 
+            ], 
+            'India': [
+                {
+                    city: 'Arambol',
+                    state: 'Goa',
+                    result: 'Goa',
+                },
+                {
+                    city: 'Pernem',
+                    state: 'Goa',
+                    result: 'Goa',
+                },
+            ]
+        
+        };
+
+    xml_location.open( 'GET', url );
+    xml_location.responseType = 'json';
 
     not_connection( xml_location, 
                     main, 
@@ -1231,91 +1310,50 @@ function get_city( lat, lon ) {
                     xml_location.response.results[ 0 ].components.district ||
                     xml_location.response.results[ 0 ].components.territory,
             country = xml_location.response.results[ 0 ].components.country;
-
-        if ( country ) {
-
-            if ( country === 'China' ) {
-
-                if ( state === 'Shanghai' ) {
-                    city = 'Shanghai';
-                } else if ( state === 'Beijing' ) {
-                    city = 'Beijing';
-                } else if ( state === 'Tianjin' ) {
-                    city = 'Tianjin';
-                } else if ( state === 'Guangdong Province' ) {
-                    city = 'Guangdong';
-                } else if ( state === 'Hubei' ) {
-                    city = 'Hubei';
-                }
-
-            } else if ( country === 'New Zealand' ) {
-
-                if ( state === 'Auckland' ) {
-                    city = 'Auckland';
-                }
-
-            } else if ( country === 'Russia' ) {
-
-                if ( state === 'Moscow' ) {
-                    city = 'Moscow';
-                } if ( state === 'Saint Petersburg' ) {
-                    city = 'Saint Petersburg';
-                } else if ( ( city === 'Baranovka' ) && ( state === 'Krasnodar Krai' ) ) {
-                    city = 'Sochi';
-                } else if ( city === 'Лиски' ) {
-                    city = 'Liski';
-                }
-
-            } else if ( country === 'Thailand' ) {
-
-                if ( ( сity === 'Dauh Puri Kauh' ) || 
-                     ( сity === 'Renon' ) ) {
-                    city = 'Denpasar';
-                } else if ( state === 'Phuket Province' ) {
-                    city = 'Phuket'; 
-                } else if ( !city && ( state === 'Bangkok' ) ) {
-                    city = 'Bangkok';
-                } else if ( city === 'Tong Yang' ) {
-                    city = 'Island Samui';
-                }
-
-            } else if ( country === 'Indonesia' ) {
-
-                if ( ( city === 'Dusun Mangsit' ) ||
-                     ( city === 'Aik Berik' ) ) {
-                    city = 'Lombok';
-                } else if ( city === 'Special Capital Region of Jakarta' ) {
-                    city = 'Jakarta';
-                }
-
-            } else if ( country === 'Turkey' ) {
-
-                if ( state === 'Izmir' ) {
-                    city = 'Izmir';
-                } else if ( state === 'Istanbul' ) {
-                    city = 'Istanbul';
-                }
-
-            } else if ( country === 'Belgium' ) {
-
-                if ( state === 'Brussels-Capital' ) {
-                    city = 'Brussels';
-                }
-
-            } else if ( country === 'Japan' ) {
-
-                if ( city === 'Chiyoda' || 
-                     city === 'Koto' ) {
-                    city === 'Tokio';
-                }
-
-            }
-
-        }
-
+            
         if ( !city && !state ) {
             not_city( lat, lon, city, slug, index_get_info_new );
             return;
+        }
+
+        if ( !city ) city = 'not';
+        if ( !state ) state = 'not';
+
+        if ( country in redefinition_city ) {
+            let array_country = redefinition_city[ country ],
+                object_location = array_country.find( item => item.city === city ) || array_country.find( item => item.state === state ),
+                city_key = false,
+                state_key = false,
+                change_city = false;
+
+            if ( object_location ) {
+
+                if ( 'city' in object_location ) {
+                    city_key = true;
+                }
+
+                if ( 'state' in object_location ) {
+                    state_key = true;
+                }
+
+                if ( city_key && !state_key ) {
+
+                    if ( object_location.city === city ) change_city = true;
+
+                } else if ( !city_key && state_key ) {
+
+                    if ( object_location.state === state ) change_city = true;
+
+                } else if ( city_key && state_key ) {
+
+                    if ( ( object_location.city === city ) && ( object_location.state === state ) ) change_city = true;
+
+                }
+
+                if ( change_city ) city = object_location.result;
+                
+            }
+
         }
 
         get_city_and_info( lat, lon, city, slug );
@@ -1328,11 +1366,11 @@ function get_city( lat, lon ) {
 
 function get_city_and_info( lat, lon, city, slug ) { 
     let xml_city = new XMLHttpRequest(),
-        get_city_array;
+        slug_array;
 
-        xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
-        xml_city.responseType = 'json';
-        xml_city.setRequestHeader( 'Content-Type', 'application/json' );
+    xml_city.open( 'GET', url + 'api/cities.json?slug=' + city );
+    xml_city.responseType = 'json';
+    xml_city.setRequestHeader( 'Content-Type', 'application/json' );
 
     not_connection( xml_city, 
                     main, 
@@ -1351,9 +1389,9 @@ function get_city_and_info( lat, lon, city, slug ) {
              index_get_info_new );
 
     xml_city.onload = function() {
-        get_city_array = xml_city.response;
-        slug = get_city_array.find( item => item.slug === city ) || 
-               get_city_array.find( item => item.name === city );
+        slug_array = xml_city.response;
+        slug = slug_array.find( item => item.slug === city ) || 
+               slug_array.find( item => item.name === city );
         
         if ( slug ) {
             city_slug = slug.slug;
@@ -1368,7 +1406,7 @@ function get_city_and_info( lat, lon, city, slug ) {
                 update_notifications( slug );
             }
             
-            // Запись (первая) данных в localStorage и перезапись
+            // Запись (первая) данных в localStorage или перезапись
             local_storage( lat, lon, city_slug, city_name, city_name_id );
             get_info_func( slug, index_get_info_new );
             

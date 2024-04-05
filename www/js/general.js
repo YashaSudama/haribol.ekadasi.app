@@ -9,7 +9,7 @@ if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
     setTimeout( show_body, 1000 );
 }
 
-remove_local_storage( 'index_get_info' );
+remove_local_storage( 'index_get_info' ); // в версии 1.0.4 убрать эти удаления
 remove_local_storage( 'main' );
 remove_local_storage( 'city' );
 remove_local_storage( 'cesh_city' );
@@ -65,7 +65,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     now_date = new Date(), // создаем экземпляр объекта с текущей датой
     now_year = now_date.getFullYear(), // возвращает текущий год в четырехзначном формате
     now_month = now_date.getMonth(), // возвращает текущий номер месяца (значение от 0 до 11. Январь равен 0)
-    month_days,  
     now_date_number = now_date.getDate(), // возвращает текущую дату
     month_name = [ 'Январь', 
                    'Февраль',
@@ -99,13 +98,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                        'Чт',
                        'Пт',
                        'Сб' ],
-    day_name_full = [ 'Воскресенье',
-                      'Понедельник',
-                      'Вторник',
-                      'Среда',
-                      'Четверг',
-                      'Пятница',
-                      'Суббота' ],
     height_header,
     current_date_span = document.getElementById( 'current_date' ),
     location_span = document.getElementById( 'location' ),
@@ -378,6 +370,7 @@ document.addEventListener( 'resume', () => {
         now_date_number_resume = now_date_resume.getDate();
 
     if ( now_date_number_resume !== now_date_number ) {
+        localStorage.setItem( 'status_background', 'yes' );
         window.location.reload();
     }
 
@@ -385,33 +378,6 @@ document.addEventListener( 'resume', () => {
 	
 min_preloader.id = 'min_preloader';
 min_preloader.innerHTML = content_preloader;
-
-if ( now_month === 0 || 
-     now_month === 2 || 
-     now_month === 4 ||
-     now_month === 6 || 
-     now_month === 7 || 
-     now_month === 9 || 
-     now_month === 11 ) {
-
-    month_days = 31;
-
-} else if ( now_month === 3 || 
-            now_month === 5 || 
-            now_month === 8 || 
-            now_month === 10 ) {
-
-   month_days = 30;
-
-} else if ( now_month === 1 ) {
-  
-   if ( ( now_year % 4 ) === 0 ) {
-       month_days = 29;
-   } else {
-       month_days = 28;
-   }
-
-}
 
 if ( home ) {
 
@@ -425,6 +391,40 @@ if ( home ) {
 choice_date.onclick = function( event ) {
     hide_body();
     localStorage.setItem( 'status_background', 'yes' );
+}
+
+function get_month_days( month, year ) {
+    let month_days;
+
+    if ( month === 0 || 
+         month === 2 || 
+         month === 4 ||
+         month === 6 || 
+         month === 7 || 
+         month === 9 || 
+         month === 11 ) {
+   
+       month_days = 31;
+   
+   } else if ( month === 3 || 
+               month === 5 || 
+               month === 8 || 
+               month === 10 ) {
+   
+      month_days = 30;
+   
+   } else if ( month === 1 ) {
+     
+      if ( ( year % 4 ) === 0 ) {
+          month_days = 29;
+      } else {
+          month_days = 28;
+      }
+   
+   }
+
+   return month_days;
+
 }
 
 function show_body() {
@@ -1298,21 +1298,21 @@ function update_notifications( slug ) {
 document.addEventListener( "deviceready", () => {
 
     cordova.plugins.firebase.messaging.onMessage( ( payload ) => {
-        let notice_foreground = document.getElementById( 'notice_foreground' );
+        let notice_foreground = document.getElementById( 'notice_foreground' ),
+            content = '<div style="display: flex">' +
+                        '<div style="margin-right: 15px;">' +
+                            '<img src="../img/logo/round/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                        '</div>' +
+                        '<div>' +
+                            '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
+                            '<span>' + payload.gcm.body + '</span>' +
+                        '</div>' +
+                      '</div>';
 
         if ( notice_foreground ) {
             let wrapper_internally_notice_foreground = document.getElementById( 'wrapper_internally_notice_foreground' );
 
-            wrapper_internally_notice_foreground.innerHTML += '<hr class="notice_foreground_hr">' +
-                                                              '<div style="display: flex">' +
-                                                                  '<div style="margin-right: 15px;">' +
-                                                                      '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
-                                                                  '</div>' +
-                                                                  '<div>' +
-                                                                      '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
-                                                                      '<span>' + payload.gcm.body + '</span>' +
-                                                                  '</div>' +
-                                                              '</div>';
+            wrapper_internally_notice_foreground.innerHTML += '<hr class="notice_foreground_hr">' + content;
                                                               
             let close_notice_foreground = document.getElementById( 'close_notice_foreground' );
 
@@ -1342,16 +1342,7 @@ document.addEventListener( "deviceready", () => {
             wrapper_internally_notice_foreground.append( close_notice_foreground );
             notice_foreground.append( wrapper_internally_notice_foreground );
             document.body.append( notice_foreground );
-            wrapper_internally_notice_foreground.innerHTML += '<div style="display: flex">' +
-                                                                  '<div style="margin-right: 15px;">' +
-                                                                      '<img src="../img/logo/android/logo_ldpi.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
-                                                                  '</div>' +
-                                                                  '<div>' +
-                                                                      '<h3 style="margin: 0;">' + payload.gcm.title + '</h3>' +
-                                                                      '<span>' + payload.gcm.body + '</span>' +
-                                                                   '</div>' +
-                                                               '</div>';
-
+            wrapper_internally_notice_foreground.innerHTML += content;
             notice_foreground.style.cssText = 'opacity: 1; z-index: 20';
             close_notice_foreground = document.getElementById( 'close_notice_foreground' );
 
@@ -1447,8 +1438,6 @@ function remove_too_events() {
 
 export { window_width, 
          window_height,
-         month_days,
-         day_name_full,
          day_week, 
          day_name_short,
          month_name_header,
@@ -1503,7 +1492,8 @@ export { window_width,
          year_screen,
          today,
          text_not_data_server,
-         year_screen_span };
+         year_screen_span,
+         get_month_days };
 
 // По луне
 // -------

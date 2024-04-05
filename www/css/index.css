@@ -859,12 +859,12 @@ header {
 	padding: 7px;
 }
 .search_string_span {
-	background-color: #f9f973;
-	height: 14px;
-	top: 3px;
+	background-color: #fea00a40;
+	height: 18px;
+	top: 2px;
 	left: -1px;
 	z-index: -1;
-	border: 1px solid #f9d673;
+	border: 1px solid #fea00a;
 	border-radius: 3px;  
 }
 #list_cityes {
@@ -1090,12 +1090,6 @@ header {
 
 }
 
-.not_data {
-	font-size: 22px;
-	padding: 20px;
-	background-color: #f8faa0;
-	border: 2px solid #eee;
-}
 .ekadashi::after,
 .nityananda::after,
 .chaytanya::after,
