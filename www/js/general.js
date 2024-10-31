@@ -9,11 +9,6 @@ if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
     setTimeout( show_body, 1000 );
 }
 
-remove_local_storage( 'index_get_info' ); // в версии 1.0.4 убрать эти удаления
-remove_local_storage( 'main' );
-remove_local_storage( 'city' );
-remove_local_storage( 'cesh_city' );
-
 let content_preloader = '<div class="sk-fading-circle">' +
                           '<div class="sk-circle sk-circle-1"></div>' +
                           '<div class="sk-circle sk-circle-2"></div>' +
@@ -54,11 +49,6 @@ if ( ( window.location.pathname === '/' ) ||
 }
 
 block_nav.append( div_ul_nav );
-
-if ( !localStorage.getItem( 'setting_notifications' ) ) { 
-    let setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
-    localStorage.setItem( 'setting_notifications', setting_notifications_let );
-}
 
 let key = '7dc98540afbc4208863cb94ea2932ef0',
     url = 'https://ekadasi.info/',
@@ -147,7 +137,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                                     '</li>' +
                                   '</ul>',
     text_not_internet = '<h3>Нет подключения к интернету!</h3>',
-    text_not_data_server =  '<div id="not_data_server" class="width-fit m-auto">' +
+    text_not_data_server =  '<div id="not_data_server" class="width-fit">' +
                                 '<span class="d-block text-center search_string l-height-1-2">' +
                                     'Не удалось получить данные с сервера! Попробуйте позже<br>или еще раз.' +
                                 '</span>' +
@@ -363,14 +353,45 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
             id: 'utpanna' 
         }
 
-    };
+    },
+    setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
+
+set_local_storage( 'setting_notifications', setting_notifications_let );
 
 document.addEventListener( 'resume', () => {
     let now_date_resume = new Date(),
         now_date_number_resume = now_date_resume.getDate();
+    
+    document.addEventListener( "deviceready", () => {
+        navigator.geolocation.getCurrentPosition( on_resume );
+    } );
+    
+    function on_resume( position ) {
 
+        if ( localStorage.getItem( 'lat' )       && 
+             localStorage.getItem( 'lon' )       &&
+             localStorage.getItem( 'city_name' ) &&
+             localStorage.getItem( 'city_slug' ) &&
+             !localStorage.getItem( 'city_select' ) ) {
+
+            let lat = position.coords.latitude,
+                lon = position.coords.longitude;
+                    
+            if ( Math.abs( +localStorage.getItem( 'lat' ) - +lat ).toFixed( 1 ) > 0.1 &&
+                Math.abs( +localStorage.getItem( 'lon' ) - +lon ).toFixed( 1 ) > 0.1 ) {
+                hide_body();
+                set_local_storage( 'status_background', 'yes' );
+                window.location.href = 'index.html';
+
+                return;
+            }
+
+        }
+    
+    }
+    
     if ( now_date_number_resume !== now_date_number ) {
-        localStorage.setItem( 'status_background', 'yes' );
+        set_local_storage( 'status_background', 'yes' );
         window.location.reload();
     }
 
@@ -383,14 +404,14 @@ if ( home ) {
 
     home.onclick = function() {
         hide_body();
-        localStorage.setItem( 'status_background', 'yes' );
+        set_local_storage( 'status_background', 'yes' );
     }
 
 }
 
 choice_date.onclick = function( event ) {
     hide_body();
-    localStorage.setItem( 'status_background', 'yes' );
+    set_local_storage( 'status_background', 'yes' );
 }
 
 function get_month_days( month, year ) {
@@ -445,9 +466,10 @@ function hide_background() {
 
 function show_today() {
 
-    if ( today && 
-         today.hasAttribute( 'id' ) && 
-         !today.closest( 'body' ).querySelector( '#not_connection' ) ) { 
+    if ( today                                                       && 
+         today.hasAttribute( 'id' )                                  && 
+         !today.closest( 'body' ).querySelector( '#not_connection' ) &&
+         section_description.style.cssText === '' ) { 
             today.style.cssText = ''; 
     }
 
@@ -528,7 +550,7 @@ function reading_locale_storage() {
 } // reading_locale_storage - end
 
 function clear() {
-  localStorage.clear();
+    localStorage.clear();
 }
 
 function content_not_data( main, 
@@ -537,133 +559,153 @@ function content_not_data( main,
                            local_html, 
                            name_func, 
                            param ) {
-
-    let after_text;
-
-    if ( !height_header ) height_header = header_top.clientHeight;
-    if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
-    if ( year_screen_span ) year_screen_span.innerHTML = '';
     
-    hide_today();
-    hide_select_date();
+    if ( localStorage.getItem( local_object )                && 
+         localStorage.getItem( 'click_choice_city' ) === '0' &&
+         !localStorage.getItem( 'choice_van_year' ) ) {
+        city = localStorage.getItem( 'city_name' );
+        location_span.innerHTML = city;
+        main.style.cssText = '';
+        main.innerHTML = localStorage.getItem( local_html );
+        param = JSON.parse( localStorage.getItem( local_object ) );
 
-    if ( main ) {
-        main.innerHTML = '';
+        name_func( param );
+        
+        if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
 
+    } else {
+        let after_text;
+
+        if ( !height_header ) height_header = header_top.clientHeight;
+        if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
+        if ( year_screen_span ) year_screen_span.innerHTML = '';
+        
+        hide_today();
+        hide_select_date();
+
+        if ( main ) {
+            main.innerHTML = '';
+
+            let document_height = Math.max(
+                    document.body.scrollHeight, 
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight, 
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight, 
+                    document.documentElement.clientHeight
+                ),
+                height_main = document_height - height_header - footer_id.clientHeight;
+
+            if ( text === text_not_internet ) {
+                after_text = 'Проверьте подключение к интернету и попробуйте еще раз';
+            } else {
+                after_text = 'Проверьте подключение к интернету и попробуйте еще раз или попробуйте позже';
+            }
+
+            main.style.cssText = 'margin-top: ' + height_header + 'px;' + 
+                                'height: ' + height_main + 'px;';
+            main.innerHTML = '<div id="not_connection" class="pos-rel">' +
+                                '<div class="text-center">' + text + '</div>' +
+                                '<button id="reload" class="d-block m-auto m-t-30 l-height-1-25">Перезагрузить страницу</button>' +
+                                '<button id="last_version" class="d-block m-t-30 m-auto l-height-1-25">Отобразить последнюю<br>сохранённую версию</button>' +
+                                '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">' + after_text + '</h4>' +
+                            '</div>';
+
+            let height_main_div = main.querySelector( '#not_connection' ).clientHeight,
+                reload = document.getElementById( 'reload' ),
+                last_version = document.getElementById( 'last_version' );
+
+            change_not_connection( height_main, height_main_div );
+
+            if ( !localStorage.getItem( local_object ) ) {
+                last_version.classList.add( 'd-none' );
+            } else {
+                param = JSON.parse( localStorage.getItem( local_object ) );
+            }
+
+            if ( reload ) {
+
+                reload.onclick = function() {
+                    hide_body();
+                    set_local_storage( 'status_background', 'yes' );
+                    window.location.reload();
+                }
+
+            }
+
+            if ( last_version ) {
+
+                last_version.onclick = function() {
+                    window.removeEventListener( 'resize', change_main );
+                    hide_body();
+                    set_local_storage( 'status_background', 'yes' );
+                    city = localStorage.getItem( 'city_name' );
+                    location_span.innerHTML = city;
+                    main.style.cssText = '';
+                    main.innerHTML = localStorage.getItem( local_html );
+                    
+                    setTimeout( () => {
+                        name_func( param );
+                    }, 500 );
+                    
+                    if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
+
+                }
+
+            }
+
+            window.addEventListener( 'resize', change_main );
+        
+        }
+
+        setTimeout( () => {
+            main.querySelector( '#not_connection' ).style.opacity = '1';
+        
+            if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
+                hide_background();
+                show_body();
+                localStorage.removeItem( 'status_background' );
+            } else {
+                navigator.splashscreen.hide();
+                show_body();
+            }
+
+            if ( localStorage.getItem( 'click_choice_city' ) === '1' ) localStorage.setItem( 'click_choice_city', '0' );
+            
+			remove_local_storage( 'choice_van_year' );
+    
+        }, 500 );
+
+    }
+
+    function change_not_connection( height_1, height_2 ) {
         let style_not_connection = 'top: 0;' +
                                    'transform: none;' +
                                    'padding-top: 5px;' +
-                                   'padding-bottom: 50px;',
-            document_height = Math.max(
-                document.body.scrollHeight, 
-                document.documentElement.scrollHeight,
-                document.body.offsetHeight, 
-                document.documentElement.offsetHeight,
-                document.body.clientHeight, 
-                document.documentElement.clientHeight
-            ),
-            height_main = document_height - height_header - footer_id.clientHeight;
+                                   'padding-bottom: 50px;';
 
-        if ( text === text_not_internet ) {
-            after_text = 'Проверьте подключение к интернету и попробуйте еще раз';
-        } else {
-            after_text = 'Проверьте подключение к интернету и попробуйте еще раз или попробуйте позже';
+        if ( ( height_1 - height_2 ) <= 20 ) {
+            main.querySelector( '#not_connection' ).style.cssText = style_not_connection;
         }
 
-        main.style.cssText = 'margin-top: ' + height_header + 'px;' + 
-                             'height: ' + height_main + 'px;';
-        main.innerHTML = '<div id="not_connection" class="pos-rel">' +
-                            '<div class="text-center">' + text + '</div>' +
-                            '<button id="reload" class="d-block m-auto m-t-30 l-height-1-25">Перезагрузить страницу</button>' +
-                            '<button id="last_version" class="d-block m-t-30 m-auto l-height-1-25">Отобразить последнюю<br>сохранённую версию</button>' +
-                            '<h4 class="text-center m-auto m-t-30" style="max-width: 80%">' + after_text + '</h4>' +
-                         '</div>';
-
-        let height_main_div = main.querySelector( '#not_connection' ).clientHeight,
-            reload = document.getElementById( 'reload' ),
-            last_version = document.getElementById( 'last_version' );
-
-        change_not_connection( height_main, height_main_div );
-
-        if ( !localStorage.getItem( local_object ) ) {
-            last_version.classList.add( 'd-none' );
-        } else {
-            param = JSON.parse( localStorage.getItem( local_object ) );
-        }
-
-        if ( reload ) {
-
-            reload.onclick = function() {
-                hide_body();
-                localStorage.setItem( 'status_background', 'yes' );
-                window.location.reload();
-            }
-
-        }
-
-        if ( last_version ) {
-
-            last_version.onclick = function() {
-                window.removeEventListener( 'resize', change_main );
-                hide_body();
-                localStorage.setItem( 'status_background', 'yes' );
-                city = localStorage.getItem( 'city_name' );
-                location_span.innerHTML = city;
-                main.style.cssText = '';
-                main.innerHTML = localStorage.getItem( local_html );
-                
-                setTimeout( () => {
-                    name_func( param );
-                }, 500 );
-                
-                if ( document.body.style.overflow === 'hidden' ) document.body.style.overflow = 'auto';
-
-            }
-
-        }
-
-        function change_not_connection( height_1, height_2 ) {
-
-            if ( ( height_1 - height_2 ) <= 20 ) {
-                main.querySelector( '#not_connection' ).style.cssText = style_not_connection;
-            }
-
-        }
-
-        function change_main() {
-            main.querySelector( '#not_connection' ).style.cssText = '';
-
-            if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
-
-            setTimeout(() => {
-                let height_main_resize = window.innerHeight - height_header - footer_id.clientHeight,
-                    height_main_div_resize = main.querySelector( '#not_connection' ).clientHeight;
-
-                main.style.height = height_main_resize + 'px'; 
-                change_not_connection( height_main_resize, height_main_div_resize );
-                window.scrollTo( 0, 0 );
-                main.querySelector( '#not_connection' ).style.opacity = '1';
-            }, 1000 );
-
-        }
-
-        window.addEventListener( 'resize', change_main );
-    
     }
 
-    setTimeout( () => {
-        main.querySelector( '#not_connection' ).style.opacity = '1';
-    
-        if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
-            hide_background();
-            show_body();
-            localStorage.removeItem( 'status_background' );
-        } else {
-            navigator.splashscreen.hide();
-            show_body();
-        }
+    function change_main() {
+        main.querySelector( '#not_connection' ).style.cssText = '';
 
-    }, 500 );
+        if ( div_zoom_calendar ) div_zoom_calendar.style.cssText = '';
+
+        setTimeout(() => {
+            let height_main_resize = window.innerHeight - height_header - footer_id.clientHeight,
+                height_main_div_resize = main.querySelector( '#not_connection' ).clientHeight;
+
+            main.style.height = height_main_resize + 'px'; 
+            change_not_connection( height_main_resize, height_main_div_resize );
+            window.scrollTo( 0, 0 );
+            main.querySelector( '#not_connection' ).style.opacity = '1';
+        }, 1000 );
+
+    }
 
 }
 
@@ -1047,8 +1089,6 @@ function update_notifications( slug ) {
         status_notifications = form.status_notifications.dataset.status;
         part_time_value_first = form.time.value[ 0 ] + form.time.value[ 1 ];
         part_time_value_last = form.time.value[ 3 ] + form.time.value[ 4 ];
-        part_time_value_first = form.time.value[ 0 ] + form.time.value[ 1 ];
-        part_time_value_last = form.time.value[ 3 ] + form.time.value[ 4 ];
 
         if ( status_notifications === 'false' ) {
             status_notifications = false;
@@ -1056,15 +1096,12 @@ function update_notifications( slug ) {
             status_notifications = true;
         }
 
-        if ( ( part_time_value_last !== '00' ) && ( part_time_value_last !== '30' )  ) {
+        if ( part_time_value_last !== '00' ) {
             
-            if ( part_time_value_last <= '15' ) {
+            if ( part_time_value_last < '30' ) {
                 time_value = part_time_value_first + ':' + '00';
                 form.time.value = time_value;
-            } else if ( ( part_time_value_last > '15' ) && ( part_time_value_last < '45' ) ) {
-                time_value = part_time_value_first + ':' + '30';
-                form.time.value = time_value;
-            } else {
+            } else if ( ( part_time_value_last >= '30' ) ) {
 
                 if ( part_time_value_first === '23' ) {
                     part_time_value_first = '00';
@@ -1076,33 +1113,7 @@ function update_notifications( slug ) {
 
                 time_value = part_time_value_first + ':' + '00';
                 form.time.value = time_value;
-            }
- 
-        } else {
-            time_value = form.time.value;
-        }
-
-        if ( ( part_time_value_last !== '00' ) && ( part_time_value_last !== '30' )  ) {
-            
-            if ( part_time_value_last <= '15' ) {
-                time_value = part_time_value_first + ':' + '00';
-                form.time.value = time_value;
-            } else if ( ( part_time_value_last > '15' ) && ( part_time_value_last < '45' ) ) {
-                time_value = part_time_value_first + ':' + '30';
-                form.time.value = time_value;
-            } else {
-
-                if ( part_time_value_first === '23' ) {
-                    part_time_value_first = '00';
-                } else if ( part_time_value_first < 9 ) {
-                    part_time_value_first = '0' + ( Number( part_time_value_first ) + 1 );
-                } else {
-                    part_time_value_first = Number( part_time_value_first ) + 1;
-                }
-
-                time_value = part_time_value_first + ':' + '00';
-                form.time.value = time_value;
-            }
+            } 
  
         } else {
             time_value = form.time.value;
@@ -1151,7 +1162,7 @@ function update_notifications( slug ) {
 
         if ( location.pathname.includes( 'notifications' ) ) {
             let not_data_server = document.getElementById( 'not_data_server' ),
-                time = 0;
+                time = 500;
 
             if ( not_data_server ) {
                 time = 1000;
@@ -1169,7 +1180,10 @@ function update_notifications( slug ) {
                 button_update_notif.insertAdjacentHTML( 'afterend', text_not_data_server );
 
                 let not_data_server = document.getElementById( 'not_data_server' );
-                not_data_server.style.opacity = '1';
+
+                setTimeout(() => {
+                    not_data_server.style.opacity = '1';
+                }, 500 );
         
                 setTimeout(() => {
                     not_data_server.style.opacity = '0';
@@ -1316,6 +1330,10 @@ document.addEventListener( "deviceready", () => {
                                                               
             let close_notice_foreground = document.getElementById( 'close_notice_foreground' );
 
+            if ( wrapper_internally_notice_foreground.scrollHeight >= window_height ) {
+                wrapper_internally_notice_foreground.style.cssText = 'transform: none; top: 20px';
+            }
+
             close_notice_foreground.onclick = () => {
                 notice_foreground.style.cssText = '';
     
@@ -1361,32 +1379,27 @@ document.addEventListener( "deviceready", () => {
 
 } );
 
-function add_sp_array( array ) {
+function add_event_array( array, date, name, change_date, number_array ) {
+    let coincidence = false;
 
-    if ( array[ 0 ][ 0 ] < 14 ) {
-        array.splice( 1, 0, [ '14', 'S' ] );
-    } else if ( +array[ 0 ][ 0 ] === 14 ) {
-        array.splice( 1, 0, [ '15', 'S' ] );
-    } else if ( array[ 0 ][ 0 ] > 14 ) {
-        array.splice( 0, 0, [ '14', 'S' ] );
+    for ( let arr of array ) {
+        if ( arr.includes( date ) ) coincidence = true;
+    }
+
+    if ( coincidence ) {
+        array.splice( 1, 0, [ change_date, name ] )
+    } else {
+
+        if ( array[ number_array ][ 0 ] < date ) {
+            array.splice( 1, 0, [ date, name ] );
+        } else if ( array[ number_array ][ 0 ] > date ) {
+            array.splice( 0, 0, [ date, name ] );
+        }
+
     }
 
     return array;
     
-}
-
-function add_isus_array( array ) {
-
-    if ( array[ 1 ][ 0 ] < 25 ) {
-        array.splice( 1, 0, [ '25', 'R' ] );
-    } else if ( +array[ 1 ][ 0 ] === 25 ) {
-        array.splice( 1, 0, [ '26', 'R' ] );
-    } else if ( array[ 1 ][ 0 ] > 25 ) {
-        array.splice( 0, 0, [ '25', 'R' ] );
-    }
-
-    return array;
-
 }
 
 function set_local_storage( key, value ) {
@@ -1481,8 +1494,7 @@ export { window_width,
          text_not_internet,
          div_zoom_calendar,
          apparition_ekadasi_days,
-         add_sp_array,
-         add_isus_array,
+         add_event_array,
          set_local_storage,
          set_update_local_storage,
          remove_local_storage,

@@ -570,8 +570,10 @@ header {
   	padding-bottom: 15px;
 }
 #main_notifications #not_data_server {
-	width: 250px;
-	padding-top: 15px;
+	max-width: 230px;
+	margin: 20px auto 0;
+    padding: 10px 0;
+    box-shadow: 0px 2px 15px -5px #000;
 }
 .info_year li[class*='value'] {
 	border-bottom: 1px solid #ededed;
@@ -715,13 +717,19 @@ header {
 #window_select_city .main,
 #window_change_city .main,
 #check_exit_page .main {
-	width: 80%;
-	max-width: 350px;
+	max-width: 400px;
 	height: auto;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate( -50%, -50% );
 	padding: 30px 20px;
+}
+#window_select_city .main {
+	width: 85%;
+}
+#window_change_city .main,
+#check_exit_page .main {
+	width: 80%;
 	box-sizing: border-box;
 }
 #check_exit_page .main {
@@ -738,6 +746,8 @@ header {
 	caret-color: #0a213a;
 }
 #found_cities {  
+    top: 0;
+    right: 0;
 	font-size: 12px !important;
 	padding: 2px 5px !important;
 	border-radius: 0 10px 0 10px;
@@ -805,16 +815,6 @@ header {
 #current_location {
   	width: 100%;
 }
-
-@media ( min-width: 400px ) {
-
-	#current_location,
-	#window_select_city .main input {
-		width: 90%;
-	}    
-
-}
-
 #update_notif[disabled] {
   	background-color: #3442668c;
 }
@@ -829,7 +829,6 @@ header {
 	overflow-y: auto;
 	opacity: 0;
 	padding: 10px;
-	max-width: 270px;
 	box-shadow: 0px 3px 15px -5px #000;
 	box-sizing: border-box;
 	transition: opacity .6s linear .2s;
@@ -1223,8 +1222,11 @@ header {
 	padding: 0 20px 60px;
 	box-sizing: border-box;
 	opacity: 0; 
-	user-select: none;
 	transition: opacity .8s linear, left .6s linear;
+}
+#about_ekadashi,
+.description {
+	user-select: none;
 }
 .description h2,
 .description h3 {
@@ -1263,6 +1265,9 @@ header {
 #wrapper_hint_description,
 #notice_foreground {
   	background-color: #ffffffc7;
+}
+#notice_foreground {
+	overflow-y: scroll;
 }
 .hint_description,
 .wrapper_internally_notice_foreground {

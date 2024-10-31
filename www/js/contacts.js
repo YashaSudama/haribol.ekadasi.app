@@ -3,7 +3,8 @@
 import { 
     show_body,
     height_footer_func,
-    header_top
+    header_top,
+    hide_background
 } from "./general.js";
 
 let contact = document.getElementById( 'contact' ),
@@ -12,4 +13,5 @@ let contact = document.getElementById( 'contact' ),
 contact.style.marginTop = height_header + 'px';
 
 show_body();
+hide_background();
 height_footer_func();

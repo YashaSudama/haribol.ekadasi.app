@@ -3,7 +3,8 @@
 import { 
     show_body,
     height_footer_func,
-    header_top
+    header_top,
+    hide_background
 } from "./general.js";
 
 let about_ekadashi = document.getElementById( 'about_ekadashi' ),
@@ -12,4 +13,5 @@ let about_ekadashi = document.getElementById( 'about_ekadashi' ),
 about_ekadashi.style.marginTop = height_header + 'px';
 
 show_body();
+hide_background();
 height_footer_func();

@@ -13,7 +13,8 @@ import { height_footer_func,
          content_not_connection,
          text_not_internet,
          header_top,
-         footer_id
+         footer_id,
+         hide_background
 } from "./general.js";
 
 let main_notifications = document.getElementById( 'main_notifications' ),
@@ -24,6 +25,7 @@ main_notifications.style.marginTop = height_header + 'px';
 function work_settings_notifications() {
     
     show_body();
+    hide_background();
     height_footer_func();
     
     let day_notifications = document.getElementById( 'day_notifications' ),

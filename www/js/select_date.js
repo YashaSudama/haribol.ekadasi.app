@@ -27,15 +27,15 @@ import { now_date_number,
 		 show_body,
 		 window_height,
 		 apparition_ekadasi_days,
-		 add_sp_array,
-		 add_isus_array,
+		 add_event_array,
          set_local_storage,
+		 remove_local_storage,
          remove_too_events,
 		 show_select_date,
 		 show_select_date_func,
 		 year_screen,
 		 year_screen_span,
-		 get_month_days
+		 get_month_days,
 } from "./general.js";
 
 let calendar = document.getElementById( 'calendar' ),
@@ -43,7 +43,6 @@ let calendar = document.getElementById( 'calendar' ),
 	div_list_all_years = document.getElementById( 'div_list_all_years' ),
 	close_list_years = document.getElementById( 'close_list_years' ),
 	year = calendar.getElementsByTagName( 'h1'),
-	div_calendar = calendar.querySelectorAll( '.calendar_year' ),
 	first_day_month,
 	min_year = 1980,
 	max_year = 2069,
@@ -60,8 +59,7 @@ let calendar = document.getElementById( 'calendar' ),
 	close_forever = document.getElementById( 'close_forever' ),
 	close_hint_description = document.getElementById( 'close_hint_description' ), 
 	wrapper_hint_description = document.getElementById( 'wrapper_hint_description' ),
-	top_elem,
-	count_year = -1; 
+	top_elem; 
 
 if ( localStorage.getItem( 'city_name' ) ) {
 	city = localStorage.getItem( 'city_name' );
@@ -165,11 +163,6 @@ function print_year( div_year, year ) {
 
 }
 
-for ( let item of div_calendar ) {
-	print_year( item.children, ( now_year + count_year ) );
-	count_year++;
-}
-
 function display_data( get_month, numb_ul, value, calendar, year ) { // value - свойство ( ключ ) объекта, дата события
 
 	let calendar_ul_li = calendar[ numb_ul ].getElementsByTagName( 'li' ),
@@ -198,6 +191,7 @@ function display_data( get_month, numb_ul, value, calendar, year ) { // value - 
 	for ( let li of calendar_ul_li ) {
 
 		if ( ( li.textContent ) === value ) {
+
 			li.classList.add( class_li );
 
 			if ( !li.classList.contains( 'click' ) ) li.classList.add( 'click' );
@@ -302,8 +296,8 @@ function inner_get_info( select_get_info ) {
 			sp_array = Object.entries( array_obj[ 5 ] ),
 			isus_array = Object.entries( array_obj[ 11 ] );
 	
-		array_obj[ 5 ] = Object.fromEntries( add_sp_array( sp_array ) );
-		array_obj[ 11 ] = Object.fromEntries( add_isus_array( isus_array ) );	
+		array_obj[ 5 ] = Object.fromEntries( add_event_array( sp_array, '14', 'S', '15', 0 ) );
+		array_obj[ 11 ] = Object.fromEntries( add_event_array( isus_array, '25', 'R', '26', 1 ) );
 		year[ i ].innerHTML = get_year;
 		year[ i ].classList.add( 'year_h_1' );
 
@@ -320,22 +314,23 @@ function inner_get_info( select_get_info ) {
 		}
 
     	if ( i === 1 ) {
-			let coord_scroll;
-
-			if ( now_month === 0 || now_month === 1 ) {
-				coord_scroll = calendar_ul[ now_month ].parentElement.previousElementSibling.getBoundingClientRect().y - 20;
-			} else {
-				coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y;
-			}
-
-    		window.scrollTo( { left: 0, 
-							   top: coord_scroll,
-							   behavior: 'smooth' } );
 							 
 			setTimeout( () => {
+				let coord_scroll;
+
+				if ( now_month === 0 || now_month === 1 ) {
+					coord_scroll = calendar_ul[ now_month ].parentElement.previousElementSibling.getBoundingClientRect().y - 20;
+				} else {
+					coord_scroll = calendar_ul[ now_month ].getBoundingClientRect().y;
+				}
+
+				window.scrollTo( { left: 0, 
+					top: coord_scroll - height_header,
+					behavior: 'smooth' } );
+
 				hide_background();
 				show_body();
-				localStorage.removeItem( 'status_background' );
+				remove_local_storage( 'status_background' )
 			}, 500 );
 
     	}
@@ -427,14 +422,13 @@ function get_van_year_info( slug,
                           van_year_response[ 0 ].nov,
                           van_year_response[ 0 ].dem ],
             calendar_van_year,
-			all_years_screen,
 			calendar_van_year_ul,
 			year_content = document.createElement( 'div' ),
 			sp_array = Object.entries( array_obj[ 5 ] ),
 			isus_array = Object.entries( array_obj[ 11 ] );
 	
-		array_obj[ 5 ] = Object.fromEntries( add_sp_array( sp_array ) );
-		array_obj[ 11 ] = Object.fromEntries( add_isus_array( isus_array ) );
+		array_obj[ 5 ] = Object.fromEntries( add_event_array( sp_array, '14', 'S', '15', 0 ) );
+		array_obj[ 11 ] = Object.fromEntries( add_event_array( isus_array, '25', 'R', '26', 1 ) );
 		
 		if ( +get_year === now_year ) {
 			year_content.innerHTML += '<h1 class="year_select_date now_year year_h_1 m-b-0">' + get_year + '</h1>';
@@ -486,6 +480,7 @@ function get_van_year_info( slug,
 		remove_too_events();
 		get_description( calendar, '.click' );
 		show_zoom_callendar();
+		remove_local_storage( 'choice_van_year' );
 
     }
 
@@ -559,16 +554,22 @@ show_select_date.onclick = function() {
 		
 			if ( span_year_input ) span_year_input.remove();
 
-			min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input"'  +
-																	 'class="text-center d-block' +  ' m-t-10">' +
-																  '<small>' +
-																	'Загружаем - ' + year_input + 
-																	' год' +
-																  '</small>' +
-																'</span>' );
+			min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input" class="text-center d-block m-t-10">' +
+															    '<small>' + 'Загружаем - ' + year_input + ' год</small>' +
+															'</span>' );
 
 			get_city( get_van_year_info, slug );
 			list_all_years.style.cssText = '';
+
+			window.addEventListener( 'resize', function () {
+				let scroll_window_height_local = window.innerHeight;
+				calendar.style.height = ( scroll_window_height_local - 
+										  height_header -
+										  footer_id.clientHeight ) + 'px';
+			} );
+
+			set_local_storage( 'choice_van_year', 'yes' );
+
 		}
 
 	}
