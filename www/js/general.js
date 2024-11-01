@@ -2,7 +2,10 @@
 
 import { content_description } from "./content_description.js";
 
-let background = document.getElementById( 'background' );
+let background = document.getElementById( 'background' ),
+    setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
+
+set_local_storage( 'setting_notifications', setting_notifications_let );;
 
 if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
     show_background();
@@ -116,11 +119,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     event_year,
     delete_div, 
 	min_preloader = document.createElement( 'section' ),
-    info_notifications = {
-        status: localStorage.getItem( 'status_notifications' ),
-        day: Number( JSON.parse( localStorage.getItem( 'setting_notifications' ) ).day ),
-        time: JSON.parse( localStorage.getItem( 'setting_notifications' ) ).time,
-    },
     form = document.forms.settings_notifications,
     home = document.getElementById( 'home' ),
     choice_date = document.getElementById( 'choice_date' ),
@@ -354,9 +352,11 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
         }
 
     },
-    setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
-
-set_local_storage( 'setting_notifications', setting_notifications_let );
+    info_notifications = {
+        status: localStorage.getItem( 'status_notifications' ),
+        day: Number( JSON.parse( localStorage.getItem( 'setting_notifications' ) ).day ),
+        time: JSON.parse( localStorage.getItem( 'setting_notifications' ) ).time,
+    };
 
 document.addEventListener( 'resume', () => {
     let now_date_resume = new Date(),
@@ -526,8 +526,7 @@ close_nav.onclick = function() {
 
 city_selection.onclick = function() {
 
-    if ( localStorage.getItem( 'click_choice_city' ) === '0' ) localStorage.setItem( 'click_choice_city', '1' );
-
+    set_local_storage( 'click_choice_city', 'yes' );
     window.location.href = 'index.html';
 }
 
@@ -560,8 +559,8 @@ function content_not_data( main,
                            name_func, 
                            param ) {
     
-    if ( localStorage.getItem( local_object )                && 
-         localStorage.getItem( 'click_choice_city' ) === '0' &&
+    if ( localStorage.getItem( local_object )         && 
+         !localStorage.getItem( 'click_choice_city' ) &&
          !localStorage.getItem( 'choice_van_year' ) ) {
         city = localStorage.getItem( 'city_name' );
         location_span.innerHTML = city;
@@ -669,9 +668,8 @@ function content_not_data( main,
                 navigator.splashscreen.hide();
                 show_body();
             }
-
-            if ( localStorage.getItem( 'click_choice_city' ) === '1' ) localStorage.setItem( 'click_choice_city', '0' );
             
+			remove_local_storage( 'click_choice_city' );
 			remove_local_storage( 'choice_van_year' );
     
         }, 500 );

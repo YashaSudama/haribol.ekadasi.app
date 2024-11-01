@@ -109,7 +109,6 @@ function get_firebase_token_func() {
 
 }
 
-set_local_storage( 'click_choice_city', '0' );
 set_local_storage( 'now_year', now_year );
 set_local_storage( 'status_notifications', 'false' );
 set_local_storage( 'user_register_notifications', 'false' );
@@ -1004,7 +1003,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                 city_slug = localStorage.getItem( 'city_slug' );
                 city_name = localStorage.getItem( 'city_name' );
         
-                if ( localStorage.getItem( 'click_choice_city' ) === '0' )  {   
+                if ( !localStorage.getItem( 'click_choice_city' ) )  {   
                     
                     if ( city && lat && lon ) add_city_undefined_database( city, state );
 
@@ -1060,6 +1059,8 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
         } else {
             return;
         }
+
+        remove_local_storage( 'click_choice_city' );
 
     }
 
@@ -6041,7 +6042,7 @@ function location_error( slug ) {
         city_slug = localStorage.getItem( 'city_slug' ); 
         city_name = localStorage.getItem( 'city_name' ); 
         
-        if ( localStorage.getItem( 'click_choice_city' ) === '0' ) {
+        if ( !localStorage.getItem( 'click_choice_city' ) ) {
 
             if ( localStorage.getItem( 'index_get_info_new' ) && 
                ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
@@ -6053,13 +6054,8 @@ function location_error( slug ) {
                 get_city_and_info( lat, lon, city_slug, slug );
             }
 
-        } else if ( localStorage.getItem( 'click_choice_city' ) === '1' ) {
+        } else if ( localStorage.getItem( 'click_choice_city' ) === 'yes' ) {
             not_city( lat, lon, city_name, slug, index_get_info_new );
-
-            setTimeout( () => {
-                localStorage.setItem( 'click_choice_city', '0' );
-            }, 1000 );
-
         }
 
     } else {
@@ -6103,16 +6099,12 @@ function on_device_ready() {
 
     function launch_calendar() {
 
-        if ( localStorage.getItem( 'click_choice_city' ) === '1' ) {
+        if ( localStorage.getItem( 'click_choice_city' ) === 'yes' ) {
             main.style.opacity = '0';
             header.style.opacity = '0';
 
             not_city( lat, lon, city, slug, index_get_info_new );
-
-            setTimeout( () => {
-                localStorage.setItem( 'click_choice_city', '0' );
-            }, 1000 );
-
+            
         } else {
             navigator.geolocation.getCurrentPosition( on_success, on_error, { timeout: 5000 } );
         }

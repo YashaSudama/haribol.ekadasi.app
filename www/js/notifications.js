@@ -14,7 +14,8 @@ import { height_footer_func,
          text_not_internet,
          header_top,
          footer_id,
-         hide_background
+         hide_background,
+         set_local_storage
 } from "./general.js";
 
 let main_notifications = document.getElementById( 'main_notifications' ),
@@ -253,10 +254,8 @@ function work_settings_notifications() {
         let select_city_notif = document.getElementById( 'select_city_notif' );
 
         select_city_notif.onclick = function() {
-
-            if ( localStorage.getItem( 'click_choice_city' ) === '0' ) localStorage.setItem( 'click_choice_city', '1' );
-
-            localStorage.setItem( 'status_background', 'yes' );
+            set_local_storage( 'click_choice_city', 'yes' );
+            set_local_storage( 'status_background', 'yes' );
             hide_body();
             window.location.href = 'index.html';
         }
