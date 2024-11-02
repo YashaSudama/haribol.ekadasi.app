@@ -564,8 +564,11 @@ header {
   	padding-bottom: 15px;
 }
 #main_notifications #not_data_server {
-	width: 250px;
-	padding-top: 15px;
+	max-width: 230px;
+	margin: 20px auto 0;
+    padding: 10px 15px;
+	opacity: 0;
+    box-shadow: 0px 2px 15px -5px #000;
 }
 .info_year li[class*='value'] {
 	border-bottom: 1px solid #ededed;
@@ -709,13 +712,19 @@ header {
 #window_select_city .main,
 #window_change_city .main,
 #check_exit_page .main {
-	width: 80%;
-	max-width: 350px;
+	max-width: 400px;
 	height: auto;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
 	padding: 30px 20px;
+	transform: translate( -50%, -50% );
+}
+#window_select_city .main {
+	width: 85%;
+}
+#window_change_city .main,
+#check_exit_page .main {
+	width: 80%;
 	box-sizing: border-box;
 }
 #check_exit_page .main {
@@ -731,7 +740,9 @@ header {
 	font-size: inherit;
 	caret-color: #0a213a;
 }
-#found_cities {  
+#found_cities { 
+	top: 0;
+    right: 0; 
 	font-size: 12px !important;
 	padding: 2px 5px !important;
 	border-radius: 0 10px 0 10px;
@@ -799,16 +810,6 @@ header {
 #current_location {
   	width: 100%;
 }
-
-@media ( min-width: 400px ) {
-
-	#current_location,
-	#window_select_city .main input {
-		width: 90%;
-	}    
-
-}
-
 #update_notif[disabled] {
   	background-color: #3442668c;
 }
@@ -825,7 +826,6 @@ header {
 	overflow-y: auto;
 	opacity: 0;
 	padding: 10px;
-	max-width: 270px;
 	box-shadow: 0px 3px 15px -5px #000;
 	box-sizing: border-box;
 	transition: opacity .6s linear .2s;
@@ -1218,18 +1218,20 @@ header {
   top: 0;
   width: 100vW;
   height: 100vh;
-  padding: 0 20px 60px;
+  padding: 0 20px;
   box-sizing: border-box;
   opacity: 0; 
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -khtml-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* Internet Explorer/Edge */
-  user-select: none;           /* Non-prefixed version, currently
-                                  not supported by any browser */
   transition: opacity .8s linear, left .6s linear;
 }
+#about_ekadashi,
+.description {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+	-khtml-user-select: none;    /* Konqueror */
+	-moz-user-select: none;      /* Firefox */
+	-ms-user-select: none;       /* Internet Explorer/Edge */
+	user-select: none;           /* Non-prefixed version, currently not supported by any browser */
+  }
 .description h2,
 .description h3 {
 	text-align: center;
@@ -1267,6 +1269,9 @@ header {
 #wrapper_hint_description,
 #notice_foreground {
   	background-color: #ffffffc7;
+}
+#notice_foreground {
+	overflow-y: scroll;
 }
 .hint_description,
 .wrapper_internally_notice_foreground {
@@ -1453,8 +1458,8 @@ header {
 	font-size: 14px;
 	margin-right: 35px;
 }
-#not_data_server {
-	opacity: 0;
+.bottom_wrapp_content {
+	height: 60px;
 }
 
 
