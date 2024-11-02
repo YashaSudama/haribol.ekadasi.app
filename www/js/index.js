@@ -122,7 +122,7 @@ current_location.onclick = function() {
     remove_local_storage( 'city_slug' );
     remove_local_storage( 'select_get_info' );
     hide_body();
-    localStorage.setItem( 'status_background', 'yes' );
+    set_local_storage( 'status_background', 'yes' );
 
     setTimeout( () => {
         window.location.href = 'index.html';
@@ -661,16 +661,16 @@ function part_not_city( slug ) {
             }
 
             list_cityes.onclick = function( event ) {
-                localStorage.setItem( 'status_background', 'yes' );
+                set_local_storage( 'status_background', 'yes' );
                 hide_body();
-
+                
                 setTimeout( () => {
                     window_select_city.style.cssText = '';
+                    list_cityes.style.cssText = '';
                 }, 500 );
 
                 city = ( event.target ).textContent;
                 slug = get_all_cities.find( item => item.name === city );
-                list_cityes.style.cssText = '';
                 city_slug = slug.slug;
                 city_name = slug.name;
                 city_name_id = slug.id;
@@ -843,7 +843,7 @@ function part_not_city( slug ) {
                         
                     }
 
-                    localStorage.setItem( 'status_background', 'yes' );
+                    set_local_storage( 'status_background', 'yes' );
                     hide_body();
                     
                     setTimeout( () => {
@@ -6006,8 +6006,8 @@ function on_success( position, city_name, index_get_info_new ) {
             city_name = localStorage.getItem( 'city_name' );
             city_slug = localStorage.getItem( 'city_slug' );
                     
-            if ( Math.abs( +localStorage.getItem( 'lat' ) - +lat ).toFixed( 1 ) <= 0.1 &&
-                 Math.abs( +localStorage.getItem( 'lon' ) - +lon ).toFixed( 1 ) <= 0.1 ) {
+            if ( Math.abs( +localStorage.getItem( 'lat' ) - +lat ).toFixed( 1 ) <= 0.5 &&
+                 Math.abs( +localStorage.getItem( 'lon' ) - +lon ).toFixed( 1 ) <= 0.5 ) {
 
                 if ( localStorage.getItem( 'index_get_info_new' ) && 
                     ( +localStorage.getItem( 'now_year' ) === now_year ) ) {

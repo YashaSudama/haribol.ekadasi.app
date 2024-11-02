@@ -377,8 +377,8 @@ document.addEventListener( 'resume', () => {
             let lat = position.coords.latitude,
                 lon = position.coords.longitude;
                     
-            if ( Math.abs( +localStorage.getItem( 'lat' ) - +lat ).toFixed( 1 ) > 0.1 &&
-                Math.abs( +localStorage.getItem( 'lon' ) - +lon ).toFixed( 1 ) > 0.1 ) {
+            if ( Math.abs( +localStorage.getItem( 'lat' ) - +lat ).toFixed( 1 ) > 0.5 &&
+                Math.abs( +localStorage.getItem( 'lon' ) - +lon ).toFixed( 1 ) > 0.5 ) {
                 hide_body();
                 set_local_storage( 'status_background', 'yes' );
                 window.location.href = 'index.html';

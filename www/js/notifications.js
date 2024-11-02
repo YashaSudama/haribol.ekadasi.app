@@ -211,7 +211,7 @@ function work_settings_notifications() {
 
                 if ( nav_ok_transition ) {
                     hide_body();
-                    localStorage.setItem( 'status_background', 'yes' );
+                    set_local_storage( 'status_background', 'yes' );
                     window.location.href = 'index.html';
                 } else {
                     open_close_nav( check_exit_page );
@@ -219,7 +219,7 @@ function work_settings_notifications() {
     
                 ok_transition.onclick = function() {
                     hide_body();
-                    localStorage.setItem( 'status_background', 'yes' );
+                    set_local_storage( 'status_background', 'yes' );
                     check_exit_page.style.cssText = '';
                     window.location.href = 'index.html';
                 }
@@ -230,7 +230,7 @@ function work_settings_notifications() {
     
             } else {
                 hide_body();
-                localStorage.setItem( 'status_background', 'yes' );
+                set_local_storage( 'status_background', 'yes' );
             }
     
         }
@@ -238,7 +238,7 @@ function work_settings_notifications() {
         update_storage.onclick = function() {
             clear();
             hide_body();
-            localStorage.setItem( 'status_background', 'yes' );
+            set_local_storage( 'status_background', 'yes' );
             window.location.href = 'index.html';
         }
 

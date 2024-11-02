@@ -532,45 +532,60 @@ show_select_date.onclick = function() {
 	}
 
 	list_all_years.onclick = function( event ) {
-		remove_too_events();
 
-		if ( event.target.tagName === 'DIV' ) {
-			return false;
-		} else if ( event.target.tagName === 'SPAN' ) {
-			div_zoom_calendar.style.cssText = '';
-			year_screen_span.innerHTML = '';
-			year_input = ( event.target ).textContent;
-			calendar.innerHTML = '';
-			calendar.style.height = ( window_height - 
-									  height_header -
-									  footer_id.clientHeight ) + 'px';
-			min_preloader.style.cssText = 'position: absolute;' +
-										  'top: 50%;' + 
-										  'left: 50%;' + 
-										  'transform: translate(-50%, -50%);' +
-										  'margin: 0';
-			calendar.append( min_preloader );
-			span_year_input = document.getElementById( 'year_input' );
-		
-			if ( span_year_input ) span_year_input.remove();
+		if ( navigator.connection.type !== 'none' ) {
+			remove_too_events();
 
-			min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input" class="text-center d-block m-t-10">' +
-															    '<small>' + 'Загружаем - ' + year_input + ' год</small>' +
-															'</span>' );
+			if ( event.target.tagName === 'DIV' ) {
+				return false;
+			} else if ( event.target.tagName === 'SPAN' ) {
+				div_zoom_calendar.style.cssText = '';
+				year_screen_span.innerHTML = '';
+				year_input = ( event.target ).textContent;
+				calendar.innerHTML = '';
+				calendar.style.height = ( window_height - 
+										height_header -
+										footer_id.clientHeight ) + 'px';
+				min_preloader.style.cssText = 'position: absolute;' +
+											'top: 50%;' + 
+											'left: 50%;' + 
+											'transform: translate(-50%, -50%);' +
+											'margin: 0';
+				calendar.append( min_preloader );
+				span_year_input = document.getElementById( 'year_input' );
+			
+				if ( span_year_input ) span_year_input.remove();
 
-			get_city( get_van_year_info, slug );
+				min_preloader.insertAdjacentHTML( 'beforeend', '<span id="year_input" class="text-center d-block m-t-10">' +
+																	'<small>' + 'Загружаем - ' + year_input + ' год</small>' +
+																'</span>' );
+
+				get_city( get_van_year_info, slug );
+				list_all_years.style.cssText = '';
+
+				window.addEventListener( 'resize', function () {
+					let scroll_window_height_local = window.innerHeight;
+
+					calendar.style.height = ( scroll_window_height_local - 
+											height_header -
+											footer_id.clientHeight ) + 'px';
+				} );
+
+			}
+
+		} else {
 			list_all_years.style.cssText = '';
-
-			window.addEventListener( 'resize', function () {
-				let scroll_window_height_local = window.innerHeight;
-				calendar.style.height = ( scroll_window_height_local - 
-										  height_header -
-										  footer_id.clientHeight ) + 'px';
-			} );
-
-			set_local_storage( 'choice_van_year', 'yes' );
-
+			
+			content_not_connection( calendar, 
+									text_not_internet, 
+									null, 
+									null, 
+									null, 
+									null );
+	
 		}
+
+		set_local_storage( 'choice_van_year', 'yes' );
 
 	}
 

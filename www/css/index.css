@@ -1219,7 +1219,7 @@ header {
 	top: 0;
 	width: 100vW;
 	height: 100vh;
-	padding: 0 20px 60px;
+	padding: 0 20px;
 	box-sizing: border-box;
 	opacity: 0; 
 	transition: opacity .8s linear, left .6s linear;
@@ -1456,6 +1456,9 @@ header {
 }
 #not_data_server {
 	opacity: 0;
+}
+.bottom_wrapp_content {
+	height: 60px;
 }
 
 

@@ -84,6 +84,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         'Господь Кришна заключил, что следуя этому Путрада экадаши, человек может обрести сына и достичь небесных планет.' +
                                         ' Любой, кто слышит о славе этого экадаши, получает результаты Ашвамедхи, знаменитого жертвоприношения коня».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_sat-tila" class="description">' +
@@ -136,6 +137,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' он освобождается от всякой духовной, умственной, физической, социальной и интеллектуальной нужды, развивает духовное сознание и возвращается' +
                                         ' обратно к Богу.<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_bhaimi" class="description">' +
@@ -197,6 +199,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' он становится вечным обитателем Вайкунтхи <i>(духовного мира)</i>. Просто читая о славе этого экадаши и слушая о ней,' +
                                         ' человек получает результаты совершения жертвоприношения Агништомы».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_vijaya" class="description">' +
@@ -259,6 +262,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' экадаши или слушающий о ней, получает результаты жертвоприношения Ваджапейя <i>(самое большое из всех жертвоприношений' +
                                         ' для достижения материальных благ)</i>».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_amalaki" class="description">' +
@@ -330,6 +334,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         'Мудрец Васиштха продолжил: «Мой дорогой царь! Любой, кто соблюдает обет этого священного Амалаки экадаши,' +
                                         ' непременно вернется в обитель Господа Вишну».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_papamocani" class="description">' +
@@ -413,6 +418,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' таких как убийство брахмана, убийство зародыша, пьянство и прелюбодеяние с женой гуру полностью нейтрализуются.' +
                                         ' Поскольку этот священный экадаши столь благоприятен и разрушает все грехи, каждый должен соблюдать его».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_kamada" class="description">' +
@@ -469,6 +475,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' удивительный экадаши так хорошо, как он только может, ибо его соблюдение уничтожает все грехи и очищает сознание.' +
                                         ' Этот экадаши способен избавить даже от греха убийства брахмана и от любых проклятий».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_varuthini" class="description">' +
@@ -519,6 +526,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' духовного мира. Даже тот, кто  слушает о славе этого экадаши, получает благо, обретаемое от раздачи тысячи коров,' +
                                         ' и в конце возвращается домой в обитель Господа Вишну <i>(Кришны)</i>». <br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_mohini" class="description">' +
@@ -595,6 +603,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' в священных водах, благотворительности и жертвоприношениям, не идет ни в какое сравнение с благочестием, достигаемым' +
                                         ' благодаря соблюдению этого Мохини экадаши».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_apara" class="description">' +
@@ -636,6 +645,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         'Даже тот, кто слышит о славе этого экадаши или читает о ней, освобождается от последствий всех своих грехов.' +
                                         ' Ради всеобщего блага Я рассказал тебе об этой славе».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_pandava" class="description">' +
@@ -692,6 +702,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' Благодаря простому слушанию о славе этого экадаши достигаются результаты соблюдения обета <i>амавасьи</i> вкупе с <i>пратипадой</i>' +
                                         ' и ритуальным подношениям предкам во время солнечного затмения».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_yogini" class="description">' +
@@ -749,6 +760,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' результат, достижимый благодаря раздаче пищи восьмидесяти восьми тысячам брахманов. Этот экадаши разрушает все' +
                                         ' последствия грехов и одаривает великим благочестием».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_sayana" class="description">' +
@@ -870,6 +882,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         'Для последователей Господа Чайтаньи в экадаши рекомендуется как минимум воздерживаться от зернобобовых' +
                                         ' и больше слушать и воспевать Имена Господа и Его славу. <br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_kamika" class="description">' + 
@@ -908,6 +921,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' особенный день очищает даже от греховных реакций за убийство брахмана или нерожденного ребёнка и дает возможность' +
                                         ' личности войти в духовную обитель. <br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_pavitra" class="description">' +
@@ -983,6 +997,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' экадаши, обретает счастье, проистекающее из отцовства в этой жизни, и возвращается к Богу в своей' +
                                         ' следующей жизни».' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_annada" class="description">' +
@@ -1026,6 +1041,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         '  результат соблюдения Аннада Экадаши. Слушая и читая о славе этого экадаши, человек обретает результаты' +
                                         ' жертвоприношения коня <i>(великое императорское жертвоприношение прошлой эпохи)</i>».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_parsva" class="description">' +
@@ -1074,6 +1090,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' экадаши, человек обретает результат совершения тысячи жертвоприношений коня <i>(великое императорское жертвоприношение' +
                                         ' прошлой эпохи)</i>».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_padmini" class="description">' +
@@ -1153,6 +1170,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         'Так заканчивается повествование из Сканда пураны о славе Падмини экадаши, экадаши светлой части дополнительного месяца' +
                                         ' в високосном году.<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_indira" class="description">' +
@@ -1205,6 +1223,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         'В заключение Шри Кришна сказал, что даже тот, кто просто слушает или читает о славе Индира экадаши, достигнет того же' +
                                         ' результата.<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_parama" class="description">' +
@@ -1314,6 +1333,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' конце концов достигнет обители Шри Вишну, а когда он будет переноситься туда, его будут восхвалять и молиться ему' +
                                         ' все полубоги”.<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_pasankusa" class="description">' +
@@ -1357,6 +1377,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' достижение временных материальных благ – лишь косвенный результат соблюдения экадаши, а главный результат – это' +
                                         ' достижение вечного преданного служения Кришне».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_rama-ekadashi" class="description">' +
@@ -1446,6 +1467,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' луны – награждают своих последователей освобождением. Любой, кто слышит о славе этого экадаши,' +
                                         ' освобождается от следствий всех грехов и счастливо обитает в обители Господа Вишну».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_utthana" class="description">' +
@@ -1509,6 +1531,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' он должен поклоняться своему духовному учителю и предложить ему пожертвование, согласно своим' +
                                         ' возможностям, таким образом доставляя удовольствие Верховному Господу».<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_moksada" class="description">' +
@@ -1565,6 +1588,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' с верой этого экадаши. Личность может немедленно переместиться из ада в рай. А если человек соблюдает' +
                                         ' эти экадаши для своей пользы, он может пойти к Богу.<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_saphala" class="description">' +
@@ -1602,6 +1626,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' царство своему сыну и отправился в лес, чтобы ещё больше погрузиться в Кришну. Очистившись от всех' +
                                         ' материальных желаний, он оставил своё тело и достиг прибежища у лотосных стоп Господа Кришны.»<br><br>' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_utpanna" class="description">' +
@@ -1686,6 +1711,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                         ' пользоваться ароматическим маслом».<br><br>' +
                                         'С тех пор день экадаши почитают в этом мире.' +
                                     '</span>' +
+                                    '<div class="bottom_wrapp_content"></div>' +
                                 '</div>' +
                             '</div>' +
                             '<div id="content_nityananda" class="description">' +
@@ -1735,6 +1761,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' Господь Нитьянанда – Само олицетворение милосердия, и нам следует молиться о Его милости.<br><br>' +
                                     '<a href="//mantrameditation.ru/kollekcziya-mantr">Здесь</a> вы можете слушать и повторять прекрасные имена Нитьянанды и Чайтаньи.' + 
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_chaytanya" class="description">' +
@@ -1770,6 +1797,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' которого мы всегда жаждем»</i>.<br><br>' +
                                     'Поучаствовать в совместном воспевании можно, <a href="//mantrameditation.ru/kollekcziya-mantr">подпевая тут</a>' +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_sita" class="description">' +
@@ -1838,6 +1866,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     '* На самом деле Равана похитил лишь созданную иллюзией иллюзорную форму Сита-деви,' +
                                     ' он не мог даже прикоснуться к настоящей Сите, энергии наслаждения Господа и Его вечной супруге. ' + 
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_nrisimha" class="description">' +
@@ -1898,6 +1927,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' положил руку ему на голову и с любовью облизал с ног до головы.<br><br>' +
                                     'Мантра НАМАСТЕ НАРАШИМХАЯ является самой сильной защитной мантрой. Послушать <a href="//youtu.be/mVw4T61ilVQ">можно тут</a>'  +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_vyasapudja" class="description">' +
@@ -1917,6 +1947,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' он помогает личности войти в духовный мир с помощью медитации на имена Бога.<br><br>' + 
                                     'Удивительное воспевание Сиддхасварупананды Парамахамсы, а также его просветляющие лекции можно <a href="//youtu.be/c2KaReXUBvk">послушать тут</a>' +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_radha-yatra" class="description">' +
@@ -1955,6 +1986,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     'Потом можно угостить всех знакомых, а также незнакомых, это очень благоприятно!<br><br>' +
                                     'Мантры к празднику можно послушать и скачать <a href="//mantrameditation.ru/kollekcziya-mantr">тут</a>' +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_baladeva" class="description">' +
@@ -1975,6 +2007,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' Голос Его очень глубок. Его руки очень длинны и касаются бёдер. Он обладатель невероятной силы.»<br><br>' + 
                                     'Любовь Кришны и Баларамы бесконечно велика.' +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_krishna" class="description">' +
@@ -2020,12 +2053,14 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     '<a href="//youtu.be/eRu9yQ5OhUY">Маха мантра в полночь</a><br><br>' + 
                                     '<a href="//mantrameditation.ru/kollekcziya-mantr">mantrameditation.ru</a>' + 
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_bhaktivedanta" class="description">' +
                             '<div class="wrapp_content">' +
                                 '<h3>Явление Шрилы Бхактиведанты Свами Прабхупад </h3>' +
                                 '<span>' + bhaktivedanta + '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_radharany" class="description">' +
@@ -2057,7 +2092,8 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     'Послушать воспевание удивительных имён Радхи и Кришны можно тут:<br><br>' + 
                                     '<a href="//youtu.be/INgNPHmRwfg">Джая Радха Мадхава</a><br><br>' +
                                     '<a href="//mantrameditation.ru/kollekcziya-mantr">mantrameditation.ru</a>' + 
-                                '</span>' + 
+                                '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' + 
                             '</div>' +
                         '</div>' +
                         '<div id="content_govardhana" class="description">' +
@@ -2107,6 +2143,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' В этот день очень благоприятно приготовить хорошее вегетарианское угощение и предложить Кришне. Это очень радостный праздник.<br><br>' +
                                     'Мантры к празднику <a href="//mantrameditation.ru/kollekcziya-mantr">можно послушать и скачать тут</a>'  +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_rozhdestvo" class="description">' +
@@ -2148,12 +2185,14 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     ' Нет другого пути, нет другого пути, нет другого пути для осознания Бога в век Кали». (Брихад-нарадия Пурана)</i>.<br><br>' +
                                     'Послушать прекрасное воспевание Святых Имён <a href="//youtu.be/Gl2Xfb4KOZk">можно тут</a>' +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' + 
                         '<div id="content_disappearance-prabhupada" class="description">' +
                             '<div class="wrapp_content">' +
                                 '<h3>Уход Шрилы Бхактиведанты Свами Прабхупады</h3>' +
                                 '<span>' + bhaktivedanta + '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_bhaktisiddhanta" class="description">' +
@@ -2174,6 +2213,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     'Великий ученик Шрилы Бхактисиддханты, Шрила Бхактиведанта Свами Прабхупад, выполняя волю своего учителя, широко распространил ' +
                                     'знание о Кришне в западных странах.' + 
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>' +
                         '<div id="content_bhaktivinoda" class="description">' +
@@ -2195,6 +2235,7 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                                     'Послушать трансцендентное исполнение «Радха Мадхава» – любимой всеми одной из песен Бхактивиноды Тхакура, ' +
                                     'можно <a href="//youtu.be/Pa0h3tWTS5Y?si=9OlMcdfyWFnqrqLU">здесь</a>' +
                                 '</span>' +
+                                '<div class="bottom_wrapp_content"></div>' +
                             '</div>' +
                         '</div>';
 
