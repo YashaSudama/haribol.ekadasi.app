@@ -137,7 +137,7 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
     text_not_internet = '<h3>Нет подключения к интернету!</h3>',
     text_not_data_server =  '<div id="not_data_server" class="width-fit">' +
                                 '<span class="d-block text-center search_string l-height-1-2">' +
-                                    'Не удалось получить данные с сервера! Попробуйте позже<br>или еще раз.' +
+                                    'Не удалось получить данные с сервера! Попробуйте позже или еще раз.' +
                                 '</span>' +
                             '</div>',
     text_error_update_notifications =  '<div id="error_update_notifications" class="width-fit m-auto">' +
