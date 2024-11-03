@@ -524,13 +524,15 @@ show_select_date.onclick = function() {
 			if ( event.target.tagName === 'DIV' ) {
 				return false;
 			} else if ( event.target.tagName === 'SPAN' ) {
+				let window_height_local = window.innerHeight;
+
 				div_zoom_calendar.style.cssText = '';
 				year_screen_span.innerHTML = '';
 				year_input = ( event.target ).textContent;
 				calendar.innerHTML = '';
-				calendar.style.height = ( window_height - 
-										height_header -
-										footer_id.clientHeight ) + 'px';
+				calendar.style.height = ( window_height_local - 
+										  height_header -
+										  footer_id.clientHeight ) + 'px';
 				min_preloader.style.cssText = 'position: absolute;' +
 											  'top: 50%;' + 
 											  'left: 50%;' + 

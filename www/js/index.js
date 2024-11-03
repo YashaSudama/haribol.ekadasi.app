@@ -143,7 +143,6 @@ current_location.onclick = function() {
     remove_local_storage( 'lat' );
     remove_local_storage( 'lon' );
     remove_local_storage( 'city_name' );
-    remove_local_storage( 'city_name_id' );
     remove_local_storage( 'city_slug' );
     remove_local_storage( 'select_get_info' );
     navigator.splashscreen.show();
@@ -910,7 +909,7 @@ function part_not_city( slug ) {
 
             let full_city = div_search_city.querySelectorAll( '.full_city' );
             
-            if ( full_city.length > 0 ) div_search_city.innerHTML += '<span id="found_cities" class="pos-fixed">' + full_city.length + '</span>';
+            if ( full_city.length > 0 ) div_search_city.innerHTML += '<span id="found_cities" class="pos-abs">' + full_city.length + '</span>';
                 
         } else {
             search_null();

@@ -1365,8 +1365,11 @@ document.addEventListener( "deviceready", () => {
         if ( !data.wasTapped ) {
             let notice_foreground = document.getElementById( 'notice_foreground' ),
                 content = '<div style="display: flex">' +
-                            '<div style="margin-right: 15px;">' +
-                                '<img src="../img/logo/ios/icon-40.png" style="position: relative; top: 50%;transform: translateY(-50%);">' +
+                            '<div style="margin-right: 20px;">' +
+                                '<img src="../img/logo/ios/icon-60.png" style="position: relative;' + 
+                                                                              'top: 50%;' + 
+                                                                              'transform: translateY( -50% );' +
+                                                                              'border-radius: 10px;">' +
                             '</div>' +
                             '<div>' +
                                 '<h3 style="margin: 0;">' + data.aps.alert.title + '</h3>' +
