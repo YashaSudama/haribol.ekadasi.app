@@ -512,9 +512,11 @@ nav.onclick = function() {
     if ( ul_nav.style.cssText === '' ) {
         ul_nav.style.cssText = 'opacity: 1; z-index: 7';
         hide_today();
+        hide_select_date();
     } else {
         ul_nav.style.cssText = '';
         show_today();
+        show_select_date_func();
     }
 
 }
