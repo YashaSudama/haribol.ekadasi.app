@@ -34,8 +34,7 @@ import { window_height,
          today,
          text_not_data_server,
          hide_background,
-         get_month_days,
-         reading_locale_storage
+         get_month_days
 } from "./general.js";
 
 import { redefinition_city } from "./redefinition_city.js";
