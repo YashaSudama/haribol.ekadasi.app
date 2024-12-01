@@ -383,7 +383,8 @@ body,
 #not_connection,
 #show_select_date,
 .new-calendar,
-.div_zoom_calendar {
+.div_zoom_calendar,
+#minus_year {
   	transition: opacity .4s linear;
 }
 #current_date {
@@ -391,6 +392,9 @@ body,
 }
 #location {
   	font-size: 13px;
+}
+#minus_year {
+	opacity: 0;
 }
 
 /* min-reloader */

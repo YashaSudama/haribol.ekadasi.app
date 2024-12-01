@@ -1,7 +1,6 @@
 "use strict";
 
 import { window_height,
-         day_week,
          day_name_short,
          now_date_number,
          now_month, 
@@ -35,7 +34,8 @@ import { window_height,
          today,
          text_not_data_server,
          hide_background,
-         get_month_days
+         get_month_days,
+         reading_locale_storage
 } from "./general.js";
 
 import { redefinition_city } from "./redefinition_city.js";
@@ -140,10 +140,9 @@ function window_city_func( elem ) {
     today.addEventListener( 'click', hide_body );
 }
 
-function inner_get_info_func( index_get_info_new, slug, height_header, day_week ) {
+function inner_get_info_func( index_get_info_new, slug, height_header ) {
     let class_li,
         id_li,
-        value_key,
         value,
         array_latin_month = [ 'jan',
                               'feb',
@@ -165,7 +164,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
         plus_year = document.getElementById( 'plus_year' ),
         today_str = 'Сегодня',
         tomorrow = 'Завтра',
-        day_after_tomorrow = 'Скоро';
+        soon = 'Скоро',
+        yesterday = 'Вчера';
 
     height_header = header_top.clientHeight;
     main.style.marginTop = height_header + 'px';
@@ -186,7 +186,9 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                           index_get_info_new[ i ].nov,
                           index_get_info_new[ i ].dem ],
             sp_array = Object.entries( array_obj[ 5 ] ),
-            isus_array = Object.entries( array_obj[ 11 ] );
+            isus_array = Object.entries( array_obj[ 11 ] ),
+            now_month_local = now_month,
+            minus_year_status = false;
 
         array_obj[ 5 ] = Object.fromEntries( add_event_array( sp_array, '14', 'S', '15', 0 ) );
         array_obj[ 11 ] = Object.fromEntries( add_event_array( isus_array, '25', 'R', '26', 1 ) );
@@ -198,7 +200,9 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
             let event_coming_class = '',
                 event_coming_elem = '',
                 event_coming_class_status = false,
-                month_days = get_month_days( now_month, now_year );
+                month_days = get_month_days( now_month, now_year ),
+                value_key = obj_month[ item ], // value_key - значение свойства ( ключа ), тип события
+                day_week = new Date( get_year, numb_month, item ).getDay(); 
 
             if ( +get_year === now_year ) {
 
@@ -211,7 +215,10 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                         event_coming_elem = '<span>' + tomorrow + '</span>';
                         event_coming_class_status = true;
                     } else if ( +item === ( now_date_number + 2 ) ) {
-                        event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                        event_coming_elem = '<span>' + soon + '</span>';
+                        event_coming_class_status = true;
+                    } else if ( +item === ( now_date_number - 1 ) && typeof( value_key ) === 'object' ) {
+                        event_coming_elem = '<span>' + yesterday + '</span>';
                         event_coming_class_status = true;
                     }
 
@@ -223,19 +230,27 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                             event_coming_elem = '<span>' + tomorrow + '</span>';
                             event_coming_class_status = true;
                         } else if ( ( now_date_number + 1 ) === month_days ) {
-                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_elem = '<span>' + soon + '</span>';
                             event_coming_class_status = true;
                         }
 
                     } else if ( +item === 2 ) {
 
                         if ( now_date_number === month_days ) {
-                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_elem = '<span>' + soon + '</span>';
                             event_coming_class_status = true;
                         }
 
                     }
 
+                } else if ( numb_month === ( now_month - 1 ) ) {
+
+                    if ( now_date_number === 1 && 
+                         +item === get_month_days( numb_month, now_year ) && 
+                         typeof( value_key ) === 'object' ) {
+                        event_coming_elem = '<span>' + yesterday + '</span>';
+                        event_coming_class_status = true;
+                    }
                 }
 
             } else if ( +get_year === ( now_year + 1 ) ) {
@@ -248,14 +263,14 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                             event_coming_elem = '<span>' + tomorrow + '</span>';
                             event_coming_class_status = true;
                         } else if ( ( now_date_number + 1 ) === month_days ) {
-                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_elem = '<span>' + soon + '</span>';
                             event_coming_class_status = true;
                         }
 
                     } else if ( +item === 2 ) {
 
                         if ( now_date_number === month_days ) {
-                            event_coming_elem = '<span>' + day_after_tomorrow + '</span>';
+                            event_coming_elem = '<span>' + soon + '</span>';
                             event_coming_class_status = true;
                         }
 
@@ -263,14 +278,19 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
 
                 }
                     
+            } else if ( +get_year === ( now_year - 1 ) && 
+                        minus_year_status &&
+                        now_date_number === 1 && 
+                        +item === get_month_days( numb_month, now_year ) && 
+                        typeof( value_key ) === 'object' ) {
+                event_coming_elem = '<span>' + yesterday + '</span>';
+                event_coming_class_status = true;
             }
             
             if ( event_coming_class_status ) event_coming_class = 'event_coming ';
 
             now_date_local = new Date( now_year, now_month, now_date_number );
             date_event = new Date( get_year, numb_month, item );
-            day_week = new Date( get_year, numb_month, item ).getDay();
-            value_key = obj_month[ item ]; // value_key - значение свойства ( ключа ), тип события
 
             if ( typeof( value_key ) === 'object' ) now_date_local = +now_date_local - 90000000;
 
@@ -282,7 +302,13 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                         numb_month_local = numb_month + 1,
                         item_local = +item + 1,
                         exit_next_year = false,
-                        month_days_local = get_month_days( numb_month, now_year );
+                        month_days_local = get_month_days( numb_month, now_year ),
+                        now_year_local = now_year;
+                    
+                    if ( minus_year_status ) {
+                        now_year_local = now_year - 1;
+                        minus_year_status = false;
+                    }
 
                     if ( item_local > month_days_local ) {
                         item_local = 1;
@@ -304,7 +330,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                     }
                     
                     if ( exit_next_year ) {
-                        exit_date = '<span>' + item_local + '</span>.' + numb_month_local + '.' + ( now_year + 1 );
+                        exit_date = '<span>' + item_local + '</span>.' + numb_month_local + '.' + ( now_year_local + 1 );
                     } else {
                         exit_date = '<span>' + item_local + '</span>.' + numb_month_local;
                     }
@@ -356,9 +382,80 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
 
         if ( now_year === +get_year ) {
 
-            for ( let i = now_month; i < array_obj.length; i++ ) {
+            if ( now_date_number === 1 ){
+                
+                if ( now_month !== 0 ) {
+                    now_month_local = now_month - 1;
+                } else {
+                    let xml_info_minus_year = new XMLHttpRequest(),
+                        slug_local = slug.id || slug;
+            
+                    xml_info_minus_year.open( 'GET', url + 'api/years.json?city=' + slug_local + '&value=' + ( now_year - 1 ) );
+                    xml_info_minus_year.responseType = 'json';
+                    xml_info_minus_year.setRequestHeader( 'Content-Type', 'application/json' );
+
+                    not_connection( xml_info_minus_year, 
+                                    main, 
+                                    text_not_connection_timeout, 
+                                    'index_get_info_new', 
+                                    'main_index', 
+                                    inner_get_info_func, 
+                                    index_get_info_new );
+
+                    timeout( xml_info_minus_year, 
+                             main, 
+                             text_not_connection_timeout, 
+                             'index_get_info_new', 
+                             'main_index', 
+                             inner_get_info_func, 
+                             index_get_info_new );
+                    
+                    xml_info_minus_year.onload = function() {
+                        let index_get_info_minus_year = xml_info_minus_year.response,
+                            object_dem = index_get_info_minus_year[ 0 ].dem,
+                            month_days_dem = get_month_days( 11, now_year - 1 );
+
+                        if ( month_days_dem in object_dem ) {
+                            let minus_year_block = '<ul id="minus_year" class="info_year">' +
+                                                       '<li class="year text-right" style="top: ' + ( height_header - 1 ) + 'px;">' +
+                                                           '<span>' + ( now_year - 1 ) + '</span>' + 
+                                                       '</li>' +
+                                                   '</ul>';
+                                             
+                            main.insertAdjacentHTML( 'afterbegin', minus_year_block );
+
+                            let minus_year = document.getElementById( 'minus_year' );
+
+                            minus_year.innerHTML += '<ul id=' + array_latin_month[ 11 ] + '-' + ( now_year - 1 ) + 
+                                                         ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
+                                                        '<li class="month" style="top: ' + ( height_header - 1 ) + 'px">' +
+                                                            '<h4 class="m-t-0 m-b-0">' + month_name[ 11 ] + '</h4>' +
+                                                        '</li>' +
+                                                    '</ul>';
+                            let elem_month = document.getElementById( array_latin_month[ 11 ] + '-' + ( now_year - 1 ) );
+
+                            minus_year_status = true;
+
+                            for ( let item in object_dem ) {
+                                display_data( object_dem, item, elem_month, ( now_year - 1 ), 11 );
+                            }
+                            
+                            setTimeout( () => {
+                                minus_year.style.opacity = '1';
+                            }, 500 );
+
+                        }
+
+                    };
+
+                    xml_info_minus_year.send();
+                }
+
+            }
+
+            for ( let i = now_month_local; i < array_obj.length; i++ ) {
                 current_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
-                                            '<li class="month">' +
+                                            '<li class="month" style="top: ' + ( height_header - 1 ) + 'px">' +
                                                 '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
                                             '</li>' +
                                           '</ul>';
@@ -371,6 +468,9 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                 if ( elem_month.children.length === 1 ) elem_month.remove();
                 
             }
+
+            if ( current_year.children.length === 1 && 
+                !current_year.querySelector( 'ul' ) ) current_year.style.cssText = 'height: 0; opacity: 0;';
 
             window.scrollTo( { left: 0, top: 0, behavior: 'smooth' } );
 
@@ -387,10 +487,10 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
 
             for ( let i = 0; i < array_obj.length; i++ ) {
                 plus_year.innerHTML += '<ul id=' + array_latin_month[ i ] + '-' + get_year + ' class="pos-rel" style="bottom: ' + height_year + 'px">' +
-                                            '<li class="month">' +
+                                            '<li class="month" style="top: ' + ( height_header - 1 ) + 'px">' +
                                                 '<h4 class="m-t-0 m-b-0">' + month_name[ i ] + '</h4>' +
                                             '</li>' +
-                                          '</ul>';
+                                        '</ul>';
                 let elem_month = document.getElementById( array_latin_month[ i ] + '-' + get_year );
 
                 for ( let item in array_obj[ i ] ) {
@@ -399,12 +499,6 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
                 
             }
 
-        }
-        
-        let month = document.getElementsByClassName( 'month' );
-
-        for ( let li of month ) {
-            li.style.top = ( height_header - 1 ) + 'px';
         }
 
     }
@@ -418,8 +512,11 @@ function inner_get_info_func( index_get_info_new, slug, height_header, day_week 
     header_top.style.opacity = '1';
 
     if ( today && today.hasAttribute( 'id' ) ) today.style.cssText = '';
+    
+    setTimeout( () => {
+        get_description( main, '.click' );
+    }, 1000 );
 
-    get_description( main, '.click' );
     height_footer_func();
 
 }
@@ -456,7 +553,7 @@ function get_info_func( slug, index_get_info_new ) {
         index_get_info_new = xml_info.response;
         localStorage.setItem( 'index_get_info_new', JSON.stringify( index_get_info_new ) );
 
-        inner_get_info_func( index_get_info_new, slug, height_header, day_week );
+        inner_get_info_func( index_get_info_new, slug, height_header );
 
     };
 
@@ -487,7 +584,6 @@ function local_storage( lat, lon, city_slug, city_name, city_name_id ) {
 } // local_storage - end
 
 function add_city_undefined_database( city, state ) {
-
     let value_token = get_token();
 
     if ( state ) {
@@ -523,7 +619,6 @@ function add_city_undefined_database( city, state ) {
              index_get_info_new );
 
     xml_city_database.onload = function() {
-
     	let response_database = xml_city_database.response;
 
         if ( response_database ) {
@@ -662,13 +757,13 @@ function part_not_city( slug ) {
             }
 
             list_cityes.onclick = function( event ) {
-                set_local_storage( 'status_background', 'yes' );
+                set_local_storage( 'background', 'yes' );
                 hide_body();
                 
                 setTimeout( () => {
                     window_select_city.style.cssText = '';
                     list_cityes.style.cssText = '';
-                }, 500 );
+                }, 1000 );
 
                 city = ( event.target ).textContent;
                 slug = get_all_cities.find( item => item.name === city );
@@ -676,24 +771,27 @@ function part_not_city( slug ) {
                 city_name = slug.name;
                 city_name_id = slug.id;
                 location_span.innerHTML = city_name.trim();
-
                 footer_id.style.cssText = '';
-
-                if ( ( localStorage.getItem( 'status_notifications' ) === 'true' ) &&
-                     ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
-                     ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
-                     ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
-                    update_notifications( slug );
-                }
-                
-                remove_local_storage( 'lat' );
-                remove_local_storage( 'lon' );
-                remove_local_storage( 'select_get_info' );
-                set_local_storage( 'city_select', 'yes' );
-                local_storage( lat, lon, city_slug, city_name, city_name_id );
-                get_info_func( slug, index_get_info_new );
                 today.id = 'today';
                 today.innerHTML = 'Сегодня';
+
+                setTimeout( () => {
+                    
+                    if ( ( localStorage.getItem( 'status_notifications' ) === 'true' ) &&
+                    ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
+                    ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
+                    ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
+                        update_notifications( slug );
+                    }
+                    
+                    get_info_func( slug, index_get_info_new );
+                    remove_local_storage( 'lat' );
+                    remove_local_storage( 'lon' );
+                    remove_local_storage( 'select_get_info' );
+                    set_local_storage( 'city_select', 'yes' );
+                    local_storage( lat, lon, city_slug, city_name, city_name_id );
+
+                }, 1000 );
 
             }
     
@@ -843,13 +941,13 @@ function part_not_city( slug ) {
                         }
                         
                     }
-
-                    set_local_storage( 'status_background', 'yes' );
+                    
+                    set_local_storage( 'background', 'yes' );
                     hide_body();
                     
                     setTimeout( () => {
                         window_select_city.style.cssText = '';
-                    }, 500 );
+                    }, 1000 );
 
                     form_search.value = city;
                     slug = search_cities.find( item => item.name.toLowerCase() == city.toLowerCase() ) || 
@@ -859,22 +957,26 @@ function part_not_city( slug ) {
                     city_name_id = slug.id;
                     location_span.innerHTML = city_name.trim();
                     footer_id.style.cssText = '';
-
-                    if ( ( localStorage.getItem( 'status_notifications' ) === 'true' ) &&
-                        ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
-                        ( localStorage.getItem( 'status_firebase_token' ) === 'true' ) &&
-                        ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
-                        update_notifications( slug );
-                    }
-                    
-                    set_local_storage( 'city_select', 'yes' );
-                    remove_local_storage( 'lat' );
-                    remove_local_storage( 'lon' );
-                    remove_local_storage( 'select_get_info' );
-                    local_storage( lat, lon, city_slug, city_name, city_name_id );
-                    get_info_func( slug, index_get_info_new );
                     today.id = 'today';
                     today.innerHTML = 'Сегодня';
+                    
+                    setTimeout(() => {
+                        
+                        if ( ( localStorage.getItem( 'status_notifications' ) === 'true' )        &&
+                        ( localStorage.getItem( 'user_register_notifications' ) === 'true' ) &&
+                        ( localStorage.getItem( 'status_firebase_token' ) === 'true' )       &&
+                        ( city_name_id !== ( +localStorage.getItem( 'city_name_id' ) ) ) ) {
+                            update_notifications( slug );
+                        }
+                        
+                        get_info_func( slug, index_get_info_new );
+                        set_local_storage( 'city_select', 'yes' );
+                        remove_local_storage( 'lat' );
+                        remove_local_storage( 'lon' );
+                        remove_local_storage( 'select_get_info' );
+                        local_storage( lat, lon, city_slug, city_name, city_name_id );
+
+                    }, 1000 );
 
                 };
 
@@ -1010,6 +1112,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                 localStorage.getItem( 'city_slug' ) ) {
                 city_slug = localStorage.getItem( 'city_slug' );
                 city_name = localStorage.getItem( 'city_name' );
+                city_name_id = localStorage.getItem( 'city_name_id' );
         
                 if ( !localStorage.getItem( 'click_choice_city' ) )  {   
                     
@@ -1039,7 +1142,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
                             index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
                             location_span.innerHTML = city_name;
                             
-                            inner_get_info_func( index_get_info_new, slug, height_header, day_week );
+                            inner_get_info_func( index_get_info_new, city_name_id, height_header );
                             
                         } else {
                             localStorage.setItem( 'now_year', now_year );
@@ -1125,8 +1228,6 @@ function get_city( lat, lon ) {
         }
 
         if ( country in redefinition_city ) {
-
-            
             let array_country = redefinition_city[ country ];
 
             for ( let object of array_country ) {
@@ -1209,12 +1310,13 @@ function on_success( position, city_name, index_get_info_new ) {
     if ( localStorage.getItem( 'city_select' ) ) {
         city_name = localStorage.getItem( 'city_name' );
         city_slug = localStorage.getItem( 'city_slug' );
+        city_name_id = localStorage.getItem( 'city_name_id' );
 
         if ( localStorage.getItem( 'index_get_info_new' ) && 
              ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
             index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
             location_span.innerHTML = city_name;
-            inner_get_info_func( index_get_info_new, slug, height_header, day_week );
+            inner_get_info_func( index_get_info_new, city_name_id, height_header );
         } else {
             localStorage.setItem( 'now_year', now_year );
             lat = position.coords.latitude; 
@@ -1233,6 +1335,7 @@ function on_success( position, city_name, index_get_info_new ) {
                 
             city_name = localStorage.getItem( 'city_name' );
             city_slug = localStorage.getItem( 'city_slug' );
+            city_name_id = localStorage.getItem( 'city_name_id' );
                     
             if ( Math.abs( +localStorage.getItem( 'lat' ) - +lat ).toFixed( 1 ) <= 0.5 &&
                  Math.abs( +localStorage.getItem( 'lon' ) - +lon ).toFixed( 1 ) <= 0.5 ) {
@@ -1241,7 +1344,7 @@ function on_success( position, city_name, index_get_info_new ) {
                     ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
                     index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
                     location_span.innerHTML = city_name;
-                    inner_get_info_func( index_get_info_new, slug, height_header, day_week );
+                    inner_get_info_func( index_get_info_new, city_name_id, height_header );
                 } else {
                     localStorage.setItem( 'now_year', now_year );
                     get_city_and_info( lat, lon, city_slug, slug );
@@ -1269,6 +1372,7 @@ function location_error( slug ) {
          localStorage.getItem( 'city_slug' ) ) {
         city_slug = localStorage.getItem( 'city_slug' ); 
         city_name = localStorage.getItem( 'city_name' ); 
+        city_name_id = localStorage.getItem( 'city_name_id' );
         
         if ( !localStorage.getItem( 'click_choice_city' ) ) {
 
@@ -1276,7 +1380,7 @@ function location_error( slug ) {
                ( +localStorage.getItem( 'now_year' ) === now_year ) ) {
                 index_get_info_new = JSON.parse( localStorage.getItem( 'index_get_info_new' ) );
                 location_span.innerHTML = city_name;
-                inner_get_info_func( index_get_info_new, slug, height_header, day_week );
+                inner_get_info_func( index_get_info_new, city_name_id, height_header );
             } else {
                 localStorage.setItem( 'now_year', now_year );
                 get_city_and_info( lat, lon, city_slug, slug );
@@ -1435,7 +1539,6 @@ function check_notifications( slug ) {
     xml_check.setRequestHeader( 'Content-Type', 'application/json' );
         
     xml_check.onload = function() {
-        
         let response_check = xml_check.response;
         
         if ( response_check.message ) {
@@ -1480,7 +1583,6 @@ function register_notifications_content( slug ) {
     xml_register.setRequestHeader( 'Content-Type', 'application/json' );
         
     xml_register.onload = function() {
-        
         let response_register = xml_register.response;
 
         if ( response_register.message ) {

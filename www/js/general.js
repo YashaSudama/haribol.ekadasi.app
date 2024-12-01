@@ -2,10 +2,9 @@
 
 import { content_description } from "./content_description.js";
 
-let background = document.getElementById( 'background' ),
-    setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
+let background = document.getElementById( 'background' );
 
-set_local_storage( 'setting_notifications', setting_notifications_let );;
+set_local_storage( 'setting_notifications', JSON.stringify( { day: 1, time: '07:00' } ) );
 
 if ( localStorage.getItem( 'status_background' ) === 'yes' ) {
     show_background();
@@ -83,7 +82,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                           'октября',
                           'ноября',
                           'декабря' ],
-    day_week,
     day_name_short = [ 'Вс',
                        'Пн',
                        'Вт',
@@ -1451,7 +1449,6 @@ function remove_too_events() {
 
 export { window_width, 
          window_height,
-         day_week, 
          day_name_short,
          month_name_header,
          now_date_number,
