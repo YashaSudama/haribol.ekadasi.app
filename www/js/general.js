@@ -2,9 +2,7 @@
 
 import { content_description } from "./content_description.js";
 
-let setting_notifications_let = JSON.stringify( { day: 1, time: '07:00' } );
-
-set_local_storage( 'setting_notifications', setting_notifications_let );;
+set_local_storage( 'setting_notifications', JSON.stringify( { day: 1, time: '07:00' } ) );
 
 let content_preloader = '<div class="sk-fading-circle">' +
                           '<div class="sk-circle sk-circle-1"></div>' +
@@ -77,7 +75,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                           'октября',
                           'ноября',
                           'декабря' ],
-    day_week,
     day_name_short = [ 'Вс',
                        'Пн',
                        'Вт',
@@ -502,9 +499,11 @@ nav.onclick = function() {
     if ( ul_nav.style.cssText === '' ) {
         ul_nav.style.cssText = 'opacity: 1; z-index: 7';
         hide_today();
+        hide_select_date();
     } else {
         ul_nav.style.cssText = '';
         show_today();
+        show_select_date_func();
     }
 
 }
@@ -1437,7 +1436,6 @@ document.addEventListener( "deviceready", () => {
 
 export { window_width, 
          window_height,
-         day_week, 
          day_name_short,
          month_name_header,
          now_date_number,
