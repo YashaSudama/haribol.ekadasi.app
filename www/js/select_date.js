@@ -26,7 +26,6 @@ import { now_date_number,
 		 hide_background,
 		 show_body,
 		 window_height,
-		 apparition_ekadasi_days,
 		 add_event_array,
          set_local_storage,
 		 remove_local_storage,
@@ -36,7 +35,10 @@ import { now_date_number,
 		 year_screen,
 		 year_screen_span,
 		 get_month_days,
+		 polyfill_object_entries
 } from "./general.js";
+
+import { apparition_ekadasi_days } from "./apparition_ekadasi_days.js";
 
 let calendar = document.getElementById( 'calendar' ),
 	list_all_years = document.getElementById( 'list_all_years' ),
@@ -295,6 +297,8 @@ function inner_get_info( select_get_info ) {
 			calendar_ul = calendar.querySelectorAll( '.calendar_year')[ i ].getElementsByTagName( 'ul' ),
 			sp_array = Object.entries( array_obj[ 5 ] ),
 			isus_array = Object.entries( array_obj[ 11 ] );
+
+		polyfill_object_entries();
 	
 		array_obj[ 5 ] = Object.fromEntries( add_event_array( sp_array, '14', 'S', '15', 0 ) );
 		array_obj[ 11 ] = Object.fromEntries( add_event_array( isus_array, '25', 'R', '26', 1 ) );
@@ -426,6 +430,8 @@ function get_van_year_info( slug,
 			year_content = document.createElement( 'div' ),
 			sp_array = Object.entries( array_obj[ 5 ] ),
 			isus_array = Object.entries( array_obj[ 11 ] );
+
+		polyfill_object_entries();
 	
 		array_obj[ 5 ] = Object.fromEntries( add_event_array( sp_array, '14', 'S', '15', 0 ) );
 		array_obj[ 11 ] = Object.fromEntries( add_event_array( isus_array, '25', 'R', '26', 1 ) );

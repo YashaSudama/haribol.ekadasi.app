@@ -26,7 +26,6 @@ import { window_height,
          min_preloader,
          show_body,
          hide_body,
-         apparition_ekadasi_days,
          add_event_array,
          set_local_storage,
          set_update_local_storage,
@@ -34,17 +33,20 @@ import { window_height,
          today,
          text_not_data_server,
          hide_background,
-         get_month_days
+         get_month_days,
+         message_notifications,
+         polyfill_object_entries
 } from "./general.js";
 
 import { redefinition_city } from "./redefinition_city.js";
+import { apparition_ekadasi_days } from "./apparition_ekadasi_days.js";
 
 document.addEventListener( "deviceready", () => {
 
     on_device_ready();
 
     if ( !localStorage.getItem( 'status_firebase_token' ) ||
-            localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
+          localStorage.getItem( 'status_firebase_token' ) === 'false' ) { 
         get_firebase_token_func();
     }
 
@@ -61,7 +63,6 @@ let window_select_city = document.getElementById( 'window_select_city' ),
     div_search_city = document.getElementById( 'div_search_city' ),
     main = document.getElementById( 'main' ),
     message_not_city = document.getElementById( 'message_not_city' ), 
-    message_location_error = document.getElementById( 'message_location_error' ),
     current_location = document.getElementById( 'current_location' ),
     state,
     lat,
@@ -188,6 +189,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
             isus_array = Object.entries( array_obj[ 11 ] ),
             now_month_local = now_month,
             minus_year_status = false;
+
+        polyfill_object_entries();
 
         array_obj[ 5 ] = Object.fromEntries( add_event_array( sp_array, '14', 'S', '15', 0 ) );
         array_obj[ 11 ] = Object.fromEntries( add_event_array( isus_array, '25', 'R', '26', 1 ) );
@@ -1204,22 +1207,23 @@ function get_city( lat, lon ) {
 
     xml_location.onload = function() {
 
-        let city = xml_location.response.results[ 0 ].components.city          ||
-                   xml_location.response.results[ 0 ].components.town          ||
-                   xml_location.response.results[ 0 ].components.village       || 
-                   xml_location.response.results[ 0 ].components.hamlet        ||
-                   xml_location.response.results[ 0 ].components.borough       ||
-                   xml_location.response.results[ 0 ].components.municipality  ||
-                   xml_location.response.results[ 0 ].components.city_district ||
-                   xml_location.response.results[ 0 ].components.suburb        ||
-                   xml_location.response.results[ 0 ].components.county, 
-            state = xml_location.response.results[ 0 ].components.state        ||
-                    xml_location.response.results[ 0 ].components.province     ||
-                    xml_location.response.results[ 0 ].components.region       ||
-                    xml_location.response.results[ 0 ].components.district     ||
-                    xml_location.response.results[ 0 ].components.territory    ||
-                    xml_location.response.results[ 0 ].components.neighbourhood,
-            country = xml_location.response.results[ 0 ].components.country;
+        let response = xml_location.response.results[ 0 ].components,
+            city = response.city          ||
+                   response.town          ||
+                   response.village       || 
+                   response.hamlet        ||
+                   response.borough       ||
+                   response.municipality  ||
+                   response.city_district ||
+                   response.suburb        ||
+                   response.county, 
+            state = response.state        ||
+                    response.province     ||
+                    response.region       ||
+                    response.district     ||
+                    response.territory    ||
+                    response.neighbourhood,
+            country = response.country;
             
         if ( !city && !state ) {
             not_city( lat, lon, city, slug, index_get_info_new );
@@ -1393,14 +1397,14 @@ function location_error( slug ) {
 
         if ( localStorage.getItem( 'status_location' ) === '1' ) {
 
-            message_location_error.innerHTML =  '<div class="width-fit m-auto">' +
+            message_notifications.innerHTML =  '<div class="width-fit m-auto">' +
                                                     '<span class="d-block text-center">' +
                                                         'Не удалось автоматически определить Ваше местоположение!' +
                                                     '</span>'
                                                 '</div>';
-            message_location_error.style.bottom = '0';
+            message_notifications.style.bottom = '0';
 
-            setTimeout( () => message_location_error.style.cssText = '', 5000 );
+            setTimeout( () => message_notifications.style.cssText = '', 5000 );
         }
 
         not_city( lat, lon, city_name, slug, index_get_info_new );

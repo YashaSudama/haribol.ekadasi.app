@@ -1,6 +1,7 @@
 "use strict";
 
 import { content_description } from "./content_description.js";
+import { apparition_ekadasi_days } from "./apparition_ekadasi_days.js";
 
 let background = document.getElementById( 'background' );
 
@@ -43,13 +44,7 @@ let content_preloader = '<div class="sk-fading-circle">' +
                             '<li><a href="contacts.html">Связаться с нами</a></li>' + 
                             '<li class="width-min l-height-1-25 p-b-5"><a href="privacy_policy.html">Политика конфиденциальности</a></li>'
                         '</ul>';
-
-if ( ( window.location.pathname === '/' ) || 
-        ( window.location.pathname === '/index.html' ) || 
-        ( window.location.pathname === '/select_date.html' ) ) { 
-    document.body.prepend( div_description );
-}
-
+        
 block_nav.append( div_ul_nav );
 
 let key = '7dc98540afbc4208863cb94ea2932ef0',
@@ -89,29 +84,29 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
                        'Чт',
                        'Пт',
                        'Сб' ],
-    height_header,
-    current_date_span = document.getElementById( 'current_date' ),
-    location_span = document.getElementById( 'location' ),
-    nav = document.getElementById( 'nav' ),
-    ul_nav = document.getElementById( 'ul_nav' ),
-    close_nav = document.getElementById( 'close_nav' ),
-    footer_id = document.getElementById( 'footer' ),
-    city_selection = document.getElementById( 'city_selection' ),
+                       current_date_span = document.getElementById( 'current_date' ),
+                       location_span = document.getElementById( 'location' ),
+                       nav = document.getElementById( 'nav' ),
+                       ul_nav = document.getElementById( 'ul_nav' ),
+                       close_nav = document.getElementById( 'close_nav' ),
+                       footer_id = document.getElementById( 'footer' ),
+                       city_selection = document.getElementById( 'city_selection' ),
     window_width = window.innerWidth,
     window_height = window.innerHeight,
     height_footer = document.getElementById( 'height_footer' ),
     message_notifications = document.getElementById('message_notifications'),
-    slug,
-    city,
     scroll_window_height = window_height,
     div_zoom_calendar = document.querySelector( '.div_zoom_calendar' ),
-    section_description = document.getElementById( 'section_description' ),
-    close_description = document.getElementById( 'close_description' ),
     button_update_notif = document.getElementById( 'update_notif' ),
-    description = document.getElementsByClassName( 'description' ), 
-    events, 
     plus = document.getElementById( 'plus' ),
     minus = document.getElementById( 'minus' ),
+    height_header,
+    city,
+    slug,
+    events, 
+    section_description,
+    close_description,
+    description, 
     coords_let, 
     coords_left, 
     event_year,
@@ -147,209 +142,6 @@ let key = '7dc98540afbc4208863cb94ea2932ef0',
 	year_screen = document.getElementById( 'year_screen' ),
     year_screen_span = document.getElementById( 'year_screen_span' ),
 	today = document.getElementById( 'today' ),
-    apparition_ekadasi_days = {
-        '1': { name: 'Явление Нитьянанды Прабху',
-               name_too_events: 'Нитьянанда',
-               id: 'nityananda'
-             },
-        '2': { name: 'Гаура-Пурнима, явление Чайтаньи Махапрабху' + 
-                     '<hr class="ekadashi_hr">' +
-                     '<span class="exit bold l-height-1-1">Полный пост</span>',
-               name_too_events: 'Чайтанья',
-               id: 'chaytanya'
-             },
-        '3': { name: 'Рама Навами, явление Рамы',
-               name_too_events: 'Рамачандра',
-               id: 'sita'
-             },
-        '4': { name: 'Явление Нришимхадева' + 
-                     '<hr class="ekadashi_hr">' +
-                     '<span class="exit bold l-height-1-1">Пост до полудня</span>',
-               name_too_events: 'Нришимхадев',
-               id: 'nrisimha'
-             },
-        '6': { name: 'Явление Баларамы',
-               name_too_events: 'Баларама',
-               id: 'baladeva'
-             },
-        '7': { name: 'Джанмастами, явление Шри Кришны' + 
-                     '<hr class="ekadashi_hr">' +
-                     '<span class="exit bold l-height-1-1">Полный пост</span>',
-               name_too_events: 'Джанмастами',
-               id: 'krishna'
-             },
-        '8': { name: 'Явление А.Ч. Бхактиведанты Свами' + 
-                     '<hr class="ekadashi_hr">' +
-                     '<span class="exit bold l-height-1-1">Пост до полудня</span>',
-               name_too_events: 'Бхактиведанта',
-               id: 'bhaktivedanta'
-             },
-        '9': { name: 'Радхастами, явление Шримати Радхарани',
-               name_too_events: 'Радхастами',
-               id: 'radharany'
-             },
-        'A': { name: 'Праздник<br>Говардхан-пуджа',
-               name_too_events: 'Говардхан',
-               id: 'govardhana'
-             },
-        'B': { name: 'Ратха-ятра',
-               name_too_events: 'Ратха-ятра',
-               id: 'radha-yatra'
-             },
-        'C': { name: 'Уход А.Ч. Бхактиведанты Свами',
-                name_too_events: 'Бхактиведанта',
-                id: 'disappearance-prabhupada'
-            },
-        'D': { name: 'Явление Бхактисиддханты Сарасвати Тхакура ',
-               name_too_events: 'Бхактисиддханта',
-               id: 'bhaktisiddhanta'
-            },
-        'E': { name: 'Явление Бхактивиноды Тхакура Прабхупады',
-                name_too_events: 'Бхактивинода',
-                id: 'bhaktivinoda'
-            },
-        'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
-                     '<hr class="ekadashi_hr">' +
-                     '<span class="exit bold l-height-1-1">Пост</span>',
-               name_too_events: 'Вьясапуджа',
-               id: 'vyasapudja'
-             },
-        'R': { name: 'Рождество, явление<br>Иисуса Христа',
-               name_too_events: 'Рождество',
-               id: 'rozhdestvo'
-             },
-        'Putrada': {
-            name: 'Путрада',
-            name_too_events: 'Путрада Экадаши',
-            id: 'putrada' 
-        },        
-        'Sat-tila': {
-            name: 'Шат-тила',
-            name_too_events: 'Шат-тила Экадаши',
-            id: 'sat-tila' 
-        },        
-        'Bhaimi': {
-            name: 'Джая (Бхаими)',
-            name_too_events: 'Джая Экадаши',
-            id: 'bhaimi' 
-        },        
-        'Vijaya': {
-            name: 'Виджая',
-            name_too_events: 'Виджая Экадаши', 
-            id: 'vijaya' 
-        },        
-        'Amalaki vrata': {
-            name: 'Амалаки',
-            name_too_events: 'Амалаки Экадаши',
-            id: 'amalaki' 
-        },
-        'Papamocani': {
-            name: 'Папа-мочани',
-            name_too_events: 'Папа-мочани Экадаши',
-            id: 'papamocani' 
-        },
-        'Kamada': {
-            name: 'Камада',
-            name_too_events: 'Камада Экадаши',
-            id: 'kamada' 
-        },
-        'Varuthini': {
-            name: 'Варутхини',
-            name_too_events: 'Варутхини Экадаши',
-            id: 'varuthini' 
-        },
-        'Mohini': {
-            name: 'Мохини',
-            name_too_events: 'Мохини Экадаши',
-            id: 'mohini' 
-        },
-        'Apara': {
-            name: 'Апара',
-            name_too_events: 'Апара Экадаши',
-            id: 'apara' 
-        },
-        'Pandava Nirjala': {
-            name: 'Нирджала (Пандава, Бхима)',
-            name_too_events: 'Нирджала Экадаши',
-            id: 'pandava' 
-        },
-        'Yogini': {
-            name: 'Йогини',
-            name_too_events: 'Йогини Экадаши',        
-            id: 'yogini'
-        },
-        'Sayana': {
-            name: 'Дева-шаяни (Падма)',
-            name_too_events: 'Дева-шаяни (Падма)',
-            id: 'sayana' 
-        },
-        'Kamika': {
-            name: 'Камика',
-            name_too_events: 'Камика Экадаши',
-            id: 'kamika' 
-        },
-        'Pavitropana': {
-            name: 'Павитра',
-            name_too_events: 'Павитра Экадаши',
-            id: 'pavitra' 
-        },
-        'Annada': {
-            name: 'Аннада (Аджа)',
-            name_too_events: 'Аннада Экадаши',
-            id: 'annada' 
-        },
-        'Parsva': {
-            name: 'Паршва',
-            name_too_events: 'Паршва Экадаши',
-            id: 'parsva' 
-        },
-        'Indira': {
-            name: 'Индира',
-            name_too_events: 'Индира Экадаши',
-            id: 'indira' 
-        },
-        'Padmini': {
-            name: 'Падмини',
-            name_too_events: 'Падмини Экадаши',
-            id: 'padmini' 
-        },
-        'Parama': {
-        name:  'Парама',
-            name_too_events: 'Парама Экадаши',
-            id: 'parama' 
-        },
-        'Pasankusa': {
-            name: 'Пашанкуша',
-            name_too_events: 'Пашанкуша Экадаши',
-            id: 'pasankusa' 
-        },
-        'Rama': { 
-            name: 'Рама',
-            name_too_events: 'Рама Экадаши',
-            id: 'rama-ekadashi' 
-        },
-        'Utthana': {
-            name: 'Уттхана',
-            name_too_events: 'Уттхана Экадаши',
-            id: 'utthana'
-        },
-        'Moksada': {
-            name: 'Мокшада',
-            name_too_events: 'Мокшада Экадаши',
-            id: 'moksada' 
-        },
-        'Saphala': {
-            name: 'Са-пхала',
-            name_too_events: 'Са-пхала Экадаши',
-            id: 'saphala'
-        },
-        'Utpanna': { 
-            name: 'Утпанна',
-            name_too_events: 'Утпанна Экадаши',
-            id: 'utpanna' 
-        }
-
-    },
     info_notifications = {
         status: localStorage.getItem( 'status_notifications' ),
         day: Number( JSON.parse( localStorage.getItem( 'setting_notifications' ) ).day ),
@@ -491,16 +283,16 @@ function hide_select_date() {
 
 }
 
-for ( let div of description ) {
-  div.style.left = window_width + 'px';
-}
-
 window.addEventListener( 'resize', function() {
     scroll_window_height = window.innerHeight;
     remove_too_events();
 
-    for ( let div of description ) {
-        if ( div.style.left !== '0px' ) div.style.left = window.innerWidth + 'px';
+    if ( description ) {
+
+        for ( let div of description ) {
+            if ( div.style.left !== '0px' ) div.style.left = window.innerWidth + 'px';
+        }
+
     }
 
 } );
@@ -866,8 +658,18 @@ function get_coords_left( block,
 }
 
 function get_description( main, tag ) {
+    
     let variable = main.querySelectorAll( tag ),
         div_visible;
+    
+    document.body.prepend( div_description );
+    section_description = document.getElementById( 'section_description' );
+    close_description = document.getElementById( 'close_description' );
+    description = document.getElementsByClassName( 'description' );
+
+    for ( let div of description ) {
+        div.style.left = window_width + 'px';
+    }
  
     variable.forEach( function( item ) {
         item.addEventListener( 'click', function() {
@@ -880,6 +682,7 @@ function get_description( main, tag ) {
                         arr_event = [];
                         
                     remove_too_events();
+
                     new_id = new_id.split( ', ' );
                     event_year = item.closest( '.calendar_year' ).previousElementSibling.textContent;
                     arr_event[ 0 ] = id;
@@ -968,8 +771,8 @@ function get_description( main, tag ) {
 
                     let close_events = document.querySelectorAll('.close_events');
 
-                    close_events.forEach( function( item, index ) {
-                        item.addEventListener( 'click', function( event ) {
+                    close_events.forEach( function( item ) {
+                        item.addEventListener( 'click', function() {
                             let delete_div = item.closest( '.too_events' );
                             delete_div.remove();
                         } );
@@ -1308,6 +1111,7 @@ function update_notifications( slug ) {
 }
 
 document.addEventListener( "deviceready", () => {
+    let language_app = ( navigator.language ).slice( 0, 3 ) + '**';
 
     cordova.plugins.firebase.messaging.onMessage( ( payload ) => {
         let notice_foreground = document.getElementById( 'notice_foreground' ),
@@ -1447,6 +1251,24 @@ function remove_too_events() {
 
 }
 
+function polyfill_object_entries() {
+
+    if ( !Object.fromEntries ) {
+
+        Object.fromEntries = function ( entries ) {
+            const obj = {};
+
+            for ( const [ key, value ] of entries ) {
+                obj[ key ] = value;
+            }
+
+            return obj;
+        };
+
+    }
+    
+}
+
 export { window_width, 
          window_height,
          day_name_short,
@@ -1502,7 +1324,9 @@ export { window_width,
          today,
          text_not_data_server,
          year_screen_span,
-         get_month_days };
+         get_month_days,
+         message_notifications,
+         polyfill_object_entries };
 
 // По луне
 // -------
