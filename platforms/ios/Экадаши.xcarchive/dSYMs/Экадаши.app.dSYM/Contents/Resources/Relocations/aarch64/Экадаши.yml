@@ -316,7 +316,7 @@ relocations:
   - { offset: 0x88016, size: 0x8, addend: 0x0, symName: '-[Diagnostic_Location setCurrentLocationAccuracyAuthorization:]', symObjAddr: 0x22F4, symBinAddr: 0x100019EE4, symSize: 0x3C }
   - { offset: 0x88058, size: 0x8, addend: 0x0, symName: '-[Diagnostic_Location .cxx_destruct]', symObjAddr: 0x2330, symBinAddr: 0x100019F20, symSize: 0x88 }
   - { offset: 0x88593, size: 0x8, addend: 0x0, symName: '-[Diagnostic_Bluetooth pluginInitialize]', symObjAddr: 0x0, symBinAddr: 0x100019FA8, symSize: 0x70 }
-  - { offset: 0x885B2, size: 0x8, addend: 0x0, symName: _diagnostic, symObjAddr: 0x66E0, symBinAddr: 0x1001942A0, symSize: 0x0 }
+  - { offset: 0x885B2, size: 0x8, addend: 0x0, symName: _diagnostic, symObjAddr: 0x66D8, symBinAddr: 0x1001942A0, symSize: 0x0 }
   - { offset: 0x886B3, size: 0x8, addend: 0x0, symName: '-[Diagnostic_Bluetooth pluginInitialize]', symObjAddr: 0x0, symBinAddr: 0x100019FA8, symSize: 0x70 }
   - { offset: 0x886E8, size: 0x8, addend: 0x0, symName: '-[Diagnostic_Bluetooth isBluetoothAvailable:]', symObjAddr: 0x70, symBinAddr: 0x10001A018, symSize: 0xFC }
   - { offset: 0x8872C, size: 0x8, addend: 0x0, symName: '___45-[Diagnostic_Bluetooth isBluetoothAvailable:]_block_invoke', symObjAddr: 0x16C, symBinAddr: 0x10001A114, symSize: 0x140 }
