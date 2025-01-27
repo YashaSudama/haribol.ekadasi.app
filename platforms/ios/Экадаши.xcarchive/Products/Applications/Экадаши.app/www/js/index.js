@@ -500,9 +500,6 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
                 }
                 
                 if ( elem_month.children.length === 1 ) elem_month.remove();
-
-                if ( current_year.children.length === 1 && 
-                    !current_year.querySelector( 'ul' ) ) current_year.style.cssText = 'height: 0; opacity: 0;';
                 
             }
 
@@ -544,6 +541,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
         get_description( main, '.click' );
     }, 1000 );
 
+    if ( current_year.children.length === 1 && !current_year.querySelector( 'ul' ) ) current_year.remove();
+
     height_footer_func();
 
 }
@@ -578,6 +577,7 @@ function get_info_func( slug, index_get_info_new ) {
     
     xml_info.onload = function() {
         index_get_info_new = xml_info.response;
+        
         localStorage.setItem( 'index_get_info_new', JSON.stringify( index_get_info_new ) );
 
         inner_get_info_func( index_get_info_new, slug, height_header );

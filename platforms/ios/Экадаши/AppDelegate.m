@@ -21,21 +21,22 @@
 #import "MainViewController.h"
 
 @interface AppDelegate ()
+
 // Заглушка для защиты содержимого
 @property (strong, nonatomic) UIView *privacyScreen;
+
 @end
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions {
     // Создание основного контроллера
     self.viewController = [[MainViewController alloc] init];
-    
+
     // Создание окна приложения
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = self.viewController; // Устанавливаем корневой контроллер
-    [self.window makeKeyAndVisible]; // Делаем окно видимым и активным
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
 
     // Настраиваем защиту от записи экрана для iOS 11+
     if (@available(iOS 11.0, *)) {
@@ -55,47 +56,16 @@
         [self handleScreenCaptureChange];
     }
 
-    // Слушаем события перехода в фон и возвращения в активное состояние
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidEnterBackground)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillEnterForeground)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-
-    return YES; // Успешная загрузка
+    return YES;
 }
 
 // Обработка изменений записи экрана
 - (void)handleScreenCaptureChange {
     if (@available(iOS 11.0, *)) {
-        if ([UIScreen mainScreen].isCaptured) {
-            // Показываем заглушку, если запись экрана активна
-            self.privacyScreen.hidden = NO;
-        } else {
-            // Скрываем заглушку, если запись экрана отключена
-            self.privacyScreen.hidden = YES;
-        }
-    }
-}
-
-// Обработка ухода приложения в фон
-- (void)applicationDidEnterBackground {
-    self.privacyScreen.hidden = NO; // Показываем заглушку
-}
-
-// Обработка возвращения приложения из фона
-- (void)applicationWillEnterForeground {
-    if (@available(iOS 11.0, *)) {
-        // Обновляем состояние заглушки на основе записи экрана
-        [self handleScreenCaptureChange];
-    } else {
-        self.privacyScreen.hidden = YES; // Скрываем заглушку, если запись экрана недоступна
+        self.privacyScreen.hidden = ![UIScreen mainScreen].isCaptured;
     }
 }
 
 @end
+
 

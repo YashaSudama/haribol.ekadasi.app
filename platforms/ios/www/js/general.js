@@ -1162,9 +1162,6 @@ function remove_too_events() {
 document.addEventListener( "deviceready", () => {
     let language_app = ( navigator.language ).slice( 0, 3 ) + '**';
 
-    console.log( language_app );
-    
-
     FCMPlugin.onNotification( function( data ) {
 
         if ( !data.wasTapped ) {
