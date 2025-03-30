@@ -521,6 +521,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
 
     height_footer_func();
 
+    if ( current_year.children.length === 1 && !current_year.querySelector( 'ul' ) ) current_year.remove();
+
 }
 
 function get_info_func( slug, index_get_info_new ) {

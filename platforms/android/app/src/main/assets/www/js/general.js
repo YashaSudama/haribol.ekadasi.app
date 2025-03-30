@@ -1114,9 +1114,6 @@ document.addEventListener( "deviceready", () => {
     let language_app = ( navigator.language ).slice( 0, 3 ) + '**',
         screen_scaling = window.devicePixelRatio,
         system_font_size = window.getComputedStyle( document.body ).fontSize;
-    
-    console.log( system_font_size );
-    console.log( screen_scaling );
 
     cordova.plugins.firebase.messaging.onMessage( ( payload ) => {
         let notice_foreground = document.getElementById( 'notice_foreground' ),
