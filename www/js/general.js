@@ -1,7 +1,7 @@
 "use strict";
 
 import { content_description } from "./content_description.js";
-import { apparition_ekadasi_days } from "./apparition_ekadasi_days.js";
+import { apparition_ekadasi_days } from "./apparition_ekadasi_days.js"; 
 
 let background = document.getElementById( 'background' );
 
