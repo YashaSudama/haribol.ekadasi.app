@@ -20,11 +20,6 @@
 package haribol.ekadasi.app;
 
 import android.os.Bundle;
-import android.view.WindowManager;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.graphics.Color;
-import android.view.View;
 
 import org.apache.cordova.*;
 
@@ -41,20 +36,7 @@ public class MainActivity extends CordovaActivity
             moveTaskToBack(true);
         }
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                             WindowManager.LayoutParams.FLAG_SECURE);
-
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
-
-        // Отключаем масштабирование
-        WebView webView = (WebView) appView.getEngine().getView();
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setSupportZoom(false);  // Отключаем поддержку зума
-        webSettings.setBuiltInZoomControls(false);  // Отключаем встроенные элементы управления зумом
-        webSettings.setDisplayZoomControls(false);  // Отключаем отображение кнопок зума
-        webSettings.setTextZoom(100);  // Фиксированный размер текста
-
     }
-    
 }
