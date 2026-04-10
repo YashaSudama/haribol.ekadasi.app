@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova.plugins.diagnostic"
-    version="7.1.4">
+    version="7.2.10">
 
     <name>Diagnostic</name>
     <description>Cordova/Phonegap plugin to check the state of Location/WiFi/Camera/Bluetooth device settings.</description>
@@ -28,6 +28,8 @@
         <js-module src="www/ios/diagnostic.js" name="Diagnostic">
             <merges target="cordova.plugins.diagnostic" />
         </js-module>
+
+        <resource-file src="src/ios/Diagnostic_Resources.bundle" target="Diagnostic_Resources.bundle" />
 
         <header-file src="src/ios/Diagnostic.h" />
         <source-file src="src/ios/Diagnostic.m" />
@@ -102,6 +104,17 @@
 
         <header-file src="src/ios/Diagnostic_Wifi.h" />
         <source-file src="src/ios/Diagnostic_Wifi.m" />
+
+        <config-file parent="NSLocalNetworkUsageDescription" platform="ios" target="*-Info.plist">
+            <string>This app requires access to your local network in order to discover and connect to devices on the same network.</string>
+        </config-file>
+
+        <config-file parent="NSBonjourServices" platform="ios" target="*-Info.plist">
+            <array>
+                <string>_lnp._tcp.</string>
+                <string>_bonjour._tcp.</string>
+            </array>
+        </config-file>
         <!--END_MODULE WIFI-->
 
         <!--BEGIN_MODULE CAMERA-->

@@ -137,13 +137,13 @@ var Diagnostic_Camera = (function(){
     };
 
     /**
-     * Returns the authorisation status for runtime permissions to use the camera.
+     * Returns the combined authorisation status for runtime permissions to use the camera.
      * Note: this is intended for Android 6 / API 23 and above. Calling on Android 5 / API 22 and below will always return GRANTED status as permissions are already granted at installation time.
      * @param {Object} params - (optional) parameters:
      *  - {Function} successCallback - function to call on successful request for runtime permission status.
      * This callback function is passed a single string parameter which defines the current authorisation status as a value in cordova.plugins.diagnostic.permissionStatus.
      *  - {Function} errorCallback - function to call on failure to request authorisation status.
-     * - {Boolean} storage - (Android only) If true, requests storage permissions in addition to CAMERA run-time permission.
+     * - {Boolean} storage - (Android only) If true, queries storage permissions in addition to CAMERA run-time permission.
      *  On Android 13+, storage permissions are READ_MEDIA_IMAGES and READ_MEDIA_VIDEO. On Android 9-12, storage permission is READ_EXTERNAL_STORAGE.
      *  cordova-plugin-camera requires both storage and camera permissions.
      *  Defaults to true.
@@ -152,14 +152,33 @@ var Diagnostic_Camera = (function(){
         params = mapFromLegacyCameraApi.apply(this, arguments);
 
         params.successCallback = params.successCallback || function(){};
-        var onSuccess = function(statuses){
-            params.successCallback(numberOfKeys(statuses) > 1 ? cordova.plugins.diagnostic._combinePermissionStatuses(statuses): statuses[Diagnostic.permission.CAMERA]);
-        };
 
-        return cordova.exec(onSuccess,
+        return cordova.exec(params.successCallback,
             params.errorCallback,
             'Diagnostic_Camera',
             'getCameraAuthorizationStatus',
+            [!!params.storage]);
+    };
+
+    /**
+     * Returns the individual authorisation statuses for runtime permissions to use the camera.
+     * Note: this is intended for Android 6 / API 23 and above. Calling on Android 5 / API 22 and below will always return GRANTED status as permissions are already granted at installation time.
+     * @param {Object} params - (optional) parameters:
+     *  - {Function} successCallback - function to call on successful request for runtime permission status.
+     * This callback function is passed a single object parameter where each key indicates the permission name and the value defines the current authorisation status as a value in cordova.plugins.diagnostic.permissionStatus.
+     *  - {Function} errorCallback - function to call on failure to request authorisation status.
+     * - {Boolean} storage - (Android only) If true, queries storage permissions in addition to CAMERA run-time permission.
+     *  On Android 13+, storage permissions are READ_MEDIA_IMAGES and READ_MEDIA_VIDEO. On Android 9-12, storage permission is READ_EXTERNAL_STORAGE.
+     *  cordova-plugin-camera requires both storage and camera permissions.
+     *  Defaults to true.
+     */
+    Diagnostic_Camera.getCameraAuthorizationStatuses = function(params){
+        params = mapFromLegacyCameraApi.apply(this, arguments);
+
+        return cordova.exec(params.successCallback,
+            params.errorCallback,
+            'Diagnostic_Camera',
+            'getCameraAuthorizationStatuses',
             [!!params.storage]);
     };
 
@@ -180,7 +199,7 @@ var Diagnostic_Camera = (function(){
 
         params.successCallback = params.successCallback || function(){};
         var onSuccess = function(status){
-            params.successCallback(status === Diagnostic.permissionStatus.GRANTED);
+            params.successCallback(status === Diagnostic.permissionStatus.GRANTED || status === Diagnostic.permissionStatus.LIMITED);
         };
 
         Diagnostic_Camera.getCameraAuthorizationStatus({

@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
-      "clobbers": [
-        "device"
-      ]
-    },
-    {
       "id": "cordova-plugin-firebase-messaging.FirebaseMessaging",
       "file": "plugins/cordova-plugin-firebase-messaging/www/FirebaseMessaging.js",
       "pluginId": "cordova-plugin-firebase-messaging",
@@ -68,6 +60,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "pluginId": "cordova-plugin-statusbar",
       "clobbers": [
         "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
+      "clobbers": [
+        "cordova.plugins.permissions"
       ]
     },
     {
@@ -159,24 +159,24 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-android-permissions.Permissions",
-      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
-      "pluginId": "cordova-plugin-android-permissions",
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
       "clobbers": [
-        "cordova.plugins.permissions"
+        "device"
       ]
     }
   ];
   module.exports.metadata = {
     "cordova-support-android-plugin": "2.0.4",
-    "cordova-plugin-device": "2.1.0",
     "cordova-plugin-firebase-messaging": "8.0.1",
     "cordova-plugin-geolocation": "5.0.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-statusbar": "4.0.0",
-    "cordova.plugins.diagnostic": "7.1.4",
-    "cordova-plugin-android-permissions": "1.1.5"
+    "cordova-plugin-android-permissions": "1.1.5",
+    "cordova.plugins.diagnostic": "7.2.10",
+    "cordova-plugin-device": "3.0.0"
   };
 });

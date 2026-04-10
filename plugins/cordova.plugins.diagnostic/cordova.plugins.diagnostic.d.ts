@@ -78,6 +78,7 @@ interface Diagnostic {
         "GRANTED_WHEN_IN_USE": "authorized_when_in_use";
         "NOT_REQUESTED": "not_determined"|"NOT_REQUESTED";
         "DENIED_ALWAYS": "denied_always"|"DENIED_ALWAYS";
+        "UNKNOWN": "unknown"|"UNKNOWN";
     };
 
     /**
@@ -109,8 +110,22 @@ interface Diagnostic {
      * @type {Object}
      */
     locationAccuracyAuthorization: {
+        /** Alias for BEST. Sets kCLLocationAccuracyBest on iOS. */
         "FULL": "full";
+        /** Sets kCLLocationAccuracyReduced on iOS - approximate location, no GPS. */
         "REDUCED": "reduced";
+        /** Sets kCLLocationAccuracyBest on iOS - may engage GPS hardware. */
+        "BEST": "best";
+        /** Sets kCLLocationAccuracyBestForNavigation on iOS - highest accuracy with additional sensors. */
+        "BEST_FOR_NAVIGATION": "bestForNavigation";
+        /** Sets kCLLocationAccuracyNearestTenMeters on iOS. */
+        "NEAREST_TEN_METERS": "nearestTenMeters";
+        /** Sets kCLLocationAccuracyHundredMeters on iOS. */
+        "HUNDRED_METERS": "hundredMeters";
+        /** Sets kCLLocationAccuracyKilometer on iOS. */
+        "KILOMETER": "kilometer";
+        /** Sets kCLLocationAccuracyThreeKilometers on iOS. */
+        "THREE_KILOMETERS": "threeKilometers";
     };
 
 
@@ -201,6 +216,16 @@ interface Diagnostic {
     ) => void;
 
     /**
+     * Checks if app is able to access device heading.
+     * @param successCallback
+     * @param errorCallback
+     */
+    isCompassAvailable: (
+        successCallback: (available: boolean) => void,
+        errorCallback: (error: string) => void
+    ) => void;
+
+    /**
      * Checks if Wifi is available.
      * On iOS this returns true if the device is connected to a network by WiFi.
      * On Android this returns true if the WiFi setting is set to enabled, and is the same as isWifiEnabled()
@@ -235,6 +260,7 @@ interface Diagnostic {
         successCallback: (available: boolean) => void,
         errorCallback: (error: string) => void
     ) => void;
+
 
     /**
      * ANDROID ONLY
@@ -305,6 +331,17 @@ interface Diagnostic {
         successCallback: () => void
     ) => void;
 
+    /**
+     * Returns true if the current build is a debug build.
+     * @param successCallback
+     * @param errorCallback
+     */
+    isDebugBuild?: (
+        successCallback: (enabled: boolean) => void,
+        errorCallback: (error: string) => void
+    ) => void;
+
+
 
     /**
      * ANDROID ONLY
@@ -332,6 +369,44 @@ interface Diagnostic {
         errorCallback: (error: string) => void
     ) => void;
 
+    /**
+     * IOS ONLY
+     *
+     * Checks if mobile data is authorized for this app.
+     *
+     * @param successCallback
+     * @param errorCallback
+     */
+    isMobileDataAuthorized?: (
+        successCallback: () => boolean,
+        errorCallback: (error: string) => void
+    ) => void;
+
+    /**
+     *
+     * Checks if accessibility mode is enabled on device.
+     *
+     * @param successCallback
+     * @param errorCallback
+     */
+    isAccessibilityModeEnabled?: (
+            successCallback: () => boolean,
+            errorCallback: (error: string) => void
+        ) => void;
+
+    /**
+     * ANDROID ONLY
+     *
+     * Checks if touch exploration of accessibility mode is enabled on device.
+     *
+     * @param successCallback
+     * @param errorCallback
+     */
+    isTouchExplorationEnabled?: (
+        successCallback: () => boolean,
+        errorCallback: (error: string) => void
+    ) => void;
+        
     /**
      * Returns details of the OS of the device on which the app is currently running
      *
@@ -403,7 +478,17 @@ interface Diagnostic {
      * @param successCallback
      * @param errorCallback
      * @param mode - (optional / iOS & Android >= 10) location authorization mode specified as a locationAuthorizationMode constant. If not specified, defaults to WHEN_IN_USE.
-     * @param accuracy
+     * @param accuracy - (optional / iOS & Android 12+) desired location accuracy as a locationAccuracyAuthorization constant.
+     * If not specified, defaults to FULL.
+     * On iOS, this sets the CLLocationManager's desiredAccuracy:
+     * - FULL / BEST - kCLLocationAccuracyBest (may engage GPS hardware)
+     * - REDUCED - kCLLocationAccuracyReduced (approximate location, no GPS)
+     * - BEST_FOR_NAVIGATION - kCLLocationAccuracyBestForNavigation
+     * - NEAREST_TEN_METERS - kCLLocationAccuracyNearestTenMeters
+     * - HUNDRED_METERS - kCLLocationAccuracyHundredMeters
+     * - KILOMETER - kCLLocationAccuracyKilometer
+     * - THREE_KILOMETERS - kCLLocationAccuracyThreeKilometers
+     * On Android < 12, has no effect.
      */
     requestLocationAuthorization?: (
         successCallback: (status: string) => void,
@@ -1016,6 +1101,14 @@ interface Diagnostic {
     ) => void;
 
     /**
+     * Opens the notification settings page for this app.
+     */
+    switchToNotificationSettings?: (
+        successCallback: () => void,
+        errorCallback: (error: string) => void
+    ) => void;
+
+    /**
      * ANDROID ONLY
      * Checks if ADB mode(debug mode) is enabled.
      * @param successCallback
@@ -1192,6 +1285,45 @@ interface Diagnostic {
      * @param errorCallback
      */
     getMotionAuthorizationStatus?: (
+        successCallback: (status: string) => void,
+        errorCallback: (error: string) => void
+    ) => void;
+
+    /**
+     * iOS ONLY
+     * Checks if the application is authorized to use local network.
+     * @param successCallback
+     * @param errorCallback
+     */
+    isLocalNetworkAuthorized?: (
+        successCallback: (authorized: boolean) => void,
+        errorCallback: (error: string) => void,
+        options?: {
+            timeoutMs?: number;
+        }
+    ) => void;
+
+    /**
+     * iOS ONLY
+     * Returns the local network authorization status for the application.
+     * @param successCallback
+     * @param errorCallback
+     */
+    getLocalNetworkAuthorizationStatus?: (
+        successCallback: (status: string) => void,
+        errorCallback: (error: string) => void,
+        options?: {
+            timeoutMs?: number;
+        }
+    ) => void;
+
+    /**
+     * iOS ONLY
+     * Requests local network authorization for the application.
+     * @param successCallback
+     * @param errorCallback
+     */
+    requestLocalNetworkAuthorization?: (
         successCallback: (status: string) => void,
         errorCallback: (error: string) => void
     ) => void;

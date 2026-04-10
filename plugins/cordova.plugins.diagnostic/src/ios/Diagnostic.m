@@ -7,7 +7,10 @@
  */
 
 #import "Diagnostic.h"
+// Only import the following header if we're not on Mac Catalyst
+#if !TARGET_OS_MACCATALYST
 #import <CoreTelephony/CTCellularData.h>
+#endif
 
 @implementation Diagnostic
 
@@ -32,7 +35,11 @@ static NSString*const CPU_ARCH_X86_64 = @"X86_64";
 
 // Internal properties
 static Diagnostic* diagnostic = nil;
+
+// Only if not on Mac Catalyst
+#if !TARGET_OS_MACCATALYST
 static CTCellularData* cellularData;
+#endif
 
 /********************************/
 #pragma mark - Public static functions
@@ -114,7 +121,11 @@ static CTCellularData* cellularData;
 
     self.debugEnabled = false;
     self.osVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-    cellularData = [[CTCellularData alloc] init];
+
+    // Only if not on Mac Catalyst
+    #if !TARGET_OS_MACCATALYST
+        cellularData = [[CTCellularData alloc] init];
+    #endif
 }
 
 // https://stackoverflow.com/a/38441011/777265
@@ -216,11 +227,30 @@ static CTCellularData* cellularData;
     }];
 }
 
-- (void) isMobileDataEnabled: (CDVInvokedUrlCommand*)command
+- (void) isMobileDataAuthorized: (CDVInvokedUrlCommand*)command
 {
     [self.commandDelegate runInBackground:^{
         @try {
-            bool isEnabled = cellularData.restrictedState == kCTCellularDataNotRestricted;;
+            #if !TARGET_OS_MACCATALYST
+                bool isEnabled = cellularData.restrictedState == kCTCellularDataNotRestricted;;
+                [diagnostic sendPluginResultBool:isEnabled :command];
+            // If we're on Mac Catalyst, set this always to false
+            #else
+                [diagnostic sendPluginResultBool:false :command];
+                return;
+            #endif
+        }
+        @catch (NSException *exception) {
+            [diagnostic handlePluginException:exception :command];
+        }
+    }];
+}
+
+- (void) isAccessibilityModeEnabled: (CDVInvokedUrlCommand*)command
+{
+    [self.commandDelegate runInBackground:^{
+        @try {
+            bool isEnabled = UIAccessibilityIsVoiceOverRunning();
             [diagnostic sendPluginResultBool:isEnabled :command];
         }
         @catch (NSException *exception) {
@@ -229,6 +259,21 @@ static CTCellularData* cellularData;
     }];
 }
 
+- (void) isDebugBuild: (CDVInvokedUrlCommand*)command
+{
+    [self.commandDelegate runInBackground:^{
+        @try {
+            bool result = false;
+            #ifdef DEBUG
+                result = true;
+            #endif
+            [diagnostic sendPluginResultBool:result :command];
+        }
+        @catch (NSException *exception) {
+            [diagnostic handlePluginException:exception :command];
+        }
+    }];
+}
 
 /********************************/
 #pragma mark - Send results

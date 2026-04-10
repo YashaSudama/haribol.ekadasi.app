@@ -88,7 +88,11 @@ var Diagnostic = (function(){
         // User denied access to this permission and checked "Never Ask Again" box.
         "DENIED_ALWAYS": "DENIED_ALWAYS",
         // App has not yet requested access to this permission.
-        "NOT_REQUESTED": "NOT_REQUESTED"
+        "NOT_REQUESTED": "NOT_REQUESTED",
+        // Platform has not provided a definitive status (e.g. timeout/indeterminate)
+        "UNKNOWN": "unknown",
+        // Limited access to the photo library on Android 14 (API 34) and above
+        "LIMITED": "LIMITED"
     };
 
     Diagnostic.cpuArchitecture = {
@@ -497,7 +501,7 @@ var Diagnostic = (function(){
     };
 
     /**
-     * Checks if mobile data is enabled on device.
+     * Checks if mobile data is enabled in device settings.
      *
      * @param {Function} successCallback -  The callback which will be called when the operation is successful.
      * This callback function is passed a single boolean parameter which is TRUE if mobile data is enabled.
@@ -509,6 +513,38 @@ var Diagnostic = (function(){
             errorCallback,
             'Diagnostic',
             'isMobileDataEnabled',
+            []);
+    };
+
+    /**
+     * Checks if accessibility mode (talkback) is enabled on device.
+     *
+     * @param {Function} successCallback -  The callback which will be called when the operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if accessibility mode is enabled.
+     * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.
+     *  This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isAccessibilityModeEnabled = function(successCallback, errorCallback) {
+        return cordova.exec(Diagnostic._ensureBoolean(successCallback),
+            errorCallback,
+            'Diagnostic',
+            'isAccessibilityModeEnabled',
+            []);
+    };
+
+    /**
+     * Checks if touch exploration (in accessibility mode) is enabled on device.
+     *
+     * @param {Function} successCallback -  The callback which will be called when the operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if touch exploration (in accessibility mode) is enabled.
+     * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.
+     *  This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isTouchExplorationEnabled = function(successCallback, errorCallback) {
+        return cordova.exec(Diagnostic._ensureBoolean(successCallback),
+            errorCallback,
+            'Diagnostic',
+            'isTouchExplorationEnabled',
             []);
     };
 
@@ -791,6 +827,22 @@ var Diagnostic = (function(){
         }
     };
 
+    /**
+     * Checks if compass is available on the device for use by the app.
+     *
+     * @param {Function} successCallback - The callback which will be called when operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if compass is available for use.
+     * @param {Function} errorCallback -  The callback which will be called when operation encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isCompassAvailable = function(successCallback, errorCallback) {
+        if(cordova.plugins.diagnostic.location){
+            cordova.plugins.diagnostic.location.isCompassAvailable.apply(this, arguments);
+        }else{
+            throw "Diagnostic Location module is not installed";
+        }
+    };
+
     /************
      * WiFi     *
      ************/
@@ -909,6 +961,26 @@ var Diagnostic = (function(){
     Diagnostic.getCameraAuthorizationStatus = function(params){
         if(cordova.plugins.diagnostic.camera){
             cordova.plugins.diagnostic.camera.getCameraAuthorizationStatus.apply(this, arguments);
+        }else{
+            throw "Diagnostic Camera module is not installed";
+        }
+    };
+
+    /**
+     * Returns the individual authorisation statuses for runtime permissions to use the camera.
+     * Note: this is intended for Android 6 / API 23 and above. Calling on Android 5 / API 22 and below will always return GRANTED status as permissions are already granted at installation time.
+     * @param {Object} params - (optional) parameters:
+     *  - {Function} successCallback - function to call on successful request for runtime permission status.
+     * This callback function is passed a single object parameter where each key indicates the permission name and the value defines the current authorisation status as a value in cordova.plugins.diagnostic.permissionStatus.
+     *  - {Function} errorCallback - function to call on failure to request authorisation status.
+     * - {Boolean} storage - (Android only) If true, queries storage permissions in addition to CAMERA run-time permission.
+     *  On Android 13+, storage permissions are READ_MEDIA_IMAGES and READ_MEDIA_VIDEO. On Android 9-12, storage permission is READ_EXTERNAL_STORAGE.
+     *  cordova-plugin-camera requires both storage and camera permissions.
+     *  Defaults to true.
+     */
+    Diagnostic.getCameraAuthorizationStatuses = function(params){
+        if(cordova.plugins.diagnostic.camera){
+            cordova.plugins.diagnostic.camera.getCameraAuthorizationStatuses.apply(this, arguments);
         }else{
             throw "Diagnostic Camera module is not installed";
         }
@@ -1504,6 +1576,22 @@ var Diagnostic = (function(){
         }else{
             throw "Diagnostic NFC module is not installed";
         }
+    };
+
+    /**
+     * Checks if the current app build is a debug build.
+     *
+     * @param {Function} successCallback -  The callback which will be called when the operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if the app is a debug build.
+     * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.
+     *  This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isDebugBuild = function(successCallback, errorCallback) {
+        return cordova.exec(Diagnostic._ensureBoolean(successCallback),
+            errorCallback,
+            'Diagnostic',
+            'isDebugBuild',
+            []);
     };
 
 

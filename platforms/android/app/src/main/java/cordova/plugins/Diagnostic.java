@@ -43,7 +43,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -60,9 +59,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 
 import androidx.core.app.ActivityCompat;
+
+import static android.content.Context.CONTEXT_INCLUDE_CODE;
+import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 
 /**
  * Diagnostic plugin implementation for Android
@@ -140,6 +143,9 @@ public class Diagnostic extends CordovaPlugin{
         Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_MEDIA_IMAGES", "android.permission.READ_MEDIA_IMAGES");
         Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_MEDIA_VIDEO", "android.permission.READ_MEDIA_VIDEO");
 
+        // API 34+
+        Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_MEDIA_VISUAL_USER_SELECTED", "android.permission.READ_MEDIA_VISUAL_USER_SELECTED");
+
         permissionsMap = Collections.unmodifiableMap(_permissionsMap);
     }
 
@@ -176,6 +182,9 @@ public class Diagnostic extends CordovaPlugin{
         Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_MEDIA_IMAGES", 33);
         Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_MEDIA_VIDEO", 33);
 
+        // API 34+
+        Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_MEDIA_VISUAL_USER_SELECTED", 34);
+
         minSdkPermissionMap = Collections.unmodifiableMap(_permissionsMap);
     }
 
@@ -187,7 +196,7 @@ public class Diagnostic extends CordovaPlugin{
         Map<String, Integer> _permissionsMap = new HashMap <String, Integer>();
 
         Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_EXTERNAL_STORAGE", 32);
-        Diagnostic.addBiDirMapEntry(_permissionsMap, "WRITE_EXTERNAL_STORAGE", 29);
+        Diagnostic.addBiDirMapEntry(_permissionsMap, "WRITE_EXTERNAL_STORAGE", 32);
 
         maxSdkPermissionMap = Collections.unmodifiableMap(_permissionsMap);
     }
@@ -232,9 +241,6 @@ public class Diagnostic extends CordovaPlugin{
     public static final String CPU_ARCH_X86_64 = "X86_64";
     public static final String CPU_ARCH_MIPS = "MIPS";
     public static final String CPU_ARCH_MIPS_64 = "MIPS_64";
-
-    protected static final String externalStorageClassName = "cordova.plugins.Diagnostic_External_Storage";
-    protected static final Integer GET_EXTERNAL_SD_CARD_DETAILS_PERMISSION_REQUEST = 1000;
 
     /*************
      * Variables *
@@ -335,6 +341,10 @@ public class Diagnostic extends CordovaPlugin{
                 callbackContext.success(isDeviceRooted() ? 1 : 0);
             } else if(action.equals("isMobileDataEnabled")) {
                 callbackContext.success(isMobileDataEnabled() ? 1 : 0);
+            } else if(action.equals("isAccessibilityModeEnabled")) {
+                callbackContext.success(isAccessibilityModeEnabled() ? 1 : 0);
+            } else if (action.equals("isTouchExplorationEnabled")) {
+                callbackContext.success(isAccessibilityTouchExplorationEnabled() ? 1 : 0);
             } else if(action.equals("restart")) {
                 this.restart(args);
             } else if(action.equals("getArchitecture")) {
@@ -347,6 +357,8 @@ public class Diagnostic extends CordovaPlugin{
                 callbackContext.success(getDeviceOSVersion());
             } else if(action.equals("getBuildOSVersion")) {
                 callbackContext.success(getBuildOSVersion());
+            } else if(action.equals("isDebugBuild")) {
+                callbackContext.success(isDebugBuild() ? 1 : 0);
             } else {
                 handleError("Invalid action");
                 return false;
@@ -509,6 +521,39 @@ public class Diagnostic extends CordovaPlugin{
             logDebug(e.getMessage());
         }
         return mobileDataEnabled;
+    }
+
+    public boolean isAccessibilityModeEnabled(){
+        boolean result = false;
+        try {
+            AccessibilityManager am = (AccessibilityManager) cordova.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+            result = am.isEnabled();
+        } catch (Exception e) {
+            logDebug(e.getMessage());
+        }
+        logDebug("Accessibility mode enabled: " + result);
+        return result;
+    }
+
+    public boolean isAccessibilityTouchExplorationEnabled() {
+        boolean result = false;
+        try {
+            AccessibilityManager am = (AccessibilityManager) cordova.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+            result = am.isTouchExplorationEnabled();
+        } catch (Exception e) {
+            logDebug(e.getMessage());
+        }
+        logDebug("Accessibility touch exploration enabled: " + result);
+        return result;
+    }
+
+    private boolean isDebugBuild() throws Exception {
+        Context context = this.cordova.getActivity().getApplicationContext();
+        ClassLoader classLoader = context.createPackageContext(context.getPackageName(), CONTEXT_INCLUDE_CODE | CONTEXT_IGNORE_SECURITY).getClassLoader();
+        Class<?> buildConfigClass = classLoader.loadClass(context.getPackageName() + ".BuildConfig");
+        boolean result = buildConfigClass.getField("DEBUG").getBoolean(null);
+        logDebug("Debug build: " + result);
+        return result;
     }
 
     /************
@@ -1056,17 +1101,7 @@ public class Diagnostic extends CordovaPlugin{
                 clearRequest(requestCode);
             }
 
-            Class<?> externalStorageClass = null;
-            try {
-                externalStorageClass = Class.forName(externalStorageClassName);
-            } catch( ClassNotFoundException e ){}
-
-            if(requestCode == GET_EXTERNAL_SD_CARD_DETAILS_PERMISSION_REQUEST && externalStorageClass != null){
-                Method method = externalStorageClass.getMethod("onReceivePermissionResult");
-                method.invoke(null);
-            }else{
-                context.success(statuses);
-            }
+            context.success(statuses);
         }catch(Exception e ) {
             handleError("Exception occurred onRequestPermissionsResult: ".concat(e.getMessage()), requestCode);
         }

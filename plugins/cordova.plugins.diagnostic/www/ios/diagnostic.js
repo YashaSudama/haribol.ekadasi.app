@@ -22,6 +22,7 @@ var Diagnostic = (function(){
      */
     Diagnostic.permissionStatus = {
         "NOT_REQUESTED": "not_determined", // App has not yet requested this permission
+        "UNKNOWN": "unknown", // Platform has not provided a definitive status (e.g. timeout/indeterminate)
         "DENIED_ALWAYS": "denied_always", // User denied access to this permission
         "RESTRICTED": "restricted", // Permission is unavailable and user cannot enable it.  For example, when parental controls are in effect for the current user.
         "GRANTED": "authorized", //  User granted access to this permission
@@ -154,18 +155,36 @@ var Diagnostic = (function(){
     };
 
     /**
-     * Checks if mobile data is enabled on device.
+     * Checks if mobile data is authorized for this app.
+     * Returns true if the per-app Mobile Data setting is set to enabled (regardless of whether the device is currently connected to a cellular network)
      *
      * @param {Function} successCallback -  The callback which will be called when the operation is successful.
      * This callback function is passed a single boolean parameter which is TRUE if mobile data is enabled.
      * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.
      *  This callback function is passed a single string parameter containing the error message.
      */
-    Diagnostic.isMobileDataEnabled = function(successCallback, errorCallback) {
+    Diagnostic.isMobileDataAuthorized = function(successCallback, errorCallback) {
         return cordova.exec(Diagnostic._ensureBoolean(successCallback),
             errorCallback,
             'Diagnostic',
-            'isMobileDataEnabled',
+            'isMobileDataAuthorized',
+            []);
+    };
+
+
+    /**
+     * Checks if accessibility mode (VoiceOver) is enabled/running on device.
+     *
+     * @param {Function} successCallback -  The callback which will be called when the operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if accessibility mode is enabled.
+     * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.
+     *  This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isAccessibilityModeEnabled = function(successCallback, errorCallback) {
+        return cordova.exec(Diagnostic._ensureBoolean(successCallback),
+            errorCallback,
+            'Diagnostic',
+            'isAccessibilityModeEnabled',
             []);
     };
 
@@ -205,6 +224,22 @@ var Diagnostic = (function(){
             errorCallback,
             'Diagnostic',
             'getBuildOSVersion',
+            []);
+    };
+
+    /**
+     * Checks if the current app build is a debug build.
+     *
+     * @param {Function} successCallback -  The callback which will be called when the operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if the app is a debug build.
+     * @param {Function} errorCallback -  The callback which will be called when the operation encounters an error.
+     *  This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isDebugBuild = function(successCallback, errorCallback) {
+        return cordova.exec(Diagnostic._ensureBoolean(successCallback),
+            errorCallback,
+            'Diagnostic',
+            'isDebugBuild',
             []);
     };
 
@@ -306,6 +341,22 @@ var Diagnostic = (function(){
     };
 
     /**
+     * Checks if compass is available on the device for use by the app.
+     *
+     * @param {Function} successCallback - The callback which will be called when operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if compass is available for use.
+     * @param {Function} errorCallback -  The callback which will be called when operation encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.isCompassAvailable = function(successCallback, errorCallback) {
+        if(cordova.plugins.diagnostic.location){
+            cordova.plugins.diagnostic.location.isCompassAvailable.apply(this, arguments);
+        }else{
+            throw "Diagnostic Location module is not installed";
+        }
+    };
+
+    /**
      * Requests location authorization for the application.
      * Authorization can be requested to use location either "when in use" (only in foreground) or "always" (foreground and background).
      * Should only be called if authorization status is NOT_REQUESTED. Calling it when in any other state will have no effect.
@@ -320,8 +371,18 @@ var Diagnostic = (function(){
      * This callback function is passed a single string parameter containing the error message.
      * @param {String} mode - (optional) location authorization mode as a constant in `cordova.plugins.diagnostic.locationAuthorizationMode`.
      * If not specified, defaults to `cordova.plugins.diagnostic.locationAuthorizationMode.WHEN_IN_USE`.
+     * @param {String} accuracy - (optional) desired location accuracy as a constant in `cordova.plugins.diagnostic.locationAccuracyAuthorization`.
+     * If not specified, defaults to `cordova.plugins.diagnostic.locationAccuracyAuthorization.FULL`.
+     * On iOS, this sets the CLLocationManager's desiredAccuracy:
+     * - `FULL` / `BEST` - kCLLocationAccuracyBest (may engage GPS hardware)
+     * - `REDUCED` - kCLLocationAccuracyReduced (approximate location, no GPS)
+     * - `BEST_FOR_NAVIGATION` - kCLLocationAccuracyBestForNavigation (highest accuracy with additional sensors)
+     * - `NEAREST_TEN_METERS` - kCLLocationAccuracyNearestTenMeters
+     * - `HUNDRED_METERS` - kCLLocationAccuracyHundredMeters
+     * - `KILOMETER` - kCLLocationAccuracyKilometer
+     * - `THREE_KILOMETERS` - kCLLocationAccuracyThreeKilometers
      */
-    Diagnostic.requestLocationAuthorization = function(successCallback, errorCallback, mode) {
+    Diagnostic.requestLocationAuthorization = function(successCallback, errorCallback, mode, accuracy) {
         if(cordova.plugins.diagnostic.location){
             cordova.plugins.diagnostic.location.requestLocationAuthorization.apply(this, arguments);
         }else{
@@ -597,6 +658,65 @@ var Diagnostic = (function(){
         }
     };
 
+    /**
+     * Checks if the app is authorized to use Local Network.
+     * On iOS 14+ this returns true if the user has authorized the app to access devices on the local network.
+     * On iOS versions prior to 14, this always returns true as no authorization is required.
+     *
+     * @param {Function} successCallback -  The callback which will be called when operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if the app is authorized to use Local Network.
+     * @param {Function} errorCallback -  The callback which will be called when operation encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     * @param {Object} [options] - Optional timeout control object containing an optional `timeoutMs` number, matching the options accepted by `getLocalNetworkAuthorizationStatus()`.
+     */
+    Diagnostic.isLocalNetworkAuthorized = function(successCallback, errorCallback, options) {
+        if(cordova.plugins.diagnostic.wifi){
+            cordova.plugins.diagnostic.wifi.isLocalNetworkAuthorized.apply(this, arguments);
+        }else{
+            throw "Diagnostic Wifi module is not installed";
+        }
+    };
+
+     /**     
+     * Returns the app's Local Network authorization status.
+     * On iOS 14+ this returns one of the values in Diagnostic.permissionStatus: NOT_REQUESTED, GRANTED, DENIED_ALWAYS, UNKNOWN.
+     * On iOS versions prior to 14, this always returns GRANTED as no authorization is required.
+     *
+     * @param {Function} successCallback -  The callback which will be called when operation is successful.
+     * This callback function is passed a single string parameter which is one of the values in Diagnostic.permissionStatus:
+     * NOT_REQUESTED, GRANTED, DENIED_ALWAYS, UNKNOWN.
+     * @param {Function} errorCallback -  The callback which will be called when operation encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     * @param {Object} [options] - Optional control over the timeout (defaults to 2 seconds) used when inferring the permission state.
+     * Provide `{ timeoutMs: <number> }` to override the timeout in milliseconds.
+     */   
+    Diagnostic.getLocalNetworkAuthorizationStatus = function(successCallback, errorCallback, options) {
+        if(cordova.plugins.diagnostic.wifi){
+            cordova.plugins.diagnostic.wifi.getLocalNetworkAuthorizationStatus.apply(this, arguments);
+        }else{
+            throw "Diagnostic Wifi module is not installed";
+        }
+    };
+
+    /**
+     * Requests the user to authorize the app to use Local Network.
+     * On iOS 14+ this will prompt the user to authorize the app to access devices on the local network.
+     * On iOS versions prior to 14, this does nothing as no authorization is required and will return success.
+     *
+     * @param {Function} successCallback -  The callback which will be called when operation is successful.
+     * This callback function is passed a single string parameter which is one of the values in Diagnostic.permissionStatus:
+     * NOT_REQUESTED, GRANTED, DENIED_ALWAYS, UNKNOWN.
+     * @param {Function} errorCallback -  The callback which will be called when operation encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.requestLocalNetworkAuthorization = function(successCallback, errorCallback) {
+        if(cordova.plugins.diagnostic.wifi){
+            cordova.plugins.diagnostic.wifi.requestLocalNetworkAuthorization.apply(this, arguments);
+        }else{
+            throw "Diagnostic Wifi module is not installed";
+        }
+    };
+
     /***************
      * Bluetooth   *
      ***************/
@@ -692,6 +812,21 @@ var Diagnostic = (function(){
             cordova.plugins.diagnostic.notifications.isRemoteNotificationsEnabled.apply(this, arguments);
         }else{
             throw "Diagnostic Notifications module is not installed";
+        }
+    };
+
+    /**
+     * Switches to the notification settings page in the Settings app
+     * 
+     * @param {Function} successCallback - The callback which will be called when switch to settings is successful.
+     * @param {Function} errorCallback - The callback which will be called when switch to settings encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic.switchToNotificationSettings = function(successCallback, errorCallback) {
+        if (cordova.plugins.diagnostic.notifications){
+            cordova.plugins.diagnostic.notifications.switchToNotificationSettings.apply(this, arguments);
+        } else {
+            throw "Diagnostic Notification module is not installed";
         }
     };
 
@@ -1092,6 +1227,8 @@ var Diagnostic = (function(){
             throw "Diagnostic Motion module is not installed";
         }
     };
+
+
 
     return Diagnostic;
 })();

@@ -327,7 +327,7 @@ public class Diagnostic_Bluetooth extends CordovaPlugin {
 
     public void requestBluetoothAuthorization(JSONArray args, CallbackContext callbackContext) throws Exception {
         JSONArray permissionsToRequest = new JSONArray();
-        if(args.length() > 0){
+        if(args.length() > 0 && args.get(0) instanceof JSONArray){
             JSONArray specifiedPermissions = args.getJSONArray(0);
             if(specifiedPermissions.length() > 0){
                 for (int i = 0, size = specifiedPermissions.length(); i < size; i++){
