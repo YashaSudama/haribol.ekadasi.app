@@ -2239,4 +2239,4 @@ let bhaktivedanta = 'Шрила Бхактиведанта Свами Прабх
                             '</div>' +
                         '</div>';
 
-export { content_description };
+export { content_description }; 

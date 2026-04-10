@@ -1,7 +1,7 @@
 "use strict";
 
 let  apparition_ekadasi_days = {
-    '1': { name: 'Явление Нитьянанды Прабху',
+    '1': { name: 'Явление Нитьянанды Прабху', 
            name_too_events: 'Нитьянанда',
            id: 'nityananda'
          },
@@ -17,7 +17,7 @@ let  apparition_ekadasi_days = {
          },
     '4': { name: 'Явление Нришимхадева' + 
                  '<hr class="ekadashi_hr">' +
-                 '<span class="exit bold l-height-1-1">Пост до полудня</span>',
+                 '<span class="exit bold l-height-1-1">Пост до полудня</span>', 
            name_too_events: 'Нришимхадев',
            id: 'nrisimha'
          },

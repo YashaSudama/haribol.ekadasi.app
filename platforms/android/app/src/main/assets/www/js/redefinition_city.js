@@ -1,4785 +1,5345 @@
 "use strict";
 
-let redefinition_city = { // переопределение города
+redefinition_city = { // переопределение city 
+                      // Ключ state - территориальная единица страны самого верхнего уровня.
+                      // Например, в Украине это область, в Германии - земля
 
-    'Abkhazia': [
-        {
-            city: [ 
-                    'Pitsunda', 
-                    'Ldzaa',
+        'Abkhazia': [
+            {
+                city: {
+                        'Gagra': [ 
+                            'Pitsunda', 
+                            'Ldzaa',
+                            'Амзара',
+                        ],
+                        'Gulripsh': [ 
+                            'Tkhubun', 
+                            'Gwandra', 
+                        ],
+                        'Gudauta': [ 
+                            'New Athos', 
+                        ],
+                        'Sukhum': [ 
+                            'Sokhumi', 
+                            'Alekseevka', 
+                        ],
+                    },
+                state: [ 
+                        'Autonomous Republic of Abkhazia',
+                       ]
+            },
+        ],
+        'Armenia': [
+            {
+                city: {
+                        'Gavar': [ 
+                            'Tsamakaberd', 
+                        ],
+                    },
+                state: [ 
+                        'Gegharkunik Province',
+                       ]
+            },
+            {
+                city: {
+                        'Razdan': [ 
+                            'Arinj', 
+                            'Charentsavan', 
+                        ],
+                    },
+                state: [ 
+                        'Kotayk Province',
+                       ]
+            },
+        ],
+        'Australia': [
+            {
+                city: { 
+                        'Sydney': [ 
+                        'Gregory Hills', 
+                      ],
+                        'Parramatta': [ 
+                        'Harris Park', 
+                      ],
+                    },
+                state: [ 
+                        'New South Wales',
+                       ]
+            },
+            {
+                city: { 
+                        'Stirling': [ 
+                        'Nollamara', 
+                      ],
+                    },
+                state: [ 
+                        'Western Australia',
+                       ]
+            },
+        ],
+        'Austria': [
+            {
+                city: {
+                        'Gmunden': [ 
+                            'Reindlmühl', 
+                        ],
+                    },
+                state: [ 
+                        'Upper Austria',
+                       ]
+            },
+            {
+                city: {
+                        'Sankt-Pyolten': [ 
+                            'Traiskirchen', 
+                        ],
+                    },
+                state: [ 
+                        'Lower Austria',
+                       ]
+            },
+        ],
+        'Azerbaijan': [
+            {
+                city: {
+                        'Baku City': [ 
+                            'Nizami Raion',
+                        ],
+                    },
+                state: [ 
+                        'Baku Ekonomic Zone',
+                       ]
+            },
+        ],
+        'Belarus': [
+            {   
+                city: { 
+                        'Minsk': [ 
+                            'Бараўлянскі сельскі Савет',
+                            'Лугаваслабадскі сельскі Савет',
+                            'Фаніпальскі сельскі Савет',
+                            'Міханавіцкі сельскі Савет',
+                        ],
+                        'Smalyavichy': [
+                            'Ozyaritska-Slabadski rural council',
+                            'Жодзінскі сельскі Савет',
+                            'Zhodzina', 
+                        ],
+                        'Maladzyechna': [ 
+                            'Гарадоцкі сельскі Савет'
+                        ],
+                        'Maryina Horka': [
+                            'Рудзенскі сельскі Савет',
+                            'Pukhavichy District',
+                        ],
+                        'Barysaw': [
+                            'Прыгарадны сельскі Савет',
+                            'Barysaw District',
+                            'Barysaŭ',
+                        ],
+                        'Vileyka': [
+                            'Людвіноўскі сельскі Савет',
+                        ],
+                        'Stolbcy': [
+                            'Старасвержанскі сельскі Савет',
+                        ],
+                    },
+                state: [ 
+                        'Minsk Region',
+                       ]
+            },
+            {   
+                city: {
+                        'Homyel': [ 
+                            'Яромінскі сельскі Савет', 
+                            'Homieĺ', 
+                        ],
+                        'Svietlahorsk': [
+                            'Чыркавіцкі сельскі Савет', 
+                        ],
+                    },
+                state: [ 
+                        'Homyel Region',
+                       ]
+            },
+            {   
+                city: {
+                        'Rasony': [ 
+                            'Янкавіцкі сельскі Савет', 
+                        ],
+                    },
+                state: [ 
+                        'Vitsebsk Region',
+                       ]
+            },
+            {   
+                city: {
+                        'Lida': [ 
+                            'Бердаўскі сельскі Савет', 
+                        ],
+                    },
+                state: [ 
+                        'Hrodna Region',
+                       ]
+            },
+            {   
+                city: {
+                        'Hantsavichy': [ 
+                            'Любашаўскі сельскі Савет', 
+                        ],
+                        'Kobryn': [
+                            'Хідрынскі сельскі Савет',
+                        ],
+                    },
+                state: [ 
+                        'Brest Region',
+                       ]
+            },
+        ],
+        'Belgium': [
+            {
+                city: {
+                        'Brussels': [ 
+                            'Tervuren', 
+                            'Zaventem', 
+                        ],
+                        'Leuven': [ 
+                            'Veltem',
+                        ],
+                    },
+                state: [
+                        'Flemish Brabant',
+                       ]
+            },  
+            {
+                city: {
+                        'Bruges': [ 
+                            'Roeselare',
+                        ],
+                    },
+                state: [
+                        'West Flanders',
+                       ]
+            }, 
+            {
+                city: {
+                        'Lezh': [ 
+                            'Huy',
+                            'Saint-Nicolas',
+                        ],
+                    },
+                state: [
+                        'Liège',
+                       ]
+            }, 
+             {
+                city: {
+                        'Arlon': [ 
+                            'Durbuy',
+                        ],  
+                    },
+                state: [
+                        'Luxembourg',
+                       ]
+            }, 
+            {
+                city: {
+                        'Mons': [ 
+                            'Comines-Warneton',
+                        ],
+                    },
+                state: [
+                        'Hainaut',
+                       ]
+            },                  
+        ],
+        'Bulgaria': [
+            {
+                city: {
+                    'Burgas': [
+                        'Sveti Vlas',
                     ],
-            state: [ 
-                    'Autonomous Republic of Abkhazia',
+                },
+                state: [
+                        'Burgas',
+                       ],
+            },
+            {
+                city: {
+                    'Stara Zagora': [
+                        'Pavel Banya',
                     ],
-            result: 'Gagra',
-        },
-        {
-            city: [ 
-                    'Tkhubun', 
-                    ],
-            state: [ 
-                    'Autonomous Republic of Abkhazia',
-                    ],
-            result: 'Gulripsh',
-        },
-        {
-            city: [ 
-                    'New Athos', 
-                    ],
-            state: [ 
-                    'Autonomous Republic of Abkhazia',
-                    ],
-            result: 'Gudauta',
-        },
-        {
-            city: [ 
-                    'Sokhumi', 
-                    'Alekseevka', 
-                    ],
-            state: [ 
-                    'Autonomous Republic of Abkhazia',
-                    ],
-            result: 'Sukhum',
-        },
-    ],
-    'Armenia': [
-        {
-            city: [ 
-                    'Tsamakaberd', 
-                    ],
-            state: [ 
-                    'Gegharkunik Province',
-                    ],
-            result: 'Gavar',
-        },
-    ],
-    'Australia': [
-        {
-            city: [ 
-                    'Gregory Hills', 
-                    ],
-            state: [ 
-                    'New South Wales',
-                    ],
-            result: 'Sydney',
-        },
-    ],
-    'Austria': [
-        {
-            city: [ 
-                    'Reindlmühl', 
-                    ],
-            state: [ 
-                    'Upper Austria',
-                    ],
-            result: 'Gmunden',
-        },
-    ],
-    'Azerbaijan': [
-        {
-            city: [ 
-                    'Nizami Raion',
-                    ],
-            state: [ 
-                    'Baku Ekonomic Zone',
-                    ],
-            result: 'Baku City',
-        },
-    ],
-    'Belarus': [
-        {   
-            city: [ 
-                    'Бараўлянскі сельскі Савет',
-                    'Лугаваслабадскі сельскі Савет',
-                    'Фаніпальскі сельскі Савет',
-                    ],
-            state: [ 
-                    'Minsk Region',
-                    ],
-            result: 'Minsk',
-        },
-        {
-            city: [ 
-                    'Ozyaritska-Slabadski rural council',
-                    'Жодзінскі сельскі Савет',
-                    'Zhodzina', 
-                    ],
-            state: [
-                    'Minsk Region',
-                    ],
-            result: 'Smalyavichy',
-        },
-        {   
-            city: [ 
-                    'Яромінскі сельскі Савет', 
-                    ],
-            state: [ 
-                    'Homyel Region',
-                    ],
-            result: 'Homyel',
-        },
-        {   
-            city: [ 
-                    'Чыркавіцкі сельскі Савет', 
-                    ],
-            state: [ 
-                    'Homyel Region',
-                    ],
-            result: 'Svietlahorsk',
-        },
-        {   
-            city: [ 
-                    'Янкавіцкі сельскі Савет', 
-                    ],
-            state: [ 
-                    'Vitsebsk Region',
-                    ],
-            result: 'Rasony',
-        },
-        {   
-            city: [ 
-                    'Бердаўскі сельскі Савет', 
-                    ],
-            state: [ 
-                    'Hrodna Region',
-                    ],
-            result: 'Lida',
-        },
-        {   
-            city: [ 
-                    'Любашаўскі сельскі Савет', 
-                    ],
-            state: [ 
-                    'Brest Region',
-                    ],
-            result: 'Hantsavichy',
-        },
-    ],
-    'Belgium': [
-        {
-            city: [ 
-                    'Tervuren', 
-                    'Zaventem', 
-                    ],
-            state: [
-                    'Flemish Brabant',
-                    ],
-            result: 'Brussels',
-        },  
-        {
-            city: [ 
-                    'Veltem',
-                    ],
-            state: [
-                    'Flemish Brabant',
-                    ],
-            result: 'Leuven',
-        },  
-        {
-            city: [ 
-                    'Durbuy',
-                    ],
-            state: [
-                    'Luxembourg',
-                    ],
-            result: 'Marche-en-Famenne',
-        },  
-        {
-            city: [ 
-                    'Braine-le-Comte',
-                    ],
-            state: [
-                    'Hainaut',
-                    ],
-            result: 'Soignies',
-        },  
-        {
-            city: [ 
-                    'Roeselare',
-                    ],
-            state: [
-                    'West Flanders',
-                    ],
-            result: 'Bruges',
-        },                 
-    ],
-    'Bulgaria': [
+                },
+                state: [
+                        'Stara Zagora',
+                       ],
+            },
+        ],
+        'Canada': [
+            {
+                city: {
+                        'Montreal': [ 
+                            'Pointe-Claire', 
+                        ],
+                    },
+                state: [
+                        'Quebec',
+                       ]
+            },  
+            {
+                city: {
+                        '(Old) Ottawa': [ 
+                            'Ottawa', 
+                        ],
+                        'Nyumarket': [ 
+                            'Vaughan', 
+                        ],
+                        'Toronto': [ 
+                            'Old Toronto', 
+                            'Cambridge', 
+                        ],
+                    },
+                state: [
+                        'Ontario',
+                       ]
+            },  
+            {
+                city: {
+                        'Calgary': [ 
+                            'Rocky View County', 
+                        ],
+                    },
+                state: [
+                        'Alberta',
+                       ]
+            },  
+            {
+                city: {
+                        'Dorchester': [ 
+                            'Dieppe', 
+                        ],
+                    },
+                state: [
+                        'New Brunswick',
+                       ]
+            },  
+        ],
+        'China': [
+            {
+                city: {
+                        'Ningbo': [ 
+                            'Yinzhou District',
+                            'Haishu District',
+                        ],
+                    },
+                state: [ 
+                        'Zhejiang',
+                       ]
+            },
+            {
+                city: {
+                        'Guangdong': [ 
+                            'Tianhe District',
+                            'Baiyun District',
+                        ],
+                        'Shenchzhen': [ 
+                            'Longgang District',
+                        ],
+                    },
+                state: [ 
+                        'Guangdong Province',
+                       ]
+            },
+        ],
+        'Czechia': [
+            { 
+                city: {
+                        'Prague': [ 
+                            'Chýně', 
+                            'Capital City of Prague', 
+                        ],
+                        'Benešov': [ 
+                            'Vlašim',
+                        ],
+                    },
+                state: [ 
+                        'Central Bohemia',
+                        'Prague',
+                       ]
+            },
+            { 
+                city: {
+                        'Brno': [ 
+                            'Malá Lhota', 
+                        ],
+                    },
+                state: [ 
+                        'Southeast',
+                       ]
+            },
+            { 
+                city: {
+                        'Ostrava': [ 
+                            'Bohumín', 
+                            'Havířov', 
+                        ],
+                    },
+                state: [ 
+                        'Moravia-Silesia',
+                       ]
+            },
+            { 
+                city: {
+                        'Liberec': [ 
+                            'Kořenov', 
+                            'Lomnice nad Popelkou', 
+                        ],
+                    },
+                state: [ 
+                        'Northeast',
+                       ]
+            },
+        ],
+        'Cyprus': [
+            { 
+                city: {
+                        'Limassol': [ 
+                            'Germasogeia', 
+                            'Pyrgos', 
+                            'Agios Tychonos', 
+                            'Κοινότητα Αγίου Τύχωνα', 
+                            'Κοινότητα Πύργου Λεμεσού', 
+                        ],
+                    },
+                state: [ 
+                        'Cyprus',
+                        'Limassol District',
+                       ]
+            },
+            { 
+                city: {
+                        'Larnaca': [ 
+                            'Oroklini', 
+                        ],
+                    },
+                state: [ 
+                        'Larnaca District',
+                       ]
+            },
+        ],
+        'Denmark': [
+            { 
+                city: {
+                        'Copenhagen': [ 
+                            'Klampenborg', 
+                        ],
+                    },
+                state: [ 
+                        'Capital Region',
+                       ]
+            },
+            { 
+                city: {
+                        'Thisted': [ 
+                            'Vestervig', 
+                        ],
+                    },
+                state: [ 
+                        'North Denmark Region',
+                       ]
+            }, 
+            { 
+                city: {
+                        'Vajle': [ 
+                            'Otterup', 
+                        ],
+                    },
+                state: [ 
+                        'Southern Denmark',
+                       ]
+            }, 
+        ],
+        'Dominican Republic': [
+            { 
+                city: {
+                        'Higüey': [ 
+                            'Dominicus', 
+                        ],
+                    },
+                state: [ 
+                        'La Altagracia',
+                       ]
+            }, 
+        ],
+        'Egypt': [
+            { 
+                city: {
+                        'Sharm Ash Sheikh': [
+                            'Sharm El Sheikh',
+                        ],
+                    },
+                state: [ 
+                        'South Sinai',
+                       ]
+            },
+        ],
+        'Estonia': [
+            {
+                city: {
+                        'Jõhvi': [ 
+                            'Kohtla-Järve linn',
+                            'Narva-Jõesuu linn',
+                        ],
+                    },
+                state: [ 
+                        'Järve linnaosa',
+                        'Ahtme',
+                        'Ida-Viru County',
+                       ]
+            },
+            {
+                city: {
+                        'Tallinn': [ 
+                            'Haabneeme alevik',
+                        ],
+                    },
+                state: [ 
+                        'Harju County',
+                       ]
+            },
+        ],
+        'Finland': [
+            {
+                city: {
+                        'Lahti': [ 
+                            'Orimattila', 
+                        ],
+                        'Parikkala': [ 
+                            'Rautjärvi', 
+                        ],
+                    },
+                state: [ 
+                        'Mainland Finland',
+                       ]
+            },
+            {
+                city: {
+                        'Vaasa': [ 
+                            'Nykarleby', 
+                        ],
+                    },
+                state: [ 
+                        'Ostrobothnia',
+                       ]
+            },
+            {
+                city: {
+                        'Helsinki': [ 
+                            'Porvoo', 
+                        ],
+                    },
+                state: [ 
+                        'Uusimaa',
+                       ]
+            },
+            {
+                city: {
+                        'Kuopio': [ 
+                            'Siilinjärvi', 
+                        ],
+                    },
+                state: [ 
+                        'North Savo',
+                       ]
+            },
+        ],
+        'France': [
+            {
+                city: {
+                        'Nice': [ 
+                            'Èze', 
+                            'Villefranche-sur-Mer',
+                            'Cannes',
+                            'Antibes',
+                            'Valbonne',
+                        ],
+                        'Toulon': [ 
+                            'Saint-Tropez', 
+                        ],
+                    },
+                state: [ 
+                        "Provence-Alpes-Côte d'Azur",
+                       ]
+            },
+            {
+                city: {
+                        'Paris': [ 
+                            'Villennes-sur-Seine', 
+                            'Aubervilliers',
+                            'Magny-les-Hameaux',
+                        ],
+                    },
+                state: [ 
+                        "Île-de-France",
+                       ]
+            },
+            {
+                city: {
+                        'Oser': [ 
+                            'Sens', 
+                        ],
+                    },
+                state: [ 
+                        "Bourgogne – Franche-Comté",
+                       ]
+            },
+            {
+                city: {
+                        'Thonon-les-Bains': [ 
+                            'Veigy-Foncenex', 
+                        ],
+                        'Grenoble': [ 
+                            'Saint-Nizier-du-Moucherotte', 
+                        ],
+                        'Shamberi': [ 
+                            'Courchevel', 
+                        ],
+                    },
+                state: [ 
+                        'Auvergne-Rhône-Alpes',
+                       ]
+            },
+            {
+                city: {
+                        'Rouen': [ 
+                            'Terres-de-Caux', 
+                        ],
+                    },
+                state: [ 
+                        'Normandie',
+                       ]
+            },
+        ],
+        'Greece': [
+            {
+                city: {
+                        'Athens': [ 
+                            'Municipality of Palaio Faliro', 
+                        ],
+                    },
+                state: [ 
+                        'Attica',
+                       ]
+            },
+            {
+                city: {
+                        'Municipal Unit of Tripoli': [ 
+                            'Municipal Unit of Lefktro', 
+                            'Municipal Unit of Avia', 
+                            'Ditiki-Mani', 
+                            'Municipality of Kalamata', 
+                        ],
+                    },
+                state: [ 
+                        'Peloponnese, Western Greece and the Ionian',
+                       ]
+            },
+            {
+                city: {
+                        'Chania': [ 
+                            'Dramia', 
+                        ],
+                    },
+                state: [ 
+                        'Region of Crete',
+                       ]
+            },
+            {
+                city: {
+                        'Thessaloniki': [ 
+                            'Nea Moudania', 
+                            'Άγιος Παύλος', 
+                            'Καβαλλάρι', 
+                            'Platamonas', 
+                        ],
+                    },
+                state: [ 
+                        'Macedonia and Thrace',
+                       ]
+            },
+            {
+                city: {
+                        'Ermoupoli': [ 
+                            'Marpissa', 
+                        ],
+                    },
+                state: [ 
+                        'Aegean',
+                       ]
+            },
+        ],
+        'Germany': [
+            {
+                city: {
+                        'Ulm': [ 
+                            'Schelklingen', 
+                        ],
+                        'Künzelsau': [ 
+                            'Öhringen', 
+                        ],
+                        'Böblingen': [ 
+                            'Ehningen', 
+                        ],
+                        'Pforzheim': [ 
+                            'Ispringen', 
+                        ],
+                        'Stuttgart': [ 
+                            'Ellwangen', 
+                        ],
+                        'Ravensburg': [ 
+                            'Aulendorf', 
+                        ],
+                        'Biberach an der Riß': [ 
+                            'Ochsenhausen',
+                            'Schemmerhofen',
+                            'Bad Buchau',
+                        ],
+                    },
+                state: [ 
+                        'Baden-Württemberg',
+                       ]
+            },
+            {
+                city: {
+                        'Bernburg': [ 
+                            'Könnern', 
+                        ],
+                    },
+                state: [ 
+                        'Saxony-Anhalt',
+                       ]
+            },
+            {
+                city: { 
+                        'Friedberg (Hesse)': [ 
+                            'Bad Nauheim', 
+                        ],
+                        'Bad-Shvalbah': [ 
+                            'Springen', 
+                        ],
+                        'Dietkirchen': [ 
+                            'Villmar', 
+                        ],
+                        'Darmstadt': [ 
+                            'Darmstadt-Nord', 
+                            'Darmstadt-Mitte',
+                            'Bickenbach',
+                        ],
+                        'Frankfurt': [ 
+                            'Offenbach am Main', 
+                            'Großen-Buseck', 
+                        ],
+                    },
+                state: [ 
+                        'Hesse',
+                       ]
+            },
+            {
+                city: {
+                        'Berlin': [ 
+                            'Neuruppin', 
+                        ],
+                        'Lübben (Spreewald)': [ 
+                            'Halbe', 
+                        ],
+                    },
+                state: [ 
+                        'Brandenburg',
+                       ]
+            },
+            {
+                city: {
+                        'Bielefeld': [ 
+                            'Bad Oeynhausen', 
+                        ],
+                        'Höxter': [ 
+                            'Nieheim', 
+                        ],
+                        'Gütersloh': [ 
+                            'Rheda-Wiedenbrück', 
+                        ],
+                        'Detmold': [ 
+                            'Oerlinghausen', 
+                        ],
+                        'Vezel': [ 
+                            'Neukirchen-Vluyn', 
+                        ],
+                        'Zost': [ 
+                            'Lippetal', 
+                        ],
+                        'Varendorf': [ 
+                            'Oelde', 
+                        ],
+                    },
+                state: [ 
+                        'North Rhine – Westphalia',
+                        'North Rhine-Westphalia',
+                       ]
+            },
+            {
+                city: {
+                        'Bad Segeberg': [ 
+                            'Norderstedt', 
+                        ],
+                        'Bad Oldesloe': [ 
+                            'Tangstedt', 
+                        ],
+                    },
+                state: [ 
+                        'Schleswig-Holstein',
+                       ]
+            },
+            {
+                city: {
+                        'Bad Kreuznach': [ 
+                            'Kirn', 
+                        ],
+                        'Birkenfeld': [ 
+                            'Abentheuer', 
+                        ],
+                        'Landau in der Pfalz': [ 
+                            'Bad Bergzabern', 
+                        ],
+                    },
+                state: [ 
+                        'Rhineland-Palatinate',
+                       ]
+            },
+            {
+                city: {
+                        'Parchim': [ 
+                            'Plate', 
+                        ],
+                    },
+                state: [ 
+                        'Mecklenburg-Vorpommern',
+                       ]
+            },
+            {
+                city: {
+                        'Schwandorf': [ 
+                            'Bruck i.d.OPf.', 
+                        ],
+                        'Augsburg': [ 
+                            'Meitingen', 
+                        ],
+                        'Hof': [ 
+                            'Zell', 
+                        ],
+                        'Traunshtajn': [ 
+                            'Tacherting', 
+                        ],
+                        'Pfaffenhofen an der Ilm': [ 
+                            'Geisenfeld', 
+                        ],
+                    },
+                state: [ 
+                        'Bavaria',
+                       ]
+            },
+            {
+                city: {
+                        'Stade': [ 
+                            'Drochtersen', 
+                        ],
+                        'Gifhorn': [ 
+                            'Sassenburg', 
+                        ],
+                        'Winsen (Luhe)': [ 
+                            'Seevetal', 
+                        ],
+                        'Meppen': [ 
+                            'Haren (Ems)', 
+                        ],
+                        'Celle': [ 
+                            'Hambühren', 
+                        ],
+                        'Fehta': [ 
+                            'Holdorf', 
+                        ],
+                    },
+                state: [ 
+                        'Lower Saxony',
+                       ]
+            },
+            {
+                city: {
+                        'Schleiz': [ 
+                            'Neustadt an der Orla', 
+                        ],
+                    },
+                state: [ 
+                        'Thuringia',
+                       ]
+            },
+        ],
+        'Georgia': [
+            {
+                city: {
+                        'Mtskheta': [ 
+                            'Akhalubani', 
+                            'Tsilkani', 
+                        ],
+                    },
+                state: [ 
+                        'Mtskheta-Mtianeti',
+                       ]
+            },
+            {
+                city: {
+                        'Kutaisi': [ 
+                            'Dapnari', 
+                            'Tqibuli', 
+                        ],
+                    },
+                state: [ 
+                        'Imereti',
+                       ]
+            },
+            {
+                city: {
+                        'Zugdidi': [ 
+                            'Nashamgu', 
+                        ],
+                    },
+                state: [ 
+                        'Samegrelo-Upper Svaneti',
+                       ]
+            },
+            {
+                city: {
+                        'Batumi': [ 
+                            'Kobuleti', 
+                        ],
+                    },
+                state: [ 
+                        'Autonomous Republic of Adjara',
+                       ]
+            },
+        ],
+        'India': [
+            {
+                city: {
+                        'Goa': [ 
+                            'Arambol', 
+                            'Pernem',
+                            'Querim',
+                            'Margao',
+                            'Morjim',
+                        ],
+                        'Panadzhi': [ 
+                            'Anjuna',
+                            'Bardez',
+                            'Sangolda',
+                            'Korgao',
+                            'Chopdem',
+                        ],
+                        'Margao': [ 
+                            'Carmona',
+                        ],
+                    },
+                state: [ 
+                        'Goa',
+                       ]
+            },
+            {
+                city: {
+                        'Palakkad': [ 
+                            'Thachanatukkara', 
+                        ],
+                        'Kottayam': [ 
+                            'Chemmalamattom', 
+                        ],
+                        'Kozhikode': [ 
+                            'Azhiyur', 
+                        ],
+                        'Thiruvananthapuram': [ 
+                            'Adimalathura', 
+                            'Varkala', 
+                            'Kovalam', 
+                        ],
+                    },
+                state: [ 
+                        'Kerala',
+                       ]
+            },
+            {
+                city: {
+                        'Devanahalli': [ 
+                            'Devanahalli taluku', 
+                        ],
+                        'Bengaluru': [ 
+                            'Mahadevapura', 
+                        ],
+                        'Udupi': [ 
+                            'Kaup', 
+                        ],   
+                        'Karvar': [ 
+                            'Gokarna', 
+                        ],
+                    },
+                state: [ 
+                        'Karnataka',
+                       ]
+            },
+            {
+                city: {
+                        'Delhi': [ 
+                            'Kalkaji Tehsil', 
+                            'New Delhi', 
+                            'Sarai Kale Khan', 
+                        ],
+                    },
+                state: [ 
+                        'Delhi',
+                       ]
+            },
+            {
+                city: {
+                        'Panipat': [ 
+                            'Bhodwal Majri',
+                        ],
+                        'Kurukshetra': [ 
+                            'Jyotisar',
+                        ],
+                    },
+                state: [ 
+                        'Haryana',
+                       ]
+            },
+            {
+                city: {
+                        'Rishikesh': [ 
+                            'Swargashram', 
+                        ],
+                        'Pauri': [ 
+                            'Pandav Gufa', 
+                            'Narendra Nagar', 
+                        ],
+                    },
+                state: [ 
+                        'Uttarakhand',
+                       ]
+            },
+            {
+                city: {
+                        'Mathura': [ 
+                            'Govardhan', 
+                            'Jatipura', 
+                            'Radha Kund', 
+                            'Hatana', 
+                            'Basonti', 
+                        ],
+                        'Vrindavan': [ 
+                            'Sunrakh', 
+                        ],
+                        'Meerut': [ 
+                            'Daurala', 
+                        ],
+                        'Lucknow': [ 
+                            'Sarojni Nagar', 
+                        ],
+                        'Agra': [ 
+                            'Fatehabad', 
+                        ],
+                        'Fajzabad': [ 
+                            'Ayodhya', 
+                        ],
+                    },
+                state: [ 
+                        'Uttar Pradesh',
+                       ]
+            },
+            {
+                city: {
+                        'Khurdha Municipality Boundary': [ 
+                            'Bhubaneswar Municipal Corporation', 
+                        ],
+                    },
+                state: [ 
+                        'Odisha',
+                       ]
+            },
+            {
+                city: {
+                        'Kolkata': [ 
+                            'Awalsiddhi', 
+                        ],
+                    },
+                state: [ 
+                        'West Bengal',
+                       ]
+            },
+            {
+                city: {
+                        'Varanasi': [ 
+                            'Durgauti', 
+                        ],
+                    },
+                state: [ 
+                        'Bihar',
+                       ]
+            },
+            {
+                city: {
+                        'Coimbatore': [ 
+                            'Semmedu', 
+                        ],
+                    },
+                state: [ 
+                        'Tamil Nadu',
+                       ]
+            },
+            {
+                city: {
+                        'Tirupati': [ 
+                            'Mallam Gunta', 
+                        ],
+                        'Anantapur': [ 
+                            'Puttaparthi', 
+                        ],
+                    },
+                state: [ 
+                        'Andhra Pradesh',
+                       ]
+            },
+            {
+                city: {
+                        'Ratnagiri': [ 
+                            'Chiplun', 
+                        ],
+                        'Thana': [ 
+                            'Mira-Bhayander', 
+                        ],
+                    },
+                state: [ 
+                        'Maharashtra',
+                       ]
+            },
+        ],
+        'Indonesia': [
+            { 
+                city: {
+                        'Mataram': [ 
+                            'Dusun Mangsit', 
+                            'Aik Berik',
+                            'Lombok Tengah', 
+                        ],
+                    },
+                state: [
+                        'West Nusa Tenggara',
+                       ]
+            }, 
+            {
+                city: {
+                        'Jakarta': [ 
+                            'Special Capital Region of Jakarta', 
+                            'Special Region of Jakarta', 
+                        ],
+                    },
+                state: [
+                        'Java',
+                       ]
+            },
+            {
+                city: {
+                        'Denpasar': [ 
+                            'Sanur', 
+                            'Cemagi', 
+                            'Dauh Puri Kauh', 
+                            'Renon',
+                            'Cepaka',
+                            'Ubud',
+                            'Petulu',
+                            'Penestanan',
+                            'Mas',
+                            'Lodtunduh',
+                            'Jimbaran',
+                            'Ungasan',
+                            'Abang',
+                            'Pecatu',
+                            'Amed',
+                            'Lokaserena',
+                            'Tumbak Bayuh',
+                            'Kecamatan Abang',
+                            'Benoa',
+                            'Mantring',
+                            'Kutuh',
+                            'Kuta',
+                            'Canggu',
+                            'Peliatan',
+                        ],
+                    },
+                state: [
+                        'Bali',
+                       ]
+            },
+        ],
+        'Ireland': [
+            {
+                city: {
+                        'Dublin': [ 
+                            'Ongar', 
+                        ],
+                    },
+                state: [
+                        'Leinster',
+                       ]
+            },
+            {
+                city: {
+                        'County Donegal': [ 
+                            'Letterkenny', 
+                        ],
+                    },
+                state: [
+                        'County Donegal',
+                       ]
+            },
+            {
+                city: {
+                        'Klonmel': [ 
+                            'Peppardstown', 
+                        ],
+                    },
+                state: [
+                        'County Tipperary',
+                       ]
+            },
+        ],
+        'Italy': [
+            { 
+                city: {
+                        'Island Sardinia': [ 
+                            'Austis', 
+                            'Crabonaxa/Villasimius', 
+                        ],
+                    },
+                state: [ 
+                        'Sardinia',
+                       ]
+            },
+            { 
+                city: {
+                        'Ancona': [ 
+                            'Arcevia', 
+                        ],
+                    },
+                state: [ 
+                        'Marche',
+                       ]
+            },
+            { 
+                city: {
+                        'Viterbo': [ 
+                            'Castiglione in Teverina', 
+                        ],
+                        'Rome': [ 
+                            'Colleverde',
+                        ],
+                    },
+                state: [ 
+                        'Lazio',
+                       ]
+            },
+            { 
+                city: {
+                        'Varese': [ 
+                            'Uboldo', 
+                        ],
+                        'Milan': [ 
+                            'Rho', 
+                        ],
+                    },
+                state: [ 
+                        'Lombardy',
+                       ]
+            }, 
+            {
+                city: {
+                        'Savona': [ 
+                            'Spotorno', 
+                            'Loano', 
+                        ],
+                    },
+                state: [ 
+                        'Liguria',
+                       ]
+            },
+            {
+                city: {
+                        'Verbaniya': [ 
+                            'Masera', 
+                        ],
+                    },
+                state: [ 
+                        'Piedmont',
+                       ]
+            },
+            {
+                city: {
+                        'Florence': [ 
+                            'San Casciano in Val di Pesa', 
+                            'Lastra a Signa', 
+                            'Impruneta', 
+                        ],
+                        'Grosseto': [ 
+                            'Porto Santo Stefano', 
+                        ],
+                        'Piza': [ 
+                            'Fauglia', 
+                        ],
+                        'Lucca': [ 
+                            'Camaiore', 
+                        ],
+                    },
+                state: [ 
+                        'Tuscany',
+                       ]
+            },
+            {
+                city: {
+                        'Teramo': [ 
+                            'Roseto degli Abruzzi', 
+                        ],
+                    },
+                state: [ 
+                        'Abruzzo',
+                       ]
+            },
+            {
+                city: {
+                        'Parma': [ 
+                            'Berceto', 
+                        ],
+                        'Bolonya': [ 
+                            'Zola Predosa', 
+                        ],
+                    },
+                state: [ 
+                        'Emilia-Romagna',
+                       ]
+            },
+            {
+                city: {
+                        'Perugia': [ 
+                            'Chiugiana', 
+                        ],
+                    },
+                state: [ 
+                        'Umbria',
+                    ]
+            },
+            {
+                city: {
+                        'Kozenca': [ 
+                            'Santa Serra',
+                        ],
+                    },
+                state: [
+                        'Calabria',
+                       ]
+            },
+            {
+                city: {
+                        'Bolcano': [ 
+                            'Olang - Valdaora',
+                        ],
+                    },
+                state: [
+                        'Trentino – Alto Adige/Südtirol',
+                       ]
+            },
+        ],
+        'Israel': [
+            {
+                city: {
+                        'Tel-Aviv': [ 
+                            'South Givatayim',  
+                            'Bat Yam', 
+                            'Rishon LeZion',
+                            'Ramat Gan',
+                            'Holon',
+                        ],
+                    },
+                city: {
+                        'Ramla': [ 
+                            'Even Yehuda',
+                        ],
+                    },
+                state: [ 
+                        'Tel-Aviv District',
+                        'Center District',
+                       ]
+            },
+            {
+                city: {
+                        'Haifa': [ 
+                            'Harish',
+                            'Hadera',
+                            'Kiryat Motzkin',
+                        ],
+                    },
+                state: [ 
+                        'Haifa District',
+                       ]
+            },
+            {
+                city: {
+                        "Be’er-Sheva": [ 
+                            'Sderot',
+                            "Be'er Sheva",
+                        ],
+                    },
+                state: [ 
+                        'South District',
+                       ]
+            },
+            {
+                city: {
+                        'Nof HaGalil': [ 
+                            'Maalot Tarshiha',
+                            'Acre',
+                        ],
+                    },
+                state: [ 
+                        'North District',
+                       ]
+            },
+        ],
+        'Japan': [
+            {
+                city: {
+                        'Kahoku': [ 
+                            'Tsubata',
+                        ],
+                    },
+                state: [ 
+                        'Ishikawa Prefecture',
+                       ]
+            },
+            {
+                city: {
+                        'Chiba': [ 
+                            'Tomisato',
+                        ],
+                    },
+                state: [ 
+                        'Chiba Prefecture',
+                       ]
+            },
+            {
+                city: {
+                        'Saitama': [ 
+                            'Tokorozawa',
+                        ],
+                    },
+                state: [ 
+                        'Saitama Prefecture',
+                       ]
+            },
+            { 
+                city: {
+                        'Tokio': [ 
+                            'Chiyoda', 
+                            'Koto', 
+                            'Chūō', 
+                        ],
+                    },
+                state: [
+                        'Nishi-Kanda 3-chome',
+                        'Ogibashi 3',
+                        'Tsukuda 1',
+                       ]
+            },
+        ],
+        'Jordan': [ // Иордания
+            {
+                city: {
+                        'Amman': [  
+                            'Al Jizah', 
+                            'Muaqqar Sub-District', 
+                            'Quaismeh Sub-District', 
+                        ],
+                    },
+                state: [ 
+                        'Amman',
+                    ]
+            },
+            {
+                city: {
+                        'Dhiban': [  
+                            'Mathlutha', 
+                        ],
+                    },
+                state: [ 
+                        'Madaba',
+                    ]
+            },
+        ],
+        'Kazakhstan': [
+            {
+                city: {
+                        'Almaty': [  
+                            'Boralday', 
+                            'Байсерке', 
+                            'Гүлдала', 
+                        ],
+                    },
+                state: [ 
+                        'Almaty Region',
+                       ]
+            },
+            {
+                city: {
+                        'Karaganda': [  
+                            'Saran, Kazakhstan', 
+                        ],
+                    },
+                state: [ 
+                        'Karaganda Region',
+                       ]
+            },
+            {
+                city: {
+                        'Taraz': [  
+                            'Кызылкайнар', 
+                        ],
+                    },
+                state: [ 
+                        'Jambyl Region',
+                       ]
+            },
+            {
+                city: {
+                        'Aqsu': [  
+                            'Aqsu city administration', 
+                        ],
+                    },
+                state: [ 
+                        'Pavlodar Region',
+                       ]
+            },
+            {
+                city: {
+                        'Oral': [  
+                            'Мичурин ауылдық округі', 
+                            'Зачаганск', 
+                        ],
+                    },
+                state: [ 
+                        'West Kazakhstan Region',
+                       ]
+            },
+            {
+                city: {
+                        'Karasu': [  
+                            'Карасу', 
+                            'Челгаши', 
+                        ],
+                        'Ayet': [  
+                            'Айет', 
+                            'Beimbet Mailin District', 
+                        ],
+                    },
+                state: [ 
+                        'Kostanay Region',
+                       ]
+            },
+            {
+                city: {
+                        'Astana': [  
+                            'Косшы', 
+                        ],
+                        'Zerenda': [  
+                            'Zerendi District', 
+                        ],
+                    },
+                state: [ 
+                        'Akmola Region',
+                       ]
+            },
+            {
+                city: {
+                        'Kulsary': [  
+                            'Қосшағыл ауылдық округі', 
+                        ],
+                        'Kulsary': [  
+                                'Құлсары қалалық әкімдігі', 
+                            ],
+                    },
+                state: [ 
+                        'Atyrau Region',
+                       ]
+            },
+        ],
+        'Kyrgyzstan': [
+            { 
+                city: {
+                        'Bokonbayevo': [ 
+                            'Tong',
+                        ],
+                    },
+                state: [
+                        'Issyk-Kul Region',
+                       ]
+            },
+        ],
+        'Latvia': [
+            { 
+                city: {
+                        'Mārupe': [ 
+                            'Mārupes pagasts',
+                            'Babītes pagasts',
+                        ],
+                    },
+                state: [
+                        'Mārupes novads',
+                        'Beberi',
+                       ]
+            },
+            { 
+                city: {
+                        'Grobiņa': [ 
+                            'Grobiņas pagasts', 
+                            'Nīcas pagasts', 
+                        ],
+                    },
+                state: [
+                        'Dienvidkurzemes novads',
+                       ]
+            },
+            { 
+                city: {
+                        'Daugavpils': [ 
+                            'Slutišķi', 
+                        ],
+                    },
+                state: [
+                        'Augšdaugavas novads',
+                       ]
+            },
+            { 
+                city: {
+                        'Ādaži': [ 
+                            'Carnikavas pagasts', 
+                        ],
+                    },
+                state: [
+                        'Ādažu novads',
+                       ]
+            },
+            { 
+                city: {
+                        'Olajne': [ 
+                            'Olaines pagasts', 
+                        ],
+                    },
+                state: [
+                        'Olaine parish',
+                       ]
+            },
+            { 
+                city: {
+                        'Krāslava': [ 
+                            'Nauļāni', 
+                        ],
+                    },
+                state: [
+                        'Krāslavas novads',
+                       ]
+            },
+            {
+                 city: {
+                        'Ogre': [ 
+                            'Birzgales pagasts', 
+                        ],
+                    },
+                state: [
+                        'Ogres novads',
+                       ]
+            },
+        ],
+        'Lithuania': [
+            { 
+                city: {
+                        'Kaunas': [ 
+                            'Paltininkai', 
+                            'Kaišiadorys', 
+                            'Pajieslys', 
+                            'Birštonas', 
+                            'Rumšiškės', 
+                        ],
+                    },
+                state: [
+                        'Kaunas County',
+                       ]
+            },
+            { 
+                city: {
+                        'Utena': [ 
+                            'Visaginas', 
+                        ],
+                    },
+                state: [
+                        'Utena County',
+                       ]
+            },
+            { 
+                city: {
+                        'Alytus': [ 
+                            'Druskininkai', 
+                        ],
+                    },
+                state: [
+                        'Alytus County',
+                       ]
+            },
+        ],
+        'Lebanon': [ // Ливан
+            {
+                city: {
+                        'Baabda': [ 
+                            'Yanar',
+                            'Burj El Brajneh',
+                        ],
+                    },
+                state: [ 
+                        'Mount Lebanon Governorate',
+                       ]
+            },
+        ],
+        'Moldova': [
+            {
+                city: {
+                        'Chișinău': [ 
+                            'Stăuceni', 
+                        ],
+                    },
+                state: [ 
+                        'Chișinău Municipality',
+                       ]
+            },
+            {
+                city: {
+                        'Orhei': [ 
+                            'Peresecina', 
+                        ],
+                    },
+                state: [ 
+                        'Orhei District',
+                       ]
+            },
+            {
+                city: {
+                        'Criuleni': [ 
+                            'Cruglic', 
+                        ],
+                    },
+                state: [ 
+                        'Criuleni District',
+                       ]
+            },
+            {
+                city: {
+                        'Bender': [ 
+                            'Bender City Council', 
+                        ],
+                    },
+                state: [ 
+                        'Pridnestrovie',
+                       ]
+            },
+            {
+                city: {
+                        'Kelerash': [ 
+                            'Meleșeni', 
+                        ],
+                    },
+                state: [ 
+                        'Călărași District',
+                       ]
+            },
+        ],
+        'Montenegro': [ // Черногория
+            {
+                city: {
+                        'Budva': [ 
+                            'Seoca', 
+                        ],
+                    },
+                state: [ 
+                        'Budva Municipality',
+                       ]
+            },
+            {
+                city: {
+                        'Kotor': [ 
+                            'Bigova', 
+                        ],
+                    },
+                state: [ 
+                        'Kotor Municipality',
+                       ]
+            },
+        ],
+        'New Zealand': [
+            { 
+                city: {
+                        'Auckland': [
+                            'Maungakiekie-Tāmaki',
+                        ],
+                    },
+                state: [
+                        'Auckland',
+                       ]
+            },
+        ],
+        'Netherlands': [
+            { 
+                city: {
+                        'Emmeloord': [
+                            'Rutten',
+                        ],
+                    },
+                state: [
+                        'Flevoland',
+                       ]
+            },
+            { 
+                city: {
+                        'Maarsen': [
+                            'Nieuwersluis',
+                        ],
+                    },
+                state: [
+                        'Utrecht',
+                       ]
+            },
+            { 
+                city: {
+                        'Zwolle': [
+                            'Deventer',
+                        ],
+                    },
+                state: [
+                        'Overijssel',
+                       ]
+            },
+            { 
+                city: {
+                        'Middelburg': [
+                            'Hulst',
+                        ],
+                    },
+                state: [
+                        'Zeeland',
+                       ]
+            },
+            { 
+                city: {
+                        'Rotterdam': [
+                            'Barendrecht',
+                        ],
+                    },
+                state: [
+                        'South Holland',
+                       ]
+            },
+            { 
+                city: {
+                        'Amsterdam': [
+                            'Amstelveen',
+                        ],
+                    },
+                state: [
+                        'North Holland',
+                       ]
+            },
+            { 
+                city: {
+                        'Arnhem': [
+                            'Tiel',
+                        ],
+                    },
+                state: [
+                        'Gelderland',
+                       ]
+            },
+            { 
+                city: {
+                        'Hes': [
+                            'Heeswijk-Dinther',
+                        ],
+                    },
+                state: [
+                        'North Brabant',
+                       ]
+            },
+        ],
+        'Norway': [
+            { 
+                city: {
+                        'Oslo': [
+                            'Rælingen',
+                            'Nesoddtangen',
+                        ],
+                    },
+                state: [
+                        'Akershus',
+                       ]
+            },
+            { 
+                city: {
+                        'Tønsberg': [
+                            'Stokke',
+                        ],
+                    },
+                state: [
+                        'Vestfold',
+                       ]
+            },
+            { 
+                city: {
+                        'Sarpsborg': [
+                            'Råde',
+                        ],
+                    },
+                state: [
+                        'Østfold',
+                       ]
+            },
+            { 
+                city: {
+                        'Stejnher': [
+                            'Stjørdal',
+                        ],
+                    },
+                state: [
+                        'Trøndelag',
+                       ]
+            },
+        ],
+        'Philippines': [
+            {
+                city: {
+                        'Manila': [ 
+                            'Quezon City',
+                            'Makati',
+                            'Pasay',
+                        ],
+                    },
+                state: [
+                        'Metro Manila',
+                       ]
+            },
+            {
+                city: {
+                        'Imus': [ 
+                            'Silang',
+                        ],
+                    },
+                state: [
+                        'Cavite',
+                       ]
+            },
+            {
+                city: {
+                        'Calapan': [ 
+                            'Puerto Galera',
+                        ],
+                    },
+                state: [
+                        'Oriental Mindoro',
+                       ]
+            },
+        ],
+        'Poland': [
+            {
+                city: {
+                        'Wadowice': [ 
+                            'Klecza Górna',
+                            'Klecza Dolna',
+                        ],
+                        'Krakow': [ 
+                            'Balice',
+                        ],
+                    },
+                state: [
+                        'Lesser Poland Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Tomaszów Lubelski': [ 
+                            'Krynice',
+                            'Hrebenne',
+                        ],
+                        'Lublin': [ 
+                            'Długie',
+                        ],
+                    },
+                state: [
+                        'Lublin Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Warsaw': [ 
+                            'Ząbki',
+                            'Kotowice',
+                        ],
+                        'Legionowo': [ 
+                            'Stanisławów Pierwszy',
+                        ],
+                        'Gróejc': [ 
+                            'Szczęsna', 
+                            'Wola Worowska', 
+                        ],
+                        'Grodzisk Mazowiecki': [ 
+                            'Milanówek', 
+                        ],
+                        'Ożarów Mazowiecki': [ 
+                            'Latchorzew', 
+                        ],
+                        'Pruszków': [
+                            'Rozalin',
+                        ],
+                    },
+                state: [
+                        'Masovian Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Kielce': [ 
+                            'Skarżysko-Kamienna',
+                            'Sielpia Wielka',
+                        ],
+                    },
+                state: [
+                        'Holy Cross Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Żywiec': [ 
+                            'Zwardoń',
+                        ],
+                    },
+                state: [
+                        'Silesian Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Puck': [ 
+                            'Jastarnia',
+                        ],
+                    },
+                state: [
+                        'Pomeranian Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Wroclaw': [ 
+                            'Smolec',
+                            'Wrocław',
+                        ],
+                    },
+                state: [
+                        'Lower Silesian Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Gryfice': [ 
+                            'Rewal',
+                            'Dygowo',
+                        ],
+                        'Wałcz': [ 
+                            'Piecnik',
+                        ],
+                    },
+                state: [
+                        'West Pomeranian Voivodeship',
+                       ]
+            },
+            {
+                city: {
+                        'Ropczyce': [ 
+                            'Olchowa',
+                        ]
+                    },
+                state: [
+                        'Subcarpathian Voivodeship',
+                       ]
+            },
+        ],
+        'Portugal': [
+            {
+                city: {
+                        'Lisbon': [ 
+                            'Seixal', 
+                            'Cascais', 
+                            'Torres Vedras',                    
+                        ],
+                    },
+                state: [
+                        'Álamo',
+                        'Cova da Raposa',
+                        'Santo António do Estoril',
+                        'A dos Cunhados e Maceira',
+                        'Lisbon',
+                       ]
+            },
+            {
+                city: {
+                        'Island São Miguel': [ 
+                            'Ponta Delgada',
+                            'Ribeira Grande',
+                        ],
+                    },
+                state: [
+                        'Azores',
+                        'Vila Franca do Campo (São Miguel)',
+                       ]
+            },
+            {
+                city: {
+                        'Faro': [ 
+                            'Albufeira',
+                        ],
+                    },
+                state: [
+                        'Faro',
+                       ]
+            },
+            {
+                city: {
+                        'Porto': [ 
+                            'Amarante',
+                            'Valongo',
+                            'Ermesinde',
+                        ],
+                    },
+                state: [
+                        'Macieiras',
+                        'Agramonte',
+                        'Porto',
+                       ]
+            },
+        ],
+        'Romania': [
+            {
+                city: {
+                        'Kluzh-Napoka': [ 
+                            'Viștea',
+                        ],
+                    },
+                state: [
+                        'Cluj',
+                       ]
+            },
+        ],
+        'Russia': [
+            {
+                city: {
+                        'Moscow': [
+                            'Moskovsky Settlement',
+                            'Беседы', 
+                            'Balashikhinsky District',
+                            'Razvilka',
+                            'Konstantinovo',
+                            'Reutov',
+                            'Lopatino',
+                            'Dzerzhinsky',
+                            'Лужки',
+                            'Malakhovka',
+                            'Oktyabrskiy',
+                            'поселение Внуковское',
+                            'Rogozinino',
+                            'Kommunarka',
+                            'район Внуково',
+                            'Vnukovo',
+                        ],
+                        'Odintsovo': [
+                            'Vniissok', 
+                            'Борки',
+                            "Zarech'e",
+                            'Romashkovo',
+                            'Сосны',
+                            'Лапино',
+                            'Nemchinovka',
+                            'Novoivanovskoe',
+                            'Одинцовский городской округ',
+                            'Usovo',
+                            'Zhukovka',
+                            'Акулово',
+                            'Щедрино',
+                            'Mamonovo',
+                            'Gorki-2',
+                            'Setun Malaya',
+                        ],
+                        'Troitsk': [
+                            'Клоково',
+                        ],
+                        'Pushkino': [
+                            'Ivanteyevka',
+                        ],
+                        'Chekhov': [
+                            'Детково',
+                            'Chekhovsky District',
+                        ],
+                        'Ramenskoye': [
+                            'Ramensky District',
+                            'Dergayevo',
+                            "Il’inskiy",
+                            'Вишняково',
+                            'Сельвачёво',
+                        ],
+                        'Mozhaisk': [
+                            'Mozhaysky District',
+                        ],
+                        'Solnechnogorsk': [
+                            'Тараканово',
+                            'Елизарово',
+                            'Общественник',
+                            'Solnechnogorsky District',
+                            '2-й микрорайон',
+                        ],
+                        'Klin': [
+                            'Афанасово',
+                            'Покровка',
+                        ],
+                        'Shakhovskaya': [
+                            'Бурцево',
+                            'Shakhovskaya Urban Okrug',
+                            'Юренево',
+                        ],
+                        'Orekhovo-Zuyevo': [
+                            'Likino-Dulyovo',
+                        ],
+                        'Dmitrov': [
+                            'Dmitrovsky District',
+                            'Озерецкое',
+                        ],
+                        'Zvenigorod': [
+                            'Pokrovskoe',
+                            'Дачный КГБ',
+                        ],
+                        'Ruza': [
+                            'Novovolkovo',
+                            'Городище',
+                            'Dorokhovo',
+                            'Tuchkovo',
+                        ],
+                        'Khimki': [
+                            'Yurlovo',
+                            'Мышецкое',
+                            'Khimki Urban Okrug',
+                            'Веревское',
+                        ],
+                         'Vidnoye': [
+                            'Bulatnikovo',
+                            'Мещерино',
+                            'Gorki Leninskiye',
+                            'Leninsky District',
+                            'Butovo',
+                        ],
+                        'Istra': [
+                            'Еремеево',
+                            'Троица',
+                            'Агрогородок',
+                            'муниципальный округ Истра',
+                            'Кашино',
+                            'Рождествено',
+                        ],
+                        'Mytishchi': [
+                            'Nagornoye', 
+                            'Mytishchi Urban Okrug', 
+                            'Никульское', 
+                            'Marfino', 
+                            'Пирогово', 
+                            'Вёшки', 
+                            'Sholokhovo', 
+                            'Шолохово', 
+                        ],
+                        'Naro-Fominsk': [
+                            'Наро-Фоминский городской округ', 
+                            'Aprelevka', 
+                            'Vereya', 
+                        ],
+                        'Krasnogorsk': [
+                            'Козино', 
+                            'Красный Посёлок', 
+                            'Buzlanovo',
+                            'Михалково',
+                            'Krasnogorsky District',
+                            'Putilkovo',
+                            'Тимошкино',
+                            'Отрадное',
+                            'Nakhabino',
+                            'Svetlyye Gory',
+                            'Korostovo',
+                            'Zakharkovo',
+                        ],
+                        'Sergiyev Posad': [
+                            'Барканово', 
+                            'Peresvet', 
+                            'Sergiyevo-Posadsky District', 
+                        ],
+                        'Podolsk': [
+                            'Bobrovo', 
+                            'Александровка', 
+                            'Novodrozhzhino', 
+                            'Dubrovitsy', 
+                            'Bykovka', 
+                        ],
+                        'Voskresensk': [
+                            'Voskresensky District', 
+                            'Yurasovo', 
+                            'Большое Колычево', 
+                            'территория Русская Деревня', 
+                            'Beloozyorsky', 
+                            'микрорайон Золотая Слобода', 
+                        ],
+                        'Lukhovitsy': [
+                            'Подлипки',
+                        ],
+                        'Serpukhov': [
+                            'Банино',
+                            'Protvino',
+                        ],
+                        'Shchyolkovo': [
+                            'Medvezhyi Ozyora', 
+                            'Zagoryanskiy',
+                        ],
+                        'Domodedovo': [
+                            'Domodedovsky District',
+                            'Константиново',
+                        ],
+                        'Lyubertsy': [
+                            'Tomilino',
+                            'Kraskovo',
+                            'Lytkarino',
+                        ],
+                        'Zelenograd': [
+                            'Andreyevka',
+                        ],
+                        'Balashikha': [
+                            'Полтево',
+                        ],   
+                        'Serebryanye-Prudy': [
+                            'Беляево',
+                        ],
+                        'Volokolamsk': [
+                            'Volokolamsky District',
+                        ],
+                        'Noginsk': [
+                            'Elektrougli',
+                        ],
+                    }, 
+                state: [
+                        'Moscow',
+                        'Moscow Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Zheleznogorsk': [ 
+                            'Троицкое', 
+                        ],
+                        'Kursk': [
+                            'Кукуевка',
+                            '2-я Моква',
+                        ],
+                        'Pryamicyno': [
+                            'Ванина',
+                            'Большедолженковский сельсовет',
+                        ],
+                    },
+                state: [
+                        'Kursk Oblast',
+                       ],
+            },
+            {
+                city: {
+                        'Tarbagataj': [ 
+                            'Нижний Саянтуй', 
+                        ],
+                    },
+                state: [
+                        'Buryatia',
+                       ],
+            },
+            {
+                city: {
+                        'Oryol': [ 
+                            'Кондырева', 
+                        ],
+                        'Mcensk': [ 
+                            'Подберёзово', 
+                        ],
+                    },
+                state: [
+                        'Oryol Oblast',
+                       ],
+            },
+            {
+                city: {
+                        'Nogliki': [ 
+                            'Nogliksky District', 
+                        ],
+                    },
+                state: [
+                        'Sakhalin Oblast',
+                       ],
+            },
+            {
+                city: {
+                        'Neryungri': [ 
+                            'Chulman', 
+                        ],
+                    },
+                state: [
+                        'Sakha Republic',
+                       ],
+            },
+            {
+                city: {
+                        'Sebezh': [ 
+                            'Burachki', 
+                        ],
+                        'Pskov': [ 
+                            'Pskovsky District', 
+                        ],
+                    },
+                state: [
+                        'Pskov Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Ivanovo': [ 
+                            'Беляницкое сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Ivanovo Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Belgorod': [ 
+                            'Таврово', 
+                        ],
+                        'Majskij': [ 
+                            'Repnoe', 
+                        ],
+                    },
+                state: [
+                        'Belgorod Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Bryansk': [ 
+                            'Толмачево', 
+                            'Нетьинка', 
+                        ],
+                        'Glinishevo': [ 
+                            'Снежское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Bryansk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Radishchevo': [ 
+                            'Октябрьское сельское поселение', 
+                            'Ореховское сельское поселение', 
+                        ],
+                        'Bolshoe-Nagatkino': [ 
+                            'Степная Репьёвка', 
+                        ],
+                        'Nikolaevka': [ 
+                            'Канадейское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Ulyanovsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Tyrnyauz': [ 
+                            'сельское поселение Эльбрус', 
+                            'Terskol', 
+                        ],
+                        'Nartkala': [ 
+                            'Old Cherek', 
+                        ],
+                    },
+                state: [
+                        'Kabardino-Balkaria',
+                       ]
+            },
+            {
+                city: {
+                        'Maloyaroslavets': [ 
+                            'Мурзино', 
+                            'сельское поселение Деревня Ерденево', 
+                        ],
+                        'Zhukov': [ 
+                            'городское поселение Белоусово', 
+                        ],
+                        'Tarusa': [ 
+                            'Волковское', 
+                        ],
+                        'Borovsk': [ 
+                            'Новомихайловское', 
+                            'Совхоз "Боровский"', 
+                            'сельское поселение Село Ворсино', 
+                            'Тимашово', 
+                        ],
+                        'Kondrovo': [ 
+                            'сельское поселение Село Совхоз имени Ленина', 
+                        ],
+                        'Zhizdra': [ 
+                            'сельское поселение Село Студенец', 
+                        ],
+                        'Kaluga': [ 
+                            'Росва', 
+                        ],
+                    },
+                state: [
+                        'Kaluga Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Saint Petersburg': [
+                            'Pavlovsk',
+                            'Yanino-1',  
+                            'Telmana',
+                            'Peterhof',
+                            'Sestroretsk',
+                            'Ladoga',
+                            'Sertolovo',
+                            'Мистолово',
+                            'Romanovka',
+                            'Pargolovo',
+                            'Kudrovo',
+                            'Таицкое городское поселение',
+                            'Kronstadt',
+                            'Shushary',
+                            'Levashovo',
+                            'Kolpino',
+                            'Koporye', 
+                            'Низинское сельское поселение', 
+                            'Оржицкое сельское поселение',
+                            'Виллозское городское поселение',
+                            'Annino',
+                            'Maloye Karlino',
+                            'Gorbunki',
+                            'Pushkin',
+                            'Lisy Nos',
+                        ],
+                        'Vsevolozhsk': [
+                            'Toksovo', 
+                            'Агалатовское сельское поселение', 
+                            'Новосергиевка', 
+                            'Сертоловское городское поселение', 
+                            'Vsevolozhsky District', 
+                            'Куйвозовское сельское поселение', 
+                            'Муринское городское поселение', 
+                        ],
+                        'Tikhvin': [
+                            'Царицыно Озеро', 
+                        ],
+                        'Kirovsk': [ 
+                            'Otradnoye', 
+                            'Priladozhsky', 
+                        ],
+                        'Kingisepp': [ 
+                            'Ivangorod',
+                            'Кузёмкинское сельское поселение',
+                            'Jaama District',
+                            'Усть-Лужское сельское поселение',
+                            'Neppovo',
+                        ],
+                        'Luga': [ 
+                            'Старая Серёдка', 
+                        ],
+                        'Tosno': [ 
+                            'Nikolskoye',
+                            'Рябово',
+                            'Tusina District',
+                        ],
+                        'Lid': [ 
+                            'Лидь', 
+                        ],
+                        'Podporozhye': [ 
+                            'Подпорожское городское поселение', 
+                        ],
+                        'Gatchina': [ 
+                            'Дружногорское городское поселение', 
+                        ],
+                        'Priozersk': [ 
+                            'Петровское сельское поселение', 
+                            'Громовское сельское поселение', 
+                            'Käkisalmi District', 
+                            'Новожилово',
+                            'Гречухино',
+                        ],
+                         'Kirishi': [ 
+                            'Глажевское сельское поселение', 
+                        ],
+                         'Vyborg': [ 
+                            'Рощинское городское поселение', 
+                            'Гаврилово', 
+                            'Roshchino', 
+                            'Первомайское сельское поселение', 
+                        ],
+                        'Volosovo': [ 
+                            'Большеврудское сельское поселение', 
+                            'Горицы', 
+                        ],
+                    },
+                state: [
+                        'Saint Petersburg',
+                        'Leningrad Oblast',
+                        'Leningrad oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Petrozavodsk': [ 
+                            'Деревянское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Republic of Karelia',
+                       ]
+            },
+            {
+                city: {
+                        'Blagoveshchensk': [ 
+                            'Chigiri', 
+                        ],
+                    },
+                state: [
+                        'Amur Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Ryazan': [ 
+                            'Поляны', 
+                        ],
+                        'Kasimov': [ 
+                            'Syntul', 
+                        ],
+                        'Pronsk': [ 
+                            'Novomichurinsk', 
+                        ],
+                        'Sapozhok': [ 
+                            'Paryshka', 
+                        ],
+                        'Starozhilovo': [ 
+                            'Akulovo', 
+                            'Chernobayevo', 
+                        ],
 
-    ],
-    'Canada': [
-        {
-            city: [ 
-                    'Pointe-Claire', 
-                    ],
-            state: [
-                    'Quebec',
-                    ],
-            result: 'Montreal',
-        },  
-        {
-            city: [ 
-                    'Ottawa', 
-                    ],
-            state: [
-                    'Ontario',
-                    ],
-            result: '(Old) Ottawa',
-        }, 
-    ],
-    'China': [
-        {
-            city: [ 
-                    'Yinzhou District',
-                    'Haishu District',
-                    ],
-            state: [ 
-                    'Zhejiang',
-                    ],
-            result: 'Ningbo',
-        },
-    ],
-    'Czechia': [
-        { 
-            city: [ 
-                    'Chýně', 
-                    'Capital City of Prague', 
-                    ],
-            state: [ 
-                    'Central Bohemia',
-                    'Prague',
-                    ],
-            result: 'Prague',
-        },
-        { 
-            city: [ 
-                    'Vlašim',
-                    ],
-            state: [ 
-                    'Central Bohemia',
-                    ],
-            result: 'Benešov',
-        }, 
-    ],
-    'Cyprus': [
-        { 
-            city: [ 
-                    'Germasogeia', 
-                    ],
-            state: [ 
-                    'Cyprus',
-                    ],
-            result: 'Limassol',
-        },
-    ],
-    'Denmark': [
-        { 
-            city: [ 
-                    'Klampenborg', 
-                    ],
-            state: [ 
-                    'Denmark',
-                    ],
-            result: 'Copenhagen',
-        },
-        { 
-            city: [ 
-                    'Vestervig', 
-                    ],
-            state: [ 
-                    'North Denmark Region',
-                    ],
-            result: 'Thisted',
-        }, 
-    ],
-    'Dominican Republic': [
-        { 
-            city: [ 
-                    'Dominicus', 
-                    ],
-            state: [ 
-                    'La Altagracia',
-                    ],
-            result: 'Higüey',
-        }, 
-    ],
-    'Estonia': [
-        {
-            city: [ 
-                    'Kohtla-Järve linn',
-                    ],
-            state: [ 
-                    'Järve linnaosa',
-                    'Ahtme',
-                    ],
-            result: 'Jõhvi',
-        },
-    ],
-    'Finland': [
-        {
-            city: [ 
-                    'Orimattila', 
-                    ],
-            state: [ 
-                    'Mainland Finland',
-                    ],
-            result: 'Lahti',
-        },
-        {
-            city: [ 
-                    'Rautjärvi', 
-                    ],
-            state: [ 
-                    'Mainland Finland',
-                    ],
-            result: 'Parikkala',
-        },
-    ],
-    'France': [
-        {
-            city: [ 
-                    'Èze', 
-                    'Villefranche-sur-Mer',
-                    'Cannes',
-                    'Antibes',
-                    ],
-            state: [ 
-                    "Provence-Alpes-Côte d'Azur",
-                    ],
-            result: 'Nice',
-        },
-        {
-            city: [ 
-                    'Villennes-sur-Seine', 
-                    'Aubervilliers',
-                    'Magny-les-Hameaux',
-                    ],
-            state: [ 
-                    "Île-de-France",
-                    ],
-            result: 'Paris',
-        },
-        {
-            city: [ 
-                    'Veigy-Foncenex', 
-                    ],
-            state: [ 
-                    'Auvergne-Rhône-Alpes',
-                    ],
-            result: 'Thonon-les-Bains',
-        },
-        {
-            city: [ 
-                    'Saint-Nizier-du-Moucherotte', 
-                    ],
-            state: [ 
-                    'Auvergne-Rhône-Alpes',
-                    ],
-            result: 'Grenoble',
-        },
-        {
-            city: [ 
-                    'Terres-de-Caux', 
-                    ],
-            state: [ 
-                    'Normandie',
-                    ],
-            result: 'Rouen',
-        },
-    ],
-    'Greece': [
-        {
-            city: [ 
-                    'Municipality of Palaio Faliro', 
-                    ],
-            state: [ 
-                    'Attica',
-                    ],
-            result: 'Athens',
-        },
-        {
-            city: [ 
-                    'Municipal Unit of Lefktro', 
-                    'Municipal Unit of Avia', 
-                    'Ditiki-Mani', 
-                    'Municipality of Kalamata', 
-                    ],
-            state: [ 
-                    'Peloponnese, Western Greece and the Ionian',
-                    ],
-            result: 'Municipal Unit of Tripoli',
-        },
-        {
-            city: [ 
-                    'Dramia', 
-                    ],
-            state: [ 
-                    'Region of Crete',
-                    ],
-            result: 'Chania',
-        },
-        {
-            city: [ 
-                    'Nea Moudania', 
-                    ],
-            state: [ 
-                    'Macedonia and Thrace',
-                    ],
-            result: 'Thessaloniki',
-        },
-    ],
-    'Germany': [
-        {
-            city: [ 
-                    'Öhringen', 
-                    ],
-            state: [ 
-                    'Baden-Württemberg',
-                    ],
-            result: 'Künzelsau',
-        },
-        {
-            city: [ 
-                    'Ehningen', 
-                    ],
-            state: [ 
-                    'Baden-Württemberg',
-                    ],
-            result: 'Böblingen',
-        },
-        {
-            city: [ 
-                    'Könnern', 
-                    ],
-            state: [ 
-                    'Saxony-Anhalt',
-                    ],
-            result: 'Bernburg',
-        },
-        {
-            city: [ 
-                    'Bad Nauheim', 
-                    ],
-            state: [ 
-                    'Hesse',
-                    ],
-            result: 'Friedberg (Hesse)',
-        },
-        {
-            city: [ 
-                    'Darmstadt-Nord', 
-                    'Darmstadt-Mitte',
-                    'Bickenbach',
-                    ],
-            state: [ 
-                    'Hesse',
-                    ],
-            result: 'Darmstadt',
-        },
-        {
-            city: [ 
-                    'Offenbach am Main', 
-                    'Großen-Buseck', 
-                    ],
-            state: [ 
-                    'Hesse',
-                    ],
-            result: 'Frankfurt',
-        },
-        {
-            city: [ 
-                    'Neuruppin', 
-                    ],
-            state: [ 
-                    'Brandenburg',
-                    ],
-            result: 'Berlin',
-        },
-        {
-            city: [ 
-                    'Halbe', 
-                    ],
-            state: [ 
-                    'Brandenburg',
-                    ],
-            result: 'Lübben (Spreewald)',
-        },
-        {
-            city: [ 
-                    'Bad Oeynhausen', 
-                    ],
-            state: [ 
-                    'North Rhine – Westphalia',
-                    ],
-            result: 'Bielefeld',
-        },
-        {
-            city: [ 
-                    'Nieheim', 
-                    ],
-            state: [ 
-                    'North Rhine-Westphalia',
-                    ],
-            result: 'Höxter',
-        },
-        {
-            city: [ 
-                    'Rheda-Wiedenbrück', 
-                    ],
-            state: [ 
-                    'North Rhine-Westphalia',
-                    ],
-            result: 'Gütersloh',
-        },
-        {
-            city: [ 
-                    'Norderstedt', 
-                    ],
-            state: [ 
-                    'Schleswig-Holstein',
-                    ],
-            result: 'Bad Segeberg',
-        },
-        {
-            city: [ 
-                    'Tangstedt', 
-                    ],
-            state: [ 
-                    'Schleswig-Holstein',
-                    ],
-            result: 'Bad Oldesloe',
-        },
-        {
-            city: [ 
-                    'Abentheuer', 
-                    ],
-            state: [ 
-                    'Rhineland-Palatinate',
-                    ],
-            result: 'Birkenfeld',
-        },
-        {
-            city: [ 
-                    'Bad Bergzabern', 
-                    ],
-            state: [ 
-                    'Rhineland-Palatinate',
-                    ],
-            result: 'Landau in der Pfalz',
-        },
-        {
-            city: [ 
-                    'Plate', 
-                    ],
-            state: [ 
-                    'Mecklenburg-Vorpommern',
-                    ],
-            result: 'Parchim',
-        },
-        {
-            city: [ 
-                    'Meitingen', 
-                    ],
-            state: [ 
-                    'Bavaria',
-                    ],
-            result: 'Augsburg',
-        },
-        {
-            city: [ 
-                    'Zell', 
-                    ],
-            state: [ 
-                    'Bavaria',
-                    ],
-            result: 'Hof',
-        },
-        {
-            city: [ 
-                    'Drochtersen', 
-                    ],
-            state: [ 
-                    'Lower Saxony',
-                    ],
-            result: 'Stade',
-        },
-        {
-            city: [ 
-                    'Sassenburg', 
-                    ],
-            state: [ 
-                    'Lower Saxony',
-                    ],
-            result: 'Gifhorn',
-        },
-        {
-            city: [ 
-                    'Seevetal', 
-                    ],
-            state: [ 
-                    'Lower Saxony',
-                    ],
-            result: 'Winsen (Luhe)',
-        },
-        {
-            city: [ 
-                    'Ispringen', 
-                    ],
-            state: [ 
-                    'Baden-Württemberg',
-                    ],
-            result: 'Pforzheim',
-        },
-        {
-            city: [ 
-                    'Ellwangen', 
-                    ],
-            state: [ 
-                    'Baden-Württemberg',
-                    ],
-            result: 'Stuttgart',
-        },
-    ],
-    'Georgia': [
-        {
-            city: [ 
-                    'Akhalubani', 
-                    'Tsilkani', 
-                    ],
-            state: [ 
-                    'Mtskheta-Mtianeti',
-                    ],
-            result: 'Mtskheta',
-        },{
-            city: [ 
-                    'Dapnari', 
-                    ],
-            state: [ 
-                    'Imereti',
-                    ],
-            result: 'Kutaisi',
-        },
-    ],
-    'India': [
-        {
-            city: [ 
-                    'Arambol', 
-                    'Pernem',
-                    'Querim',
-                    'Margao',
-                    'Morjim',
-                    ],
-            state: [ 
-                    'Goa',
-                    ],
-            result: 'Goa',
-        },
-        {
-            city: [ 
-                    'Thachanatukkara', 
-                    ],
-            state: [ 
-                    'Kerala',
-                    ],
-            result: 'Palakkad',
-        },
-        {
-            city: [ 
-                    'Chemmalamattom', 
-                    ],
-            state: [ 
-                    'Kerala',
-                    ],
-            result: 'Kottayam',
-        },
-        {
-            city: [ 
-                    'Adimalathura', 
-                    ],
-            state: [ 
-                    'Kerala',
-                    ],
-            result: 'Thiruvananthapuram',
-        },
-        {
-            city: [ 
-                    'Devanahalli taluku', 
-                    ],
-            state: [ 
-                    'Karnataka',
-                    ],
-            result: 'Devanahalli',
-        },
-        {
-            city: [ 
-                    'Mahadevapura', 
-                    ],
-            state: [ 
-                    'Karnataka',
-                    ],
-            result: 'Bengaluru',
-        },
-        {
-            city: [ 
-                    'Kaup', 
-                    ],
-            state: [ 
-                    'Karnataka',
-                    ],
-            result: 'Udupi',
-        },
-        {
-            city: [ 
-                    'Kalkaji Tehsil', 
-                    'New Delhi', 
-                    ],
-            state: [ 
-                    'Delhi',
-                    ],
-            result: 'Delhi',
-        },
-        {
-            city: [ 
-                    'Bhodwal Majri',
-                    ],
-            state: [ 
-                    'Haryana',
-                    ],
-            result: 'Panipat',
-        },
-        {
-            city: [ 
-                    'Swargashram', 
-                    ],
-            state: [ 
-                    'Uttarakhand',
-                    ],
-            result: 'Rishikesh',
-        },
-        {
-            city: [ 
-                    'Govardhan', 
-                    'Jatipura', 
-                    ],
-            state: [ 
-                    'Uttar Pradesh',
-                    ],
-            result: 'Mathura',
-        },
-        {
-            city: [ 
-                    'Sunrakh', 
-                    ],
-            state: [ 
-                    'Uttar Pradesh',
-                    ],
-            result: 'Vrindavan',
-        },
-        {
-            city: [ 
-                    'Bhubaneswar Municipal Corporation', 
-                    ],
-            state: [ 
-                    'Odisha',
-                    ],
-            result: 'Khurdha Municipality Boundary',
-        },
-        {
-            city: [ 
-                    'Awalsiddhi', 
-                    ],
-            state: [ 
-                    'West Bengal',
-                    ],
-            result: 'Kolkata',
-        },
-        {
-            city: [ 
-                    'Durgauti', 
-                    ],
-            state: [ 
-                    'Bihar',
-                    ],
-            result: 'Varanasi',
-        },
-        {
-            city: [ 
-                    'Semmedu', 
-                    ],
-            state: [ 
-                    'Tamil Nadu',
-                    ],
-            result: 'Coimbatore',
-        },
-        {
-            city: [ 
-                    'Daurala', 
-                    ],
-            state: [ 
-                    'Uttar Pradesh',
-                    ],
-            result: 'Meerut',
-        },
-    ],
-    'Indonesia': [
-        { 
-            city: [ 
-                    'Dusun Mangsit', 
-                    'Aik Berik',
-                    'Lombok Tengah', 
-                    ],
-            state: [
-                    'West Nusa Tenggara',
-                    ],
-            result: 'Lombok',
-        }, 
-        {
-            city: [ 
-                    'Special Capital Region of Jakarta', 
-                    'Special Region of Jakarta', 
-                    ],
-            state: [
-                    'Java',
-                    ],
-            result: 'Jakarta',
-        },
-        {
-            city: [ 
-                    'Sanur', 
-                    'Cemagi', 
-                    'Dauh Puri Kauh', 
-                    'Renon',
-                    'Cepaka',
-                    'Ubud',
-                    'Petulu',
-                    'Penestanan',
-                    'Mas',
-                    'Lodtunduh',
-                    'Jimbaran',
-                    'Ungasan',
-                    'Abang',
-                    'Pecatu',
-                    ],
-            state: [
-                    'Bali',
-                    ],
-            result: 'Denpasar',
-        },
-        {
-            city: [ 
-                    'Amed', 
-                    ],
-            state: [
-                    'Bali',
-                    ],
-            result: 'Amlapura',
-        },
-    ],
-    'Ireland': [
-        {
-            city: [ 
-                    'Ongar', 
-                    ],
-            state: [
-                    'Leinster',
-                    ],
-            result: 'Dublin',
-        },
-        {
-            city: [ 
-                    'Clifden', 
-                    'County Galway', 
-                    ],
-            state: [
-                    'Connacht',
-                    'Conamara Municipal District',
-                    ],
-            result: 'Galway',
-        },
-    ],
-    'Italy': [
-        { 
-            city: [ 
-                    'Austis', 
-                    'Crabonaxa/Villasimius', 
-                    ],
-            state: [ 
-                    'Sardinia',
-                    ],
-            result: 'Island Sardinia',
-        },
-        { 
-            city: [ 
-                    'Castiglione in Teverina', 
-                    ],
-            state: [ 
-                    'Lazio',
-                    ],
-            result: 'Viterbo',
-        },
-        { 
-            city: [ 
-                    'Uboldo', 
-                    ],
-            state: [ 
-                    'Lombardy',
-                    ],
-            result: 'Varese',
-        }, 
-        {
-            city: [ 
-                    'Spotorno', 
-                    ],
-            state: [ 
-                    'Liguria',
-                    ],
-            result: 'Savona',
-        },
-        {
-            city: [ 
-                    'San Casciano in Val di Pesa', 
-                    ],
-            state: [ 
-                    'Tuscany',
-                    ],
-            result: 'Florence',
-        },
-        {
-            city: [ 
-                    'Roseto degli Abruzzi', 
-                    ],
-            state: [ 
-                    'Abruzzo',
-                    ],
-            result: 'Teramo',
-        },
-        {
-            city: [ 
-                    'Colleverde',
-                    ],
-            state: [ 
-                    'Lazio',
-                    ],
-            result: 'Rome',
-        },
-        {
-            city: [ 
-                    'Berceto', 
-                    ],
-            state: [ 
-                    'Emilia-Romagna',
-                    ],
-            result: 'Parma',
-        },
-        {
-            city: [ 
-                    'Chiugiana', 
-                    ],
-            state: [ 
-                    'Umbria',
-                    ],
-            result: 'Perugia',
-        },
-    ],
-    'Israel': [
-        {
-            city: [ 
-                    'South Givatayim',  
-                    'Bat Yam', 
-                    'Rishon LeZion',
-                    'Ramat Gan',
-                    ],
-            state: [ 
-                    'Tel-Aviv District',
-                    'Center District',
-                    ],
-            result: 'Tel-Aviv',
-        },
-        {
-            city: [ 
-                    'Harish',
-                    'Hadera',
-                    ],
-            state: [ 
-                    'Haifa District',
-                    ],
-            result: 'Haifa',
-        },
-        {
-            city: [ 
-                    'Sderot',
-                    "Be'er Sheva",
-                    ],
-            state: [ 
-                    'South District',
-                    ],
-            result: "Be’er-Sheva",
-        },
-        {
-            city: [ 
-                    'Maalot Tarshiha',
-                    ],
-            state: [ 
-                    'North District',
-                    ],
-            result: 'Nof HaGalil',
-        },
-    ],
-    'Japan': [
-        {
-            city: [ 
-                    'Tsubata',
-                    ],
-            state: [ 
-                    'Ishikawa Prefecture',
-                    ],
-            result: 'Kahoku',
-        },
-        {
-            city: [ 
-                    'Tokorozawa',
-                    ],
-            state: [ 
-                    'Saitama Prefecture',
-                    ],
-            result: 'Saitama',
-        },
-        { 
-            city: [ 
-                    'Chiyoda', 
-                    'Koto', 
-                    ],
-            state: [
-                    'Nishi-Kanda 3-chome',
-                    'Ogibashi 3',
-                    ],
-            result: 'Tokio',
-        },
-    ],
-    'Jordan': [ // Иордания
-    {
-        city: [  
-                'Al Jizah', 
-                'Muaqqar Sub-District', 
-                'Quaismeh Sub-District', 
-                ],
-        state: [ 
-                'Amman',
-                ],
-        result: 'Amman',
-    },
-    ],
-    'Kazakhstan': [
-        {
-            city: [  
-                    'Boralday', 
-                    'Байсерке', 
-                    'Гүлдала', 
-                    ],
-            state: [ 
-                    'Almaty Region',
-                    ],
-            result: 'Almaty',
-        },
-        {
-            city: [  
-                    'Saran, Kazakhstan', 
-                    ],
-            state: [ 
-                    'Karaganda Region',
-                    ],
-            result: 'Karaganda',
-        },
-        {
-            city: [  
-                    'Мичурин ауылдық округі', 
-                    'Зачаганск', 
-                    ],
-            state: [ 
-                    'West Kazakhstan Region',
-                    ],
-            result: 'Oral',
-        },
-        {
-            city: [  
-                    'Карасу', 
-                    'Челгаши', 
-                    ],
-            state: [ 
-                    'Kostanay Region',
-                    ],
-            result: 'Karasu',
-        },
-        {
-            city: [  
-                    'Айет', 
-                    'Beimbet Mailin District', 
-                    ],
-            state: [ 
-                    'Kostanay Region',
-                    ],
-            result: 'Ayet',
-        },
-        {
-            city: [  
-                    'Косшы', 
-                    ],
-            state: [ 
-                    'Akmola Region',
-                    ],
-            result: 'Astana',
-        },
-    ],
-    'Latvia': [
-        { 
-            city: [ 
-                    'Mārupes pagasts',
-                    'Babītes pagasts',
-                    ],
-            state: [
-                    'Mārupes novads',
-                    'Beberi',
-                    ],
-            result: 'Mārupe',
-        },
-        { 
-            city: [ 
-                    'Grobiņas pagasts', 
-                    ],
-            state: [
-                    'Dienvidkurzemes novads',
-                    ],
-            result: 'Grobiņa',
-        },
-        { 
-            city: [ 
-                    'Slutišķi', 
-                    ],
-            state: [
-                    'Augšdaugavas novads',
-                    ],
-            result: 'Daugavpils',
-        },
-        { 
-            city: [ 
-                    'Carnikavas pagasts', 
-                    ],
-            state: [
-                    'Mežciems',
-                    ],
-            result: 'Ādaži',
-        },
-    ],
-    'Lithuania': [
-        { 
-            city: [ 
-                    'Paltininkai', 
-                    'Kaišiadorys', 
-                    ],
-            state: [
-                    'Kaunas County',
-                    ],
-            result: 'Kaunas',
-        },
-        { 
-            city: [ 
-                    'Visaginas', 
-                    ],
-            state: [
-                    'Utena County',
-                    ],
-            result: 'Utena',
-        },
-        { 
-            city: [ 
-                    'Druskininkai', 
-                    ],
-            state: [
-                    'Alytus County',
-                    ],
-            result: 'Alytus',
-        },
-    ],
-    'Lebanon': [
-        {
-            city: [ 
-                    'Yanar',
-                    'Burj El Brajneh',
-                    ],
-            state: [ 
-                    'Mount Lebanon Governorate',
-                    ],
-            result: 'Baabda',
-        },
-    ],
-    'Moldova': [
-        {
-            city: [ 
-                    'Ialoveni', 
-                    'Slobozia', 
-                    ],
-            state: [ 
-                    'Ialoveni District',
-                    ],
-            result: 'Chișinău',
-        },
-        {
-            city: [ 
-                    'Peresecina', 
-                    ],
-            state: [ 
-                    'Orhei District',
-                    ],
-            result: 'Orhei',
-        },
-        {
-            city: [ 
-                    'Cruglic', 
-                    ],
-            state: [ 
-                    'Criuleni District',
-                    ],
-            result: 'Criuleni',
-        },
-        {
-            city: [ 
-                    'Bender City Council', 
-                    ],
-            state: [ 
-                    'Pridnestrovie',
-                    ],
-            result: 'Bender',
-        },
-    ],
-    'Montenegro': [
-        {
-            city: [ 
-                    'Seoca', 
-                    ],
-            state: [ 
-                    'Budva Municipality',
-                    ],
-            result: 'Budva',
-        },
-        {
-            city: [ 
-                    'Bigova', 
-                    ],
-            state: [ 
-                    'Kotor Municipality',
-                    ],
-            result: 'Kotor',
-        },
-    ],
-    'New Zealand': [
-        { 
-            city: [
-                    'Maungakiekie-Tāmaki',
-                    ],
-            state: [
-                    'Auckland',
-                    ],
-            result: 'Auckland',
-        },
-    ],
-    'Netherlands': [
-        { 
-            city: [
-                    'Rutten',
-                    ],
-            state: [
-                    'Flevoland',
-                    ],
-            result: 'Emmeloord',
-        },
-        { 
-            city: [
-                    'Deventer',
-                    ],
-            state: [
-                    'Overijssel',
-                    ],
-            result: 'Zwolle',
-        },
-        { 
-            city: [
-                    'Hulst',
-                    ],
-            state: [
-                    'Zeeland',
-                    ],
-            result: 'Middelburg',
-        },
-        { 
-            city: [
-                    'Barendrecht',
-                    ],
-            state: [
-                    'South Holland',
-                    ],
-            result: 'Rotterdam',
-        },
-        { 
-            city: [
-                    'Amstelveen',
-                    ],
-            state: [
-                    'North Holland',
-                    ],
-            result: 'Amsterdam',
-        },
-        { 
-            city: [
-                    'Tiel',
-                    ],
-            state: [
-                    'Gelderland',
-                    ],
-            result: 'Arnhem',
-        },
-    ],
-    'Norway': [
-        { 
-            city: [
-                    'Rælingen',
-                    'Nesoddtangen',
-                    ],
-            state: [
-                    'Øgardshøgda',
-                    'Akershus',
-                    ],
-            result: 'Oslo',
-        },
-        { 
-            city: [
-                    'Stokke',
-                    ],
-            state: [
-                    'Vestfold',
-                    ],
-            result: 'Tønsberg',
-        },
-    ],
-    'Philippines': [
-        {
-            city: [ 
-                    'Quezon City',
-                    'Makati',
-                    'Pasay',
-                    ],
-            state: [
-                    'Metro Manila',
-                    ],
-            result: 'Manila',
-        },
-        {
-            city: [ 
-                    'Silang',
-                    ],
-            state: [
-                    'Cavite',
-                    ],
-            result: 'Imus',
-        },
-        {
-            city: [ 
-                    'Puerto Galera',
-                    ],
-            state: [
-                    'Oriental Mindoro',
-                    ],
-            result: 'Calapan',
-        },
-    ],
-    'Poland': [
-        {
-            city: [ 
-                    'Klecza Górna',
-                    'Klecza Dolna',
-                    ],
-            state: [
-                    'Lesser Poland Voivodeship',
-                    ],
-            result: 'Wadowice',
-        },
-        {
-            city: [ 
-                    'Krynice',
-                    'Hrebenne',
-                    ],
-            state: [
-                    'Lublin Voivodeship',
-                    ],
-            result: 'Tomaszów Lubelski',
-        },
-        {
-            city: [ 
-                    'Długie',
-                    ],
-            state: [
-                    'Lublin Voivodeship',
-                    ],
-            result: 'Lublin',
-        },
-        {
-            city: [ 
-                    'Ząbki',
-                    'Kotowice',
-                    ],
-            state: [
-                    'Masovian Voivodeship',
-                    ],
-            result: 'Warsaw',
-        },
-        {
-            city: [ 
-                    'Stanisławów Pierwszy',
-                    ],
-            state: [
-                    'Masovian Voivodeship',
-                    ],
-            result: 'Legionowo',
-        },
-        {
-            city: [ 
-                    'Szczęsna', 
-                    'Wola Worowska', 
-                    ],
-            state: [
-                    'Masovian Voivodeship',
-                    ],
-            result: 'Gróejc',
-        },
-        {
-            city: [ 
-                    'Milanówek', 
-                    ],
-            state: [
-                    'Masovian Voivodeship',
-                    ],
-            result: 'Grodzisk Mazowiecki',
-        },
-        {
-            city: [ 
-                    'Latchorzew', 
-                    ],
-            state: [
-                    'Masovian Voivodeship',
-                    ],
-            result: 'Ożarów Mazowiecki',
-        },
-        {
-            city: [ 
-                    'Skarżysko-Kamienna',
-                    'Sielpia Wielka',
-                    ],
-            state: [
-                    'Holy Cross Voivodeship',
-                    ],
-            result: 'Kielce',
-        },
-        {
-            city: [ 
-                    'Zwardoń',
-                    ],
-            state: [
-                    'Silesian Voivodeship',
-                    ],
-            result: 'Żywiec',
-        },
-        {
-            city: [ 
-                    'Jastarnia',
-                    ],
-            state: [
-                    'Pomeranian Voivodeship',
-                    ],
-            result: 'Puck',
-        },
-        {
-            city: [ 
-                    'Smolec',
-                    ],
-            state: [
-                    'Lower Silesian Voivodeship',
-                    ],
-            result: 'Wroclaw',
-        },
-        {
-            city: [ 
-                    'Rewal',
-                    'Dygowo',
-                    ],
-            state: [
-                    'West Pomeranian Voivodeship',
-                    ],
-            result: 'Gryfice',
-        },
-        {
-            city: [ 
-                    'Piecnik',
-                    ],
-            state: [
-                    'West Pomeranian Voivodeship',
-                    ],
-            result: 'Wałcz',
-        },
-    ],
-    'Portugal': [
-        {
-            city: [ 
-                    'Seixal', 
-                    'Cascais', 
-                    'Torres Vedras', 
-                    ],
-            state: [
-                    'Álamo',
-                    'Cova da Raposa',
-                    'Santo António do Estoril',
-                    'A dos Cunhados e Maceira',
-                    ],
-            result: 'Lisbon',
-        },
-        {
-            city: [ 
-                    'Ponta Delgada',
-                    'Ribeira Grande',
-                    ],
-            state: [
-                    'Azores',
-                    'Vila Franca do Campo (São Miguel)',
-                    ],
-            result: 'Island São Miguel',
-        },
-        {
-            city: [ 
-                    'Amarante',
-                    ],
-            state: [
-                    'Macieiras',
-                    'Agramonte',
-                    ],
-            result: 'Porto',
-        },
-    ],
-    'Russia': [
-        {
-            city: [
-                    'Moskovsky Settlement',
-                    'Solnechnogorsky District',
-                    'Беседы', 
-                    'Balashikhinsky District',
-                    'Razvilka',
-                    'Konstantinovo',
-                    'Reutov',
-                    'Lopatino',
-                    'Dzerzhinsky',
-                    'Лужки',
-                    'Malakhovka',
-                    'Oktyabrskiy',
-                    'поселение Внуковское',
-                    ], 
-            state: [
-                    'Moscow',
-                    'Moscow Oblast',
-                    ],
-            result: 'Moscow',
-        },
-        {
-            city: [ 
-                    'Vniissok', 
-                    'Борки',
-                    "Zarech'e",
-                    'Romashkovo',
-                    'Сосны',
-                    'Лапино',
-                    'Nemchinovka',
-                    'Novoivanovskoe',
-                    'Одинцовский городской округ',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Odintsovo',
-        },
-        {
-            city: [ 
-                    'Клоково', 
-                    ],
-            state: [
-                    'Moscow',
-                    ],
-            result: 'Troitsk',
-        },
-        {
-            city: [ 
-                    'Ivanteyevka',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Pushkino',
-        },
-        {
-            city: [ 
-                    'Детково', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Chekhov',
-        },
-        {
-            city: [ 
-                    'Ramensky District',
-                    'Dergayevo',
-                    "Il’inskiy",
-                    'Вишняково',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Ramenskoye',
-        },
-        {
-            city: [ 
-                    'Mozhaysky District',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Mozhaisk',
-        },
-        {
-            city: [ 
-                    'Тараканово',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Solnechnogorsk',
-        },
-        {
-            city: [ 
-                    'Афанасово',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Klin',
-        },
-        {
-            city: [ 
-                    'Бурцево',
-                    'Shakhovskaya Urban Okrug',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Shakhovskaya',
-        },
-        {
-            city: [ 
-                    'Likino-Dulyovo',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Orekhovo-Zuyevo',
-        },
-        {
-            city: [ 
-                    'Dmitrovsky District',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Dmitrov',
-        },
-        {
-            city: [ 
-                    'Pokrovskoe',
-                    'Дачный КГБ',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Zvenigorod',
-        },
-        {
-            city: [ 
-                    'Novovolkovo',
-                    'Городище',
-                    'Dorokhovo',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Ruza',
-        },
-        {
-            city: [ 
-                    'Yurlovo',
-                    'Мышецкое',
-                    'Khimki Urban Okrug',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Khimki',
-        },
-        {
-            city: [ 
-                    'Мещерино', 
-                    'Bulatnikovo', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Vidnoye',
-        },
-        {
-            city: [ 
-                    'Еремеево',
-                    'Троица',
-                    'Агрогородок',
-                    'Агрогородок',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Istra',
-        },
-        {
-            city: [ 
-                    'Nagornoye', 
-                    'Mytishchi Urban Okrug', 
-                    'Никульское', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Mytishchi',
-        },
-        {
-            city: [ 
-                    'Наро-Фоминский городской округ', 
-                    'Aprelevka', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Naro-Fominsk',
-        },
-        {
-            city: [ 
-                    'Козино', 
-                    'Красный Посёлок', 
-                    'Buzlanovo',
-                    'Михалково',
-                    'Krasnogorsky District',
-                    'Putilkovo',
-                    'Тимошкино',
-                    'Отрадное',
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Krasnogorsk',
-        },
-        {
-            city: [ 
-                    'Барканово', 
-                    'Peresvet', 
-                    'Sergiyevo-Posadsky District', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Sergiyev Posad',
-        },
-        {
-            city: [ 
-                    'Bobrovo', 
-                    'Александровка', 
-                    'Novodrozhzhino', 
-                    'Dubrovitsy', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Podolsk',
-        },
-        {
-            city: [ 
-                    'Voskresensky District', 
-                    'Yurasovo', 
-                    'Большое Колычево', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Voskresensk',
-        },
-        {
-            city: [ 
-                    'Подлипки', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Lukhovitsy',
-        },
-        {
-            city: [ 
-                    'Банино', 
-                    'Protvino', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Serpukhov',
-        },
-        {
-            city: [ 
-                    'Medvezhyi Ozyora', 
-                    'Zagoryanskiy', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Shchyolkovo',
-        },
-        {
-            city: [ 
-                    'Domodedovsky District', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Domodedovo',
-        },
-        {
-            city: [ 
-                    'Lytkarino', 
-                    'Kraskovo', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    ],
-            result: 'Lyubertsy',
-        },
-        {
-            city: [ 
-                    'Andreyevka', 
-                    ],
-            state: [
-                    'Moscow Oblast',
-                    'Moscow',
-                    ],
-            result: 'Zelenograd',
-        },
-        {
-            city: [ 
-                    'Троицкое', 
-                    ],
-            state: [
-                    'Kursk Oblast',
-                    ],
-            result: 'Zheleznogorsk',
-        },
-        {
-            city: [ 
-                    'Burachki', 
-                    ],
-            state: [
-                    'Pskov Oblast',
-                    ],
-            result: 'Sebezh',
-        },
-        {
-            city: [ 
-                    'Беляницкое сельское поселение', 
-                    ],
-            state: [
-                    'Ivanovo Oblast',
-                    ],
-            result: 'Ivanovo',
-        },
-        {
-            city: [ 
-                    'Таврово', 
-                    ],
-            state: [
-                    'Belgorod Oblast',
-                    ],
-            result: 'Belgorod',
-        },
-        {
-            city: [ 
-                    'Толмачево', 
-                    ],
-            state: [
-                    'Bryansk Oblast',
-                    ],
-            result: 'Bryansk',
-        },
-        {
-            city: [ 
-                    'Октябрьское сельское поселение', 
-                    ],
-            state: [
-                    'Ulyanovsk Oblast',
-                    ],
-            result: 'Radishchevo',
-        },
-        {
-            city: [ 
-                    'сельское поселение Эльбрус', 
-                    'Terskol', 
-                    ],
-            state: [
-                    'Kabardino-Balkaria',
-                    ],
-            result: 'Tyrnyauz',
-        },
-        {
-            city: [ 
-                    'Мурзино', 
-                    'сельское поселение Деревня Ерденево', 
-                    ],
-            state: [
-                    'Kaluga Oblast',
-                    ],
-            result: 'Maloyaroslavets',
-        },
-        {
-            city: [ 
-                    'городское поселение Белоусово', 
-                    ],
-            state: [
-                    'Kaluga Oblast',
-                    ],
-            result: 'Zhukov',
-        },
-        {
-            city: [ 
-                    'Волковское', 
-                    ],
-            state: [
-                    'Kaluga Oblast',
-                    ],
-            result: 'Tarusa',
-        },
-        {
-            city: [ 
-                    'Новомихайловское', 
-                    'Совхоз "Боровский"', 
-                    ],
-            state: [
-                    'Kaluga Oblast',
-                    ],
-            result: 'Borovsk',
-        },
-        {
-            city: [
-                    'Pavlovsk',
-                    'Yanino-1',  
-                    'Telmana',
-                    'Peterhof',
-                    'Sestroretsk',
-                    'Ladoga',
-                    'Sertolovo',
-                    'Мистолово',
-                    'Romanovka',
-                    'Pargolovo',
-                    'Kudrovo',
-                    'Таицкое городское поселение',
-                    ],
-            state: [
-                    'Saint Petersburg',
-                    'Leningrad Oblast',
-                    'Leningrad oblast',
-                    ],
-            result: 'Saint Petersburg',
-        },
-        {
-            city: [ 
-                    'Toksovo', 
-                    'Агалатовское сельское поселение', 
-                    'Новосергиевка', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Vsevolozhsk',
-        },
-        {
-            city: [ 
-                    'Koporye', 
-                    'Низинское сельское поселение', 
-                    ],
-            state: [
-                    'Leningrad oblast',
-                    'Leningrad Oblast',
-                    ],
-            result: 'Lomonosov',
-        },
-        {
-            city: [ 
-                    'Царицыно Озеро', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Tikhvin',
-        },
-        {
-            city: [ 
-                    'Otradnoye', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Kirovsk',
-        },
-        {
-            city: [ 
-                    'Ivangorod', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Kingisepp',
-        },
-        {
-            city: [ 
-                    'Старая Серёдка', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Luga',
-        },
-        {
-            city: [ 
-                    'Nikolskoye', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Tosno',
-        },
-        {
-            city: [ 
-                    'Лидь', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Lid',
-        },
-        {
-            city: [ 
-                    'Подпорожское городское поселение', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Podporozhye',
-        },
-        {
-            city: [ 
-                    'Дружногорское городское поселение', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Gatchina',
-        },
-        {
-            city: [ 
-                    'Петровское сельское поселение', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Priozersk',
-        },
-        {
-            city: [ 
-                    'Глажевское сельское поселение', 
-                    ],
-            state: [
-                    'Leningrad Oblast',
-                    ],
-            result: 'Kirishi',
-        },
-        {
-            city: [ 
-                    'Деревянское сельское поселение', 
-                    ],
-            state: [
-                    'Republic of Karelia',
-                    ],
-            result: 'Petrozavodsk',
-        },
-        {
-            city: [ 
-                    'Поляны', 
-                    ],
-            state: [
-                    'Ryazan Oblast',
-                    ],
-            result: 'Ryazan',
-        },
-        {
-            city: [ 
-                    'Syntul', 
-                    ],
-            state: [
-                    'Ryazan Oblast',
-                    ],
-            result: 'Kasimov',
-        },
-        {
-            city: [ 
-                    'Novomichurinsk', 
-                    ],
-            state: [
-                    'Ryazan Oblast',
-                    ],
-            result: 'Pronsk',
-        },
-        {
-            city: [ 
-                    'Курджиново', 
-                    'Ершов', 
-                    ],
-            state: [
-                    'Karachay-Cherkessia',
-                    ],
-            result: 'Pregradnaya',
-        },
-        {
-            city: [ 
-                    'Семеновское', 
-                    ],
-            state: [
-                    'Tver Oblast',
-                    ],
-            result: 'Tver',
-        },
-        {
-            city: [ 
-                    'Щеколдино', 
-                    ],
-            state: [
-                    'Tver Oblast',
-                    ],
-            result: 'Zubtsov',
-        },
-        {
-            city: [ 
-                    'Berezayka', 
-                    ],
-            state: [
-                    'Tver Oblast',
-                    ],
-            result: 'Bologoe',
-        },
-        {
-            city: [ 
-                    'Varaksino', 
-                    ],
-            state: [
-                    'Tver Oblast',
-                    ],
-            result: 'Konakovo',
-        },
-        {
-            city: [ 
-                    'Shakin',
-                    ],
-            state: [
-                    'Volgograd Oblast',
-                    ],
-            result: 'Kumylzhenskaya',
-        },
-        {
-            city: [ 
-                    'Dubovka',
-                    ],
-            state: [
-                    'Volgograd Oblast',
-                    ],
-            result: 'Volgograd',
-        },
-        {
-            city: [ 
-                    'Виновка',
-                    ],
-            state: [
-                    'Volgograd Oblast',
-                    ],
-            result: 'Gorodische',
-        },
-        {
-            city: [ 
-                    "Velikiy Oktyabr'",
-                    ],
-            state: [
-                    'Volgograd Oblast',
-                    ],
-            result: 'Srednyaya Akhtuba',
-        },
-        {
-            city: [ 
-                    'Гизельское сельское поселение',
-                    ],
-            state: [
-                    'Republic of North Ossetia – Alania',
-                    ],
-            result: 'Vladikavkaz',
-        },
-        {
-            city: [ 
-                    'Вухтым',
-                    ],
-            state: [
-                    'Komi Republic',
-                    ],
-            result: 'Objachevo',
-        },
-        {
-            city: [ 
-                    'Engels',
-                    ],
-            state: [
-                    'Saratov Oblast',
-                    ],
-            result: 'Saratov',
-        },
-        {
-            city: [ 
-                    'Bagrationovsky District', 
-                    'Переславское',
-                    'Krasnopolye',
-                    'Черёмхово',
-                    'Медведевка',
-                    'Bolshoye Isakovo',
-                    'Холмогоровка',
-                    ],
-            state: [
-                    'Kaliningrad',
-                    ],
-            result: 'Kaliningrad',
-        },
-        {
-            city: [ 
-                    'Бор', 
-                    'Заволжское сельское поселение',
-                    'Григорьевское',
-                    'Кузнечихинское сельское поселение',
-                    'Лютово',
-                    ],
-            state: [
-                    'Yaroslavl Oblast',
-                    ],
-            result: 'Yaroslavl',
-        },
-        {
-            city: [ 
-                    'Фоминское', 
-                    ],
-            state: [
-                    'Yaroslavl Oblast',
-                    ],
-            result: 'Tutaev',
-        },
-        {
-            city: [ 
-                    'Троицкая Слобода', 
-                    ],
-            state: [
-                    'Yaroslavl Oblast',
-                    ],
-            result: 'Pereslavl-Zalessky',
-        },
-        {
-            city: [ 
-                    'Назарово', 
-                    'Назаровское сельское поселение', 
-                    ],
-            state: [
-                    'Yaroslavl Oblast',
-                    ],
-            result: 'Rybinsk',
-        },
-        {
-            city: [ 
-                    'Апраксинское сельское поселение',
-                    ],
-            state: [
-                    'Kostroma Oblast',
-                    ],
-            result: 'Kostroma',
-        },
-        {
-            city: [ 
-                    'Анкудиновка', 
-                    'Подновье', 
-                    'Bor', 
-                    ],
-            state: [
-                    'Nizhny Novgorod Oblast',
-                    ],
-            result: 'Nizhny Novgorod',
-        },
-        {
-            city: [ 
-                    'Зубово', 
-                    ],
-            state: [
-                    'Nizhny Novgorod Oblast',
-                    ],
-            result: 'Gorodets',
-        },
-        {
-            city: [ 
-                    'Хабарское', 
-                    ],
-            state: [
-                    'Nizhny Novgorod Oblast',
-                    ],
-            result: 'Dzerzhinsk',
-        },
-        {
-            city: [ 
-                    'Дьяково', 
-                    ],
-            state: [
-                    'Nizhny Novgorod Oblast',
-                    ],
-            result: 'Semyonov',
-        },
-        {
-            city: [ 
-                    'Афонино', 
-                    'Черемисское', 
-                    ],
-            state: [
-                    'Nizhny Novgorod Oblast',
-                    ],
-            result: 'Kstovo',
-        },
-        {
-            city: [ 
-                    'Kuyuki',
-                    'Сокуры',
-                    'Набережно-Морквашское сельское поселение',
-                    'Семиозерское сельское поселение',
-                    ],
-            state: [
-                    'Tatarstan',
-                    ],
-            result: 'Kazan',
-        },
-        {
-            city: [ 
-                    'Биклянское сельское поселение',
-                    ],
-            state: [
-                    'Tatarstan',
-                    ],
-            result: 'Naberezhnye Chelny',
-        },
-        {
-            city: [ 
-                    'Верхнеуслонское сельское поселение',
-                    ],
-            state: [
-                    'Tatarstan',
-                    ],
-            result: 'Verhnij Uslon',
-        },
-        {
-            city: [ 
-                    'Лекаревское сельское поселение',
-                    ],
-            state: [
-                    'Tatarstan',
-                    ],
-            result: 'Yelabuga',
-        },
-        {
-            city: [ 
-                    'Балгазын', 
-                    ],
-            state: [
-                    'Tuva Republic',
-                    ],
-            result: 'Balgazyn',
-        },
-        {
-            city: [ 
-                    'Khvoyninsky District', 
-                    ],
-            state: [
-                    'Novgorod Oblast',
-                    ],
-            result: 'Khvoynaya',
-        },
-        {
-            city: [ 
-                    'Bessonovka', 
-                    ],
-            state: [
-                    'Penza Oblast',
-                    ],
-            result: 'Penza',
-        },
-        {
-            city: [ 
-                    'Июс', 
-                    ],
-            state: [
-                    'Republic of Khakassia',
-                    ],
-            result: 'Kopyovo',
-        },
-        {
-            city: [ 
-                    'Калинино', 
-                    'Калининский сельсовет', 
-                    'Московский сельсовет', 
-                    'Чапаево', 
-                    ],
-            state: [
-                    'Republic of Khakassia',
-                    ],
-            result: 'Ust-Abakan',
-        },
-        {
-            city: [ 
-                    'сельское поселение Александровка', 
-                    'сельское поселение Подстёпки', 
-                    'сельское поселение Приморский', 
-                    'сельское поселение Васильевка', 
-                    'Tolyatti',
-                    'Zolnoe',
-                    'Bakhilova Polyana', 
-                    ],
-            state: [
-                    'Samara Oblast',
-                    ],
-            result: 'Togliatti',
-        },
-        {
-            city: [ 
-                    'Stroykeramika',
-                    'Novokuybyshevsk',
-                    'Smyshlyayevka',
-                    'Berezovyy Gay',
-                    'городское поселение Новосемейкино', 
-                    ],
-            state: [
-                    'Samara Oblast',
-                    ],
-            result: 'Samara',
-        },
-        {
-            city: [  
-                    'Starosemeykino', 
-                    ],
-            state: [
-                    'Samara Oblast',
-                    ],
-            result: 'Krasnyy Yar',
-        },
-        {
-            city: [ 
-                    'Bely Yar', 
-                    'сельское поселение Солнечный', 
-                    ],
-            state: [
-                    'Khanty-Mansiysk Autonomous Okrug – Ugra',
-                    ],
-            result: 'Surgut',
-        },
-        {
-            city: [ 
-                    'Nyagan', 
-                    ],
-            state: [
-                    'Khanty-Mansiysk Autonomous Okrug – Ugra',
-                    ],
-            result: "Oktyabr'skoe",
-        },
-        {
-            city: [ 
-                    'Isluchinsk', 
-                    'Megion', 
-                    ],
-            state: [
-                    'Khanty-Mansiysk Autonomous Okrug – Ugra',
-                    ],
-            result: 'Nizhnevartovsk',
-        },
-        {
-            city: [ 
-                    'Taydakovo', 
-                    ],
-            state: [
-                    'Tula Oblast',
-                    ],
-            result: 'Yasnogorsk',
-        },
-        {
-            city: [ 
-                    'Schokino', 
-                    ],
-            state: [
-                    'Tula Oblast',
-                    ],
-            result: 'Tula',
-        },
-        {
-            city: [ 
-                    'Урусово', 
-                    ],
-            state: [
-                    'Tula Oblast',
-                    ],
-            result: 'Venyov',
-        },
-        {
-            city: [ 
-                    'Селецкое сельское поселение', 
-                    ],
-            state: [
-                    'Vladimir Oblast',
-                    ],
-            result: 'Vladimir',
-        },
-        {
-            city: [ 
-                    'Радужный', 
-                    ],
-            state: [
-                    'Vladimir Oblast',
-                    ],
-            result: 'Raduzhny',
-        },
-        {
-            city: [ 
-                    'Струнино', 
-                    ],
-            state: [
-                    'Vladimir Oblast',
-                    ],
-            result: 'Alexandrov',
-        },
-        {
-            city: [ 
-                    'Pokrov',
-                    'Болдино',
-                    'Петушинское сельское поселение',
-                    'Нагорный',
-                    ],
-            state: [
-                    'Vladimir Oblast',
-                    ],
-            result: 'Petushki',
-        },
-        {
-            city: [ 
-                    'Кипревское сельское поселение', 
-                    ],
-            state: [
-                    'Vladimir Oblast',
-                    ],
-            result: 'Kirzhach',
-        },
-        {
-            city: [ 
-                    'Вишняково', 
-                    ],
-            state: [
-                    'Vladimir Oblast',
-                    ],
-            result: 'Sobinka',
-        },
-        {
-            city: [ 
-                    'Усть-Утяк', 
-                    ],
-            state: [
-                    'Kurgan Oblast',
-                    ],
-            result: 'Kurgan',
-        },
-        {
-            city: [ 
-                    'Русско-Лашминское сельское поселение', 
-                    ],
-            state: [
-                    'Republic of Mordovia',
-                    ],
-            result: 'Kovylkino',
-        },
-        {
-            city: [ 
-                    'Акшенас', 
-                    ],
-            state: [
-                    'Republic of Mordovia',
-                    ],
-            result: 'Ruzaevka',
-        },
-        {
-            city: [ 
-                    'Анна', 
-                    ],
-            state: [
-                    'Voronezh Oblast',
-                    ],
-            result: 'Anna',
-        },
-        {
-            city: [ 
-                    'Петропавловское сельское поселение', 
-                    ],
-            state: [
-                    'Voronezh Oblast',
-                    ],
-            result: 'Liski',
-        },
-        {
-            city: [ 
-                    'Горки', 
-                    ],
-            state: [
-                    'Voronezh Oblast',
-                    ],
-            result: 'Novaya Usman',
-        },
-        {
-            city: [ 
-                    'Подгоренское сельское поселение', 
-                    ],
-            state: [
-                    'Voronezh Oblast',
-                    ],
-            result: 'Rossosh',
-        },
-        {
-            city: [ 
-                    'Baranovka',
-                    'Sirius',
-                    'Estosadok',
-                    'Krasnaya Polyana',
-                    'Dagomys',
-                    'Razdolnoye',
-                    'Vysokoye',
-                    'Nizhnyaya Shilovka',
-                    'Nizhneye Uch-Dere',
-                    'Ordynka',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Sochi',
-        },
-        {
-            city: [ 
-                    'Джубгское городское поселение',
-                    'Dzhubga',
-                    'посёлок турбазы "Приморская"',
-                    'Lermontovo',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Tuapse',
-        },
-        {
-            city: [ 
-                    'Shirvanskaya',
-                    'Khadyzhensk',
-                    'Mezmay',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Apsheronsk',
-        },
-        {
-            city: [ 
-                    'Sukko',
-                    'городской округ Новороссийск',
-                    'Abrau-Dyurso',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Novorossiysk',
-        },
-        {
-            city: [ 
-                    'Rassvet',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Anapa',
-        },
-        {
-            city: [ 
-                    'Газырское сельское поселение',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Vyselki',
-        },
-        {
-            city: [ 
-                    'Кущёвское сельское поселение',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Kushchovskaya',
-        },
-        {
-            city: [ 
-                    'Nizhnebakanskaya',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Krymsk',
-        },
-        {
-            city: [ 
-                    'Прикубанский округ',
-                    'Yelizavetinskaya',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Krasnodar',
-        },
-        {
-            city: [ 
-                    'Novopetrovskaya',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Pavlovskaya',
-        },
-        {
-            city: [ 
-                    'Saratovskaya',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Goryachiy Klyuch',
-        },
-        {
-            city: [ 
-                    'Afipskiy',
-                    'Ilskiy',
-                    'Ubinskaya',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Severskaya',
-        },
-        {
-            city: [ 
-                    'Новоукраинское сельское поселение',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Gulkevichi',
-        },
-        {
-            city: [ 
-                    'Прикубанское сельское поселение',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Slavyansk-na-Kubani',
-        },
-        {
-            city: [ 
-                    'Arkhipo-Osipovka',
-                    'Krinitsa',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Gelendzhik',
-        },
-        {
-            city: [ 
-                    'Veselovka',
-                    'Голубицкое сельское поселение',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Temryuk',
-        },
-        {
-            city: [ 
-                    'Платнировское сельское поселение',
-                    ],
-            state: [
-                    'Krasnodar Krai',
-                    ],
-            result: 'Korenovsk',
-        },
-        {
-            city: [ 
-                    'Novaya Adygeya',
-                    'Yablonovskiy',
-                    'Старобжегокайское сельское поселение',
-                    ],
-            state: [
-                    'Republic of Adygea',
-                    ],
-            result: 'Takhtamukai',
-        },
-        {
-            city: [ 
-                    'Kamennomostskiy',
-                    ],
-            state: [
-                    'Republic of Adygea',
-                    ],
-            result: 'Maykop',
-        },
-        {
-            city: [ 
-                    'Михновское сельское поселение', 
-                    'Хохловское сельское поселение', 
-                    'Koryuzino', 
-                    ],
-            state: [
-                    'Smolensk Oblast',
-                    ],
-            result: 'Smolensk',
-        },
-        {
-            city: [ 
-                    'Krasniy Yar', 
-                    ],
-            state: [
-                    'Altai Krai',
-                    ],
-            result: 'Biysk',
-        },
-        {
-            city: [ 
-                    'Айский сельсовет', 
-                    ],
-            state: [
-                    'Altai Krai',
-                    ],
-            result: 'Altayskoye',
-        },
-        {
-            city: [ 
-                    'Новая Чемровка', 
-                    'Зональное', 
-                    ],
-            state: [
-                    'Altai Krai',
-                    ],
-            result: 'Zonalnoe',
-        },
-        {
-            city: [ 
-                    'Айский сельсовет', 
-                    ],
-            state: [
-                    'Altai Krai',
-                    ],
-            result: 'Altayskoye',
-        },
-        {
-            city: [ 
-                    'Firsovo', 
-                    ],
-            state: [
-                    'Altai Krai',
-                    ],
-            result: 'Novoaltaysk',
-        },
-        {
-            city: [ 
-                    'Артыбашское сельское поселение', 
-                    ],
-            state: [
-                    'Altai Republic',
-                    ],
-            result: 'Turochak',
-        },
-        {
-            city: [ 
-                    'Turbaza Katun', 
-                    'Elekmonar', 
-                    ],
-            state: [
-                    'Altai Republic',
-                    ],
-            result: 'Chemal',
-        },
-        {
-            city: [ 
-                    'Terekta',
-                    ],
-            state: [
-                    'Altai Republic',
-                    ],
-            result: 'Ust-Koksa',
-        },
-        {
-            city: [ 
-                    'Mayma', 
-                    ],
-            state: [
-                    'Altai Republic',
-                    ],
-            result: 'Gorno-Altaysk',
-        },
-        {
-            city: [ 
-                    'Khmeli', 
-                    'Объект КРП', 
-                    'Ясыри', 
-                    'Krasnokamsk', 
-                    ],
-            state: [
-                    'Perm Krai',
-                    ],
-            result: 'Perm',
-        },
-        {
-            city: [ 
-                    'Krasnoyarsk Urban Okrug', 
-                    'Еловое', 
-                    ],
-            state: [
-                    'Krasnoyarsk Krai',
-                    ],
-            result: 'Krasnoyarsk',
-        },
-        {
-            city: [ 
-                    'городской округ Норильск', 
-                    ],
-            state: [
-                    'Krasnoyarsk Krai',
-                    ],
-            result: 'Norilsk',
-        },
-        {
-            city: [ 
-                    'Есаульский сельсовет', 
-                    ],
-            state: [
-                    'Krasnoyarsk Krai',
-                    ],
-            result: 'Beryozovka',
-        },
-        {
-            city: [ 
-                    'городское поселение Емельяново', 
-                    ],
-            state: [
-                    'Krasnoyarsk Krai',
-                    ],
-            result: 'Yemelyanovo',
-        },
-        {
-            city: [ 
-                    'Араданский сельсовет', 
-                    ],
-            state: [
-                    'Krasnoyarsk Krai',
-                    ],
-            result: 'Aradan',
-        },
-        {
-            city: [ 
-                    'Verkhnyaya Pyshma', 
-                    'Beryozovsky',
-                    'Прохладный',
-                    'Сагра',
-                    'Патруши',
-                    'Исток',
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Yekaterinburg',
-        },
-        {
-            city: [ 
-                    'городской округ Сухой Лог', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Sukhoy Log',
-        },
-        {
-            city: [ 
-                    'Черноисточинск', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Nizhny Tagil',
-        },
-        {
-            city: [ 
-                    'Курганово', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Polevskoy',
-        },
-        {
-            city: [ 
-                    'Аятское', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Nevyansk',
-        },
-        {
-            city: [ 
-                    'Кисловское', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Kamensk-Uralsky',
-        },
-        {
-            city: [ 
-                    'городской округ Первоуральск', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Pervouralsk',
-        },
-        {
-            city: [ 
-                    'Малое Седельниково', 
-                    'Бобровский', 
-                    'Aramil', 
-                    ],
-            state: [
-                    'Sverdlovsk Oblast',
-                    ],
-            result: 'Sysert',
-        },
-        {
-            city: [ 
-                    'Князе-Волконское', 
-                    ],
-            state: [
-                    'Khabarovsk Krai',
-                    ],
-            result: 'Knyaze-Volkonskoe',
-        },
-        {
-            city: [ 
-                    'Приамурский', 
-                    ],
-            state: [
-                    'Jewish Autonomous Oblast',
-                    ],
-            result: 'Khabarovsk',
-        },
-        {
-            city: [ 
-                    'Большеустьикинское', 
-                    'Ишалино', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Bolsheustyikinskoye',
-        },
-        {
-            city: [ 
-                    'Salavat', 
-                    'Наумовка', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Sterlitamak',
-        },
-        {
-            city: [ 
-                    'Чулпан', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Maloyaz',
-        },
-        {
-            city: [ 
-                    'Зелёная Поляна', 
-                    'Аскарово', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Askarovo',
-        },
-        {
-            city: [ 
-                    'Mikhailovka', 
-                    'Булгаковский сельсовет', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Ufa',
-        },
-        {
-            city: [ 
-                    'Старокурмашево', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Kushnarenkovo',
-        },
-        {
-            city: [ 
-                    'Sibay', 
-                    ],
-            state: [
-                    'Bashkortostan',
-                    ],
-            result: 'Baymak',
-        },
-        {
-            city: [ 
-                    'Вербилово', 
-                    ],
-            state: [
-                    'Lipetsk Oblast',
-                    ],
-            result: 'Lipetsk',
-        },
-        {
-            city: [ 
-                    'Stanovlyansky District', 
-                    ],
-            state: [
-                    'Lipetsk Oblast',
-                    ],
-            result: 'Stanovoye',
-        },
-        {
-            city: [ 
-                    'Dvurechki', 
-                    'Kamennoe', 
-                    ],
-            state: [
-                    'Lipetsk Oblast',
-                    ],
-            result: 'Gryazi',
-        },
-        {
-            city: [ 
-                    'Ленина', 
-                    'Подгородне-Покровский сельсовет', 
-                    'Подгородняя Покровка', 
-                    ],
-            state: [
-                    'Orenburg Oblast',
-                    ],
-            result: 'Orenburg',
-        },
-        {
-            city: [ 
-                    'Сакмарский сельсовет', 
-                    'Татаро-Каргалинский сельсовет', 
-                    ],
-            state: [
-                    'Orenburg Oblast',
-                    ],
-            result: 'Sakmara',
-        },
-        {
-            city: [ 
-                    'Бугуруслан', 
-                    ],
-            state: [
-                    'Orenburg Oblast',
-                    ],
-            result: 'Buguruslan',
-        },
-        {
-            city: [ 
-                    'Rastopulovka', 
-                    ],
-            state: [
-                    'Astrakhan Oblast',
-                    ],
-            result: 'Astrakhan',
-        },
-        {
-            city: [ 
-                    'Mikhaylovsk', 
-                    'Ленинский район',
-                    'Подлужное',
-                    ],
-            state: [
-                    'Stavropol Krai',
-                    ],
-            result: 'Stavropol',
-        },
-        {
-            city: [ 
-                    'Goryachevodsky', 
-                    'Novaya Proletarka',
-                    'Подгорная',
-                    'Inozemtsevo',
-                    'Zheleznovodsk',
-                    'Lermontov',
-                    'Верблюдогорка',
-                    'Kislovodsk',
-                    ],
-            state: [
-                    'Stavropol Krai',
-                    ],
-            result: 'Pyatigorsk',
-        },
-        {
-            city: [ 
-                    'Каясула',
-                    'Abdul-Gazy',
-                    ],
-            state: [
-                    'Stavropol Krai',
-                    ],
-            result: 'Neftekumsk',
-        },
-        {
-            city: [ 
-                    'Budyonnovsky District',
-                    ],
-            state: [
-                    'Stavropol Krai',
-                    ],
-            result: 'Budyonnovsk',
-        },
-        {
-            city: [ 
-                    'Levokumsky District',
-                    ],
-            state: [
-                    'Stavropol Krai',
-                    ],
-            result: 'Levokumskoye',
-        },
-        {
-            city: [ 
-                    'Bezopasnoye',
-                    ],
-            state: [
-                    'Stavropol Krai',
-                    ],
-            result: 'Donskoye',
-        },
-        {
-            city: [ 
-                    'Грушевское сельское поселение', 
-                    'Большелогское сельское поселение', 
-                    'Большой Лог',
-                    'Olginskaya',
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Rostov-on-Don',
-        },
-        {
-            city: [ 
-                    'Ленина', 
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Aksay',
-        },
-        {
-            city: [ 
-                    'Пролетарское сельское поселение', 
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Shakhty',
-        },
-        {
-            city: [ 
-                    'Anikin', 
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Kamensk-Shakhtinsky',
-        },
-        {
-            city: [ 
-                    'Zhukovskoye', 
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Peschanokopskoye',
-        },
-        {
-            city: [ 
-                    'Пиховкинское сельское поселение', 
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Glubokiy',
-        },
-        {
-            city: [ 
-                    'Komarovka',
-                    'Taganrog City District', 
-                    ],
-            state: [
-                    'Rostov Oblast',
-                    ],
-            result: 'Taganrog',
-        },
-        {
-            city: [ 
-                    'Паренкина', 
-                    ],
-            state: [
-                    'Tyumen Oblast',
-                    ],
-            result: 'Tyumen',
-        },
-        {
-            city: [ 
-                    'Малая Куйсарина',
-                    'Kusa',
-                    ],
-            state: [
-                    'Chelyabinsk Oblast',
-                    ],
-            result: 'Miass',
-        },
-        {
-            city: [ 
-                    'Oshurga', 
-                    ],
-            state: [
-                    'Mari El Republic',
-                    ],
-            result: 'Yoshkar-Ola',
-        },
-        {
-            city: [ 
-                    'Изи Кугунур', 
-                    ],
-            state: [
-                    'Mari El Republic',
-                    ],
-            result: 'Sovetskiy',
-        },
-        {
-            city: [ 
-                    'Aeroport', 
-                    'Zonalnaya Stantsiya', 
-                    'Naumovka', 
-                    ],
-            state: [
-                    'Tomsk Oblast',
-                    ],
-            result: 'Tomsk',
-        },
-        {
-            city: [ 
-                    'Богословское сельское поселение',
-                    'Андреевское сельское поселение',
-                    'Troitskoye', 
-                    ],
-            state: [
-                    'Omsk Oblast',
-                    ],
-            result: 'Omsk',
-        },
-        {
-            city: [ 
-                    'Бергамакское сельское поселение',
-                    ],
-            state: [
-                    'Omsk Oblast',
-                    ],
-            result: 'Muromtsevo',
-        },
-        {
-            city: [ 
-                    'Смычка', 
-                    ],
-            state: [
-                    'Tambov Oblast',
-                    ],
-            result: 'Tambov',
-        },
-        {
-            city: [ 
-                    'Michurinsky District', 
-                    ],
-            state: [
-                    'Tambov Oblast',
-                    ],
-            result: 'Michurinsk',
-        },
-        {
-            city: [ 
-                    'Забайкальский',
-                    ],
-            state: [
-                    'Zabaykalsky Krai',
-                    ],
-            result: 'Chita',
-        },
-        {
-            city: [ 
-                    'Катайск',
-                    ],
-            state: [
-                    'Kurgan Oblast',
-                    ],
-            result: 'Katajsk',
-        },
-        {
-            city: [ 
-                    'Октябрьский район',
-                    'Kostino',
-                    'Подберёзы',
-                    'Pasegovo',
-                    ],
-            state: [
-                    'Kirov Oblast',
-                    ],
-            result: 'Kirov',
-        },
-        {
-            city: [ 
-                    'Шиховское сельское поселение',
-                    ],
-            state: [
-                    'Kirov Oblast',
-                    ],
-            result: 'Slobodskoy',
-        },
-        {
-            city: [ 
-                    'Ангарский городской округ',
-                    'Новая Разводная',
-                    'Хомутовское сельское поселение',
-                    'Markova',
-                    ],
-            state: [
-                    'Irkutsk Oblast',
-                    ],
-            result: 'Irkutsk',
-        },
-        {
-            city: [ 
-                    'Байкальское городское поселение',
-                    ],
-            state: [
-                    'Irkutsk Oblast',
-                    ],
-            result: 'Slyudyanka',
-        },
-        {
-            city: [ 
-                    'Хазанское сельское поселение',
-                    ],
-            state: [
-                    'Irkutsk Oblast',
-                    ],
-            result: 'Zima',
-        },
-        {
-            city: [ 
-                    'Kozlovka', 
-                    ],
-            state: [
-                    'Chuvashia',
-                    ],
-            result: 'Volzhsk',
-        },
-        {
-            city: [ 
-                    'Tsivilsky District', 
-                    'Хыркасы', 
-                    ],
-            state: [
-                    'Chuvashia',
-                    ],
-            result: 'Cheboksary',
-        },
-        {
-            city: [ 
-                    'Leninskoye', 
-                    'Berdsk municipality',
-                    'Koltsovo',
-                    ],
-            state: [
-                    'Novosibirsk Oblast',
-                    ],
-            result: 'Novosibirsk',
-        },
-        {
-            city: [ 
-                    'Металлплощадка', 
-                    ],
-            state: [
-                    'Kemerovo Oblast–Kuzbass',
-                    ],
-            result: 'Kemerovo',
-        },
-        {
-            city: [ 
-                    'Sheregesh', 
-                    ],
-            state: [
-                    'Kemerovo Oblast–Kuzbass',
-                    ],
-            result: 'Tashtagol',
-        },
-        {
-            city: [ 
-                    'Костенково', 
-                    ],
-            state: [
-                    'Kemerovo Oblast–Kuzbass',
-                    ],
-            result: 'Novokuznetsk',
-        },
-        {
-            city: [ 
-                    'Vokhtoga', 
-                    ],
-            state: [
-                    'Vologda Oblast',
-                    ],
-            result: 'Gryazovets',
-        },
-        {
-            city: [ 
-                    'Хламово', 
-                    ],
-            state: [
-                    'Vologda Oblast',
-                    ],
-            result: 'Cherepovets',
-        },
-        {
-            city: [ 
-                    'Бережное', 
-                    ],
-            state: [
-                    'Vologda Oblast',
-                    ],
-            result: 'Berezhnoe',
-        },
-        {
-            city: [ 
-                    'Steklyanuha', 
-                    'Volno-Nadejdinskoe', 
-                    'Russky', 
-                    ],
-            state: [
-                    'Primorsky Krai',
-                    ],
-            result: 'Vladivostok',
-        },
-        {
-            city: [ 
-                    'Shkotovsky District',
-                    ],
-            state: [
-                    'Primorsky Krai',
-                    ],
-            result: 'Shkotovo',
-        },
-        {
-            city: [ 
-                    'Bolon', 
-                    ],
-            state: [
-                    'Khabarovsk Krai',
-                    ],
-            result: 'Amursk',
-        },
-        {
-            city: [ 
-                    'Alnashsky District', 
-                    ],
-            state: [
-                    'Udmurtia',
-                    ],
-            result: 'Alnashi',
-        },
-    ],
-    'Thailand': [
-        {
-            city: [ 
-                    'Tong Yang', 
-                    'Ko Samui', 
-                    'Baan Tai', 
-                    'Baan Bo Phut',
-                    'Baan Plai Laem',
-                    'Baan Lamai',
-                    'Baan Taling Ngam',
-                    'Baan Wang Ta Kien',
-                    ],
-            state: [
-                    'Surat Thani Province',
-                    ],
-            result: 'Island Samui',
-        },
-        {
-            city: [ 
-                    'Si Sunthon',
-                    'Talat Nuea',
-                    'Ko Kaeo',
-                    ],
-            state: [
-                    'Phuket Province',
-                    ],
-            result: 'Island Phuket',
-        },
-        {
-            city: [ 
-                    'Nong Prue Subdistrict',
-                    'Bang Pu Subdistrict Municipality',
-                    ],
-            state: [
-                    'Samut Prakan Province',
-                    ],
-            result: 'Samut Prakan',
-        },
-        {
-            city: [ 
-                    'Bang Nai Si',
-                    ],
-            state: [
-                    'Phang-nga Province',
-                    ],
-            result: 'Takua Pa',
-        },
-        {
-            city: [ 
-                    'Baan Sri Thanu',
-                    'Baan Chaloklum',
-                    ],
-            state: [
-                    'Surat Thani Province',
-                    ],
-            result: 'Island Phangan',
-        },
-        {
-            city: [ 
-                    'Don Sak',
-                    ],
-            state: [
-                    'Surat Thani Province',
-                    ],
-            result: 'Surat Thani',
-        },
-    ],
-    'Turkey': [
-        { 
-            city: [
-                    'Bornova',
-                    'Çeşme',
-                    ],
-            state: [
-                    'Izmir',
-                    ],
-            result: 'Izmir',
-        }, 
-        {
-            city: [
-                    'Maltepe',
-                    ],
-            state: [
-                    'Istanbul',
-                    ],
-            result: 'Istanbul',
-        },
-        {
-            city: [ 
-                    'Aksu',
-                    'Konyaaltı',
-                    'Serik',
-                    'Muratpaşa',
-                    ],
-            state: [
-                    'Antalya',
-                    ],
-            result: 'Antalya',
-        },
-        {
-            city: [ 
-                    'Keçiören', 
-                    ],
-            state: [
-                    'Ankara',
-                    ],
-            result: 'Ankara',
-        },
-        {
-            city: [ 
-                    'Bodrum',
-                    'Marmaris',
-                    ],
-            state: [
-                    'Muğla',
-                    ],
-            result: 'Muğla',
-        },
-        {
-            city: [ 
-                    'Meram',
-                    ],
-            state: [
-                    'Konya',
-                    ],
-            result: 'Konya',
-        },
-        {
-            city: [ 
-                    'Çınarcık',
-                    ],
-            state: [
-                    'Yalova',
-                    ],
-            result: 'Yalova Merkez',
-        },
-    ],
-    'Slovakia': [
-        {
-            city: [ 
-                    'Beňadiková', 
-                    ],
-            state: [
-                    'Žilina',
-                    ],
-            result: 'Žilina',
-        },
-        {
-            city: [ 
-                    'Bernolákovo', 
-                    ],
-            state: [
-                    'Bratislava',
-                    ],
-            result: 'Bratislava',
-        },
-    ],
-    'Spain': [
-        {
-            city: [ 
-                    'Lena', 
-                    ],
-            state: [
-                    'Asturias',
-                    ],
-            result: 'Oviedo',
-        },
-        {
-            city: [ 
-                    'Torrelavega', 
-                    ],
-            state: [
-                    'Cantabria',
-                    ],
-            result: 'Santander',
-        },
-        {
-            city: [ 
-                    'Pilar de la Horadada', 
-                    'Torrevieja', 
-                    ],
-            state: [
-                    'Valencian Community',
-                    ],
-            result: 'Orihuela',
-        },
-        {
-            city: [ 
-                    'Arroyo de la Miel-Benalmádena Costa', 
-                    'Benahavís', 
-                    ],
-            state: [
-                    'Andalusia',
-                    ],
-            result: 'Málaga',
-        },
-        {
-            city: [ 
-                    'Tejeda', 
-                    ],
-            state: [
-                    'Las Palmas',
-                    ],
-            result: 'Las Palmas de Gran Canaria',
-        },
-        {
-            city: [ 
-                    'Lloret de Mar', 
-                    'Vilanova i la Geltrú',
-                    'Cubelles',  
-                    ],
-            state: [
-                    'Catalonia',
-                    ],
-            result: 'Barcelona',
-        },
-    ],
-    'Sri Lanka': [
-        {
-            city: [ 
-                    'Goviyapana', 
-                    'Bentota', 
-                    ],
-            state: [
-                    'Southern Province',
-                    ],
-            result: 'Galle',
-        },
-        {
-            city: [ 
-                    'Pasikudah', 
-                    ],
-            state: [
-                    'Eastern Province',
-                    ],
-            result: 'Batticaloa',
-        },
-        {
-            city: [ 
-                    'Ettukala', 
-                    ],
-            state: [
-                    'Western Province',
-                    ],
-            result: 'Gampaha',
-        },
-    ],
-    'Sweden': [
-        {
-            city: [ 
-                    'Vega', 
-                    ],
-            state: [
-                    'Hermanstorp',
-                    ],
-            result: 'Stockholm',
-        },
-        {
-            city: [ 
-                    'Mölndals kommun', 
-                    'Öckerö', 
-                    ],
-            state: [
-                    'Kärrahöjd',
-                    'Heden',
-                    ],
-            result: 'Gothenburg',
-        },
-    ],
-    'Switzerland': [
-        {
-            city: [ 
-                    'Crans (VD)', 
-                    ],
-            state: [
-                    'Vaud',
-                    ],
-            result: 'Geneva',
-        },
-        {
-            city: [ 
-                    'Echallens', 
-                    ],
-            state: [
-                    'Vaud',
-                    ],
-            result: 'Lausanne',
-        },
-        {
-            city: [ 
-                    'Wetzikon (ZH)', 
-                    ],
-            state: [
-                    'Zurich',
-                    ],
-            result: 'Zurich',
-        },
-        {
-            city: [ 
-                    'Büchel', 
-                    'Kaltbrunn', 
-                    'Bad Ragaz', 
-                    ],
-            state: [
-                    'St. Gallen',
-                    ],
-            result: 'St. Gallen',
-        },
-        {
-            city: [ 
-                    'Udligenswil', 
-                    ],
-            state: [
-                    'Lucerne',
-                    ],
-            result: 'Lucerne',
-        },
-        {
-            city: [ 
-                    'Grenchen', 
-                    ],
-            state: [
-                    'Solothurn',
-                    ],
-            result: 'Solothurn',
-        },
-        {
-            city: [ 
-                    'Vorderthal', 
-                    ],
-            state: [
-                    'Schwyz',
-                    ],
-            result: 'Schwyz',
-        },
-        {
-            city: [ 
-                    'Morcote',
-                    'Muzzano',
-                    ],
-            state: [
-                    'Ticino',
-                    ],
-            result: 'Bellinzona',
-        },
-    ],
-    'Ukraine': [
-        {
-            city: [ 
-                    'Tarasivka',
-                    'Kotsiubynske',
-                    'Kvitneve',
-                    'Liutizh',
-                    'Petropavlivska Borshchahivka',
-                    'Sofiivska Borshchahivka',
-                    'Hnidyn',
-                    ],
-            state: [
-                    'Kyiv Oblast',
-                    ],
-            result: 'Kyiv',
-        },
-        {
-            city: [ 
-                    'Shchaslyve', 
-                    'Hora', 
-                    ],
-            state: [
-                    'Kyiv Oblast',
-                    ],
-            result: 'Boryspil',
-        },
-        {
-            city: [ 
-                    'Zazymia', 
-                    ],
-            state: [
-                    'Kyiv Oblast',
-                    ],
-            result: 'Brovary',
-        },
-        {
-            city: [ 
-                    'Leonivka',
-                    'Kozyn',  
-                    'Krushynka',  
-                    ],
-            state: [
-                    'Kyiv Oblast',
-                    ],
-            result: 'Obukhiv',
-        },
-        {
-            city: [ 
-                    'Kolonshchyna', 
-                    'Pirnove Rural Hromada', 
-                    ],
-            state: [
-                    'Kyiv Oblast',
-                    ],
-            result: 'Irpin',
-        },
-        {
-            city: [ 
-                    'Henzerivka', 
-                    ],
-            state: [
-                    'Kyiv Oblast',
-                    ],
-            result: 'Yahotyn',
-        },
-        {
-            city: [ 
-                    'Rymachi',
-                    ],
-            state: [
-                    'Volyn Oblast',
-                    ],
-            result: 'Liuboml',
-        },
-        {
-            city: [ 
-                    'Стеблівська селищна громада',
-                    ],
-            state: [
-                    'Cherkasy Oblast',
-                    ],
-            result: 'Korsun-Shevchenkivskyi',
-        },
-        { 
-            city: [ 
-                    'Marianivka', 
-                    ],
-            state: [
-                    'Zhytomyr Oblast',
-                    ],
-            result: 'Zviahel',
-        }, 
-        { 
-            city: [ 
-                    'Chornomorsk', 
-                    'Авангардівська селищна громада', 
-                    ],
-            state: [
-                    'Odesa Oblast',
-                    ],
-            result: 'Odesa',
-        }, 
-        { 
-            city: [ 
-                    'Plotsk', 
-                    ],
-            state: [
-                    'Odesa Oblast',
-                    ],
-            result: 'Artsyz',
-        }, 
-        {
-            city: [ 
-                    'Obukhivka',
-                    'Mykolaivka',
-                    'Samar',
-                    'Novomoskovsk',
-                    'Обухівська селищна громада',
-                    'Слобожанська селищна громада',
-                    ],
-            state: [
-                    'Dnipropetrovsk Oblast',
-                    ],
-            result: 'Dnipro',
-        },
-        {
-            city: [ 
-                    'Чернеччинська сільська громада', ],
-            state: [
-                    'Dnipropetrovsk Oblast',
-                    ],
-            result: 'Chernechchyna',
-        },
-        {
-            city: [ 
-                    'Лозуватська сільська громада', 
-                    ],
-            state: [
-                    'Dnipropetrovsk Oblast',
-                    ],
-            result: 'Kryvyi Rih',
-        },
-        {
-            city: [ 
-                    'Baburka', 
-                    ],
-            state: [
-                    'Zaporizhia Oblast',
-                    'Zaporizhzhia Oblast',
-                    ],
-            result: 'Zaporizhzhia',
-        },
-        {
-            city: [ 
-                    'Klymashivka', 
-                    ],
-            state: [
-                    'Khmelnytskyi Oblast',
-                    ],
-            result: 'Khmelnytskyi',
-        },
-        {
-            city: [ 
-                    'Solomiivka', 
-                    ],
-            state: [
-                    'Rivne Oblast',
-                    ],
-            result: 'Dubrovytsia',
-        },
-        {
-            city: [ 
-                    'Mala Liubasha Rural Hromada', 
-                    ],
-            state: [
-                    'Rivne Oblast',
-                    ],
-            result: 'Kostopil',
-        },
-        {
-            city: [ 
-                    'Petrykiv', 
-                    ],
-            state: [
-                    'Ternopil Oblast',
-                    ],
-            result: 'Ternopil',
-        },
-        {
-            city: [ 
-                    'Укромновское сельское поселение', 
-                    'Перовское сельское поселение', 
-                    'Мирновское сельское поселение',
-                    'Молодёжненское сельское поселение',
-                    'Родниковское сельское поселение',
-                    'Гвардейское сельское поселение',
-                    'Добровское сельское поселение',
-                    'Simferopol (urban okrug)',
-                    'Aeroflotsky',
-                    'Gresovsky',
-                    ],
-            state: [
-                    'Republic of Crimea',
-                    'Autonomous Republic of Crimea',
-                    ],
-            result: 'Simferopol',
-        },
-        {
-            city: [ 
-                    'Керченский городской совет', 
-                    'городской округ Керчь', 
-                    ],
-            state: [
-                    'Autonomous Republic of Crimea',
-                    'Republic of Crimea',
-                    ],
-            result: 'Kerch',
-        },
-        {
-            city: [ 
-                    'Koreiz', 
-                    ],
-            state: [
-                    'Autonomous Republic of Crimea',
-                    ],
-            result: 'Alupka',
-        },
-        {
-            city: [ 
-                    'Novyi Svet', 
-                    ],
-            state: [
-                    'Autonomous Republic of Crimea',
-                    ],
-            result: 'Sudak',
-        },
-        {
-            city: [ 
-                    'Voskhod',
-                    'Massandra',
-                    'Oliva',
-                    ],
-            state: [
-                    'Autonomous Republic of Crimea',
-                    ],
-            result: 'Yalta',
-        },
-        {
-            city: [ 
-                    'городское поселение Щелкино', 
-                    'Лениново сельское поселение', 
-                    'Мысовское сельское поселение', 
-                    ],
-            state: [
-                    'Autonomous Republic of Crimea',
-                    ],
-            result: 'Lenino',
-        },
-        {
-            city: [ 
-                    'Оленевское сельское поселение', 
-                    ],
-            state: [
-                    'Republic of Crimea',
-                    ],
-            result: 'Chornomorskoe',
-        },
-        {
-            city: [ 
-                    'Zaozernoe',
-                    'Окунёвское сельское поселение',
-                    ],
-            state: [
-                    'Republic of Crimea',
-                    ],
-            result: 'Yevpatoriya',
-        },
-        {
-            city: [ 
-                    'Inkerman', 
-                    'Сахарная Головка', 
-                    'Балаклавский округ',
-                    'Орлиновский округ',
-                    ],
-            state: [
-                    'Sevastopol',
-                    ],
-            result: 'Sevastopol',
-        },
-        {
-            city: [ 
-                    'Velyke Kolodno', 
-                    'Vynnyky', 
-                    'Zhovkva', 
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Lviv',
-        },
-        {
-            city: [ 
-                    'Sokolivka', 
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Busk',
-        },
-        {
-            city: [ 
-                    'Silets', 
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Chervonohrad',
-        },
-        {
-            city: [ 
-                    'Starychi', 
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Yavoriv',
-        },
-        {
-            city: [ 
-                    'Solonka Rural Hromada', 
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Pustomyty',
-        },
-        {
-            city: [ 
-                    'Hranky-Kuty', 
-                    'Slavsko', 
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Stryi',
-        },
-        {
-            city: [ 
-                    'Skole Urban Hromada',
-                    ],
-            state: [
-                    'Lviv Oblast',
-                    ],
-            result: 'Skole',
-        },
-        {
-            city: [ 
-                    'Uhryniv', 
-                    ],
-            state: [
-                    'Ivano-Frankivsk Oblast',
-                    ],
-            result: 'Ivano-Frankivsk',
-        },
-        {
-            city: [ 
-                    'Kryvopillia', 
-                    'Iltsi', 
-                    ],
-            state: [
-                    'Ivano-Frankivsk Oblast',
-                    ],
-            result: 'Verkhovyna',
-        },
-        {
-            city: [ 
-                    'Vorokhta', 
-                    ],
-            state: [
-                    'Ivano-Frankivsk Oblast',
-                    ],
-            result: 'Nadvirna',
-        },
-        {
-            city: [ 
-                    'Poliana Rural Hromada', 
-                    ],
-            state: [
-                    'Zakarpattia Oblast',
-                    ],
-            result: 'Mukachevo',
-        },
-        {
-            city: [ 
-                    'Poliana', 
-                    ],
-            state: [
-                    'Zakarpattia Oblast',
-                    ],
-            result: 'Svaliava',
-        },
-        {
-            city: [ 
-                    'Huklyvyi', 
-                    ],
-            state: [
-                    'Zakarpattia Oblast',
-                    ],
-            result: 'Volovets',
-        },
-        {
-            city: [ 
-                    'Poliana', 
-                    ],
-            state: [
-                    'Zakarpattia Oblast',
-                    ],
-            result: 'Svaliava',
-        },
-        {
-            city: [ 
-                    'Huklyvyi', 
-                    ],
-            state: [
-                    'Zakarpattia Oblast',
-                    ],
-            result: 'Volovets',
-        },
-        {
-            city: [ 
-                    'Solotvyno', 
-                    ],
-            state: [
-                    'Zakarpattia Oblast',
-                    ],
-            result: 'Tiachiv',
-        },
-        {
-            city: [ 
-                    'Shestovytsia',
-                    'Staryi Bilous',
-                    ],
-            state: [
-                    'Chernihiv Oblast',
-                    ],
-            result: 'Chernihiv',
-        },
-        {
-            city: [ 
-                    'Вертіївська сільська громада', 
-                    ],
-            state: [
-                    'Chernihiv Oblast',
-                    ],
-            result: 'Nizhyn',
-        },
-        {
-            city: [ 
-                    'Vasylivka', 
-                    ],
-            state: [
-                    'Poltava Oblast',
-                    ],
-            result: 'Poltava',
-        },
-        {
-            city: [ 
-                    'Лубенська міська громада', 
-                    ],
-            state: [
-                    'Poltava Oblast',
-                    ],
-            result: 'Lubny',
-        },
-        {
-            city: [ 
-                    'Bakhmutivka', 
-                    ],
-            state: [
-                    'Luhansk Oblast',
-                    ],
-            result: 'Novoaidar',
-        },
-        {
-            city: [ 
-                    'Sorokyne', 
-                    ],
-            state: [
-                    'Luhansk Oblast',
-                    ],
-            result: 'Krasnodon',
-        },
-        {
-            city: [ 
-                    'Dzerzhynskyi', 
-                    ],
-            state: [
-                    'Luhansk Oblast',
-                    ],
-            result: 'Rovenky',
-        },
-        {
-            city: [ 
-                    'Korotych', 
-                    'Pisochyn',
-                    'Liubotyn',
-                    ],
-            state: [
-                    'Kharkiv Oblast',
-                    ],
-            result: 'Kharkiv',
-        },
-        {
-            city: [ 
-                    'Kolisnykivka',
-                    ],
-            state: [
-                    'Kharkiv Oblast',
-                    ],
-            result: 'Kupiansk',
-        },
-        {
-            city: [ 
-                    'Коблівська сільська громада', 
-                    ],
-            state: [
-                    'Mykolaiv Oblast',
-                    ],
-            result: 'Yuzhne',
-        },
-        {
-            city: [ 
-                    'Kostiantynivka', 
-                    ],
-            state: [
-                    'Donetsk Oblast',
-                    ],
-            result: 'Kramatorsk',
-        },
-        {
-            city: [ 
-                    'Manhush Settlement Hromada', 
-                    ],
-            state: [
-                    'Donetsk Oblast',
-                    ],
-            result: 'Mariupol',
-        },
-        {
-            city: [ 
-                    'Niu-York', 
-                    ],
-            state: [
-                    'Donetsk Oblast',
-                    ],
-            result: 'Horlivka',
-        },
-        {
-            city: [ 
-                    'Luzhany', 
-                    ],
-            state: [
-                    'Chernivtsi Oblast',
-                    ],
-            result: 'Chernivtsi',
-        },
-        {
-            city: [ 
-                    'Strointsi', 
-                    ],
-            state: [
-                    'Chernivtsi Oblast',
-                    ],
-            result: 'Novoselytsia',
-        },
-        {
-            city: [ 
-                    'Revne', 
-                    ],
-            state: [
-                    'Chernivtsi Oblast',
-                    ],
-            result: 'Kitsman',
-        },
-    ],
-    'United Arab Emirates': [
-        {
-            city: [ 
-                    'Al Saadiyat Island', 
-                    'Al Matar', 
-                    ],
-            state: [
-                    'Abu Dhabi Emirate',
-                    ],
-            result: 'Abu Dhabi',
-        },
-        {
-            city: [ 
-                    'Dubai International Airport', 
-                    'Business Bay', 
-                    ],
-            state: [
-                    'Dubai',
-                    ],
-            result: 'Dubai',
-        },
-    ],
-    'United Kingdom': [
-        {
-            city: [ 
-                    'Gateshead', 
-                    'Ryton', 
-                    'Sunderland',
-                    'Whickham',
-                    'North Tyneside', 
-                    'South Tyneside', 
-                    ],
-            state: [
-                    'England',
-                    ],
-            result: 'Newcastle upon Tyne',
-        },
-        {
-            city: [ 
-                    'Woking', 
-                    ],
-            state: [
-                    'England',
-                    ],
-            result: 'Guildford',
-        },
-        {
-            city: [ 
-                    'Larbert', 
-                    ],
-            state: [
-                    'Scotland',
-                    ],
-            result: 'Glasgow',
-        },
-    ],
-    'United States': [
-        {
-            city: [ 
-                    'Madison County', 
-                    'Anderson', 
-                    ],
-            state: [
-                    'Indiana',
-                    ],
-            result: 'Indianapolis',
-        },
-        {
-            city: [ 
-                    'Abington Township', 
-                    'Upper Moreland Township', 
-                    ],
-            state: [
-                    'Pennsylvania',
-                    ],
-            result: 'Philadelphia',
-        },
-        {
-            city: [ 
-                    'Merrifield', 
-                    ],
-            state: [
-                    'Virginia',
-                    ],
-            result: 'Fairfax',
-        },
-        {
-            city: [ 
-                    'Oxford', 
-                    ],
-            state: [
-                    'Massachusetts',
-                    ],
-            result: 'Worcester',
-        },
-        {
-            city: [ 
-                    'Bella Vista', 
-                    ],
-            state: [
-                    'Arkansas',
-                    ],
-            result: 'Bentonville',
-        },
-        {
-            city: [ 
-                    'Costa Mesa', 
-                    'Irvine', 
-                    ],
-            state: [
-                    'California',
-                    ],
-            result: 'Santa Ana',
-        },
-        {
-            city: [ 
-                    'Gwinnett County', 
-                    ],
-            state: [
-                    'Georgia',
-                    ],
-            result: 'Lawrenceville',
-        },
-        {
-            city: [ 
-                    'Miami Beach', 
-                    ],
-            state: [
-                    'Florida',
-                    ],
-            result: 'Miami',
-        },
-        {
-            city: [ 
-                    'Maud', 
-                    ],
-            state: [
-                    'Mississippi',
-                    ],
-            result: 'Memphis',
-        },
-        {
-            city: [ 
-                    'Irving', 
-                    ],
-            state: [
-                    'Texas',
-                    ],
-            result: 'Dallas',
-        },
-        {
-            city: [ 
-                    'Montgomery County', 
-                    ],
-            state: [
-                    'Texas',
-                    ],
-            result: 'Conroe',
-        },
-        {
-            city: [ 
-                    'Dania Beach', 
-                    ],
-            state: [
-                    'Florida',
-                    ],
-            result: 'Fort Lauderdale',
-        },
-    ],
-    'Uzbekistan': [
-        {
-            city: [ 
-                    'Salar', 
-                    'Kyzyltog', 
-                    ],
-            state: [
-                    'Tashkent Region',
-                    ],
-            result: 'Tashkent',
-        },
-        {
-            city: [ 
-                    'Samarkand City', 
-                    ],
-            state: [
-                    'Samarqand Region',
-                    ],
-            result: 'Samarqand City',
-        },
-    ]
-    
-}
+                      },
+                state: [
+                        'Ryazan Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Pregradnaya': [ 
+                            'Курджиново', 
+                            'Ершов', 
+                        ],
+                    },
+                state: [
+                        'Karachay-Cherkessia',
+                       ]
+            },
+            {
+                city: {
+                        'Tver': [ 
+                            'Семеновское', 
+                        ],
+                        'Zubtsov': [ 
+                            'Щеколдино', 
+                        ],
+                        'Bologoe': [ 
+                            'Berezayka', 
+                        ],
+                        'Konakovo': [ 
+                            'Varaksino', 
+                        ],
+                    },
+                state: [
+                        'Tver Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kumylzhenskaya': [ 
+                            'Shakin',
+                        ],
+                        'Volgograd': [ 
+                            'Dubovka',
+                            'Kirovskiy District',
+                        ],
+                        'Gorodische': [ 
+                            'Виновка',
+                        ],
+                        'Srednyaya Akhtuba': [ 
+                            "Velikiy Oktyabr'",
+                            "Кировское сельское поселение",
+                            "городское поселение Краснослободск",
+                            "Vyazovka",
+                            "Kuybyshev",
+                        ],
+                    },
+                state: [
+                        'Volgograd Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Vladikavkaz': [ 
+                            'Гизельское сельское поселение',
+                        ],
+                        'Beslan': [ 
+                            'Novyy Batako',
+                        ],
+                    },
+                state: [
+                        'Republic of North Ossetia – Alania',
+                       ]
+            },
+            {
+                city: {
+                        'Anadyr': [ 
+                            'Anadyrsky District',
+                        ],
+                    },
+                state: [
+                        'Chukotka Autonomous Okrug',
+                       ]
+            },
+            {
+                city: {
+                        'Objachevo': [ 
+                            'Вухтым',
+                        ],
+                    },
+                state: [
+                        'Komi Republic',
+                       ]
+            },
+            {
+                city: {
+                        'Saratov': [ 
+                            'Engels',
+                            'Усть-Курдюм',
+                        ],
+                        'Engels': [ 
+                            'Приволжский',
+                        ],
+                        'Balakovo': [ 
+                            'Быково-Отрогское сельское поселение',
+                        ],
+                    },
+                state: [
+                        'Saratov Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kaliningrad': [ 
+                            'Bagrationovsky District', 
+                            'Переславское',
+                            'Krasnopolye',
+                            'Черёмхово',
+                            'Медведевка',
+                            'Bolshoye Isakovo',
+                            'Холмогоровка',
+                        ],
+                        'Guryevsk': [ 
+                            'Guryevsky District', 
+                            'Zaozerye', 
+                            'Gorlovka', 
+                            'Golubevo', 
+                        ],
+                    },
+                state: [
+                        'Kaliningrad',
+                       ]
+            },
+            {
+                city: {
+                        'Yaroslavl': [ 
+                            'Бор', 
+                            'Заволжское сельское поселение',
+                            'Григорьевское',
+                            'Кузнечихинское сельское поселение',
+                            'Лютово',
+                            'Поповское',
+                        ],
+                        'Tutaev': [ 
+                            'Фоминское', 
+                        ],
+                        'Pereslavl-Zalessky': [ 
+                            'Троицкая Слобода', 
+                            'городской округ Переславль-Залесский', 
+                            'Переславль-Залесский муниципальный округ', 
+                            'Новинцы', 
+                        ],
+                        'Rybinsk': [ 
+                            'Назарово', 
+                            'Назаровское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Yaroslavl Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kostroma': [ 
+                            'Апраксинское сельское поселение',
+                        ],
+                    },
+                state: [
+                        'Kostroma Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Nizhny Novgorod': [ 
+                            'Анкудиновка', 
+                            'Подновье', 
+                            'Bor', 
+                            'Бешенцево', 
+                            'Линда', 
+                        ],
+                        'Gorodets': [ 
+                            'Зубово', 
+                        ],
+                        'Dzerzhinsk': [ 
+                            'Хабарское', 
+                            'Желнино', 
+                        ],
+                        'Semyonov': [ 
+                            'Дьяково', 
+                            'Семёновский городской округ', 
+                        ],
+                        'Kstovo': [ 
+                            'Афонино', 
+                            'Черемисское', 
+                            'Грязновка', 
+                        ],
+                    },
+                state: [
+                        'Nizhny Novgorod Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kazan': [ 
+                            'Kuyuki',
+                            'Сокуры',
+                            'Набережно-Морквашское сельское поселение',
+                            'Семиозерское сельское поселение',
+                        ],
+                        'Naberezhnye Chelny': [ 
+                            'Биклянское сельское поселение',
+                        ],
+                            'Verhnij Uslon': [ 
+                            'Верхнеуслонское сельское поселение',
+                        ],
+                        'Yelabuga': [ 
+                            'Лекаревское сельское поселение',
+                        ],
+                        'Nizhnekamsk': [ 
+                            'городское поселение Нижнекамск', 
+                        ],
+                        'Laishevo': [ 
+                            'Орёл', 
+                            'Габишевское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Tatarstan',
+                       ]
+            },
+            {
+                city: {
+                        'Khvoynaya': [ 
+                            'Khvoyninsky District', 
+                        ],
+                    },
+                state: [
+                        'Novgorod Oblast',
+                       ]
+            },
+            {
+                city: { 
+                        'Penza': [ 
+                            'Bessonovka', 
+                        ],
+                    },
+                state: [
+                        'Penza Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kopyovo': [ 
+                            'Июс', 
+                            'Красноиюсский сельсовет', 
+                        ],
+                        'Sayanogorsk': [ 
+                            'Cheremushki', 
+                        ],
+                        'Ust-Abakan': [ 
+                            'Калинино', 
+                            'Калининский сельсовет', 
+                            'Московский сельсовет', 
+                            'Чапаево', 
+                        ],
+                    },
+                state: [
+                        'Republic of Khakassia',
+                       ]
+            },
+            {
+                city: {
+                        'Togliatti': [ 
+                            'сельское поселение Александровка', 
+                            'сельское поселение Подстёпки', 
+                            'сельское поселение Приморский', 
+                            'сельское поселение Васильевка', 
+                            'Tolyatti',
+                            'Zolnoe',
+                            'Bakhilova Polyana', 
+                            'сельское поселение Пискалы', 
+                            'Ягодное',
+                            'Stavropolsky District',
+                            'сельское поселение Ягодное',
+                            'сельское поселение Узюково',
+                        ],
+                        'Samara': [ 
+                            'Stroykeramika',
+                            'Novokuybyshevsk',
+                            'Smyshlyayevka',
+                            'Berezovyy Gay',
+                            'городское поселение Новосемейкино', 
+                            'Лопатино', 
+                        ],
+                        'Krasnyy Yar': [  
+                            'Starosemeykino', 
+                        ],
+                    },
+                state: [
+                        'Samara Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Surgut': [ 
+                            'Bely Yar', 
+                            'сельское поселение Солнечный', 
+                            'Surgutsky District', 
+                        ],
+                        "Oktyabr'skoe": [ 
+                            'Nyagan', 
+                        ],
+                        'Nizhnevartovsk': [ 
+                            'Isluchinsk', 
+                            'Megion', 
+                        ],
+                        'Khanty-Mansiysk': [ 
+                            'Перегрёбное', 
+                            'Khanty-Mansiysky District', 
+                        ],
+                    },
+                state: [
+                        'Khanty-Mansiysk Autonomous Okrug – Ugra',
+                       ]
+            },
+            {
+                city: {
+                        'Yasnogorsk': [ 
+                            'Taydakovo', 
+                            'Ревякино', 
+                        ],
+                        'Tula': [ 
+                            'Schokino', 
+                        ],
+                        'Venyov': [ 
+                            'Урусово', 
+                        ],
+                        'Suvorov': [ 
+                            'Kuleshovo', 
+                        ],
+                        'Efremov': [ 
+                            'Мосоловский', 
+                        ],
+                        'Leninskiy': [ 
+                            'Ленинский', 
+                            'Малаховское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Tula Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Vladimir': [ 
+                            'Селецкое сельское поселение', 
+                        ],
+                        'Raduzhny': [ 
+                            'Радужный', 
+                        ],
+                        'Alexandrov': [ 
+                            'Струнино', 
+                        ], 
+                        'Petushki': [ 
+                            'Pokrov',
+                            'Болдино',
+                            'Петушинское сельское поселение',
+                            'Нагорный',
+                            'Домашнево',
+                        ],
+                        'Kirzhach': [ 
+                            'Кипревское сельское поселение', 
+                        ],
+                        'Sobinka': [ 
+                            'Вишняково', 
+                        ],
+                    },
+                state: [
+                        'Vladimir Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kurgan': [ 
+                            'Усть-Утяк', 
+                        ],
+                        'Katajsk': [ 
+                            'Катайск',
+                            'Kataysk',
+                        ],
+                    },
+                state: [
+                        'Kurgan Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kovylkino': [ 
+                            'Русско-Лашминское сельское поселение', 
+                        ],
+                        'Ruzaevka': [ 
+                            'Акшенас',
+                        ],
+                        "Lyambir'": [
+                            'Берсеневское сельское поселение',
+                            'Берсеневские Выселки',
+                        ],
+                        'Saransk': [
+                            'Луховка',
+                        ],
+                    },
+                state: [
+                        'Republic of Mordovia',
+                       ]
+            },
+            {
+                city: {
+                        'Voronezh': [ 
+                            'Otradnoye', 
+                        ],
+                        'Anna': [ 
+                            'Анна', 
+                        ],
+                        'Liski': [ 
+                            'Петропавловское сельское поселение', 
+                        ],
+                        'Novaya Usman': [ 
+                            'Горки', 
+                            'Babyakovo', 
+                        ],
+                        'Rossosh': [ 
+                            'Подгоренское сельское поселение', 
+                        ],
+                    },
+                state: [
+                        'Voronezh Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Sochi': [ 
+                            'Baranovka',
+                            'Sirius',
+                            'Estosadok',
+                            'Krasnaya Polyana',
+                            'Dagomys',
+                            'Razdolnoye',
+                            'Vysokoye',
+                            'Nizhnyaya Shilovka',
+                            'Nizhneye Uch-Dere',
+                            'Ordynka',
+                            'Kashtany',
+                            'Kalinovoye ozero',
+                        ],
+                        'Tuapse': [
+                            'Джубгское городское поселение',
+                            'Dzhubga',
+                            'посёлок турбазы "Приморская"',
+                            'Lermontovo',
+                            'Tuapsinsky District',
+                            'Agoy',
+                            'Tyumenskiy',
+                        ],
+                        'Apsheronsk': [ 
+                            'Shirvanskaya',
+                            'Khadyzhensk',
+                            'Mezmay',
+                            'Новополянское сельское поселение',
+                          ],
+                        'Novorossiysk': [ 
+                            'Sukko',
+                            'городской округ Новороссийск',
+                            'Abrau-Dyurso',
+                            'Приморский район',
+                          ],
+                        'Anapa': [ 
+                            'Rassvet',
+                        ],
+                        'Vyselki': [ 
+                            'Газырское сельское поселение',
+                        ],
+                        'Kushchovskaya': [ 
+                            'Кущёвское сельское поселение',
+                        ],
+                        'Krymsk': [ 
+                            'Nizhnebakanskaya',
+                            'Chekon',
+                        ],
+                        'Krasnodar': [ 
+                            'Прикубанский округ',
+                            'Yelizavetinskaya',
+                        ],
+                        'Pavlovskaya': [ 
+                            'Novopetrovskaya',
+                        ],
+                        'Goryachiy Klyuch': [ 
+                            'Saratovskaya',
+                        ],
+                        'Severskaya': [ 
+                            'Afipskiy',
+                            'Ilskiy',
+                            'Ubinskaya',
+                            'Seversky District',
+                            'Азовское сельское поселение',
+                            'Azovskaya',
+                            'Львовское сельское поселение',
+                        ],
+                        'Gulkevichi': [ 
+                            'Новоукраинское сельское поселение',
+                            'Гирейское городское поселение',
+                        ],
+                        'Slavyansk-na-Kubani': [ 
+                            'Прикубанское сельское поселение',
+                            'Sadovy',
+                        ],
+                        'Gelendzhik': [ 
+                            'Arkhipo-Osipovka',
+                            'Krinitsa',
+                            'Divnomorskoye',
+                        ],
+                        'Temryuk': [ 
+                            'Veselovka',
+                            'Голубицкое сельское поселение',
+                            'Фонталовское сельское поселение',
+                        ],
+                        'Korenovsk': [ 
+                            'Платнировское сельское поселение',
+                        ],
+                        'Abinsk': [ 
+                            'Erivanskaya',
+                            'Kholmskaya',
+                        ],
+                        'Kavkazskaya': [ 
+                            'Dmitriyevskaya',
+                        ],
+                        'Armavir': [ 
+                            'городской округ Армавир',
+                        ],
+                        'Dinskaya': [ 
+                            'Yuzhny',
+                        ],
+                        'Ust-Labinsk': [ 
+                            'Voronezhskaya',
+                        ],
+                        'Poltavskaya': [ 
+                            'Марьянское сельское поселение',
+                            'Полтавское сельское поселение',
+                        ],
+                        'Primorsko-Akhtarsk': [ 
+                            'Primorsko-Akhtarsky District',
+                        ],
+                        'Leningradskaya': [ 
+                            'Pervomayskiy',
+                        ],
+                    },
+                state: [
+                        'Krasnodar Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Takhtamukai': [ 
+                            'Novaya Adygeya',
+                            'Yablonovskiy',
+                            'Старобжегокайское сельское поселение',
+                        ],
+                        'Maykop': [ 
+                            'Kamennomostskiy',
+                        ],
+                        'Ponezhukaj': [ 
+                            'Teuchezhsky District',
+                        ],
+                    },
+                state: [
+                        'Republic of Adygea',
+                       ]
+            },
+            {
+                city: {
+                        'Petropavlovsk-Kamchatsky': [ 
+                            'Yelizovsky District',
+                        ],
+                    },
+                state: [
+                        'Kamchatka Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Smolensk': [ 
+                            'Михновское сельское поселение', 
+                            'Хохловское сельское поселение', 
+                            'Koryuzino', 
+                            'Smolensky District', 
+                        ],
+                    },
+                state: [
+                        'Smolensk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Biysk': [ 
+                            'Krasniy Yar', 
+                            'Verkh-Katunskoye', 
+                        ],
+                        'Altayskoye': [ 
+                            'Айский сельсовет', 
+                        ],
+                        'Zonalnoe': [ 
+                            'Новая Чемровка', 
+                            'Зональное', 
+                        ],
+                        'Altayskoye': [ 
+                            'Айский сельсовет', 
+                        ],
+                        'Novoaltaysk': [ 
+                            'Firsovo', 
+                        ],
+                        'Kamen-na-Obi': [ 
+                            'Плотниковский сельсовет', 
+                        ],
+                    },
+                state: [
+                        'Altai Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Turochak': [ 
+                            'Артыбашское сельское поселение', 
+                        ],
+                        'Chemal': [ 
+                            'Turbaza Katun', 
+                            'Elekmonar', 
+                            'Уожан', 
+                        ],
+                        'Ust-Koksa': [ 
+                            'Terekta',
+                        ],
+                        'Gorno-Altaysk': [ 
+                            'Mayma', 
+                        ],
+                        'Ust-Kan': [ 
+                            'Белый Ануй', 
+                        ],
+                    },
+                state: [
+                        'Altai Republic',
+                       ]
+            },
+            {
+                city: {
+                        'Perm': [ 
+                            'Khmeli', 
+                            'Объект КРП', 
+                            'Ясыри', 
+                            'Krasnokamsk', 
+                            'Кондратово', 
+                        ],
+                    },
+                state: [
+                        'Perm Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Krasnoyarsk': [ 
+                            'Krasnoyarsk Urban Okrug', 
+                            'Еловое', 
+                        ],
+                        'Norilsk': [ 
+                            'городской округ Норильск', 
+                        ],
+                        'Beryozovka': [ 
+                            'Есаульский сельсовет', 
+                        ],
+                        'Yemelyanovo': [ 
+                            'городское поселение Емельяново', 
+                        ],
+                        'Aradan': [ 
+                            'Араданский сельсовет', 
+                        ],
+                        'Minusinsk': [ 
+                            'Шошино', 
+                        ],
+                        'Kuragino': [ 
+                            'Bolshaya Irba', 
+                        ],
+                    },
+                state: [
+                        'Krasnoyarsk Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Yekaterinburg': [ 
+                            'Verkhnyaya Pyshma', 
+                            'Beryozovsky',
+                            'Прохладный',
+                            'Сагра',
+                            'Патруши',
+                            'Исток',
+                            'Горный Щит',
+                        ],
+                        'Sukhoy Log': [ 
+                            'городской округ Сухой Лог', 
+                        ],
+                        'Nizhny Tagil': [ 
+                            'Черноисточинск', 
+                        ],
+                        'Polevskoy': [ 
+                            'Курганово', 
+                        ],
+                        'Nevyansk': [ 
+                            'Аятское', 
+                        ],
+                            'Kamensk-Uralsky': [ 
+                            'Кисловское', 
+                        ],
+                        'Talitsa': [ 
+                            'Троицкий', 
+                        ],
+                        'Pervouralsk': [ 
+                            'городской округ Первоуральск', 
+                        ],
+                        'Verhnyaya-Pyshma': [ 
+                            'городской округ Верхняя Пышма', 
+                        ],
+                        'Beryozovskij': [ 
+                            'Лосиный', 
+                        ],
+                        'Sysert': [ 
+                            'Малое Седельниково', 
+                            'Бобровский', 
+                            'Aramil', 
+                        ],
+                    },
+                state: [
+                        'Sverdlovsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Knyaze-Volkonskoe': [ 
+                            'Князе-Волконское', 
+                        ],
+                        'Khabarovsk': [ 
+                            'Khabarovsky District', 
+                        ],
+                        'Amursk': [ 
+                            'Bolon', 
+                        ],
+                    },
+                state: [
+                        'Khabarovsk Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Bolsheustyikinskoye': [ 
+                            'Большеустьикинское', 
+                            'Ишалино', 
+                        ],
+                        'Sterlitamak': [ 
+                            'Salavat', 
+                            'Наумовка', 
+                            'Байрак', 
+                        ],
+                        'Maloyaz': [ 
+                            'Чулпан', 
+                        ],
+                        'Askarovo': [ 
+                            'Зелёная Поляна', 
+                            'Аскарово', 
+                        ],
+                        'Ufa': [ 
+                            'Mikhailovka', 
+                            'Булгаковский сельсовет', 
+                            'Красноярский сельсовет', 
+                        ],
+                        'Kushnarenkovo': [ 
+                            'Старокурмашево', 
+                            'Чирша-Тартыш', 
+                        ],
+                        'Baymak': [ 
+                            'Sibay', 
+                        ],
+                        'Yermolayevo': [ 
+                            'Маломусино', 
+                            'Якутово', 
+                        ],
+                        'Ishimbay': [ 
+                            'Михайловка', 
+                        ],
+                        'Iglino': [
+                            'Калтымановский сельсовет',
+                            'Акбердино',
+                        ],
+                        'Chishmy': [
+                            'Чишмы',
+                            'Алкинский сельсовет',
+                        ],
+                        'Tujmazy': [
+                            'Серафимовский',
+                            'Tuymazinsky District',
+                            'Kandry',
+                            'Тюменяк',
+                        ],
+                        'Dyurtyuli': [
+                            'Такарликовский сельсовет',
+                            'Иванаево',
+                        ],
+                        'Novobelokataj': [
+                            'Мунасово',
+                        ],
+                        'Karmaskaly': [
+                            'Starye Kieshki',
+                        ],
+                        'Askarovo': [
+                            'Ташбулатовский сельсовет',
+                        ],
+                        'Bakaly': [
+                            'Куштиряково',
+                        ],
+                    },
+                state: [
+                        'Bashkortostan',
+                       ]
+            },
+            {
+                city: {
+                        'Lipetsk': [ 
+                            'Вербилово', 
+                        ],
+                        'Stanovoye': [ 
+                            'Stanovlyansky District', 
+                        ],
+                        'Gryazi': [ 
+                            'Dvurechki', 
+                            'Kamennoe', 
+                            'Большесамовецкий сельсовет', 
+                            'Kazinka', 
+                        ],
+                    },
+                state: [
+                        'Lipetsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Orenburg': [ 
+                            'Ленина', 
+                            'Подгородне-Покровский сельсовет', 
+                            'Подгородняя Покровка', 
+                            'Нежинка', 
+                        ],
+                        'Sakmara': [ 
+                            'Сакмарский сельсовет', 
+                            'Татаро-Каргалинский сельсовет', 
+                        ],
+                        'Buguruslan': [ 
+                            'Бугуруслан', 
+                        ],
+                        'Oktyabrskoe': [ 
+                            'Марьевка', 
+                        ],
+                        'Orsk': [ 
+                            'Orsk', 
+                        ],
+                    },
+                state: [
+                        'Orenburg Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Astrakhan': [ 
+                            'Rastopulovka', 
+                        ],
+                    },
+                state: [
+                        'Astrakhan Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Stavropol': [ 
+                            'Mikhaylovsk', 
+                            'Ленинский район',
+                            'Подлужное',
+                        ],
+                        'Pyatigorsk': [ 
+                            'Goryachevodsky', 
+                            'Novaya Proletarka',
+                            'Подгорная',
+                            'Inozemtsevo',
+                            'Zheleznovodsk',
+                            'Lermontov',
+                            'Верблюдогорка',
+                            'Kislovodsk',
+                        ],
+                        'Neftekumsk': [ 
+                            'Каясула',
+                            'Abdul-Gazy',
+                        ],
+                        'Budyonnovsk': [ 
+                            'Budyonnovsky District',
+                        ],
+                        'Levokumskoye': [ 
+                            'Levokumsky District',
+                        ],
+                        'Donskoye': [ 
+                            'Bezopasnoye',
+                        ],
+                        'Georgiyevsk': [ 
+                            'Georgiyevskaya',
+                        ],
+                        'Kochubeevskoe': [ 
+                            'Kochubeyevsky District',
+                        ],
+                    },
+                state: [
+                        'Stavropol Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Rostov-on-Don': [ 
+                            'Грушевское сельское поселение', 
+                            'Большелогское сельское поселение', 
+                            'Большой Лог',
+                            'Olginskaya',
+                        ],
+                        'Aksay': [ 
+                            'Ленина', 
+                        ],
+                        'Shakhty': [ 
+                            'Пролетарское сельское поселение', 
+                        ],
+                        'Kamensk-Shakhtinsky': [ 
+                            'Anikin', 
+                        ],
+                        'Peschanokopskoye': [ 
+                            'Zhukovskoye', 
+                        ],
+                        'Glubokiy': [ 
+                            'Пиховкинское сельское поселение', 
+                        ],
+                        'Azov': [ 
+                            'Ovoshchnoy', 
+                        ],
+                        'Taganrog': [ 
+                            'Komarovka',
+                            'Taganrog City District', 
+                        ],
+                        'Pokrovskoye': [ 
+                            'Novobessergenevka', 
+                        ],
+                        'Volgodonsk': [
+                            'Лагутники',
+                            'Волгодонской район',
+                        ],
+                    },
+                state: [
+                        'Rostov Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Tyumen': [ 
+                            'Паренкина', 
+                            'городской округ Тюмень', 
+                        ],
+                    },
+                state: [
+                        'Tyumen Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Miass': [ 
+                            'Малая Куйсарина',
+                            'Kusa',
+                            'Novotagilka',
+                        ],
+                        'Argayash': [ 
+                            'Дербишевское сельское поселение', 
+                        ],
+                        'Dolgoderevenskoye': [ 
+                            'Sargazy', 
+                            'Саргазинское сельское поселение', 
+                            'Zapadny', 
+                        ],
+                        'Varna': [
+                            "Bol'shevik",
+                            'Varnensky District',
+                        ],
+                        'Katav-Ivanovsk': [
+                            "Трёхгорный городской округ",
+                            'Pervukha',
+                        ],
+                    },
+                state: [
+                        'Chelyabinsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Yoshkar-Ola': [ 
+                            'Oshurga', 
+                        ],
+                        'Sovetskiy': [ 
+                            'Изи Кугунур', 
+                        ],
+                    },
+                state: [
+                        'Mari El Republic',
+                       ]
+            },
+            {
+                city: {
+                        'Tomsk': [ 
+                            'Aeroport',
+                            'Zonalnaya Stantsiya',
+                            'Naumovka',
+                            'Timiryazevskoe',
+                            'Tomsk municipal region',
+                            'Dzerzhinskoye',
+                        ],
+                        'Kargasok': [ 
+                            'Новоюгинское сельское поселение',
+                            'Каргасокское сельское поселение',
+                        ],
+                    },
+                state: [
+                        'Tomsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Omsk': [ 
+                            'Богословское сельское поселение',
+                            'Андреевское сельское поселение',
+                            'Troitskoye', 
+                        ],
+                        'Muromtsevo': [ 
+                            'Бергамакское сельское поселение',
+                        ],
+                        'Lyubinskij': [ 
+                            'Krasny Yar',
+                        ],
+                    },
+                state: [
+                        'Omsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Tambov': [ 
+                            'Смычка', 
+                        ],
+                        'Michurinsk': [ 
+                            'Michurinsky District', 
+                        ],
+                    },
+                state: [
+                        'Tambov Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Chita': [ 
+                            'Забайкальский',
+                        ],
+                    },
+                state: [
+                        'Zabaykalsky Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Kirov': [ 
+                            'Октябрьский район',
+                            'Kostino',
+                            'Подберёзы',
+                            'Pasegovo',
+                            'Ganino',
+                            'Булдаки',
+                        ],
+                        'Slobodskoy': [ 
+                            'Шиховское сельское поселение',
+                            'Шихово',
+                        ],
+                        'Yurya': [ 
+                            'Загарское сельское поселение',
+                        ],
+                    },
+                state: [
+                        'Kirov Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Irkutsk': [ 
+                            'Ангарский городской округ',
+                            'Новая Разводная',
+                            'Хомутовское сельское поселение',
+                            'Markova',
+                            'Karluk',
+                            'Irkutsky District',
+                            'Молодёжный',
+                        ],
+                        'Slyudyanka': [ 
+                            'Байкальское городское поселение',
+                            'Baykalsk',
+                        ],
+                        'Zima': [ 
+                            'Хазанское сельское поселение',
+                        ],
+                        'Yelansy': [ 
+                            'Khuzhir', 
+                        ],
+                    },
+                state: [
+                        'Irkutsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Volzhsk': [ 
+                            'Kozlovka', 
+                        ],
+                        'Cheboksary': [ 
+                            'Tsivilsky District', 
+                            'Хыркасы', 
+                        ],
+                    },
+                state: [
+                        'Chuvashia',
+                       ]
+            },
+            {
+                city: {
+                        'Novosibirsk': [ 
+                            'Leninskoye', 
+                            'Berdsk municipality',
+                            'Koltsovo',
+                        ],
+                        'Iskitim': [ 
+                            'Легостаевский сельсовет', 
+                        ],
+                        'Moshkovo': [ 
+                            'Oktyabrskiy', 
+                        ],
+                    },
+                state: [
+                        'Novosibirsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kemerovo': [ 
+                            'Металлплощадка', 
+                            'Елыкаево', 
+                        ],
+                        'Tashtagol': [ 
+                            'Sheregesh', 
+                        ],
+                        'Novokuznetsk': [ 
+                            'Костенково', 
+                        ],
+                        'Prokopyevsk': [ 
+                            'Prokopyevsky Municipal Okrug',
+                            'Prokopyevsky Urban Okrug',
+                        ],
+                    },
+                state: [
+                        'Kemerovo Oblast–Kuzbass',
+                       ]
+            },
+            {
+                city: {
+                        'Gryazovets': [ 
+                            'Vokhtoga', 
+                        ],
+                        'Cherepovets': [ 
+                            'Хламово', 
+                            'Яконское', 
+                            'Мяксинское сельское поселение', 
+                        ],
+                        'Berezhnoe': [ 
+                            'Бережное', 
+                        ],
+                        "Ust'ye": [ 
+                            'Чернышово', 
+                        ],
+                    },
+                state: [
+                        'Vologda Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Vladivostok': [ 
+                            'Steklyanuha', 
+                            'Volno-Nadejdinskoe', 
+                            'Russky', 
+                            'Trudovoye', 
+                            'Трудовое', 
+                        ],
+                        'Shkotovo': [ 
+                            'Shkotovsky District',
+                        ],
+                        'Vladimiro-Alexandrovskoy': [ 
+                            'Volchanec', 
+                        ],
+                        'Volno-Nadezhdinskoe': [ 
+                            'Надеждинское сельское поселение', 
+                        ],
+                        'Ussurijsk': [ 
+                            'Borisovka', 
+                        ],
+                    },
+                state: [
+                        'Primorsky Krai',
+                       ]
+            },
+            {
+                city: {
+                        'Alnashi': [ 
+                            'Alnashsky District', 
+                        ],
+                        'Debyosy': [ 
+                            'Debyossky District',
+                            'Малая Чепца', 
+                        ],
+                        'Mozhga': [ 
+                            'Замостные Какси', 
+                        ],
+                        'Votkinsk': [ 
+                            'Беркуты', 
+                        ],
+                    },
+                state: [
+                        'Udmurtia',
+                       ]
+            },
+            {
+                city: {
+                        'Arkhangelsk': [ 
+                            'Primorsky District', 
+                        ],
+                    },
+                state: [
+                        'Arkhangelsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Bay-Haak': [ 
+                            'Балгазын', 
+                            'сумон Бай-Хаак', 
+                            'сумон Балгазын', 
+                        ],
+                    },
+                state: [
+                        'Tuva Republic',
+                       ]
+            },
+            {
+                city: {
+                        'Smidovich': [ 
+                            'Приамурский',
+                        ],
+                        'Obluche': [ 
+                            'Известковый',
+                        ],
+                    },
+                state: [
+                        'Jewish Autonomous Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Khuchni': [ 
+                            'Хурикский сельсовет',
+                        ],
+                    },
+                state: [
+                        'Dagestan',
+                    ]
+            },
+            {
+                city: {
+                        'Gubkinsky': [ 
+                            'Губкинский',
+                        ],
+                        'Tarko-Sale': [ 
+                            'Purovsky Rayon',
+                        ],
+                        'Tazovskij': [ 
+                            'Tazovsky Rayon',
+                        ],
+                        'Nadym': [ 
+                            'Pangody',
+                        ],
+                    },
+                state: [
+                        'Yamalo-Nenets Autonomous Okrug',
+                    ]
+            },
+        ],
+        'Thailand': [
+            {
+                city: {
+                        'Surat Thani City Municipality': [ 
+                            'Tong Yang', 
+                            'Ko Samui', 
+                            'Baan Tai', 
+                            'Baan Bo Phut',
+                            'Baan Plai Laem',
+                            'Baan Lamai',
+                            'Baan Taling Ngam',
+                            'Baan Wang Ta Kien',
+                            'Don Sak',
+                            'Baan Sri Thanu',
+                            'Baan Chaloklum',
+                            'Baan Lipa Noi',
+                        ],
+                    },
+                state: [
+                        'Surat Thani Province',
+                       ]
+            },
+            {
+                city: {
+                        'Phuket City Municipality': [ 
+                            'Si Sunthon',
+                            'Talat Nuea',
+                            'Ko Kaeo',
+                            'Sakhu',
+                            'Choeng Thale',
+                        ],
+                    },
+                state: [
+                        'Phuket Province',
+                       ]
+            },
+            {
+                city: {
+                        'Samut Prakan': [ 
+                            'Nong Prue Subdistrict',
+                            'Bang Pu Subdistrict Municipality',
+                            'Bang Kaeo Subdistrict',
+                        ],
+                    },
+                state: [
+                        'Samut Prakan Province',
+                       ]
+            },
+            {
+                city: {
+                        'Phang-nga': [ 
+                            'Bang Nai Si',
+                        ],
+                    },
+                state: [
+                        'Phang-nga Province',
+                       ]
+            },
+            {
+                city: {
+                        'Krabi': [ 
+                            'Ao Nang',
+                        ],
+                    },
+                state: [
+                        'Krabi Province',
+                       ]
+            },
+        ],
+        'Turkey': [
+            { 
+                city: {
+                        'Izmir': [
+                            'Bornova',
+                            'Çeşme',
+                        ],
+                    },
+                state: [
+                        'Izmir',
+                       ]
+            }, 
+            {
+                city: {
+                        'Istanbul': [
+                            'Maltepe',
+                            'Şişli',
+                        ],
+                    },
+                state: [
+                        'Istanbul',
+                       ]
+            },
+            {
+                city: {
+                        'Antalya': [ 
+                            'Aksu',
+                            'Konyaaltı',
+                            'Serik',
+                            'Muratpaşa',
+                            'Kepez',
+                            'Kaş',
+                        ],
+                    },
+                state: [
+                        'Antalya',
+                       ]
+            },
+            {
+                city: {
+                        'Ankara': [ 
+                            'Keçiören', 
+                        ],
+                    },
+                state: [
+                        'Ankara',
+                       ]
+            },
+            {
+                city: {
+                        'Muğla': [ 
+                            'Bodrum',
+                            'Marmaris',
+                        ],
+                    },
+                state: [
+                        'Muğla',
+                       ]
+            },
+            {
+                city: {
+                        'Konya': [ 
+                            'Meram',
+                        ],
+                    },
+                state: [
+                        'Konya',
+                       ]
+            },
+            {
+                city: {
+                        'Yalova Merkez': [ 
+                            'Çınarcık',
+                        ],
+                    },
+                state: [
+                        'Yalova',
+                       ]
+            },
+        ],
+        'Slovakia': [
+            {
+                city: {
+                        'Žilina': [ 
+                            'Beňadiková', 
+                            'Dolný Kubín', 
+                        ],
+                    },
+                state: [
+                        'Žilina',
+                       ]
+            },
+            {
+                city: {
+                        'Bratislava': [ 
+                            'Bernolákovo', 
+                            'Malacky', 
+                        ],
+                    },
+                state: [
+                        'Bratislava',
+                       ]
+            },
+            {
+                city: {
+                        'Preshov': [ 
+                            'Dulova Ves', 
+                            'District of Prešov', 
+                        ],
+                    },
+                state: [
+                        'Prešov',
+                       ]
+            },
+            {
+                city: {
+                        'Trenchin': [ 
+                            'Prievidza', 
+                        ],
+                    },
+                state: [
+                        'Trenčín',
+                       ]
+            },
+        ],
+        'Spain': [
+            {
+                    city: {
+                        'Oviedo': [ 
+                            'Lena', 
+                        ],
+                    },
+                state: [
+                        'Asturias',
+                       ]
+            },
+            {
+                city: {
+                        'Santander': [ 
+                            'Torrelavega', 
+                        ],
+                    },
+                state: [
+                        'Cantabria',
+                       ]
+            },
+            {
+                city: {
+                        'Orihuela': [ 
+                            'Pilar de la Horadada', 
+                            'Torrevieja', 
+                        ],
+                    },
+                state: [
+                        'Valencian Community',
+                       ]
+            },
+            {
+                city: {
+                        'Málaga': [ 
+                            'Arroyo de la Miel-Benalmádena Costa', 
+                            'Benahavís', 
+                            'Monda', 
+                        ],
+                    },
+                state: [
+                        'Andalusia',
+                       ]
+            },
+            {
+                city: {
+                        'Las Palmas de Gran Canaria': [ 
+                            'Tejeda', 
+                        ],
+                    },
+                state: [
+                        'Las Palmas',
+                       ]
+            },
+            {
+                city: {
+                        'Barcelona': [ 
+                            'Vilanova i la Geltrú',
+                            'Cubelles',  
+                        ],
+                        'Girona': [ 
+                            'Lloret De Mar',  
+                            'Lloret de Mar',  
+                            "Castell d'Aro, Platja d'Aro i s'Agaró",  
+                            "Castell d'Aro",  
+                        ],
+                    },
+                state: [
+                        'Catalonia',
+                       ]
+            },
+            {
+                city: {
+                        'Santa Cruz de Tenerife': [ 
+                            'Arona',
+                            'Costa Del Silencio',
+                        ],
+                    },
+                state: [
+                        'Canary Islands',
+                       ]
+            },
+            {
+                city: {
+                        'A Coruña': [ 
+                            'Santiago de Compostela',
+                        ],
+                    },
+                state: [
+                        'Galicia',
+                       ]
+            },
+        ],
+        'Sri Lanka': [
+            {
+                city: {
+                        'Galle': [ 
+                            'Goviyapana', 
+                            'Bentota',
+                            'Hikkaduwa',
+                        ],
+                    },
+                state: [
+                        'Southern Province',
+                       ]
+            },
+            {
+                city: {
+                        'Batticaloa': [ 
+                            'Pasikudah', 
+                        ],
+                    },
+                state: [
+                        'Eastern Province',
+                       ]
+            },
+            {
+                city: {
+                        'Badulla': [ 
+                            'Ella', 
+                        ],
+                    },
+                state: [
+                        'Uva Province',
+                       ]
+            },
+            {
+                city: {
+                        'Gampaha': [ 
+                            'Ettukala', 
+                        ],
+                        'Colombo': [ 
+                            'Negombo', 
+                        ],
+                    },
+                state: [
+                        'Western Province',
+                       ]
+            },
+        ],
+        'Sweden': [
+            {
+                city: {
+                        'Stockholm': [ 
+                            'Vega', 
+                            'Sundbybergs kommun', 
+                        ],
+                    },
+                state: [
+                        'Hermanstorp',
+                        'Solskiftet',
+                       ]
+            },
+            {
+                city: {
+                        'Gothenburg': [ 
+                            'Mölndals kommun', 
+                            'Öckerö', 
+                        ],
+                    },
+                state: [
+                        'Kärrahöjd',
+                        'Heden',
+                       ]
+            },
+        ],
+        'Switzerland': [
+            {
+                city: {
+                        'Lausanne': [ 
+                            'Crans (VD)',
+                            'Echallens',
+                            'Corsier-sur-Vevey',
+                            'Sainte-Croix',
+                        ],
+                    },
+                state: [
+                        'Vaud',
+                       ]
+            },
+            {
+                city: {
+                        'Zurich': [ 
+                            'Wetzikon (ZH)', 
+                            'Dachsleren', 
+                            'Dübendorf', 
+                        ],
+                    },
+                state: [
+                        'Zurich',
+                       ]
+            },
+            {
+                city: {
+                        'St. Gallen': [ 
+                            'Büchel', 
+                            'Kaltbrunn', 
+                            'Bad Ragaz', 
+                        ],
+                    },
+                state: [
+                        'St. Gallen',
+                       ],
+            },
+            {
+                city: {
+                        'Lucerne': [ 
+                            'Udligenswil', 
+                        ],
+                    },
+                state: [
+                        'Lucerne',
+                       ],
+            },
+            {
+                city: {
+                        'Solothurn': [ 
+                            'Grenchen', 
+                        ],
+                    },
+                state: [
+                        'Solothurn',
+                       ]
+            },
+            {
+                city: {
+                        'Bern': [ 
+                            'Muri bei Bern', 
+                        ],
+                    },
+                state: [
+                        'Bern',
+                       ]
+            },
+            {
+                city: {
+                        'Schwyz': [ 
+                            'Vorderthal', 
+                        ],
+                    },
+                state: [
+                        'Schwyz',
+                       ]
+            },
+            {
+                city: {
+                        'Kur': [ 
+                            'Igis', 
+                        ],
+                    },
+                state: [
+                        'Grisons',
+                       ]
+            },
+            {
+                city: {
+                        'Fribur': [ 
+                            'Granges-Paccot', 
+                        ],
+                    },
+                state: [
+                        'Fribourg',
+                       ]
+            },
+            {
+                city: {
+                        'Geneva': [ 
+                            'Meyrin', 
+                        ],
+                    },
+                state: [
+                        'Geneva',
+                       ]
+            },
+            {
+                city: {
+                        'Bellinzona': [ 
+                            'Morcote',
+                            'Muzzano',
+                        ],
+                    },
+                state: [
+                        'Ticino',
+                       ]
+            },
+        ],
+        'South Korea': [
+            {
+                city: {
+                        'Gwangju': [ 
+                            'Woncheon-ri', 
+                        ],
+                    },
+                state: [
+                        'South Jeolla',
+                       ]
+            },
+            {
+                city: {
+                        'Suvon': [ 
+                            '화성시', 
+                            'Hwaseong-si', 
+                        ],
+                    },
+                state: [
+                        '경기도',
+                       ]
+            },
+        ],
+        'Ukraine': [
+            {
+                city: {
+                        'Kyiv': [ 
+                            'Tarasivka',
+                            'Kotsiubynske',
+                            'Kvitneve',
+                            'Liutizh',
+                            'Petropavlivska Borshchahivka',
+                            'Sofiivska Borshchahivka',
+                            'Hnidyn',
+                        ],
+                        'Boryspil': [ 
+                            'Shchaslyve', 
+                            'Hora', 
+                            'Vyshenky', 
+                        ],
+                        'Brovary': [ 
+                            'Zazymia', 
+                        ],
+                        'Fastiv': [ 
+                            'Hatne', 
+                        ],
+                        'Obukhiv': [ 
+                            'Leonivka',
+                            'Kozyn',  
+                            'Krushynka',  
+                            'Vasylkiv',  
+                        ],
+                        'Irpin': [ 
+                            'Kolonshchyna', 
+                            'Pirnove Rural Hromada', 
+                        ],
+                        'Yahotyn': [ 
+                            'Henzerivka', 
+                        ],
+                        'Vyshhorod': [
+                            'Novi Petrivtsi',
+                            'Voropaivka',
+                        ],
+                        'Bila Tserkva': [
+                            'Teleshivka',
+                            'Tetiiv',
+                            'Mali Lysivtsi',
+                        ],
+                        'Bucha': [
+                            'Hostomel',
+                            'Bilohorodka',
+                        ],
+                    },
+                state: [
+                        'Kyiv Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Liuboml': [ 
+                            'Rymachi',
+                        ],
+                        'Kovel': [ 
+                            'Zelena', 
+                        ],
+                        'Kamin-Kashyrskyi': [ 
+                            'Klitytsk', 
+                        ],
+                        'Lutsk': [ 
+                            'Tarasove', 
+                        ],
+                    },
+                state: [
+                        'Volyn Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Korsun-Shevchenkivskyi': [ 
+                            'Стеблівська селищна громада',
+                        ],
+                    },
+                state: [
+                        'Cherkasy Oblast',
+                       ]
+            },
+            { 
+                city: {
+                        'Zviahel': [ 
+                            'Marianivka', 
+                        ],
+                        'Zhytomyr': [ 
+                            'Hadzynka', 
+                            'Levkiv', 
+                        ],
+                    },
+                state: [
+                        'Zhytomyr Oblast',
+                       ]
+            }, 
+            { 
+                city: {
+                        'Odesa': [ 
+                            'Chornomorsk', 
+                            'Авангардівська селищна громада', 
+                            'Avanhard', 
+                            'Pivdenne', 
+                            'Великодолинська селищна громада', 
+                        ],
+                        'Artsyz': [ 
+                            'Plotsk', 
+                        ],
+                        'Belgorod-Dnestrovskij': [ 
+                            'Zatoka', 
+                        ],
+                    },
+                state: [
+                        'Odesa Oblast',
+                       ]
+            }, 
+            {
+                city: {
+                        'Dnipro': [ 
+                            'Obukhivka',
+                            'Mykolaivka',
+                            'Samar',
+                            'Novomoskovsk',
+                            'Обухівська селищна громада',
+                            'Слобожанська селищна громада',
+                            'Pidhorodne',
+                            'Новоолександрівська сільська громада',
+                        ],
+                        'Chernechchyna': [ 
+                            'Чернеччинська сільська громада', 
+                        ],
+                        'Kryvyi Rih': [ 
+                            'Лозуватська сільська громада',
+                        ],
+                        'Kamianske': [ 
+                            'Auly',
+                        ],
+                    },
+                state: [
+                        'Dnipropetrovsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Zaporizhzhia': [ 
+                            'Baburka', 
+                            'Dolynske', 
+                        ],
+                    },
+                state: [
+                        'Zaporizhia Oblast',
+                        'Zaporizhzhia Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Khmelnytskyi': [ 
+                            'Klymashivka', 
+                        ],
+                    },
+                state: [
+                        'Khmelnytskyi Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Sarny': [ 
+                            'Solomiivka', 
+                            'Dubrovytsia',
+                        ],
+                        'Rivne': [ 
+                            'Kostopil', 
+                            'Mala Liubasha Rural Hromada', 
+                            'Klevan', 
+                        ],
+                        'Dubno': [
+                            'Radyvyliv',
+                            'Pryvilne Rural Hromada',
+                        ],
+                    },
+                state: [
+                        'Rivne Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Ternopil': [ 
+                            'Petrykiv', 
+                            'Smykivtsi', 
+                        ],
+                    },
+                state: [
+                        'Ternopil Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Lviv': [ 
+                            'Velyke Kolodno', 
+                            'Vynnyky', 
+                            'Zhovkva', 
+                            'Solonka', 
+                            'Malechkovychi', 
+                        ],
+                        'Busk': [ 
+                            'Sokolivka', 
+                        ],
+                        'Chervonohrad': [ 
+                            'Silets', 
+                        ],
+                        'Yavoriv': [ 
+                            'Starychi', 
+                            'Shehyni Rural Hromada', 
+                        ],
+                        'Pustomyty': [ 
+                            'Solonka Rural Hromada', 
+                        ],
+                        'Stryi': [ 
+                            'Hranky-Kuty', 
+                            'Slavsko', 
+                        ],
+                        'Skole': [ 
+                            'Skole Urban Hromada',
+                        ],
+                        'Drohobych': [ 
+                            'Oriv', 
+                        ],
+                    },
+                state: [
+                        'Lviv Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Ivano-Frankivsk': [ 
+                            'Uhryniv', 
+                        ],
+                        'Verkhovyna': [ 
+                            'Kryvopillia', 
+                            'Iltsi', 
+                        ],
+                        'Nadvirna': [ 
+                            'Vorokhta', 
+                        ],
+                    },
+                state: [
+                        'Ivano-Frankivsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Mukachevo': [ 
+                            'Poliana Rural Hromada', 
+                        ],
+                        'Svaliava': [ 
+                            'Poliana', 
+                        ],
+                        'Volovets': [ 
+                            'Huklyvyi', 
+                        ],
+                        'Tiachiv': [ 
+                            'Solotvyno', 
+                        ],
+                    },
+                state: [
+                        'Zakarpattia Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Chernihiv': [ 
+                            'Markivtsi',
+                            'Mostyshche',
+                            'Shestovytsia',
+                            'Staryi Bilous',
+                        ],
+                        'Nizhyn': [ 
+                            'Вертіївська сільська громада', 
+                            'Bobrovytsia', 
+                        ],
+                    },
+                state: [
+                        'Chernihiv Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Poltava': [ 
+                            'Vasylivka', 
+                            'Zinkiv', 
+                        ],
+                        'Lubny': [ 
+                            'Лубенська міська громада', 
+                            'Хорольська міська громада', 
+                        ],
+                    },
+                state: [
+                        'Poltava Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Novoaidar': [ 
+                            'Bakhmutivka', 
+                        ],
+                        'Krasnodon': [ 
+                            'Sorokyne', 
+                        ],
+                        'Rovenky': [ 
+                            'Dzerzhynskyi', 
+                        ],
+                    },
+                state: [
+                        'Luhansk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Kharkiv': [ 
+                            'Korotych', 
+                            'Pisochyn',
+                            'Liubotyn',
+                            'Vysokyi',
+                        ],
+                        'Kupiansk': [ 
+                            'Kolisnykivka',
+                        ],
+                    },
+                state: [
+                        'Kharkiv Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Yuzhne': [ 
+                            'Коблівська сільська громада', 
+                        ],
+                        'Bashtanka': [ 
+                            'Казанківська селищна громада', 
+                        ],
+                        'Mykolaiv': [ 
+                            'Stepove', 
+                            'Novofedorivka', 
+                        ],
+                    },
+                state: [
+                        'Mykolaiv Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Mariupol': [ 
+                            'Manhush Settlement Hromada', 
+                        ],
+                        'Kramatorsk': [ 
+                            'Kostiantynivka', 
+                        ],
+                        'Horlivka': [ 
+                            'Niu-York', 
+                        ],
+                        'Pokrovsk': [
+                            'Kamianka',
+                        ],
+                    },
+                state: [
+                        'Donetsk Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Chernivtsi': [ 
+                            'Luzhany', 
+                        ],
+                        'Novoselytsia': [ 
+                            'Strointsi', 
+                        ],
+                        'Kitsman': [ 
+                            'Revne', 
+                        ],
+                    },
+                state: [
+                        'Chernivtsi Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Chortkiv': [ 
+                            'Korzhova', 
+                            'Zavadivka', 
+                        ],
+                    },
+                state: [
+                        'Chortkiv Raion',
+                        'Ternopil Oblast',
+                       ]
+            },
+            {
+                city: {
+                        'Feodosia': [ 
+                            'Коктебельский поселковый совет', 
+                        ],
+                        'Lenino': [ 
+                            'городское поселение Щелкино', 
+                            'Лениново сельское поселение', 
+                            'Мысовское сельское поселение', 
+                        ],
+                        'Simferopol': [ 
+                            'Укромновское сельское поселение', 
+                            'Перовское сельское поселение', 
+                            'Мирновское сельское поселение',
+                            'Молодёжненское сельское поселение',
+                            'Родниковское сельское поселение',
+                            'Гвардейское сельское поселение',
+                            'Добровское сельское поселение',
+                            'Simferopol (urban okrug)',
+                            'Aeroflotsky',
+                            'Gresovsky',
+                            'Agrarnoye',
+                        ],
+                        'Kerch': [ 
+                            'Керченский городской совет', 
+                            'городской округ Керчь', 
+                        ],
+                        'Alupka': [ 
+                            'Koreiz', 
+                        ],
+                        'Sudak': [ 
+                            'Novyi Svet', 
+                        ],
+                        'Yalta': [ 
+                            'Voskhod',
+                            'Massandra',
+                            'Oliva',
+                            "General'skoe",
+                            "город Ялта",
+                        ],
+                        'Chornomorskoe': [ 
+                            'Оленевское сельское поселение', 
+                        ],
+                        'Yevpatoriya': [ 
+                            'Zaozernoe',
+                            'Окунёвское сельское поселение',
+                        ],
+                        'Razdolnoe': [ 
+                            'Ковыльновское сельское поселение',
+                        ],
+                        'Sevastopol': [ 
+                            'Inkerman', 
+                            'Сахарная Головка', 
+                            'Балаклавский округ',
+                            'Орлиновский округ',
+                        ],
+                    },
+                state: [
+                        'Republic of Crimea',
+                        'Autonomous Republic of Crimea',
+                        'Sevastopol'
+                       ]
+            },
+            {
+                city: {
+                        'Holovanivsk': [ 
+                            'Vilshanka', 
+                        ],
+                        'Kropyvnytskyi': [ 
+                            'Tsvitne', 
+                        ],
+                    },
+                state: [
+                        'Kirovohrad Oblast',
+                       ],
+            },
+        ],
+        'United Arab Emirates': [
+            {
+                city: {
+                        'Abu Dhabi': [ 
+                            'Al Saadiyat Island', 
+                            'Al Matar', 
+                        ],
+                    },
+                state: [
+                        'Abu Dhabi Emirate',
+                       ]
+            },
+            {
+                city: {
+                        'Dubai': [ 
+                            'Dubai International Airport', 
+                            'Business Bay', 
+                            'Umm Suqeim', 
+                        ],
+                    },
+                state: [
+                        'Dubai',
+                       ]
+            },
+        ],
+        'United Kingdom': [
+            {
+                city: {
+                        'Newcastle upon Tyne': [ 
+                            'Gateshead', 
+                            'Ryton', 
+                            'Sunderland',
+                            'Whickham',
+                            'North Tyneside', 
+                            'South Tyneside', 
+                        ],
+                        'Guildford': [ 
+                            'Woking', 
+                        ],
+                        'Maidstone': [ 
+                            'Upper Stoke', 
+                        ],
+                        'Noridzh': [ 
+                            'Breckland District', 
+                        ],
+                    },
+                state: [
+                        'England',
+                       ]
+            },
+            {
+                city: {
+                        'Glasgow': [ 
+                            'Larbert', 
+                        ],
+                    },
+                state: [
+                        'Scotland',
+                       ]
+            },
+            {
+                city: {
+                        'Barri': [ 
+                            'Boverton', 
+                        ],
+                    },
+                state: [
+                        'Wales',
+                       ]
+            },
+            {
+                city: {
+                        'Omagh': [ 
+                            'Strabane', 
+                            'Newtownstewart', 
+                        ],
+                    },
+                state: [
+                        'Northern Ireland',
+                       ]
+            },
+        ],
+        'United States': [
+            {
+                city: {
+                        'Indianapolis': [ 
+                            'Madison County', 
+                            'Anderson', 
+                        ],
+                    },
+                state: [
+                        'Indiana',
+                       ]
+            },
+            {
+                city: {
+                        'Wewoka': [ 
+                            'Seminole County',
+                        ],
+                    },
+                state: [
+                        'Oklahoma',
+                       ]
+            },
+            {
+                city: {
+                        'Spokane': [ 
+                            'Spokane Valley',
+                        ],
+                    },
+                state: [
+                        'Washington',
+                       ]
+            },
+            {
+                city: {
+                        'Philadelphia': [ 
+                            'Abington Township', 
+                            'Upper Moreland Township', 
+                        ],
+                        'Gettisberg': [ 
+                            'Carroll Valley', 
+                        ],
+                        'Milford': [ 
+                            'Lackawaxen Township', 
+                        ],
+                    },
+                state: [
+                        'Pennsylvania',
+                       ]
+            },
+            {
+                city: {
+                        'Fairfax': [ 
+                            'Merrifield', 
+                            'Reston', 
+                        ],
+                    },
+                state: [
+                        'Virginia',
+                       ]
+            },
+            {
+                city: {
+                        'Springfild': [ 
+                            'Greene County', 
+                        ],
+                    },
+                state: [
+                        'Missouri',
+                       ]
+            },
+            {
+                city: {
+                        'Worcester': [ 
+                            'Oxford', 
+                        ],
+                        'Springfield': [ 
+                            'Holyoke', 
+                        ],
+                    },
+                state: [
+                        'Massachusetts',
+                       ]
+            },
+            {
+                city: {
+                        'Bentonville': [ 
+                        'Bella Vista', 
+                      ],
+                    },
+                state: [
+                        'Arkansas',
+                       ]
+            },
+            {
+                city: {
+                        'Santa Ana': [ 
+                            'Costa Mesa', 
+                            'Irvine', 
+                        ],
+                    },
+                state: [
+                        'California',
+                       ]
+            },
+            {
+                city: {
+                        'Lawrenceville': [ 
+                        'Gwinnett County', 
+                      ],
+                    },
+                state: [
+                        'Georgia',
+                       ]
+            },
+            {
+                city: {
+                        'Monro': [ 
+                        'Union County', 
+                      ],
+                    },
+                state: [
+                        'North Carolina',
+                       ]
+            },
+            {
+                city: {
+                        'Miami': [ 
+                            'Miami Beach', 
+                            'Sunny Isles Beach', 
+                        ],
+                        'Fort Lauderdale': [ 
+                            'Dania Beach', 
+                            'Pompano Beach', 
+                            'Deerfield Beach', 
+                        ],
+                        'De-Fyuniak-Springs': [ 
+                            'Seacrest Beach', 
+                        ],
+                        'Sarasota': [ 
+                            'Laurel', 
+                        ],
+                        'West-Palm-Beach': [ 
+                            'Boca Raton', 
+                        ],
+                    },
+                state: [
+                        'Florida',
+                       ]
+            },
+            {
+                city: {
+                        'Memphis': [ 
+                            'Maud', 
+                        ],
+                    },
+                state: [
+                        'Mississippi',
+                       ]
+            },
+            {
+                city: {
+                        'Dallas': [ 
+                            'Irving', 
+                        ],
+                        'Conroe': [ 
+                            'Montgomery County', 
+                            'Porter', 
+                        ],
+                    },
+                state: [
+                        'Texas',
+                       ]
+            },
+            {
+                city: {
+                        'Huntsville': [ 
+                            'Madison County', 
+                        ],
+                    },
+                state: [
+                        'Alabama',
+                       ]
+            },
+            {
+                city: {
+                        'Cleveland': [ 
+                            'Lakewood', 
+                        ],
+                    },
+                state: [
+                        'Ohio',
+                       ]
+            },
+            {
+                city: {
+                        'York': [ 
+                            'Fort Mill', 
+                        ],
+                    },
+                state: [
+                        'South Carolina',
+                       ]
+            },
+            {
+                city: {
+                        'Toms-River': [ 
+                            'Berkeley Township', 
+                        ],
+                    },
+                state: [
+                        'New Jersey',
+                       ]
+            },
+            {
+                city: {
+                        'Golden': [ 
+                            'Jefferson County', 
+                        ],
+                    },
+                state: [
+                        'Colorado',
+                       ]
+            },
+            {
+                city: {
+                        'Chicago': [ 
+                            'Barrington',
+                        ],
+                        'Wheaton': [ 
+                            'Aurora', 
+                        ],
+                        'Vokigan': [ 
+                            'Vernon Hills', 
+                        ],
+                    },
+                state: [
+                        'Illinois',
+                       ]
+            },
+        ],
+        'Uzbekistan': [
+            {
+                city: {
+                        'Tashkent': [ 
+                            'Salar', 
+                            'Kyzyltog', 
+                        ],
+                        'Nurafshan': [ 
+                            'Urtaaul', 
+                            'Уртааул', 
+                        ],
+                    },
+                state: [
+                        'Tashkent Region',
+                       ]
+            },
+            {
+                city: {
+                        'Samarqand City': [ 
+                            'Samarkand City', 
+                        ],
+                        'Payshanba': [
+                            'Kasymaul',
+                        ],
+                    },
+                state: [
+                        'Samarqand Region',
+                       ]
+            },
+        ],
+       'Vietnam': [
+            {
+                city: {
+                        'Ho Chi Minh City': [ 
+                            'Thủ Đức',
+                        ],
+                    },
+                state: [
+                        'District 2',
+                       ]
+            },
+            {
+                city: {
+                        'Da Nang': [ 
+                            'Phường Hòa Cường',
+                            'Đà Nẵng',
+                        ],
+                    },
+                state: [
+                        'Đà Nẵng',
+                       ]
+            },
+            {
+                city: {
+                        'Dalat': [ 
+                            'Phường Phú Thủy',
+                            'Phan Thiết',
+                        ],
+                    },
+                state: [
+                        'Lâm Đồng Province',
+                       ]
+            },
+        ],
+
+    };
 
 export { redefinition_city };
