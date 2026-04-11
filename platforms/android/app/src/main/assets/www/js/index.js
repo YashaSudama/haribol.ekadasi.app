@@ -1209,7 +1209,7 @@ function get_city( lat, lon ) {
 
     xml_location.onload = function() {
 
-        let response = data.results[0].components,
+        let response = xml_location.response.results[ 0 ].components,
             city =  response.city          ||
                     response.town          ||
                     response.village       || 

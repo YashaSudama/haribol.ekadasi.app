@@ -25,9 +25,6 @@
       "PLAY_SERVICES_LOCATION_VERSION": "16.+",
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "haribol.ekadasi.app"
-    },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },

@@ -10,10 +10,6 @@
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
-    <feature name="StatusBar">
-        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="Permissions">
         <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
@@ -85,7 +81,6 @@
     </config-file>
     <icon background="www/img/logo/background/xxxhdpi-background.png" density="xxxhdpi" foreground="www/img/logo/square/logo_xxxhdpi_new.png" src="www/img/logo/round/logo_xxxhdpi.png" />
     <preference name="loglevel" value="DEBUG" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="GradlePluginGoogleServicesEnabled" value="true" />
     <preference name="GradlePluginGoogleServicesVersion" value="4.4.0" />
     <preference name="AndroidXEnabled" value="true" />

@@ -10,7 +10,7 @@
           "/manifest/application": [
             {
               "xml": "<meta-data android:name=\"com.google.firebase.messaging.default_notification_icon\" android:resource=\"@drawable/notification_icon\" />",
-              "count": 5
+              "count": 13
             },
             {
               "xml": "<service android:exported=\"false\" android:name=\"by.chemerisuk.cordova.firebase.FirebaseMessagingPluginService\"><intent-filter><action android:name=\"com.google.firebase.MESSAGING_EVENT\" /></intent-filter></service>",
@@ -58,14 +58,6 @@
             },
             {
               "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
               "count": 1
             },
             {
@@ -161,9 +153,6 @@
       "PLAY_SERVICES_LOCATION_VERSION": "16.+",
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "haribol.ekadasi.app"
-    },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
@@ -230,14 +219,6 @@
       "pluginId": "cordova-plugin-request-location-accuracy",
       "clobbers": [
         "cordova.plugins.locationAccuracy"
-      ]
-    },
-    {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
       ]
     },
     {
@@ -352,7 +333,6 @@
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
-    "cordova-plugin-statusbar": "4.0.0",
     "cordova-plugin-android-permissions": "1.1.5",
     "cordova.plugins.diagnostic": "7.2.10",
     "cordova-plugin-device": "3.0.0"
