@@ -339,6 +339,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
 
                     if ( ( value_key.exit_time ).includes( 'after' ) ) {
                         value_key.exit_time = ( value_key.exit_time ).replace( 'after', 'после' );
+                    } else {
+                        value_key.exit_time = '<span class="prefix">c</span>' + value_key.exit_time;
                     }
 
                     class_li = 'value-0';
@@ -347,8 +349,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
                                 apparition_ekadasi_days[ value_key.ekadasi_name ].name + ' Экадаши' +
                             '</span>' +
                             '<hr class="ekadashi_hr">' + 
-                            '<span class="exit bold l-height-1-1">Выход из поста<br>' +
-                                '<span class="exit_date">' + exit_date + '</span>' + ' ' +
+                            '<span class="exit bold l-height-1-1">Выход из поста ' +
+                                '<span class="exit_date">' + exit_date + '</span><br>' + ' ' +
                                 '<span class="exit_time">' + value_key.exit_time + '</span>' +
                             '</span>';
 
