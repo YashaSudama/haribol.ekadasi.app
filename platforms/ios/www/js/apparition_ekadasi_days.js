@@ -61,10 +61,10 @@ let  apparition_ekadasi_days = {
             name_too_events: 'Бхактивинода',
             id: 'bhaktivinoda'
         },
-    'S': { name: 'Вьясапуджа, явление Сиддхасварупананды Парамахамсы' + 
+    'S': { name: 'Явление Сиддхасварупананды Парамахамсы' + 
                  '<hr class="ekadashi_hr">' +
                  '<span class="exit bold l-height-1-1">Пост</span>',
-           name_too_events: 'Вьясапуджа',
+           name_too_events: 'Сиддхасварупананда',
            id: 'vyasapudja'
          },
     'R': { name: 'Рождество, явление<br>Иисуса Христа',
