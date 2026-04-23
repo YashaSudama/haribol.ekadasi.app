@@ -625,9 +625,11 @@ header {
 }
 .exit {
   	font-size: 12px;
+	word-spacing: -1.5px;
 }
-.exit_time {
-  	word-spacing: -2px;
+.exit_time .prefix {
+	margin-right: 3.5px;
+    margin-left: 1px;
 }
 .day_info span {
   	display: block;
@@ -699,6 +701,14 @@ header {
 
 	#background {
 		background-image: url( '../img/splashscreen-landscape-app.jpg' );
+	}
+
+}
+
+@media ( min-width: 380px ) {
+	
+	.exit .exit_date + br {
+		display: none;
 	}
 
 }

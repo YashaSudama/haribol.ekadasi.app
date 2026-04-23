@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
-      "clobbers": [
-        "device"
-      ]
-    },
-    {
       "id": "cordova-plugin-fcm.FCMPlugin",
       "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
       "pluginId": "cordova-plugin-fcm",
@@ -86,6 +78,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "pluginId": "cordova-plugin-statusbar",
       "clobbers": [
         "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
       ]
     },
     {
@@ -178,13 +178,13 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     }
   ];
   module.exports.metadata = {
-    "cordova-plugin-device": "2.1.0",
     "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-geolocation": "5.0.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-statusbar": "4.0.0",
-    "cordova.plugins.diagnostic": "7.1.4"
+    "cordova-plugin-device": "3.0.0",
+    "cordova.plugins.diagnostic": "7.2.10"
   };
 });

@@ -9,10 +9,6 @@
         "parents": {
           "/*": [
             {
-              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"FCMPlugin\"><param name=\"ios-package\" value=\"FCMPlugin\" /></feature>",
               "count": 1
             },
@@ -42,6 +38,10 @@
             },
             {
               "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
               "count": 1
             },
             {
@@ -143,6 +143,18 @@
               "count": 1
             }
           ],
+          "NSLocalNetworkUsageDescription": [
+            {
+              "xml": "<string>This app requires access to your local network in order to discover and connect to devices on the same network.</string>",
+              "count": 1
+            }
+          ],
+          "NSBonjourServices": [
+            {
+              "xml": "<array><string>_lnp._tcp.</string><string>_bonjour._tcp.</string></array>",
+              "count": 1
+            }
+          ],
           "NSCameraUsageDescription": [
             {
               "xml": "<string>This app requires camera access to function properly.</string>",
@@ -190,9 +202,6 @@
     }
   },
   "installed_plugins": {
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "haribol.ekadasi.app"
-    },
     "cordova-plugin-fcm": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
@@ -212,20 +221,15 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "haribol.ekadasi.app"
+    },
     "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "haribol.ekadasi.app"
     }
   },
   "dependent_plugins": {},
   "modules": [
-    {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
-      "clobbers": [
-        "device"
-      ]
-    },
     {
       "id": "cordova-plugin-fcm.FCMPlugin",
       "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
@@ -304,6 +308,14 @@
       "pluginId": "cordova-plugin-statusbar",
       "clobbers": [
         "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
       ]
     },
     {
@@ -396,13 +408,13 @@
     }
   ],
   "plugin_metadata": {
-    "cordova-plugin-device": "2.1.0",
     "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-geolocation": "5.0.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-network-information": "3.0.0",
     "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-statusbar": "4.0.0",
-    "cordova.plugins.diagnostic": "7.1.4"
+    "cordova-plugin-device": "3.0.0",
+    "cordova.plugins.diagnostic": "7.2.10"
   }
 }

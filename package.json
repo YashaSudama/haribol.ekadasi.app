@@ -1,21 +1,20 @@
 {
   "devDependencies": {
-    "cordova-ios": "^7.1.1",
-    "cordova-plugin-device": "^2.1.0",
+    "cordova-ios": "^8.0.1",
+    "cordova-plugin-device": "^3.0.0",
     "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-geolocation": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-request-location-accuracy": "^2.3.0",
     "cordova-plugin-statusbar": "^4.0.0",
-    "cordova.plugins.diagnostic": "^7.1.4"
+    "cordova.plugins.diagnostic": "^7.2.10"
   },
   "cordova": {
     "platforms": [
       "ios"
     ],
     "plugins": {
-      "cordova-plugin-device": {},
       "cordova-plugin-fcm": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
@@ -24,6 +23,7 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-request-location-accuracy": {},
       "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
       "cordova.plugins.diagnostic": {}
     }
   }

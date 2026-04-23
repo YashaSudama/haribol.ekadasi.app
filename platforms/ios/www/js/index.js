@@ -371,6 +371,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
 
                     if ( ( value_key.exit_time ).includes( 'after' ) ) {
                         value_key.exit_time = ( value_key.exit_time ).replace( 'after', 'после' );
+                    } else {
+                        value_key.exit_time = '<span class="prefix">c</span>' + value_key.exit_time;
                     }
 
                     class_li = 'value-0';
@@ -379,8 +381,8 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
                                 apparition_ekadasi_days[ value_key.ekadasi_name ].name + ' Экадаши' +
                             '</span>' +
                             '<hr class="ekadashi_hr">' + 
-                            '<span class="exit bold l-height-1-1">Выход из поста<br>' +
-                                '<span class="exit_date">' + exit_date + '</span>' + ' ' +
+                            '<span class="exit bold l-height-1-1">Выход из поста ' +
+                                '<span class="exit_date">' + exit_date + '</span><br>' + ' ' +
                                 '<span class="exit_time">' + value_key.exit_time + '</span>' +
                             '</span>';
 
@@ -1232,21 +1234,26 @@ function get_city( lat, lon ) {
     xml_location.onload = function() {
 
         let response = xml_location.response.results[ 0 ].components,
-            city = response.city          ||
-                   response.town          ||
-                   response.village       || 
-                   response.hamlet        ||
-                   response.borough       ||
-                   response.municipality  ||
-                   response.city_district ||
-                   response.suburb        ||
-                   response.county, 
-            state = response.state        ||
-                    response.province     ||
-                    response.region       ||
-                    response.district     ||
-                    response.territory    ||
-                    response.neighbourhood,
+            city =  response.city          ||
+                    response.town          ||
+                    response.village       || 
+                    response.hamlet        ||
+                    response.borough       ||
+                    response.municipality  ||
+                    response.city_district ||
+                    response.suburb        ||
+                    response.county        ||
+                    response.region,        
+            state = response.state            ||
+                    response.province         ||
+                    response.county           ||
+                    response.region           ||
+                    response.district         ||
+                    response.territory        ||
+                    response.state_district   ||
+                    response.municipality     ||
+                    response._normalized_city ||
+                    response.neighbourhood,  
             country = response.country;
 
         if ( !city && !state ) {
@@ -1255,12 +1262,20 @@ function get_city( lat, lon ) {
         }
 
         if ( country in redefinition_city ) {
-            let array_country = redefinition_city[ country ];
-    
-            for ( let object of array_country ) {
-    
-                if ( object.city.includes( city ) && object.state.includes( state ) ) {
-                   city = object.result;
+
+            for ( let object of redefinition_city[ country ] ) {
+
+                if ( object.state.includes( state ) ) {
+                    
+                    for ( let key in object.city ) {
+                        
+                        if ( object.city[ key ].includes( city ) ) {
+                            city = key;
+                            break;
+                        }
+                        
+                    }
+
                 }
     
             }
