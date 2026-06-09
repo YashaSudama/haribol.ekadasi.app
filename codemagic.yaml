@@ -17,6 +17,8 @@ workflows:
       - cat package-lock.json | head -50
       - cordova platform add ios
       - cordova build ios --release
+      - find . -name "*.ipa"
+      - find . -name "*.xcarchive"
 
     artifacts:
       - platforms/ios/build/**/*.ipa
