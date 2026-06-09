@@ -4,13 +4,16 @@ workflows:
 
     environment:
       xcode: latest
+      node: 18
 
     scripts:
       - node -v
       - npm -v
-      - npm ci
       - npm install -g cordova
+      - cordova -v
+      - npm ci
       - cordova platform add ios
+      - cordova build ios --release
 
     artifacts:
       - platforms/ios/build/**/*.ipa
