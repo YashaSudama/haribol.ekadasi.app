@@ -4,21 +4,13 @@ workflows:
 
     environment:
       xcode: latest
-      node: 18
 
     scripts:
-      - node -v
-      - npm -v
-      - npm install -g cordova
-      - cordova -v
       - npm ci
-      - ls -la
-      - cat package.json
-      - cat package-lock.json | head -50
+      - npm install -g cordova
       - cordova platform add ios
       - cordova build ios --release
-      - find . -name "*.ipa"
-      - find . -name "*.xcarchive"
 
     artifacts:
       - platforms/ios/build/**/*.ipa
+      - platforms/ios/build/**/*.xcarchive
