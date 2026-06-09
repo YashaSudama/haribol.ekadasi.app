@@ -8,6 +8,7 @@ workflows:
     scripts:
       - npm ci
       - npm install -g cordova
+      - cordova platform add ios
       - cordova build ios --release
 
     artifacts:
