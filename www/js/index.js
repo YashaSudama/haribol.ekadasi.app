@@ -165,7 +165,45 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
         today_str = 'Сегодня',
         tomorrow = 'Завтра',
         soon = 'Скоро',
-        yesterday = 'Вчера';
+        yesterday = 'Вчера',
+        array_location_user = location_span.innerHTML.split(', '),
+        array_location_user_length = array_location_user.length,
+        country_user = '',
+        countries_without_DST = [
+            'Китай',
+            'Индия',
+            'Япония',
+            'Россия',
+            'Беларусь',
+            'Турция',
+            'Аргентина',
+            'Бразилия',
+            'Южная Африка',
+            'Саудовская Аравия',
+            'Объединённые Арабские Эмираты',
+            'Катар',
+            'Кувейт',
+            'Бахрейн',
+            'Оман',
+            'Сингапур',
+            'Малайзия',
+            'Индонезия',
+            'Таиланд',
+            'Вьетнам',
+            'Филиппины',
+            'Южная Корея',
+            'Пакистан',
+            'Бангладеш',
+            'Шри-Ланка',
+            'Непал',
+            'Казахстан',
+            'Монголия',
+            'Исландия'
+        ];
+
+    if (array_location_user_length >= 2) {
+        country_user = array_location_user_length === 2 ? array_location_user[1] : array_location_user_length === 3 ? array_location_user[2] : '';
+    };
 
     height_header = header_top.clientHeight;
     main.style.marginTop = height_header + 'px';
@@ -204,7 +242,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
                 event_coming_class_status = false,
                 month_days = get_month_days( now_month, now_year ),
                 value_key = obj_month[ item ], // value_key - значение свойства ( ключа ), тип события
-                day_week = new Date( get_year, numb_month, item ).getDay(); 
+                day_week = new Date( get_year, numb_month, item ).getDay();
 
             if ( +get_year === now_year ) {
 
@@ -337,10 +375,37 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
                         exit_date = '<span>' + item_local + '</span>.' + numb_month_local;
                     }
 
-                    if ( ( value_key.exit_time ).includes( 'after' ) ) {
-                        value_key.exit_time = ( value_key.exit_time ).replace( 'after', 'после' );
+                    function minus_one_hour(time) {
+                        let [hours, minutes] = time.split(":").map(Number);
+
+                        hours = (hours - 1 + 24) % 24;
+
+                        return String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0");
+
+                    }
+
+                    function is_DST() {
+                        let march = new Date(get_year, 2, 31);
+                        march.setDate(31 - march.getDay());
+
+                        let october = new Date(get_year, 9, 31);
+                        october.setDate(31 - october.getDay());
+
+                        return date_event >= march && date_event < october;
+
+                    }
+
+                    let exit_time = value_key.exit_time,
+                        [start, end] = exit_time.split(" - ");
+
+                    if ( ( exit_time ).includes( 'after' ) ) {
+                        exit_time = country_user !== '' && countries_without_DST.includes(country_user) && is_DST() ? 
+                                    'после ' + minus_one_hour(( exit_time ).replace( 'after', '' ).trim())          : 
+                                    ( exit_time ).replace( 'after', 'после' );
                     } else {
-                        value_key.exit_time = '<span class="prefix">c</span>' + value_key.exit_time;
+                        exit_time = country_user !== '' && countries_without_DST.includes(country_user) && is_DST()              ? 
+                                    exit_time = `<span class="prefix">c</span>${minus_one_hour(start)} - ${minus_one_hour(end)}` : 
+                                    '<span class="prefix">c</span>' + exit_time;
                     }
 
                     class_li = 'value-0';
@@ -351,7 +416,7 @@ function inner_get_info_func( index_get_info_new, slug, height_header ) {
                             '<hr class="ekadashi_hr">' + 
                             '<span class="exit bold l-height-1-1">Выход из поста ' +
                                 '<span class="exit_date">' + exit_date + '</span><br>' + ' ' +
-                                '<span class="exit_time">' + value_key.exit_time + '</span>' +
+                                '<span class="exit_time">' + exit_time + '</span>' +
                             '</span>';
 
                 } else if ( typeof( value_key ) === 'string' ) {
@@ -1188,7 +1253,7 @@ function not_city( lat, lon, city, slug, index_get_info_new ) {
 function get_city( lat, lon ) {
     let xml_location = new XMLHttpRequest(),
         url = 'https://api.opencagedata.com/geocode/v1/json?q=' + lat + ',' + lon + 
-              '&no_annotations=1&language=en&limit=1&key=' + key;
+              '&language=en&limit=1&key=' + key;
 
     xml_location.open( 'GET', url );
     xml_location.responseType = 'json';

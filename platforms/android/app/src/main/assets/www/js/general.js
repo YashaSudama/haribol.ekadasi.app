@@ -47,7 +47,7 @@ let content_preloader = '<div class="sk-fading-circle">' +
         
 block_nav.append( div_ul_nav );
 
-let key = '7dc98540afbc4208863cb94ea2932ef0',
+let key = 'e6f3ad8b9b3b443c8630193b3c2c9973',
     url = 'https://ekadasi.info/',
     now_date = new Date(), // создаем экземпляр объекта с текущей датой
     now_year = now_date.getFullYear(), // возвращает текущий год в четырехзначном формате
