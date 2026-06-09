@@ -81,7 +81,7 @@ function get_firebase_token_func() {
     if ( !localStorage.getItem( 'status_firebase_token' ) ) { 
         localStorage.setItem( 'status_firebase_token', 'false' ); 
 
-        FCMPlugin.getToken( function( token ) {
+        FirebasexMessaging.getToken( function( token ) {
             
             if ( !token_notif ) {
 
@@ -89,7 +89,7 @@ function get_firebase_token_func() {
 
                     if ( token_notif ) clearInterval( get_firebase_token_interval );
 
-                    FCMPlugin.getToken( function( token ) {
+                    FirebasexMessaging.getToken( function( token ) {
                         token_notif = token;
                     }, function( error ) {
                         token_notif = false;
@@ -107,7 +107,7 @@ function get_firebase_token_func() {
 
     } else {
 
-        FCMPlugin.getToken( function( token ) {
+        FirebasexMessaging.getToken( function( token ) {
             
             if ( !token_notif ) {
 
@@ -115,7 +115,7 @@ function get_firebase_token_func() {
 
                     if ( token_notif ) clearInterval( get_firebase_token_interval );
 
-                    FCMPlugin.getToken( function( token ) {
+                    FirebasexMessaging.getToken( function( token ) {
                         token_notif = token;
                     }, function( error ) {
                         token_notif = false;

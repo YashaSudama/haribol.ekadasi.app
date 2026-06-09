@@ -1162,76 +1162,78 @@ function remove_too_events() {
 document.addEventListener( "deviceready", () => {
     let language_app = ( navigator.language ).slice( 0, 3 ) + '**';
 
-    FCMPlugin.onNotification( function( data ) {
+    FirebasexMessaging.onMessageReceived(function( data ) {
 
-        if ( !data.wasTapped ) {
-            let notice_foreground = document.getElementById( 'notice_foreground' ),
-                content = '<div style="display: flex">' +
-                            '<div style="margin-right: 20px;">' +
-                                '<img src="../img/logo/ios/icon-60.png" style="position: relative;' + 
-                                                                              'top: 50%;' + 
-                                                                              'transform: translateY( -50% );' +
-                                                                              'border-radius: 10px;">' +
-                            '</div>' +
-                            '<div>' +
-                                '<h3 style="margin: 0;">' + data.aps.alert.title + '</h3>' +
-                                '<span>' + data.aps.alert.body + '</span>' +
-                            '</div>' +
-                          '</div>';
+        console.log( data );
 
-            if ( notice_foreground ) {
-                let wrapper_internally_notice_foreground = document.getElementById( 'wrapper_internally_notice_foreground' );
+        // if ( !data.wasTapped ) {
+        //     let notice_foreground = document.getElementById( 'notice_foreground' ),
+        //         content = '<div style="display: flex">' +
+        //                     '<div style="margin-right: 20px;">' +
+        //                         '<img src="../img/logo/ios/icon-60.png" style="position: relative;' + 
+        //                                                                       'top: 50%;' + 
+        //                                                                       'transform: translateY( -50% );' +
+        //                                                                       'border-radius: 10px;">' +
+        //                     '</div>' +
+        //                     '<div>' +
+        //                         '<h3 style="margin: 0;">' + data.aps.alert.title + '</h3>' +
+        //                         '<span>' + data.aps.alert.body + '</span>' +
+        //                     '</div>' +
+        //                   '</div>';
 
-                wrapper_internally_notice_foreground.innerHTML += '<hr class="notice_foreground_hr">' + content;
+        //     if ( notice_foreground ) {
+        //         let wrapper_internally_notice_foreground = document.getElementById( 'wrapper_internally_notice_foreground' );
+
+        //         wrapper_internally_notice_foreground.innerHTML += '<hr class="notice_foreground_hr">' + content;
                                                                 
-                let close_notice_foreground = document.getElementById( 'close_notice_foreground' );
+        //         let close_notice_foreground = document.getElementById( 'close_notice_foreground' );
 
-                if ( wrapper_internally_notice_foreground.scrollHeight >= window_height ) {
-                    wrapper_internally_notice_foreground.style.cssText = 'transform: none; top: 20px';
-                }
+        //         if ( wrapper_internally_notice_foreground.scrollHeight >= window_height ) {
+        //             wrapper_internally_notice_foreground.style.cssText = 'transform: none; top: 20px';
+        //         }
 
-                close_notice_foreground.onclick = () => {
-                    notice_foreground.style.cssText = '';
+        //         close_notice_foreground.onclick = () => {
+        //             notice_foreground.style.cssText = '';
         
-                    setTimeout( () => {
-                        notice_foreground.remove();
-                    }, 1000 );
+        //             setTimeout( () => {
+        //                 notice_foreground.remove();
+        //             }, 1000 );
 
-                }
+        //         }
 
-            } else {
-                let notice_foreground = document.createElement( 'div' ),
-                    wrapper_internally_notice_foreground = document.createElement( 'div' ),
-                    close_notice_foreground = document.createElement( 'i' );
+        //     } else {
+        //         let notice_foreground = document.createElement( 'div' ),
+        //             wrapper_internally_notice_foreground = document.createElement( 'div' ),
+        //             close_notice_foreground = document.createElement( 'i' );
 
-                notice_foreground.id = 'notice_foreground';
-                notice_foreground.className = 'pos-fixed';;
+        //         notice_foreground.id = 'notice_foreground';
+        //         notice_foreground.className = 'pos-fixed';;
                 
-                wrapper_internally_notice_foreground.id = 'wrapper_internally_notice_foreground';
-                wrapper_internally_notice_foreground.className = 'wrapper_internally_notice_foreground pos-abs';
+        //         wrapper_internally_notice_foreground.id = 'wrapper_internally_notice_foreground';
+        //         wrapper_internally_notice_foreground.className = 'wrapper_internally_notice_foreground pos-abs';
 
-                close_notice_foreground.id = 'close_notice_foreground';
-                close_notice_foreground.className = 'pos-abs far fa-times-circle';
+        //         close_notice_foreground.id = 'close_notice_foreground';
+        //         close_notice_foreground.className = 'pos-abs far fa-times-circle';
 
-                wrapper_internally_notice_foreground.append( close_notice_foreground );
-                notice_foreground.append( wrapper_internally_notice_foreground );
-                document.body.append( notice_foreground );
-                wrapper_internally_notice_foreground.innerHTML += content;
-                notice_foreground.style.cssText = 'opacity: 1; z-index: 20';
-                close_notice_foreground = document.getElementById( 'close_notice_foreground' );
+        //         wrapper_internally_notice_foreground.append( close_notice_foreground );
+        //         notice_foreground.append( wrapper_internally_notice_foreground );
+        //         document.body.append( notice_foreground );
+        //         wrapper_internally_notice_foreground.innerHTML += content;
+        //         notice_foreground.style.cssText = 'opacity: 1; z-index: 20';
+        //         close_notice_foreground = document.getElementById( 'close_notice_foreground' );
 
-                close_notice_foreground.onclick = () => {
-                    notice_foreground.style.cssText = '';
+        //         close_notice_foreground.onclick = () => {
+        //             notice_foreground.style.cssText = '';
 
-                    setTimeout( () => {
-                        notice_foreground.remove();
-                    }, 1000 );
+        //             setTimeout( () => {
+        //                 notice_foreground.remove();
+        //             }, 1000 );
 
-                }
+        //         }
 
-            }
+        //     }
 
-        }
+        // }
 
     } );
 

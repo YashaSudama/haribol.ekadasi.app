@@ -5,6 +5,8 @@
   "devDependencies": {
     "cordova-ios": "^8.1.0",
     "cordova-plugin-device": "^3.0.0",
+    "cordova-plugin-firebasex-core": "^2.0.0",
+    "cordova-plugin-firebasex-messaging": "^2.0.0",
     "cordova-plugin-geolocation": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-network-information": "^3.0.0",
@@ -25,7 +27,17 @@
       "cordova-plugin-request-location-accuracy": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
-      "cordova.plugins.diagnostic": {}
+      "cordova.plugins.diagnostic": {},
+      "cordova-plugin-firebasex-core": {
+        "IOS_FIREBASE_SDK_VERSION": "12.14.0"
+      },
+      "cordova-plugin-firebasex-messaging": {
+        "FIREBASE_FCM_AUTOINIT_ENABLED": "true",
+        "FIREBASE_MESSAGING_IMMEDIATE_PAYLOAD_DELIVERY": "false",
+        "IOS_FCM_ENABLED": "true",
+        "IOS_ENABLE_CRITICAL_ALERTS_ENABLED": "false",
+        "IOS_FIREBASE_SDK_VERSION": "12.14.0"
+      }
     }
   }
 }
