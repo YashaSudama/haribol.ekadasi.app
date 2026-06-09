@@ -1,0 +1,15 @@
+workflows:
+  ios-release:
+    name: iOS Release
+
+    environment:
+      xcode: latest
+
+    scripts:
+      - npm ci
+      - npm install -g cordova
+      - cordova prepare ios
+      - cordova build ios --release
+
+    artifacts:
+      - platforms/ios/build/**/*.ipa
