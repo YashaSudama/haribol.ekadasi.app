@@ -12,6 +12,9 @@ workflows:
       - npm install -g cordova
       - cordova -v
       - npm ci
+      - ls -la
+      - cat package.json
+      - cat package-lock.json | head -50
       - cordova platform add ios
       - cordova build ios --release
 
