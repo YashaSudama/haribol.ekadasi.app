@@ -6,10 +6,11 @@ workflows:
       xcode: latest
 
     scripts:
+      - node -v
+      - npm -v
       - npm ci
       - npm install -g cordova
       - cordova platform add ios
-      - cordova build ios --release
 
     artifacts:
       - platforms/ios/build/**/*.ipa
