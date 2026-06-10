@@ -9,22 +9,40 @@ workflows:
         distribution_type: app_store
         bundle_identifier: haribol.ekadasi.app
 
-    scripts:
-      - npm ci
-      - npm install -g cordova
+        scripts:
+         - npm ci
+         - npm install -g cordova
 
-      - cordova platform add ios
+         - cordova platform add ios
 
-      # Подключить сертификат и профиль
-      - xcode-project use-profiles
+         # Подключить сертификат и профиль Codemagic
+         - xcode-project use-profiles
 
-      # Сборка для устройства, а не симулятора
-      - cordova build ios --device --release
+         # Шаг А: Создаем файл build.json для Cordova, чтобы она применила профиль
+         - |
+          cat <<EOF > build.json
+          {
+            "ios": {
+              "release": {
+                "codeSignIdentity": "iPhone Distribution",
+                "developmentTeam": "$CM_DEVELOPMENT_TEAM",
+                "packageType": "app-store",
+                "provisioningProfile": "$CM_PROVISIONING_PROFILE_UUID",
+                "codeSignEntitlements": "platforms/ios/Экадаши/Entitlements-Release.plist"
+              }
+            }
+          }
+          EOF
+          
+        # Принудительное указание CODE_SIGN_ENTITLEMENTS для сборщика
+         - export CODE_SIGN_ENTITLEMENTS="platforms/ios/Экадаши/Entitlements-Release.plist"
 
-      # Посмотреть что реально создалось
-      - find platforms/ios/build -type f | sort
+         # Сборка для устройства с явным указанием созданного файла конфигурации
+         - cordova build ios --device --release --buildConfig=build.json
 
-    artifacts:
-      - platforms/ios/build/**/*.app
-      - platforms/ios/build/**/*.ipa
-      - platforms/ios/build/**/*.xcarchive
+         # Посмотреть что реально создалось
+         - find platforms/ios/build -type f | sort
+         
+        artifacts:
+        - platforms/ios/build/device/*.ipa
+        - platforms/ios/build/device/*.xcarchive
