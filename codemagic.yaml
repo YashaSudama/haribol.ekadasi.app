@@ -5,12 +5,26 @@ workflows:
     environment:
       xcode: latest
 
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: haribol.ekadasi.app
+
     scripts:
       - npm ci
       - npm install -g cordova
+
       - cordova platform add ios
-      - cordova build ios --release
+
+      # Подключить сертификат и профиль
+      - xcode-project use-profiles
+
+      # Сборка для устройства, а не симулятора
+      - cordova build ios --device --release
+
+      # Посмотреть что реально создалось
+      - find platforms/ios/build -type f | sort
 
     artifacts:
+      - platforms/ios/build/**/*.app
       - platforms/ios/build/**/*.ipa
       - platforms/ios/build/**/*.xcarchive
