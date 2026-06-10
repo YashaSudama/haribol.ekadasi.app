@@ -1,6 +1,6 @@
 workflows:
-  ios-release:
-    name: iOS Release
+    ios-release:
+        name: iOS Release
 
     environment:
         xcode: latest
@@ -18,26 +18,26 @@ workflows:
         - xcode-project use-profiles
 
         - |
-          cat <<EOF > build.json
-          {
+            cat <<EOF > build.json
+            {
             "ios": {
-              "release": {
+                "release": {
                 "codeSignIdentity": "iPhone Distribution",
                 "developmentTeam": "$CM_DEVELOPMENT_TEAM",
                 "packageType": "app-store",
                 "provisioningProfile": "$CM_PROVISIONING_PROFILE_UUID",
                 "codeSignEntitlements": "platforms/ios/Экадаши/Entitlements-Release.plist"
-              }
+                }
             }
-          }
-          EOF
-          
+            }
+            EOF
+            
         - export CODE_SIGN_ENTITLEMENTS="platforms/ios/Экадаши/Entitlements-Release.plist"
 
         - cordova build ios --device --release --buildConfig=build.json
 
         - find platforms/ios/build -type f | sort
-         
+            
     artifacts:
         - platforms/ios/build/device/*.ipa
         - platforms/ios/build/device/*.xcarchive
