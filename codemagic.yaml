@@ -3,23 +3,21 @@ workflows:
     name: iOS Release
 
     environment:
-      xcode: latest
+        xcode: latest
 
-      ios_signing:
+    ios_signing:
         distribution_type: app_store
         bundle_identifier: haribol.ekadasi.app
 
-        scripts:
-         - npm ci
-         - npm install -g cordova
+    scripts:
+        - npm ci
+        - npm install -g cordova
 
-         - cordova platform add ios
+        - cordova platform add ios
 
-         # Подключить сертификат и профиль Codemagic
-         - xcode-project use-profiles
+        - xcode-project use-profiles
 
-         # Шаг А: Создаем файл build.json для Cordova, чтобы она применила профиль
-         - |
+        - |
           cat <<EOF > build.json
           {
             "ios": {
@@ -34,15 +32,12 @@ workflows:
           }
           EOF
           
-        # Принудительное указание CODE_SIGN_ENTITLEMENTS для сборщика
-         - export CODE_SIGN_ENTITLEMENTS="platforms/ios/Экадаши/Entitlements-Release.plist"
+        - export CODE_SIGN_ENTITLEMENTS="platforms/ios/Экадаши/Entitlements-Release.plist"
 
-         # Сборка для устройства с явным указанием созданного файла конфигурации
-         - cordova build ios --device --release --buildConfig=build.json
+        - cordova build ios --device --release --buildConfig=build.json
 
-         # Посмотреть что реально создалось
-         - find platforms/ios/build -type f | sort
+        - find platforms/ios/build -type f | sort
          
-        artifacts:
+    artifacts:
         - platforms/ios/build/device/*.ipa
         - platforms/ios/build/device/*.xcarchive
