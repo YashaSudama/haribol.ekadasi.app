@@ -21,9 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Prepare iOS
-        run: cordova prepare ios
-
       - name: Show schemes
         run: xcodebuild -list -workspace "platforms/ios/Экадаши.xcworkspace"
 
