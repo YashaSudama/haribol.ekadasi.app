@@ -5,7 +5,6 @@
   "devDependencies": {
     "cordova-ios": "^7.1.1",
     "cordova-plugin-device": "^3.0.0",
-    "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-geolocation": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-network-information": "^3.0.0",
@@ -26,8 +25,7 @@
       "cordova-plugin-request-location-accuracy": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
-      "cordova.plugins.diagnostic": {},
-      "cordova-plugin-fcm": {}
+      "cordova.plugins.diagnostic": {}
     }
   }
 }
