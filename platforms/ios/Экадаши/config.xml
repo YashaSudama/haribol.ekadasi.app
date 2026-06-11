@@ -132,12 +132,6 @@
     <icon height="180" src="www/img/logo/ios/icon-60@3x.png" width="180" />
     <icon height="1024" src="www/img/logo/ios/icon-1024.png" width="1024" />
     <splash src="www/img/screen/ios/Default@2x~universal~anyany.jpeg" />
-    <config-file parent="aps-environment" target="*-Debug.plist">
-        <string>development</string>
-    </config-file>
-    <config-file parent="aps-environment" target="*-Release.plist">
-        <string>production</string>
-    </config-file>
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="DisallowOverscroll" value="false" />
     <preference name="EnableViewportScale" value="false" />
