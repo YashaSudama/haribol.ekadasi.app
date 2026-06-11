@@ -1,33 +1,73 @@
 name: Build iOS
 
 on:
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: macos-latest
+    build:
+        runs-on: macos-latest
 
-    steps:
-      - uses: actions/checkout@v4
+steps:
+    - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
-      - name: Install Cordova
-        run: npm install -g cordova
+    - name: Install Cordova
+      run: npm install -g cordova
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Show schemes
-        run: xcodebuild -list -workspace "platforms/ios/Экадаши.xcworkspace"
+    - name: Install signing certificate
+      env:
+        BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+        P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+      run: |
+        echo "$BUILD_CERTIFICATE_BASE64" | base64 --decode > certificate.p12
 
-      - name: Build
-        run: |
-          xcodebuild \
-          -workspace "platforms/ios/Экадаши.xcworkspace" \
-          -scheme "Экадаши" \
-          -configuration Release \
-          build
+        security create-keychain -p actions build.keychain
+        security default-keychain -s build.keychain
+        security unlock-keychain -p actions build.keychain
+
+        security import certificate.p12 \
+        -k build.keychain \
+        -P "$P12_PASSWORD" \
+        -T /usr/bin/codesign
+
+        security set-key-partition-list \
+        -S apple-tool:,apple:,codesign: \
+        -s \
+        -k actions \
+        build.keychain
+
+    - name: Install provisioning profile
+      env:
+        BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+      run: |
+        mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+
+        echo "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode > profile.mobileprovision
+
+        cp profile.mobileprovision \
+        "$HOME/Library/MobileDevice/Provisioning Profiles/"
+
+    - name: Verify provisioning profile
+      run: |
+        ls -la "$HOME/Library/MobileDevice/Provisioning Profiles"
+
+    - name: Show schemes
+      run: |
+        xcodebuild -list \
+        -workspace "platforms/ios/Экадаши.xcworkspace"
+
+    - name: Build
+      run: |
+        xcodebuild \
+        -workspace "platforms/ios/Экадаши.xcworkspace" \
+        -scheme "Экадаши" \
+        -configuration Release \
+        build
+
