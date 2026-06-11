@@ -87,14 +87,27 @@ jobs:
           <plist version="1.0">
           <dict>
               <key>method</key>
-              <string>app-store</string>
+              <string>app-store-connect</string>
+
               <key>signingStyle</key>
               <string>manual</string>
+
               <key>teamID</key>
               <string>99K3GM26Y8</string>
+
+              <key>provisioningProfiles</key>
+              <dict>
+                  <key>haribol.ekadasi.app</key>
+                  <string>App Store Connect</string>
+              </dict>
           </dict>
           </plist>
           EOF
+      
+      - name: Show installed profile details
+        run: |
+          security cms -D -i profile.mobileprovision | grep -A1 "<key>Name</key>"
+          security cms -D -i profile.mobileprovision | grep -A1 aps-environment
 
       - name: Export IPA
         run: |
