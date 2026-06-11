@@ -47,12 +47,12 @@ steps:
       env:
         BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
       run: |
-        mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
 
-        echo "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode > profile.mobileprovision
+          echo "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode > profile.mobileprovision
 
-        cp profile.mobileprovision \
-        "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          cp profile.mobileprovision \
+          "$HOME/Library/MobileDevice/Provisioning Profiles/"
 
     - name: Verify provisioning profile
       run: |
