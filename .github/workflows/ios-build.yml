@@ -52,7 +52,7 @@ steps:
       echo "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode > profile.mobileprovision
 
       cp profile.mobileprovision \
-         "$HOME/Library/MobileDevice/Provisioning Profiles/"
+        "$HOME/Library/MobileDevice/Provisioning Profiles/"
 
   - name: Verify provisioning profile
     run: |
@@ -61,20 +61,12 @@ steps:
   - name: Show schemes
     run: |
       xcodebuild -list \
-      -workspace "platforms/ios/Экадаши.xcworkspace"
+        -workspace "platforms/ios/Экадаши.xcworkspace"
 
   - name: Build
     run: |
       xcodebuild \
-      -workspace "platforms/ios/Экадаши.xcworkspace" \
-      -scheme "Экадаши" \
-      -configuration Release \
-      build
-
-  - name: Upload build logs
-    uses: actions/upload-artifact@v4
-    if: always()
-    with:
-      name: build-logs
-      path: |
-        ~/Library/Logs
+        -workspace "platforms/ios/Экадаши.xcworkspace" \
+        -scheme "Экадаши" \
+        -configuration Release \
+        build
