@@ -5,10 +5,19 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Select Xcode 26
+        run: sudo xcode-select -switch /Applications/Xcode.app
+
+      - name: Check Xcode version
+        run: xcodebuild -version
+
+      - name: Verify SDK
+        run: xcodebuild -showsdks
 
       - name: Setup Node
         uses: actions/setup-node@v4
